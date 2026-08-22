@@ -1,9 +1,9 @@
-name: Auto Update Gaming Stats
+name: Statistiques de jeu mises à jour automatiquement
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
-  workflow_dispatch:
+    - cron: '0 * * * *' # S'exécute automatiquement toutes les heures
+  workflow_dispatch:      # Permet de le lancer manuellement à tout moment
 
 jobs:
   update-stats:
@@ -22,7 +22,6 @@ jobs:
 
       - name: Installer Playwright
         run: |
-          npm init -y
           npm install playwright
           npx playwright install chromium --with-deps
 
@@ -31,8 +30,7 @@ jobs:
 
       - name: Commit et Push des nouvelles stats
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add stats.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "Mise à jour automatique des stats [skip ci]"
-          git push
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Mise à jour automatique des stats [skip ci]" && git push)
