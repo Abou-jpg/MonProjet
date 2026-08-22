@@ -50,32 +50,46 @@ async function scrapeRocketLeague() {
     const scraped = await page.evaluate(() => {
       const res = {};
       const rows = document.querySelectorAll('tr, .trn-table__row, .playlist');
+      const rankTiers = ['Bronze', 'Silver', 'Argent', 'Gold', 'Or', 'Platinum', 'Platine', 'Diamond', 'Diamant', 'Champion', 'Grand Champion', 'Supersonic Legend', 'Unranked', 'Non classé'];
 
       rows.forEach(r => {
         const fullText = (r.innerText || '').trim();
         const lines = fullText.split('\n').map(l => l.trim()).filter(Boolean);
 
-        function parseRow(modeKey) {
-          // Retire les lignes contenant le nom du mode
-          const cleanLines = lines.filter(l => !/ranked|duel|doubles|standard|1v1|2v2|3v3/i.test(l));
-          if (cleanLines.length > 0) {
-            let rank = cleanLines[0];
-            if (cleanLines[1] && /division/i.test(cleanLines[1])) {
-              rank += ` (${cleanLines[1]})`;
+        function parseRankForMode(modeKey) {
+          let foundRank = null;
+          let foundDiv = null;
+
+          for (const line of lines) {
+            for (const tier of rankTiers) {
+              const reg = new RegExp(`^(${tier})(\\s+[I|V|X\\d]+)?`, 'i');
+              if (reg.test(line)) {
+                foundRank = line;
+                break;
+              }
             }
-            res[modeKey] = rank;
+            if (/Division\s*[I|V|X\\d]+/i.test(line)) {
+              foundDiv = line;
+            }
+          }
+
+          if (foundRank) {
+            res[modeKey] = foundDiv && !foundRank.includes(foundDiv) ? `${foundRank} (${foundDiv})` : foundRank;
+          } else {
+            const placementMatch = lines.find(l => /match/i.test(l));
+            res[modeKey] = placementMatch ? `Non classé (${placementMatch})` : "Non classé";
           }
         }
 
-        if (/Duel 1v1/i.test(fullText)) parseRow('duel1v1');
-        if (/Doubles 2v2/i.test(fullText)) parseRow('doubles2v2');
-        if (/Standard 3v3/i.test(fullText)) parseRow('standard3v3');
+        if (/Duel 1v1/i.test(fullText)) parseRankForMode('duel1v1');
+        if (/Doubles 2v2/i.test(fullText)) parseRankForMode('doubles2v2');
+        if (/Standard 3v3/i.test(fullText)) parseRankForMode('standard3v3');
       });
 
       return res;
     });
 
-    console.log("=== VRAIS RANGS EXTRAITS ===", scraped);
+    console.log("=== RANGS FINAUX ===", scraped);
 
     if (scraped.duel1v1) stats.rocketLeague.duel1v1 = scraped.duel1v1;
     if (scraped.doubles2v2) stats.rocketLeague.doubles2v2 = scraped.doubles2v2;
