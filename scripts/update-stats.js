@@ -49,47 +49,44 @@ async function scrapeRocketLeague() {
 
     const scraped = await page.evaluate(() => {
       const res = {};
-      const rows = document.querySelectorAll('tr, .trn-table__row, .playlist');
-      const rankTiers = ['Bronze', 'Silver', 'Argent', 'Gold', 'Or', 'Platinum', 'Platine', 'Diamond', 'Diamant', 'Champion', 'Grand Champion', 'Supersonic Legend', 'Unranked', 'Non classé'];
+      const rows = Array.from(document.querySelectorAll('tr, .trn-table__row, .playlist'));
+
+      const rankTiers = [
+        'Supersonic Legend', 'Grand Champion III', 'Grand Champion II', 'Grand Champion I', 'Grand Champion',
+        'Champion III', 'Champion II', 'Champion I', 'Champion',
+        'Diamond III', 'Diamond II', 'Diamond I', 'Diamond', 'Diamant III', 'Diamant II', 'Diamant I', 'Diamant',
+        'Platinum III', 'Platinum II', 'Platinum I', 'Platinum', 'Platine III', 'Platine II', 'Platine I', 'Platine',
+        'Gold III', 'Gold II', 'Gold I', 'Gold', 'Or III', 'Or II', 'Or I', 'Or',
+        'Silver III', 'Silver II', 'Silver I', 'Silver', 'Argent III', 'Argent II', 'Argent I', 'Argent',
+        'Bronze III', 'Bronze II', 'Bronze I', 'Bronze', 'Unranked', 'Non classé'
+      ];
+
+      function extractFromRow(row, modeKey) {
+        const text = row.innerText || '';
+        
+        // Recherche du palier exact dans tout le texte de la ligne
+        const foundTier = rankTiers.find(tier => new RegExp(`\\b${tier}\\b`, 'i').test(text));
+        
+        // Recherche de la division
+        const divMatch = text.match(/Division\s*([I|V|X\d]+)/i);
+        const div = divMatch ? divMatch[0] : '';
+
+        if (foundTier) {
+          res[modeKey] = div && !foundTier.toLowerCase().includes('division') ? `${foundTier} (${div})` : foundTier;
+        }
+      }
 
       rows.forEach(r => {
-        const fullText = (r.innerText || '').trim();
-        const lines = fullText.split('\n').map(l => l.trim()).filter(Boolean);
-
-        function parseRankForMode(modeKey) {
-          let foundRank = null;
-          let foundDiv = null;
-
-          for (const line of lines) {
-            for (const tier of rankTiers) {
-              const reg = new RegExp(`^(${tier})(\\s+[I|V|X\\d]+)?`, 'i');
-              if (reg.test(line)) {
-                foundRank = line;
-                break;
-              }
-            }
-            if (/Division\s*[I|V|X\\d]+/i.test(line)) {
-              foundDiv = line;
-            }
-          }
-
-          if (foundRank) {
-            res[modeKey] = foundDiv && !foundRank.includes(foundDiv) ? `${foundRank} (${foundDiv})` : foundRank;
-          } else {
-            const placementMatch = lines.find(l => /match/i.test(l));
-            res[modeKey] = placementMatch ? `Non classé (${placementMatch})` : "Non classé";
-          }
-        }
-
-        if (/Duel 1v1/i.test(fullText)) parseRankForMode('duel1v1');
-        if (/Doubles 2v2/i.test(fullText)) parseRankForMode('doubles2v2');
-        if (/Standard 3v3/i.test(fullText)) parseRankForMode('standard3v3');
+        const rowText = r.innerText || '';
+        if (/Ranked\s*Duel\s*1v1|Duel\s*1v1/i.test(rowText)) extractFromRow(r, 'duel1v1');
+        if (/Ranked\s*Doubles\s*2v2|Doubles\s*2v2/i.test(rowText)) extractFromRow(r, 'doubles2v2');
+        if (/Ranked\s*Standard\s*3v3|Standard\s*3v3/i.test(rowText)) extractFromRow(r, 'standard3v3');
       });
 
       return res;
     });
 
-    console.log("=== RANGS FINAUX ===", scraped);
+    console.log("=== VRAIS RANGS EXTRAITS ===", scraped);
 
     if (scraped.duel1v1) stats.rocketLeague.duel1v1 = scraped.duel1v1;
     if (scraped.doubles2v2) stats.rocketLeague.doubles2v2 = scraped.doubles2v2;
