@@ -3,10 +3,20 @@ const fs = require('fs');
 
 async function scrapeRocketLeague() {
   console.log("Lancement du scraper...");
-  const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+  const browser = await chromium.launch({
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-blink-features=AutomationControlled'
+    ]
   });
+
+  const context = await browser.newContext({
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+    viewport: { width: 1920, height: 1080 }
+  });
+
   const page = await context.newPage();
 
   let stats = {
@@ -30,41 +40,47 @@ async function scrapeRocketLeague() {
       timeout: 60000
     });
 
-    await page.waitForTimeout(6000);
+    // Attente du rendu complet des scripts
+    await page.waitForTimeout(8000);
 
-    const scraped = await page.evaluate(() => {
-      const results = {};
-      const rows = document.querySelectorAll('tr, .playlist-row');
+    const pageTitle = await page.title();
+    console.log("Titre de la page :", pageTitle);
 
-      rows.forEach(r => {
-        const text = r.innerText || '';
-        const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
+    const results = await page.evaluate(() => {
+      const text = document.body.innerText;
+      const res = {};
 
-        // Récupère le rang (généralement la 2e ou 3e ligne de texte de la rangée)
-        if (text.includes('Duel 1v1') || text.includes('1v1')) {
-          results.duel1v1 = lines.length > 1 ? (lines[1].toLowerCase().includes('duel') ? lines[2] : lines[1]) : text;
+      function extractRank(modePattern) {
+        const regex = new RegExp(modePattern + '[\\s\\S]{0,150}?(Bronze|Silver|Gold|Platinum|Diamond|Champion|Grand Champion|Supersonic Legend|Unranked)\\s*([I|V|X]+)?(?:[\\s\\S]{0,50}?(Division\\s*[I|V|X]+))?', 'i');
+        const match = text.match(regex);
+        if (match) {
+          const rankTier = match[1] || '';
+          const rankNumber = match[2] || '';
+          const division = match[3] || '';
+          return `${rankTier} ${rankNumber} ${division ? '(' + division + ')' : ''}`.trim();
         }
-        if (text.includes('Doubles 2v2') || text.includes('2v2')) {
-          results.doubles2v2 = lines.length > 1 ? (lines[1].toLowerCase().includes('double') ? lines[2] : lines[1]) : text;
-        }
-        if (text.includes('Standard 3v3') || text.includes('3v3')) {
-          results.standard3v3 = lines.length > 1 ? (lines[1].toLowerCase().includes('standard') ? lines[2] : lines[1]) : text;
-        }
-      });
+        return null;
+      }
 
-      return results;
+      res.duel1v1 = extractRank('(?:Ranked\\s*)?Duel\\s*1v1');
+      res.doubles2v2 = extractRank('(?:Ranked\\s*)?Doubles\\s*2v2');
+      res.standard3v3 = extractRank('(?:Ranked\\s*)?Standard\\s*3v3');
+
+      return res;
     });
 
-    if (scraped.duel1v1) stats.rocketLeague.duel1v1 = scraped.duel1v1;
-    if (scraped.doubles2v2) stats.rocketLeague.doubles2v2 = scraped.doubles2v2;
-    if (scraped.standard3v3) stats.rocketLeague.standard3v3 = scraped.standard3v3;
+    console.log("Rangs détectés :", results);
 
-    console.log("Stats extraites :", stats.rocketLeague);
+    if (results.duel1v1) stats.rocketLeague.duel1v1 = results.duel1v1;
+    if (results.doubles2v2) stats.rocketLeague.doubles2v2 = results.doubles2v2;
+    if (results.standard3v3) stats.rocketLeague.standard3v3 = results.standard3v3;
+
   } catch (err) {
-    console.log("Avertissement scraping :", err.message);
+    console.error("Erreur lors de l'exécution :", err.message);
   } finally {
     fs.writeFileSync('stats.json', JSON.stringify(stats, null, 2));
     await browser.close();
+    console.log("stats.json enregistré avec succès !");
   }
 }
 
