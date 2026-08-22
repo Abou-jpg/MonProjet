@@ -1,36 +1,39 @@
-name: Statistiques de jeu mises à jour automatiquement
+name: Update Stats
 
 on:
   schedule:
-    - cron: '0 * * * *' # S'exécute automatiquement toutes les heures
-  workflow_dispatch:      # Permet de le lancer manuellement à tout moment
+    # S'exécute automatiquement toutes les 30 minutes (à :15 et :45)
+    - cron: '15,45 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   update-stats:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
-      - name: Checkout repository
+      - name: Récupérer le code du dépôt
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Installer Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
 
-      - name: Installer Playwright
+      - name: Installer les dépendances Playwright
         run: |
           npm install playwright
-          npx playwright install chromium --with-deps
+          npx playwright install --with-deps chromium
 
-      - name: Exécuter le scraper
+      - name: Exécuter le script de scraping
         run: node scripts/update-stats.js
 
-      - name: Commit et Push des nouvelles stats
+      - name: Enregistrer et publier les nouvelles stats
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add stats.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Mise à jour automatique des stats [skip ci]" && git push)
+          git commit -m "Mise à jour automatique des stats [skip ci]" || echo "Aucune modification détectée"
+          git push
