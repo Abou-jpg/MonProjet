@@ -30,24 +30,28 @@ async function scrapeRocketLeague() {
       timeout: 60000
     });
 
-    // Attente du chargement complet des composants dynamiques
     await page.waitForTimeout(6000);
 
     const scraped = await page.evaluate(() => {
       const results = {};
-      const rows = document.querySelectorAll('.playlist-row, tr');
+      const rows = document.querySelectorAll('tr, .playlist-row');
+
       rows.forEach(r => {
         const text = r.innerText || '';
-        if (text.includes('Ranked Duel 1v1') || text.includes('Duel 1v1')) {
-          results.duel1v1 = text.split('\n')[1] || text;
+        const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
+
+        // Récupère le rang (généralement la 2e ou 3e ligne de texte de la rangée)
+        if (text.includes('Duel 1v1') || text.includes('1v1')) {
+          results.duel1v1 = lines.length > 1 ? (lines[1].toLowerCase().includes('duel') ? lines[2] : lines[1]) : text;
         }
-        if (text.includes('Ranked Doubles 2v2') || text.includes('Doubles 2v2')) {
-          results.doubles2v2 = text.split('\n')[1] || text;
+        if (text.includes('Doubles 2v2') || text.includes('2v2')) {
+          results.doubles2v2 = lines.length > 1 ? (lines[1].toLowerCase().includes('double') ? lines[2] : lines[1]) : text;
         }
-        if (text.includes('Ranked Standard 3v3') || text.includes('Standard 3v3')) {
-          results.standard3v3 = text.split('\n')[1] || text;
+        if (text.includes('Standard 3v3') || text.includes('3v3')) {
+          results.standard3v3 = lines.length > 1 ? (lines[1].toLowerCase().includes('standard') ? lines[2] : lines[1]) : text;
         }
       });
+
       return results;
     });
 
@@ -55,7 +59,7 @@ async function scrapeRocketLeague() {
     if (scraped.doubles2v2) stats.rocketLeague.doubles2v2 = scraped.doubles2v2;
     if (scraped.standard3v3) stats.rocketLeague.standard3v3 = scraped.standard3v3;
 
-    console.log("Stats extraites avec succès :", stats.rocketLeague);
+    console.log("Stats extraites :", stats.rocketLeague);
   } catch (err) {
     console.log("Avertissement scraping :", err.message);
   } finally {
