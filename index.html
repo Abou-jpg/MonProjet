@@ -61,11 +61,12 @@
     /* Poster Card Rocket League */
     .game-poster-card {
       position: relative;
-      height: 400px;
+      height: 420px;
       border-radius: 1.5rem;
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
     }
     .game-poster-bg {
       position: absolute;
@@ -78,9 +79,9 @@
       transform: scale(1.08);
     }
     .game-poster-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 35px -10px rgba(16, 185, 129, 0.35);
-      border-color: rgba(52, 211, 153, 0.6);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.35);
+      border-color: rgba(52, 211, 153, 0.8);
     }
 
     /* Accordéon tiroirs */
@@ -91,7 +92,7 @@
       opacity: 0;
     }
     .accordion-content.open {
-      max-height: 300px;
+      max-height: 250px;
       opacity: 1;
       transition: max-height 0.4s ease-in, opacity 0.3s ease;
     }
@@ -125,7 +126,9 @@
     </div>
   </header>
 
-  <!-- ==================== VUE 1 : ACCUEIL PRINCIPAL ==================== -->
+  <!-- ========================================== -->
+  <!-- NIVEAU 1 : ACCUEIL PRINCIPAL               -->
+  <!-- ========================================== -->
   <div id="view-accueil" class="view-section max-w-7xl mx-auto px-6 pt-16 pb-20">
     <div class="max-w-3xl">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/25 text-emerald-800 dark:text-emerald-300 text-xs font-semibold mb-6">
@@ -151,7 +154,7 @@
       </div>
     </div>
 
-    <!-- GRILLE DES 6 RUBRIQUES -->
+    <!-- GRILLE DES 6 POLES -->
     <div class="pt-6 border-t border-amber-900/10 dark:border-white/5">
       <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-3">
         <span>— navigation rapide</span>
@@ -160,7 +163,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         
-        <!-- CARTE VERS RUBRIQUE GAMING -->
+        <!-- CARTE GAMING VERS HUB JEUX -->
         <div onclick="navigateTab('gaming')" class="glass-card p-6 rounded-2xl group block cursor-pointer border border-emerald-500/30">
           <div class="flex items-center justify-between mb-4">
             <div class="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition">
@@ -231,30 +234,32 @@
     </div>
   </div>
 
-  <!-- ==================== VUE 2 : ESPACE DÉDIÉ GAMING (ISOLÉ) ==================== -->
+  <!-- ========================================== -->
+  <!-- NIVEAU 2 : ESPACE GAMING DÉDIÉ             -->
+  <!-- ========================================== -->
   <div id="view-gaming" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
     
-    <!-- SUB-VIEW 2A : HUB DES 3 JEUX -->
+    <!-- SUB-VIEW A : HUB DES 3 JEUX -->
     <div id="gaming-hub-screen">
       <div class="flex items-center justify-between mb-8 pb-4 border-b border-amber-900/10 dark:border-white/5">
         <div class="flex items-center gap-3">
-          <button onclick="navigateTab('accueil')" class="p-2 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-emerald-500 hover:text-black dark:hover:bg-emerald-400 dark:hover:text-black transition" title="Retour Accueil">
+          <button onclick="navigateTab('accueil')" class="p-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-emerald-500 hover:text-black dark:hover:bg-emerald-400 dark:hover:text-black transition" title="Retour Accueil">
             <i data-lucide="arrow-left" class="w-5 h-5"></i>
           </button>
           <div>
             <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-1">
-              Espace Compétitif
+              Hub ELO
             </div>
             <h2 class="text-3xl md:text-4xl font-serif-title text-zinc-950 dark:text-white">Gaming & Rangs ELO</h2>
           </div>
         </div>
       </div>
 
-      <!-- LES 3 CARTES DE JEUX -->
+      <!-- LES 3 CARTES -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        <!-- CARTE ROCKET LEAGUE (AVEC L'IMAGE RL.JPG) -->
-        <div onclick="openRLDetails()" class="game-poster-card border border-emerald-500/30 group">
+        <!-- CARTE ROCKET LEAGUE (CLIC -> OUVRE LA PAGE RL) -->
+        <div onclick="openRLDetails()" class="game-poster-card group">
           <div class="game-poster-bg" style="background-image: url('rl.jpg'), url('rl/rl.jpg');"></div>
           <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
           
@@ -263,8 +268,8 @@
               <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-[10px] font-bold uppercase tracking-widest text-emerald-400 backdrop-blur-md">
                 Epic Games
               </span>
-              <span class="w-9 h-9 rounded-xl bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition">
-                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+              <span class="w-10 h-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
               </span>
             </div>
 
@@ -274,9 +279,9 @@
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 ID : abdel92jr
               </p>
-              <div class="w-full py-2.5 px-4 rounded-xl bg-emerald-500/20 border border-emerald-500/30 backdrop-blur-md text-white text-xs font-semibold flex items-center justify-between group-hover:bg-emerald-500 group-hover:text-black transition">
-                <span>Accéder aux modes (1v1, 2v2, 3v3)</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              <div class="w-full py-3 px-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-emerald-500 group-hover:text-black transition">
+                <span>Explorer 1v1 • 2v2 • 3v3</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
               </div>
             </div>
           </div>
@@ -352,7 +357,9 @@
       </div>
     </div>
 
-    <!-- SUB-VIEW 2B : PAGE DÉTAILLÉE ROCKET LEAGUE -->
+    <!-- ========================================== -->
+    <!-- NIVEAU 3 : PAGE DÉDIÉE ROCKET LEAGUE       -->
+    <!-- ========================================== -->
     <div id="gaming-rl-screen" class="hidden">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-amber-900/10 dark:border-white/5">
         <div class="flex items-center gap-4">
@@ -470,7 +477,9 @@
 
   </div>
 
-  <!-- ==================== VUES DES AUTRES ONGLETS ==================== -->
+  <!-- ========================================== -->
+  <!-- AUTRES VUES DU SITE (SEPARÉES)             -->
+  <!-- ========================================== -->
   <div id="view-sport" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
     <div class="flex items-center gap-3 mb-6">
       <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400"><i data-lucide="activity" class="w-6 h-6"></i></div>
@@ -583,27 +592,22 @@
       lucide.createIcons();
     });
 
-    // Navigation par onglet principale (SPA)
+    // Navigation principale (SPA)
     function navigateTab(tabName) {
-      // Masquer toutes les sections principales
       document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
 
-      // Réinitialiser les styles des boutons de la navbar
       document.querySelectorAll('.nav-tab').forEach(btn => {
         btn.className = 'nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5';
       });
 
-      // Afficher la vue demandée
       const targetView = document.getElementById(`view-${tabName}`);
       if (targetView) targetView.classList.remove('hidden');
 
-      // Mettre en valeur le bouton actif
       const activeBtn = document.getElementById(`nav-btn-${tabName}`);
       if (activeBtn) {
         activeBtn.className = 'nav-tab text-emerald-700 dark:text-emerald-400 font-semibold border-b-2 border-emerald-600 dark:border-emerald-400 pb-0.5';
       }
 
-      // Si on va sur Gaming, toujours réinitialiser sur le Hub des 3 jeux
       if (tabName === 'gaming') {
         closeRLDetails();
       }
@@ -612,7 +616,7 @@
       lucide.createIcons();
     }
 
-    // Navigation interne dans l'espace Gaming (Hub <-> Rocket League)
+    // Navigation interne Gaming : Hub <-> Rocket League
     function openRLDetails() {
       document.getElementById('gaming-hub-screen').classList.add('hidden');
       document.getElementById('gaming-rl-screen').classList.remove('hidden');
@@ -625,7 +629,7 @@
       lucide.createIcons();
     }
 
-    // Gestion accordéon Rocket League (1v1, 2v2, 3v3)
+    // Accordéon Rocket League (1v1, 2v2, 3v3)
     function toggleAccordion(mode) {
       const content = document.getElementById(`content-${mode}`);
       const arrow = document.getElementById(`icon-arrow-${mode}`);
@@ -644,7 +648,7 @@
       }
     }
 
-    // Chargement automatique des statistiques
+    // Chargement automatique des statistiques depuis stats.json
     window.addEventListener('DOMContentLoaded', () => {
       fetch('./stats.json?t=' + Date.now())
         .then(response => {
@@ -655,25 +659,35 @@
           if (data.rocketLeague) {
             const rl = data.rocketLeague;
             if (rl.duel1v1) {
-              document.getElementById('rl-1v1').innerText = rl.duel1v1;
-              document.getElementById('badge-1v1-compact').innerText = rl.duel1v1;
+              const el = document.getElementById('rl-1v1');
+              const bd = document.getElementById('badge-1v1-compact');
+              if (el) el.innerText = rl.duel1v1;
+              if (bd) bd.innerText = rl.duel1v1;
             }
             if (rl.doubles2v2) {
-              document.getElementById('rl-2v2').innerText = rl.doubles2v2;
-              document.getElementById('badge-2v2-compact').innerText = rl.doubles2v2;
+              const el = document.getElementById('rl-2v2');
+              const bd = document.getElementById('badge-2v2-compact');
+              if (el) el.innerText = rl.doubles2v2;
+              if (bd) bd.innerText = rl.doubles2v2;
             }
             if (rl.standard3v3) {
-              document.getElementById('rl-3v3').innerText = rl.standard3v3;
-              document.getElementById('badge-3v3-compact').innerText = rl.standard3v3;
+              const el = document.getElementById('rl-3v3');
+              const bd = document.getElementById('badge-3v3-compact');
+              if (el) el.innerText = rl.standard3v3;
+              if (bd) bd.innerText = rl.standard3v3;
             }
           }
 
           if (data.valorant) {
             const v = data.valorant;
-            if (v.rang || v.rank) document.getElementById('valo-rank').innerText = v.rang || v.rank;
-            if (v.rr) document.getElementById('valo-rr').innerText = `Score : ${v.rr} • Peak Silver 3`;
-            if (v.kd) document.getElementById('valo-kd').innerText = v.kd;
-            if (v.hs) document.getElementById('valo-hs').innerText = v.hs;
+            const r = document.getElementById('valo-rank');
+            const rr = document.getElementById('valo-rr');
+            const kd = document.getElementById('valo-kd');
+            const hs = document.getElementById('valo-hs');
+            if (r && (v.rang || v.rank)) r.innerText = v.rang || v.rank;
+            if (rr && v.rr) rr.innerText = `Score : ${v.rr} • Peak Silver 3`;
+            if (kd && v.kd) kd.innerText = v.kd;
+            if (hs && v.hs) hs.innerText = v.hs;
           }
         })
         .catch(err => console.error("Erreur stats :", err));
