@@ -84,23 +84,30 @@
       border-color: rgba(52, 211, 153, 0.8);
     }
 
-    /* Accordéon tiroirs */
-    .accordion-content {
-      max-height: 0;
+    /* Cartes des Modes RL */
+    .mode-card {
+      position: relative;
+      border-radius: 1.25rem;
       overflow: hidden;
-      transition: max-height 0.35s ease-out, opacity 0.3s ease;
-      opacity: 0;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
-    .accordion-content.open {
-      max-height: 300px;
-      opacity: 1;
-      transition: max-height 0.4s ease-in, opacity 0.3s ease;
+    .mode-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: rgba(52, 211, 153, 0.6);
+      box-shadow: 0 14px 28px rgba(16, 185, 129, 0.25);
+    }
+    .mode-card.active {
+      border-color: #10b981;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+      transform: translateY(-4px);
     }
   </style>
 </head>
 <body class="text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors duration-300">
 
-  <!-- NAVBAR -->
   <header class="w-full border-b border-amber-900/10 dark:border-white/5 bg-[#fcfbf4]/80 dark:bg-[#070d0a]/80 backdrop-blur-md sticky top-0 z-50 transition-colors">
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
       <nav class="flex items-center gap-6 text-sm font-medium overflow-x-auto" id="main-nav">
@@ -126,7 +133,6 @@
     </div>
   </header>
 
-  <!-- NIVEAU 1 : ACCUEIL -->
   <div id="view-accueil" class="view-section max-w-7xl mx-auto px-6 pt-16 pb-20">
     <div class="max-w-3xl">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/25 text-emerald-800 dark:text-emerald-300 text-xs font-semibold mb-6">
@@ -152,7 +158,6 @@
       </div>
     </div>
 
-    <!-- GRILLE DES 6 POLES -->
     <div class="pt-6 border-t border-amber-900/10 dark:border-white/5">
       <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-3">
         <span>— navigation rapide</span>
@@ -229,30 +234,28 @@
     </div>
   </div>
 
-  <!-- NIVEAU 2 : ESPACE GAMING -->
   <div id="view-gaming" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
     
-    <!-- HUB DES 3 JEUX -->
     <div id="gaming-hub-screen">
-      <div class="flex items-center justify-between mb-8 pb-4 border-b border-amber-900/10 dark:border-white/5">
-        <div class="flex items-center gap-3">
-          <button onclick="navigateTab('accueil')" class="p-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-emerald-500 hover:text-black dark:hover:bg-emerald-400 dark:hover:text-black transition" title="Retour Accueil">
-            <i data-lucide="arrow-left" class="w-5 h-5"></i>
-          </button>
-          <div>
-            <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-1">
-              Hub Compétitif
-            </div>
-            <h2 class="text-3xl md:text-4xl font-serif-title text-zinc-950 dark:text-white">Gaming & Rangs ELO</h2>
+      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <span class="text-emerald-400">Gaming</span>
+      </div>
+
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-1">
+            Hub Compétitif
           </div>
+          <h2 class="text-3xl md:text-4xl font-serif-title text-zinc-950 dark:text-white">Gaming & Rangs ELO</h2>
         </div>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        <!-- ROCKET LEAGUE -->
         <div onclick="openRLDetails()" class="game-poster-card group">
-          <div class="game-poster-bg" style="background-image: url('rl.jpg'), url('rl/rl.jpg');"></div>
+          <div class="game-poster-bg" style="background-image: url('rl.jpg'), url('rl.jpg.png');"></div>
           <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
           
           <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
@@ -272,14 +275,13 @@
                 ID : abdel92jr
               </p>
               <div class="w-full py-3 px-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-emerald-500 group-hover:text-black transition">
-                <span>Explorer 1v1 • 2v2 • 3v3</span>
+                <span>Sélectionner 1v1 • 2v2 • 3v3</span>
                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- LEAGUE OF LEGENDS -->
         <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
           <div>
             <div class="flex justify-between items-start mb-4">
@@ -305,7 +307,6 @@
           </div>
         </div>
 
-        <!-- VALORANT -->
         <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
           <div>
             <div class="flex justify-between items-start mb-3">
@@ -349,16 +350,27 @@
       </div>
     </div>
 
-    <!-- NIVEAU 3 : ROCKET LEAGUE TIROIRS -->
     <div id="gaming-rl-screen" class="hidden">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-amber-900/10 dark:border-white/5">
+      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="closeRLDetails()" class="hover:text-emerald-400 transition">Gaming</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <span class="text-white">Rocket League</span>
+        <span id="breadcrumb-mode-part" class="hidden flex items-center gap-2">
+          <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+          <span id="breadcrumb-mode-name" class="text-emerald-400 font-bold">1 VS 1</span>
+        </span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div class="flex items-center gap-4">
           <button onclick="closeRLDetails()" class="px-4 py-2 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-emerald-500 hover:text-black dark:hover:bg-emerald-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
             Tous les jeux
           </button>
           <div>
-            <h2 class="text-2xl md:text-3xl font-serif-title text-zinc-950 dark:text-white">Rocket League • Modes Compétitifs</h2>
+            <h2 class="text-2xl md:text-3xl font-serif-title text-zinc-950 dark:text-white">Choisis ton mode Rocket League</h2>
             <p class="text-xs text-zinc-500 dark:text-zinc-400">ID Epic : <span class="text-emerald-600 dark:text-emerald-400 font-semibold">abdel92jr</span></p>
           </div>
         </div>
@@ -369,113 +381,84 @@
         </a>
       </div>
 
-      <div class="space-y-4 max-w-4xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         
-        <!-- 1 VS 1 -->
-        <div class="glass-card rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 transition">
-          <button onclick="toggleAccordion('1v1')" class="w-full p-6 flex items-center justify-between text-left hover:bg-emerald-500/5 transition">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center font-black text-base text-zinc-700 dark:text-zinc-300">
-                1v1
-              </div>
-              <div>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Solo</span>
-                <h3 class="text-xl font-bold text-zinc-950 dark:text-white">Duel 1 VS 1</h3>
-              </div>
+        <div onclick="selectRLMode('1v1')" id="card-mode-1v1" class="mode-card group">
+          <img src="1vs1.jpg" onerror="this.onerror=null; this.src='1vs1.jpg.png';" alt="Mode 1v1" class="w-full h-44 object-cover">
+          <div class="p-4 bg-zinc-900/90 border-t border-white/5 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Solo</span>
+              <h3 class="text-lg font-bold text-white">Duel 1 VS 1</h3>
             </div>
-            <div class="flex items-center gap-4">
-              <span id="badge-1v1-compact" class="text-xs font-semibold px-3 py-1 rounded-full bg-zinc-200 dark:bg-white/10 text-zinc-800 dark:text-zinc-200">Chargement...</span>
-              <i id="icon-arrow-1v1" data-lucide="chevron-down" class="w-5 h-5 text-zinc-400 transition-transform duration-300"></i>
-            </div>
-          </button>
-          <div id="content-1v1" class="accordion-content border-t border-zinc-200/50 dark:border-white/5 px-6 pb-6 pt-4 bg-black/5 dark:bg-black/20">
-            <div class="p-4 rounded-xl bg-zinc-900/60 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div class="flex items-center gap-4">
-                <img id="img-badge-1v1" src="ou-3.jpg.png" alt="Badge 1v1" class="w-16 h-16 object-contain rounded-lg drop-shadow-[0_0_12px_rgba(234,179,8,0.3)]">
-                <div>
-                  <span class="text-[11px] text-zinc-400 block mb-0.5">Rang Compétitif Actuel</span>
-                  <span id="rl-1v1" class="text-2xl font-black text-white">Chargement...</span>
-                </div>
-              </div>
-              <div class="sm:text-right">
-                <span class="text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full font-semibold">Synchronisé</span>
-              </div>
-            </div>
+            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
+              <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i>
+            </span>
           </div>
         </div>
 
-        <!-- 2 VS 2 -->
-        <div class="glass-card rounded-2xl overflow-hidden border border-emerald-500/40 transition">
-          <button onclick="toggleAccordion('2v2')" class="w-full p-6 flex items-center justify-between text-left hover:bg-emerald-500/5 transition">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center font-black text-base text-emerald-500">
-                2v2
-              </div>
-              <div>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-500 block">Mode Principal</span>
-                <h3 class="text-xl font-bold text-zinc-950 dark:text-white">Double 2 VS 2</h3>
-              </div>
+        <div onclick="selectRLMode('2v2')" id="card-mode-2v2" class="mode-card group">
+          <img src="2vs2.jpg" onerror="this.onerror=null; this.src='2vs2.jpg.png';" alt="Mode 2v2" class="w-full h-44 object-cover">
+          <div class="p-4 bg-zinc-900/90 border-t border-white/5 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-400 block">Mode Principal</span>
+              <h3 class="text-lg font-bold text-white">Double 2 VS 2</h3>
             </div>
-            <div class="flex items-center gap-4">
-              <span id="badge-2v2-compact" class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Chargement...</span>
-              <i id="icon-arrow-2v2" data-lucide="chevron-down" class="w-5 h-5 text-emerald-500 transition-transform duration-300"></i>
-            </div>
-          </button>
-          <div id="content-2v2" class="accordion-content border-t border-zinc-200/50 dark:border-white/5 px-6 pb-6 pt-4 bg-emerald-500/5">
-            <div class="p-4 rounded-xl bg-zinc-900/70 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div class="flex items-center gap-4">
-                <img id="img-badge-2v2" src="platine-2.jpg.png" alt="Badge 2v2" class="w-16 h-16 object-contain rounded-lg drop-shadow-[0_0_15px_rgba(56,189,248,0.4)]">
-                <div>
-                  <span class="text-[11px] text-emerald-400 block mb-0.5">Rang Compétitif Actuel</span>
-                  <span id="rl-2v2" class="text-2xl font-black text-emerald-400">Chargement...</span>
-                </div>
-              </div>
-              <div class="sm:text-right">
-                <span class="text-[10px] text-emerald-400 bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 rounded-full font-semibold">Rang Actif</span>
-              </div>
-            </div>
+            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
+              <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i>
+            </span>
           </div>
         </div>
 
-        <!-- 3 VS 3 -->
-        <div class="glass-card rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 transition">
-          <button onclick="toggleAccordion('3v3')" class="w-full p-6 flex items-center justify-between text-left hover:bg-emerald-500/5 transition">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center font-black text-base text-zinc-700 dark:text-zinc-300">
-                3v3
-              </div>
-              <div>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Équipe</span>
-                <h3 class="text-xl font-bold text-zinc-950 dark:text-white">Standard 3 VS 3</h3>
-              </div>
+        <div onclick="selectRLMode('3v3')" id="card-mode-3v3" class="mode-card group">
+          <img src="3vs3.jpg" onerror="this.onerror=null; this.src='3vs3.jpg.png';" alt="Mode 3v3" class="w-full h-44 object-cover">
+          <div class="p-4 bg-zinc-900/90 border-t border-white/5 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Équipe</span>
+              <h3 class="text-lg font-bold text-white">Standard 3 VS 3</h3>
             </div>
-            <div class="flex items-center gap-4">
-              <span id="badge-3v3-compact" class="text-xs font-semibold px-3 py-1 rounded-full bg-zinc-200 dark:bg-white/10 text-zinc-800 dark:text-zinc-200">Chargement...</span>
-              <i id="icon-arrow-3v3" data-lucide="chevron-down" class="w-5 h-5 text-zinc-400 transition-transform duration-300"></i>
-            </div>
-          </button>
-          <div id="content-3v3" class="accordion-content border-t border-zinc-200/50 dark:border-white/5 px-6 pb-6 pt-4 bg-black/5 dark:bg-black/20">
-            <div class="p-4 rounded-xl bg-zinc-900/60 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div class="flex items-center gap-4">
-                <img id="img-badge-3v3" src="platine-2.jpg.png" alt="Badge 3v3" class="w-16 h-16 object-contain rounded-lg drop-shadow-[0_0_15px_rgba(56,189,248,0.4)]">
-                <div>
-                  <span class="text-[11px] text-zinc-400 block mb-0.5">Rang Compétitif Actuel</span>
-                  <span id="rl-3v3" class="text-2xl font-black text-white">Chargement...</span>
-                </div>
-              </div>
-              <div class="sm:text-right">
-                <span class="text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full font-semibold">Synchronisé</span>
-              </div>
-            </div>
+            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
+              <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i>
+            </span>
           </div>
         </div>
 
       </div>
+
+      <div id="rl-rank-display" class="hidden max-w-2xl mx-auto">
+        <div class="glass-card rounded-2xl overflow-hidden border-2 border-emerald-500/40 p-6 sm:p-8 bg-zinc-950/80 shadow-2xl animate-fade-in">
+          
+          <div class="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-400 block" id="rl-selected-subtitle">MODE SOLO SÉLECTIONNÉ</span>
+              <h3 class="text-2xl font-black text-white" id="rl-selected-title">Duel 1 VS 1</h3>
+            </div>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              Synchronisé
+            </span>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            <div class="flex items-center gap-5">
+              <img id="rl-selected-badge" src="ou-3.jpg.png" alt="Badge" class="w-20 h-20 object-contain drop-shadow-[0_0_18px_rgba(16,185,129,0.35)]">
+              <div>
+                <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
+                <span id="rl-selected-rank" class="text-3xl font-black text-white">Chargement...</span>
+              </div>
+            </div>
+
+            <div class="sm:text-right flex sm:flex-col justify-between items-center sm:items-end border-t sm:border-t-0 pt-4 sm:pt-0 border-white/5">
+              <span class="text-[11px] text-zinc-400 block">Saison Compétitive</span>
+              <span class="text-sm font-bold text-emerald-400">Tracker Network Actif</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
   </div>
 
-  <!-- AUTRES VUES -->
   <div id="view-sport" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
     <div class="flex items-center gap-3 mb-6">
       <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400"><i data-lucide="activity" class="w-6 h-6"></i></div>
@@ -577,9 +560,15 @@
     </div>
   </div>
 
-  <!-- SCRIPT ROUTEUR SPA, THEME & STATS -->
   <script>
     lucide.createIcons();
+
+    // Variable pour stocker les stats chargées
+    let rlStatsCache = {
+      '1v1': 'Chargement...',
+      '2v2': 'Chargement...',
+      '3v3': 'Chargement...'
+    };
 
     // 1. Thème Sombre / Clair
     const themeToggleBtn = document.getElementById('themeToggle');
@@ -612,11 +601,15 @@
       lucide.createIcons();
     }
 
-    // 3. Navigation interne Gaming
+    // 3. Navigation Gaming : Hub <-> Rocket League
     function openRLDetails() {
       document.getElementById('gaming-hub-screen').classList.add('hidden');
       document.getElementById('gaming-rl-screen').classList.remove('hidden');
+      document.getElementById('rl-rank-display').classList.add('hidden');
+      document.getElementById('breadcrumb-mode-part').classList.add('hidden');
+      document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
       lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function closeRLDetails() {
@@ -625,94 +618,90 @@
       lucide.createIcons();
     }
 
-    // 4. Accordéon Rocket League
-    function toggleAccordion(mode) {
-      const content = document.getElementById(`content-${mode}`);
-      const arrow = document.getElementById(`icon-arrow-${mode}`);
-      const isOpen = content.classList.contains('open');
+    // 4. Sélection du Mode RL (1v1, 2v2, 3v3) et Affichage du Rang
+    function selectRLMode(mode) {
+      // Activer visuellement la carte cliquée
+      document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
+      const activeCard = document.getElementById(`card-mode-${mode}`);
+      if (activeCard) activeCard.classList.add('active');
 
-      ['1v1', '2v2', '3v3'].forEach(m => {
-        const c = document.getElementById(`content-${m}`);
-        const a = document.getElementById(`icon-arrow-${m}`);
-        if (c) c.classList.remove('open');
-        if (a) a.style.transform = 'rotate(0deg)';
-      });
+      // Mettre à jour le fil d'Ariane
+      const breadcrumbPart = document.getElementById('breadcrumb-mode-part');
+      const breadcrumbName = document.getElementById('breadcrumb-mode-name');
+      breadcrumbPart.classList.remove('hidden');
+      breadcrumbName.innerText = mode.toUpperCase().replace('V', ' VS ');
 
-      if (!isOpen) {
-        content.classList.add('open');
-        arrow.style.transform = 'rotate(180deg)';
-      }
+      // Mettre à jour le titre et sous-titre
+      const titles = {
+        '1v1': { title: 'Duel 1 VS 1', subtitle: 'MODE SOLO' },
+        '2v2': { title: 'Double 2 VS 2', subtitle: 'MODE PRINCIPAL' },
+        '3v3': { title: 'Standard 3 VS 3', subtitle: 'MODE ÉQUIPE' }
+      };
+
+      document.getElementById('rl-selected-title').innerText = titles[mode].title;
+      document.getElementById('rl-selected-subtitle').innerText = titles[mode].subtitle;
+
+      // Récupérer et afficher le rang
+      const rankText = rlStatsCache[mode] || 'Non Classé';
+      document.getElementById('rl-selected-rank').innerText = rankText;
+
+      // Charger le badge correspondant
+      const badgeImg = document.getElementById('rl-selected-badge');
+      badgeImg.src = getRLRankBadge(rankText);
+
+      // Afficher le conteneur de rang avec animation
+      const displayCard = document.getElementById('rl-rank-display');
+      displayCard.classList.remove('hidden');
+      displayCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      lucide.createIcons();
     }
 
-    // 5. Détection dynamique des badges
+    // 5. Détection dynamique des badges avec support de tous les formats du dépôt
     function getRLRankBadge(rankStr) {
       if (!rankStr) return 'ou-3.jpg.png';
       const r = rankStr.toLowerCase();
 
-      // SSL & GC (.webp.webp)
+      // SSL & GC
       if (r.includes('supersonic') || r.includes('ssl')) return 'ssl.webp.webp';
       if (r.includes('grand champion iii') || r.includes('gc3') || r.includes('gc 3')) return 'gc-3.webp.webp';
       if (r.includes('grand champion ii') || r.includes('gc2') || r.includes('gc 2')) return 'gc-2.webp.webp';
       if (r.includes('grand champion') || r.includes('gc1') || r.includes('gc 1')) return 'gc-1.webp.webp';
 
-      // Champion (.jpg.png)
+      // Champion
       if (r.includes('champion iii') || r.includes('c3')) return 'champion-3.jpg.png';
       if (r.includes('champion ii') || r.includes('c2')) return 'champion-2.jpg.png';
       if (r.includes('champion i') || r.includes('c1')) return 'champion-1.jpg.png';
 
-      // Diamant (.jpg.png)
+      // Diamant
       if (r.includes('diamond iii') || r.includes('diamant iii') || r.includes('d3')) return 'diamant-3.jpg.png';
       if (r.includes('diamond ii') || r.includes('diamant ii') || r.includes('d2')) return 'diamant-2.jpg.png';
       if (r.includes('diamond i') || r.includes('diamant i') || r.includes('d1')) return 'diamant-1.jpg.png';
 
-      // Platine (.jpg.png)
+      // Platine
       if (r.includes('platinum iii') || r.includes('platine iii') || r.includes('p3')) return 'platine-3.jpg.png';
       if (r.includes('platinum ii') || r.includes('platine ii') || r.includes('p2')) return 'platine-2.jpg.png';
       if (r.includes('platinum i') || r.includes('platine i') || r.includes('p1')) return 'platine-1.jpg.png';
 
-      // Or / Gold (gestion ou-X.jpg.png)
+      // Or / Gold (gestion ou- et or-)
       if (r.includes('gold iii') || r.includes('or iii') || r.includes('gold 3') || r.includes('or 3') || r.includes('g3')) return 'ou-3.jpg.png';
       if (r.includes('gold ii') || r.includes('or ii') || r.includes('gold 2') || r.includes('or 2') || r.includes('g2')) return 'ou-2.jpg.png';
       if (r.includes('gold i') || r.includes('or i') || r.includes('gold 1') || r.includes('or 1') || r.includes('g1')) return 'ou-1.jpg.png';
 
-      // Argent (.jpg.png)
+      // Argent
       if (r.includes('silver iii') || r.includes('argent iii')) return 'argent-3.jpg.png';
       if (r.includes('silver ii') || r.includes('argent ii')) return 'argent-2.jpg.png';
       if (r.includes('silver i') || r.includes('argent i')) return 'argent-1.jpg.png';
 
-      // Bronze (.jpg.png)
-      if (r.includes('bronze iii') || r.includes('bronze 3')) return 'bronze-3.jpg.png';
-      if (r.includes('bronze ii') || r.includes('bronze 2')) return 'bronze-2.jpg.png';
-      if (r.includes('bronze i') || r.includes('bronze 1')) return 'bronze-1.jpg.png';
+      // Bronze
+      if (r.includes('bronze iii')) return 'bronze-3.jpg.png';
+      if (r.includes('bronze ii')) return 'bronze-2.jpg.png';
+      if (r.includes('bronze i')) return 'bronze-1.jpg.png';
 
       return 'platine-2.jpg.png';
     }
 
-    // 6. Système de secours en cas d'erreur de nommage
-    function applyBadgeWithFallback(imgElement, initialSrc) {
-      if (!imgElement) return;
-
-      const fallbacks = [
-        initialSrc,
-        initialSrc.replace('ou-', 'or-'),
-        initialSrc.replace('.jpg.png', '.jpg'),
-        initialSrc.replace('.jpg.png', '.png'),
-        initialSrc.replace('ou-', 'gold-'),
-        'platine-2.jpg.png'
-      ];
-
-      let idx = 0;
-      imgElement.onerror = function() {
-        idx++;
-        if (idx < fallbacks.length) {
-          this.src = fallbacks[idx];
-        }
-      };
-
-      imgElement.src = fallbacks[0];
-    }
-
-    // 7. Chargement automatique des statistiques
+    // 6. Chargement des statistiques depuis stats.json
     window.addEventListener('DOMContentLoaded', () => {
       fetch('./stats.json?t=' + Date.now())
         .then(response => {
@@ -720,33 +709,12 @@
           return response.json();
         })
         .then(data => {
-          // Rocket League
+          // Stockage en cache des stats Rocket League
           if (data.rocketLeague) {
             const rl = data.rocketLeague;
-            if (rl.duel1v1) {
-              const el = document.getElementById('rl-1v1');
-              const bd = document.getElementById('badge-1v1-compact');
-              const img = document.getElementById('img-badge-1v1');
-              if (el) el.innerText = rl.duel1v1;
-              if (bd) bd.innerText = rl.duel1v1;
-              applyBadgeWithFallback(img, getRLRankBadge(rl.duel1v1));
-            }
-            if (rl.doubles2v2) {
-              const el = document.getElementById('rl-2v2');
-              const bd = document.getElementById('badge-2v2-compact');
-              const img = document.getElementById('img-badge-2v2');
-              if (el) el.innerText = rl.doubles2v2;
-              if (bd) bd.innerText = rl.doubles2v2;
-              applyBadgeWithFallback(img, getRLRankBadge(rl.doubles2v2));
-            }
-            if (rl.standard3v3) {
-              const el = document.getElementById('rl-3v3');
-              const bd = document.getElementById('badge-3v3-compact');
-              const img = document.getElementById('img-badge-3v3');
-              if (el) el.innerText = rl.standard3v3;
-              if (bd) bd.innerText = rl.standard3v3;
-              applyBadgeWithFallback(img, getRLRankBadge(rl.standard3v3));
-            }
+            if (rl.duel1v1) rlStatsCache['1v1'] = rl.duel1v1;
+            if (rl.doubles2v2) rlStatsCache['2v2'] = rl.doubles2v2;
+            if (rl.standard3v3) rlStatsCache['3v3'] = rl.standard3v3;
           }
 
           // Valorant
