@@ -155,7 +155,6 @@
       </div>
     </div>
 
-    <!-- GRILLE DES 6 POLES -->
     <div class="pt-6 border-t border-amber-900/10 dark:border-white/5">
       <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-3">
         <span>— navigation rapide</span>
@@ -234,8 +233,6 @@
 
   <!-- NIVEAU 2 : ESPACE GAMING -->
   <div id="view-gaming" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    
-    <!-- HUB DES 3 JEUX -->
     <div id="gaming-hub-screen">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
@@ -253,7 +250,6 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
         <!-- 1. POSTER ROCKET LEAGUE -->
         <div onclick="openRLDetails()" class="game-poster-card group border-emerald-500/40 hover:border-emerald-500">
           <div class="game-poster-bg" style="background-image: url('rl.jpg'), url('rl.jpg.png');"></div>
@@ -340,7 +336,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -533,7 +528,7 @@
       </div>
     </div>
 
-    <!-- VALORANT : PAGE DÉDIÉE AVEC BADGE DE RANG -->
+    <!-- VALORANT : PAGE DÉDIÉE AVEC BADGES SVG -->
     <div id="gaming-valo-screen" class="hidden max-w-4xl mx-auto">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
@@ -565,11 +560,11 @@
           </span>
         </div>
 
-        <!-- Section Badge + Rang Valorant -->
+        <!-- Section Badge SVG + Rang Valorant -->
         <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div class="flex items-center gap-6">
             <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
-              <img id="valo-badge-img" src="valo-bronze-3.png" alt="Badge Valorant" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">
+              <img id="valo-badge-img" src="valo-bronze-3.svg" alt="Badge Valorant" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">
             </div>
             <div>
               <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
@@ -598,112 +593,9 @@
         </div>
       </div>
     </div>
-
   </div>
 
-  <!-- AUTRES VUES -->
-  <div id="view-sport" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400"><i data-lucide="activity" class="w-6 h-6"></i></div>
-      <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Sport Pro Data & Calendrier</h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-lg font-semibold text-zinc-950 dark:text-white mb-2">Football</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">• Real Madrid & Olympique Lyonnais<br>• Sélections Algérie / France<br>• Focus : Amira Benaïssa (Fleury / Algérie)</p>
-      </div>
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-lg font-semibold text-zinc-950 dark:text-white mb-2">Basket & Tennis</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">• San Antonio Spurs (Wemby)<br>• Équipe de Gabby Williams<br>• Carlos Alcaraz & Emma Raducanu</p>
-      </div>
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-lg font-semibold text-zinc-950 dark:text-white mb-2">Volleyball Pro</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">• Les Mariannes 92<br>• Équipe de France Féminine</p>
-      </div>
-    </div>
-  </div>
-
-  <div id="view-watchlist" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400"><i data-lucide="clapperboard" class="w-6 h-6"></i></div>
-      <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Watchlist & Clips MCU</h2>
-    </div>
-    <div class="glass-card p-6 rounded-2xl">
-      <h3 class="text-lg font-semibold text-zinc-950 dark:text-white mb-2">Production Montage MCU (TikTok / Shorts)</h3>
-      <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-4 font-medium">Montage Premiere Pro des réactions du stream d'Abdou.</p>
-      <div class="inline-flex items-center gap-2 text-xs text-emerald-800 dark:text-emerald-300 bg-emerald-500/10 px-3.5 py-2 rounded-lg border border-emerald-500/30 font-semibold">
-        <i data-lucide="scissors" class="w-4 h-4"></i>
-        Priorité : Hooks percutants & sous-titrage dynamique
-      </div>
-    </div>
-  </div>
-
-  <div id="view-planning" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400"><i data-lucide="calendar" class="w-6 h-6"></i></div>
-      <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Planning Hebdomadaire</h2>
-    </div>
-    <div class="glass-card p-6 rounded-2xl">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs text-zinc-500 dark:text-zinc-400 font-medium">
-        <div class="p-3 bg-amber-50 dark:bg-white/5 rounded-xl border border-amber-200/50 dark:border-white/5">
-          <span class="text-zinc-950 dark:text-white font-bold block mb-1">Matin & Après-midi</span>
-          Fac Éco-Gestion & TD
-        </div>
-        <div class="p-3 bg-amber-50 dark:bg-white/5 rounded-xl border border-amber-200/50 dark:border-white/5">
-          <span class="text-zinc-950 dark:text-white font-bold block mb-1">Fin d'après-midi</span>
-          Montage MCU Premiere Pro
-        </div>
-        <div class="p-3 bg-amber-50 dark:bg-white/5 rounded-xl border border-amber-200/50 dark:border-white/5">
-          <span class="text-zinc-950 dark:text-white font-bold block mb-1">Soirée</span>
-          Entraînement Volley / Révisions
-        </div>
-        <div class="p-3 bg-amber-50 dark:bg-white/5 rounded-xl border border-amber-200/50 dark:border-white/5">
-          <span class="text-zinc-950 dark:text-white font-bold block mb-1">Week-end</span>
-          Matchs Nanterre & Foot Cardio
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="view-volley" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400"><i data-lucide="shield" class="w-6 h-6"></i></div>
-      <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Volley Club Nanterre • Espace DS</h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-1">Seniors Départemental</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Gestion et suivi des équipes Filles et Garçons.</p>
-      </div>
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-1">Pôle Jeunes & Relève</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Détection, suivi des présences et surclassements.</p>
-      </div>
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-1">Administration & Matchs</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Licences, réservations de salle et matériel.</p>
-      </div>
-    </div>
-  </div>
-
-  <div id="view-perso" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400"><i data-lucide="user" class="w-6 h-6"></i></div>
-      <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Personnel & Objectifs</h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-2">L2 Éco-Gestion</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Rentrée 15 Septembre • Accent sur les TD et la gestion de projet.</p>
-      </div>
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-2">Permis de Conduire</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Lancement Code de la route en Octobre (Mode Blitz 3-4 semaines).</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- SCRIPT ROUTEUR SPA, NIVEAUX DE NAVIGATION & STATS -->
+  <!-- SCRIPT ROUTEUR SPA & STATS -->
   <script>
     lucide.createIcons();
 
@@ -840,7 +732,7 @@
       lucide.createIcons();
     }
 
-    // 5. Gestionnaire d'images universel avec secours
+    // 5. Gestionnaire universel d'images
     function setupImageWithFallbacks(elementId, candidates) {
       const el = document.getElementById(elementId);
       if (!el || !candidates || candidates.length === 0) return;
@@ -857,99 +749,93 @@
 
     // 6. Badges Rocket League
     function getRLRankBadgeFallbacks(rankStr) {
-      if (!rankStr) return ['ou-3.jpg.png', 'or-3.jpg', 'platine-2.jpg.png'];
+      if (!rankStr) return ['ou-3.jpg.png', 'or-3.jpg.png', 'platine-2.jpg.png'];
       const r = rankStr.toLowerCase();
 
       if (r.includes('supersonic') || r.includes('ssl')) return ['ssl.webp.webp', 'ssl.webp', 'ssl.png'];
-      if (r.includes('grand champion iii') || r.includes('gc3') || r.includes('gc 3')) return ['gc-3.webp.webp', 'gc-3.webp', 'gc-3.png'];
-      if (r.includes('grand champion ii') || r.includes('gc2') || r.includes('gc 2')) return ['gc-2.webp.webp', 'gc-2.webp', 'gc-2.png'];
-      if (r.includes('grand champion') || r.includes('gc1') || r.includes('gc 1')) return ['gc-1.webp.webp', 'gc-1.webp', 'gc-1.png'];
+      if (r.includes('grand champion iii') || r.includes('gc3')) return ['gc-3.webp.webp', 'gc-3.webp', 'gc-3.png'];
+      if (r.includes('grand champion ii') || r.includes('gc2')) return ['gc-2.webp.webp', 'gc-2.webp', 'gc-2.png'];
+      if (r.includes('grand champion') || r.includes('gc1')) return ['gc-1.webp.webp', 'gc-1.webp', 'gc-1.png'];
 
-      if (r.includes('champion iii') || r.includes('c3')) return ['champion-3.jpg.png', 'champion-3.jpg', 'champion-3.png'];
-      if (r.includes('champion ii') || r.includes('c2')) return ['champion-2.jpg.png', 'champion-2.jpg', 'champion-2.png'];
-      if (r.includes('champion i') || r.includes('c1')) return ['champion-1.jpg.png', 'champion-1.jpg', 'champion-1.png'];
+      if (r.includes('champion iii') || r.includes('c3')) return ['champion-3.jpg.png', 'champion-3.jpg'];
+      if (r.includes('champion ii') || r.includes('c2')) return ['champion-2.jpg.png', 'champion-2.jpg'];
+      if (r.includes('champion i') || r.includes('c1')) return ['champion-1.jpg.png', 'champion-1.jpg'];
 
-      if (r.includes('diamond iii') || r.includes('diamant iii') || r.includes('d3')) return ['diamant-3.jpg.png', 'diamant-3.jpg', 'diamand-3.jpg'];
-      if (r.includes('diamond ii') || r.includes('diamant ii') || r.includes('d2')) return ['diamant-2.jpg.png', 'diamant-2.jpg', 'diamand-2.jpg'];
-      if (r.includes('diamond i') || r.includes('diamant i') || r.includes('d1')) return ['diamant-1.jpg.png', 'diamant-1.jpg'];
+      if (r.includes('diamond iii') || r.includes('diamant iii')) return ['diamant-3.jpg.png', 'diamant-3.jpg'];
+      if (r.includes('diamond ii') || r.includes('diamant ii')) return ['diamant-2.jpg.png', 'diamant-2.jpg'];
+      if (r.includes('diamond i') || r.includes('diamant i')) return ['diamant-1.jpg.png', 'diamant-1.jpg'];
 
-      if (r.includes('platinum iii') || r.includes('platine iii') || r.includes('p3')) return ['platine-3.jpg.png', 'platine-3.jpg', 'platine-3.png'];
-      if (r.includes('platinum ii') || r.includes('platine ii') || r.includes('p2')) return ['platine-2.jpg.png', 'platine-2.jpg', 'platine-2.png'];
-      if (r.includes('platinum i') || r.includes('platine i') || r.includes('p1')) return ['platine-1.jpg.png', 'platine-1.jpg', 'platine-1.png'];
+      if (r.includes('platinum iii') || r.includes('platine iii')) return ['platine-3.jpg.png', 'platine-3.jpg'];
+      if (r.includes('platinum ii') || r.includes('platine ii')) return ['platine-2.jpg.png', 'platine-2.jpg'];
+      if (r.includes('platinum i') || r.includes('platine i')) return ['platine-1.jpg.png', 'platine-1.jpg'];
 
-      if (r.includes('gold iii') || r.includes('or iii') || r.includes('gold 3') || r.includes('or 3') || r.includes('g3')) {
-        return ['ou-3.jpg.png', 'or-3.jpg.png', 'or-3.jpg', 'gold-3.png', 'ou-3.jpg'];
-      }
-      if (r.includes('gold ii') || r.includes('or ii') || r.includes('gold 2') || r.includes('or 2') || r.includes('g2')) {
-        return ['ou-2.jpg.png', 'or-2.jpg.png', 'or-2.jpg', 'gold-2.png', 'ou-2.jpg'];
-      }
-      if (r.includes('gold i') || r.includes('or i') || r.includes('gold 1') || r.includes('or 1') || r.includes('g1')) {
-        return ['ou-1.jpg.png', 'or-1.jpg.png', 'or-1.jpg', 'gold-1.png', 'ou-1.jpg'];
-      }
+      if (r.includes('gold iii') || r.includes('or iii') || r.includes('gold 3')) return ['ou-3.jpg.png', 'or-3.jpg.png', 'gold-3.jpg.png', 'ou-3.jpg'];
+      if (r.includes('gold ii') || r.includes('or ii') || r.includes('gold 2')) return ['ou-2.jpg.png', 'or-2.jpg.png', 'gold-2.jpg.png', 'ou-2.jpg'];
+      if (r.includes('gold i') || r.includes('or i') || r.includes('gold 1')) return ['ou-1.jpg.png', 'or-1.jpg.png', 'gold-1.jpg.png', 'ou-1.jpg'];
 
-      if (r.includes('silver iii') || r.includes('argent iii')) return ['argent-3.jpg.png', 'argent-3.jpg', 'argent-3.png'];
-      if (r.includes('silver ii') || r.includes('argent ii')) return ['argent-2.jpg.png', 'argent-2.jpg', 'argent-2.png'];
-      if (r.includes('silver i') || r.includes('argent i')) return ['argent-1.jpg.png', 'argent-1.jpg', 'argent-1.png'];
+      if (r.includes('silver iii') || r.includes('argent iii')) return ['argent-3.jpg.png', 'argent-3.jpg'];
+      if (r.includes('silver ii') || r.includes('argent ii')) return ['argent-2.jpg.png', 'argent-2.jpg'];
+      if (r.includes('silver i') || r.includes('argent i')) return ['argent-1.jpg.png', 'argent-1.jpg'];
 
-      if (r.includes('bronze iii') || r.includes('bronze 3')) return ['bronze-3.jpg.png', 'bronze-3.jpg', 'bronze-3.png'];
-      if (r.includes('bronze ii') || r.includes('bronze 2')) return ['bronze-2.jpg.png', 'bronze-2.jpg', 'bronze-2.png'];
-      if (r.includes('bronze i') || r.includes('bronze 1')) return ['bronze-1.jpg.png', 'bronze-1.jpg', 'bronze-1.png'];
+      if (r.includes('bronze iii')) return ['bronze-3.jpg.png', 'bronze-3.jpg'];
+      if (r.includes('bronze ii')) return ['bronze-2.jpg.png', 'bronze-2.jpg'];
+      if (r.includes('bronze i')) return ['bronze-1.jpg.png', 'bronze-1.jpg'];
 
       return ['platine-2.jpg.png', 'platine-2.jpg'];
     }
 
-    // 7. Badges Valorant (avec fallbacks automatiques)
+    // 7. Badges Valorant SVG (Correspondance exacte avec tes fichiers GitHub)
     function getValoRankBadgeFallbacks(rankStr) {
-      if (!rankStr) return ['valo-bronze-3.png', 'valo-bronze-3.jpg'];
+      if (!rankStr) return ['valo-bronze-3.svg', 'valo-bronze-3.png'];
       const r = rankStr.toLowerCase();
 
       // Radiant
-      if (r.includes('radiant')) return ['valo-radiant.png', 'valo-radiant.jpg', 'radiant.png'];
+      if (r.includes('radiant')) return ['valo-radiant.svg', 'valo-radiant.png'];
 
-      // Immortal
-      if (r.includes('immortal 3') || r.includes('immortel 3')) return ['valo-immortal-3.png', 'valo-immortal-3.jpg'];
-      if (r.includes('immortal 2') || r.includes('immortel 2')) return ['valo-immortal-2.png', 'valo-immortal-2.jpg'];
-      if (r.includes('immortal') || r.includes('immortel')) return ['valo-immortal-1.png', 'valo-immortal-1.jpg'];
+      // Immortel
+      if (r.includes('immortal 3') || r.includes('immortel 3')) return ['valo-immortel-3.svg', 'valo-immortal-3.svg'];
+      if (r.includes('immortal 2') || r.includes('immortel 2')) return ['valo-immortel-2.svg', 'valo-immortal-2.svg'];
+      if (r.includes('immortal') || r.includes('immortel')) return ['valo-immortel-1.svg', 'valo-immortal-1.svg'];
 
       // Ascendant
-      if (r.includes('ascendant 3')) return ['valo-ascendant-3.png', 'valo-ascendant-3.jpg'];
-      if (r.includes('ascendant 2')) return ['valo-ascendant-2.png', 'valo-ascendant-2.jpg'];
-      if (r.includes('ascendant')) return ['valo-ascendant-1.png', 'valo-ascendant-1.jpg'];
+      if (r.includes('ascendant 3')) return ['valo-ascendant-3.svg', 'valo-ascendant-3.png'];
+      if (r.includes('ascendant 2')) return ['valo-ascendant-2.svg', 'valo-ascendant-2.png'];
+      if (r.includes('ascendant')) return ['valo-ascendant-1.svg', 'valo-ascendant-1.png'];
 
-      // Diamant
-      if (r.includes('diamond 3') || r.includes('diamant 3')) return ['valo-diamond-3.png', 'valo-diamond-3.jpg'];
-      if (r.includes('diamond 2') || r.includes('diamant 2')) return ['valo-diamond-2.png', 'valo-diamond-2.jpg'];
-      if (r.includes('diamond') || r.includes('diamant')) return ['valo-diamond-1.png', 'valo-diamond-1.jpg'];
+      // Diamond
+      if (r.includes('diamond 3') || r.includes('diamant 3')) return ['valo-diamond-3.svg', 'valo-diamond-3.png'];
+      if (r.includes('diamond 2') || r.includes('diamant 2')) return ['valo-diamond-2.svg', 'valo-diamond-2.png'];
+      if (r.includes('diamond') || r.includes('diamant')) return ['valo-diamond-1.svg', 'valo-diamond-1.png'];
 
-      // Platine
-      if (r.includes('platinum 3') || r.includes('platine 3')) return ['valo-platinum-3.png', 'valo-platine-3.png', 'valo-platinum-3.jpg'];
-      if (r.includes('platinum 2') || r.includes('platine 2')) return ['valo-platinum-2.png', 'valo-platine-2.png', 'valo-platinum-2.jpg'];
-      if (r.includes('platinum') || r.includes('platine')) return ['valo-platinum-1.png', 'valo-platine-1.png', 'valo-platinum-1.jpg'];
+      // Platinum
+      if (r.includes('platinum 3') || r.includes('platine 3')) return ['valo-platinum-3.svg', 'valo-platine-3.svg'];
+      if (r.includes('platinum 2') || r.includes('platine 2')) return ['valo-platinum-2.svg', 'valo-platine-2.svg'];
+      if (r.includes('platinum') || r.includes('platine')) return ['valo-platinum-1.svg', 'valo-platine-1.svg'];
 
       // Gold
-      if (r.includes('gold 3') || r.includes('or 3')) return ['valo-gold-3.png', 'valo-gold-3.jpg'];
-      if (r.includes('gold 2') || r.includes('or 2')) return ['valo-gold-2.png', 'valo-gold-2.jpg'];
-      if (r.includes('gold') || r.includes('or')) return ['valo-gold-1.png', 'valo-gold-1.jpg'];
+      if (r.includes('gold 3') || r.includes('or 3')) return ['valo-gold-3.svg', 'valo-gold-3.png'];
+      if (r.includes('gold 2') || r.includes('or 2')) return ['valo-gold-2.svg', 'valo-gold-2.png'];
+      if (r.includes('gold') || r.includes('or')) return ['valo-gold-1.svg', 'valo-gold-1.png'];
 
       // Silver
-      if (r.includes('silver 3') || r.includes('argent 3')) return ['valo-silver-3.png', 'valo-silver-3.jpg'];
-      if (r.includes('silver 2') || r.includes('argent 2')) return ['valo-silver-2.png', 'valo-silver-2.jpg'];
-      if (r.includes('silver') || r.includes('argent')) return ['valo-silver-1.png', 'valo-silver-1.jpg'];
+      if (r.includes('silver 3') || r.includes('argent 3')) return ['valo-silver-3.svg', 'valo-argent-3.svg'];
+      if (r.includes('silver 2') || r.includes('argent 2')) return ['valo-silver-2.svg', 'valo-argent-2.svg'];
+      if (r.includes('silver') || r.includes('argent')) return ['valo-silver-1.svg', 'valo-argent-1.svg'];
 
       // Bronze
-      if (r.includes('bronze 3')) return ['valo-bronze-3.png', 'valo-bronze-3.jpg', 'valo-bronze-3.png.png'];
-      if (r.includes('bronze 2')) return ['valo-bronze-2.png', 'valo-bronze-2.jpg'];
-      if (r.includes('bronze')) return ['valo-bronze-1.png', 'valo-bronze-1.jpg'];
+      if (r.includes('bronze 3')) return ['valo-bronze-3.svg', 'valo-bronze-3.png'];
+      if (r.includes('bronze 2')) return ['valo-bronze-2.svg', 'valo-bronze-2.png'];
+      if (r.includes('bronze')) return ['valo-bronze-1.svg', 'valo-bronze-1.png'];
 
-      // Iron / Fer
-      if (r.includes('iron 3') || r.includes('fer 3')) return ['valo-iron-3.png', 'valo-iron-3.jpg'];
-      if (r.includes('iron 2') || r.includes('fer 2')) return ['valo-iron-2.png', 'valo-iron-2.jpg'];
-      if (r.includes('iron') || r.includes('fer')) return ['valo-iron-1.png', 'valo-iron-1.jpg'];
+      // Iron
+      if (r.includes('iron 3') || r.includes('fer 3')) return ['valo-iron-3.svg', 'valo-iron-3.png'];
+      if (r.includes('iron 2') || r.includes('fer 2')) return ['valo-iron-2.svg', 'valo-iron-2.png'];
+      if (r.includes('iron') || r.includes('fer')) return ['valo-iron-1.svg', 'valo-iron-1.png'];
 
-      return ['valo-bronze-3.png', 'valo-bronze-3.jpg'];
+      return ['valo-bronze-3.svg', 'valo-bronze-3.png'];
     }
 
-    // 8. Chargement automatique des statistiques depuis stats.json
+    // 8. Chargement automatique des stats depuis stats.json
     window.addEventListener('DOMContentLoaded', () => {
       fetch('./stats.json?t=' + Date.now())
         .then(response => {
@@ -977,7 +863,6 @@
             if (kd && v.kd) kd.innerText = v.kd;
             if (hs && v.hs) hs.innerText = v.hs;
 
-            // Chargement du badge Valorant
             const valoBadges = getValoRankBadgeFallbacks(rankVal);
             setupImageWithFallbacks('valo-badge-img', valoBadges);
           }
