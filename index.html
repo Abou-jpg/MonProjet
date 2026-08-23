@@ -285,7 +285,7 @@
 
         <!-- 2. POSTER LEAGUE OF LEGENDS -->
         <div onclick="openLoLDetails()" class="game-poster-card group border-amber-500/40 hover:border-amber-500">
-          <div class="game-poster-bg" style="background-image: url('lol.jpg'), url('lol.jpg.png'), url('lol.png');"></div>
+          <div class="game-poster-bg" style="background-image: url('Neeko.jpg'), url('neeko.jpg'), url('lol.jpg');"></div>
           <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
           
           <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
@@ -429,7 +429,7 @@
       </div>
     </div>
 
-    <!-- ROCKET LEAGUE : PAGE RANG DÉDIÉE -->
+    <!-- ROCKET LEAGUE : PAGE DU RANG SÉLECTIONNÉ -->
     <div id="gaming-rl-rank-page" class="hidden max-w-4xl mx-auto">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
@@ -503,7 +503,6 @@
       </div>
 
       <div class="glass-card rounded-3xl overflow-hidden border border-amber-500/40 p-6 sm:p-10 bg-[#141208]/90 shadow-2xl">
-        <!-- Bannière Neeko -->
         <div class="w-full h-56 sm:h-72 rounded-2xl overflow-hidden mb-8 border border-white/10 shadow-lg">
           <img id="lol-banner-img" src="Neeko.jpg" alt="Neeko - League of Legends" class="w-full h-full object-cover">
         </div>
@@ -534,7 +533,7 @@
       </div>
     </div>
 
-    <!-- VALORANT : PAGE DÉDIÉE -->
+    <!-- VALORANT : PAGE DÉDIÉE AVEC BADGE DE RANG -->
     <div id="gaming-valo-screen" class="hidden max-w-4xl mx-auto">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
@@ -566,11 +565,17 @@
           </span>
         </div>
 
+        <!-- Section Badge + Rang Valorant -->
         <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <div>
-            <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
-            <div class="text-4xl font-black text-rose-400 tracking-tight" id="valo-dedicated-rank">Bronze 3</div>
-            <span class="text-xs text-zinc-400 font-medium block mt-1" id="valo-dedicated-rr">Score : 38 RR • Peak Silver 3</span>
+          <div class="flex items-center gap-6">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
+              <img id="valo-badge-img" src="valo-bronze-3.png" alt="Badge Valorant" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">
+            </div>
+            <div>
+              <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
+              <div class="text-3xl sm:text-4xl font-black text-rose-400 tracking-tight" id="valo-dedicated-rank">Bronze 3</div>
+              <span class="text-xs text-zinc-400 font-medium block mt-1" id="valo-dedicated-rr">Score : 38 RR • Peak Silver 3</span>
+            </div>
           </div>
 
           <div class="flex gap-4">
@@ -698,7 +703,7 @@
     </div>
   </div>
 
-  <!-- SCRIPT ROUTEUR SPA & STATS -->
+  <!-- SCRIPT ROUTEUR SPA, NIVEAUX DE NAVIGATION & STATS -->
   <script>
     lucide.createIcons();
 
@@ -797,7 +802,7 @@
       lucide.createIcons();
     }
 
-    // 4. Navigation Gaming LoL & Valorant (Avec secours CDN officiel Riot)
+    // 4. Navigation Gaming LoL & Valorant
     function openLoLDetails() {
       document.getElementById('gaming-hub-screen').classList.add('hidden');
       document.getElementById('gaming-lol-screen').classList.remove('hidden');
@@ -817,7 +822,13 @@
     function openValoDetails() {
       document.getElementById('gaming-hub-screen').classList.add('hidden');
       document.getElementById('gaming-valo-screen').classList.remove('hidden');
+      
       setupImageWithFallbacks('valo-banner-img', ['valo.jpg', 'valo.jpg.png', 'valo.png']);
+      
+      const currentValoRank = document.getElementById('valo-dedicated-rank').innerText;
+      const valoBadges = getValoRankBadgeFallbacks(currentValoRank);
+      setupImageWithFallbacks('valo-badge-img', valoBadges);
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
     }
@@ -829,7 +840,7 @@
       lucide.createIcons();
     }
 
-    // 5. Gestionnaire d'images universel
+    // 5. Gestionnaire d'images universel avec secours
     function setupImageWithFallbacks(elementId, candidates) {
       const el = document.getElementById(elementId);
       if (!el || !candidates || candidates.length === 0) return;
@@ -844,6 +855,7 @@
       el.src = candidates[0];
     }
 
+    // 6. Badges Rocket League
     function getRLRankBadgeFallbacks(rankStr) {
       if (!rankStr) return ['ou-3.jpg.png', 'or-3.jpg', 'platine-2.jpg.png'];
       const r = rankStr.toLowerCase();
@@ -886,7 +898,58 @@
       return ['platine-2.jpg.png', 'platine-2.jpg'];
     }
 
-    // 6. Chargement des statistiques depuis stats.json
+    // 7. Badges Valorant (avec fallbacks automatiques)
+    function getValoRankBadgeFallbacks(rankStr) {
+      if (!rankStr) return ['valo-bronze-3.png', 'valo-bronze-3.jpg'];
+      const r = rankStr.toLowerCase();
+
+      // Radiant
+      if (r.includes('radiant')) return ['valo-radiant.png', 'valo-radiant.jpg', 'radiant.png'];
+
+      // Immortal
+      if (r.includes('immortal 3') || r.includes('immortel 3')) return ['valo-immortal-3.png', 'valo-immortal-3.jpg'];
+      if (r.includes('immortal 2') || r.includes('immortel 2')) return ['valo-immortal-2.png', 'valo-immortal-2.jpg'];
+      if (r.includes('immortal') || r.includes('immortel')) return ['valo-immortal-1.png', 'valo-immortal-1.jpg'];
+
+      // Ascendant
+      if (r.includes('ascendant 3')) return ['valo-ascendant-3.png', 'valo-ascendant-3.jpg'];
+      if (r.includes('ascendant 2')) return ['valo-ascendant-2.png', 'valo-ascendant-2.jpg'];
+      if (r.includes('ascendant')) return ['valo-ascendant-1.png', 'valo-ascendant-1.jpg'];
+
+      // Diamant
+      if (r.includes('diamond 3') || r.includes('diamant 3')) return ['valo-diamond-3.png', 'valo-diamond-3.jpg'];
+      if (r.includes('diamond 2') || r.includes('diamant 2')) return ['valo-diamond-2.png', 'valo-diamond-2.jpg'];
+      if (r.includes('diamond') || r.includes('diamant')) return ['valo-diamond-1.png', 'valo-diamond-1.jpg'];
+
+      // Platine
+      if (r.includes('platinum 3') || r.includes('platine 3')) return ['valo-platinum-3.png', 'valo-platine-3.png', 'valo-platinum-3.jpg'];
+      if (r.includes('platinum 2') || r.includes('platine 2')) return ['valo-platinum-2.png', 'valo-platine-2.png', 'valo-platinum-2.jpg'];
+      if (r.includes('platinum') || r.includes('platine')) return ['valo-platinum-1.png', 'valo-platine-1.png', 'valo-platinum-1.jpg'];
+
+      // Gold
+      if (r.includes('gold 3') || r.includes('or 3')) return ['valo-gold-3.png', 'valo-gold-3.jpg'];
+      if (r.includes('gold 2') || r.includes('or 2')) return ['valo-gold-2.png', 'valo-gold-2.jpg'];
+      if (r.includes('gold') || r.includes('or')) return ['valo-gold-1.png', 'valo-gold-1.jpg'];
+
+      // Silver
+      if (r.includes('silver 3') || r.includes('argent 3')) return ['valo-silver-3.png', 'valo-silver-3.jpg'];
+      if (r.includes('silver 2') || r.includes('argent 2')) return ['valo-silver-2.png', 'valo-silver-2.jpg'];
+      if (r.includes('silver') || r.includes('argent')) return ['valo-silver-1.png', 'valo-silver-1.jpg'];
+
+      // Bronze
+      if (r.includes('bronze 3')) return ['valo-bronze-3.png', 'valo-bronze-3.jpg', 'valo-bronze-3.png.png'];
+      if (r.includes('bronze 2')) return ['valo-bronze-2.png', 'valo-bronze-2.jpg'];
+      if (r.includes('bronze')) return ['valo-bronze-1.png', 'valo-bronze-1.jpg'];
+
+      // Iron / Fer
+      if (r.includes('iron 3') || r.includes('fer 3')) return ['valo-iron-3.png', 'valo-iron-3.jpg'];
+      if (r.includes('iron 2') || r.includes('fer 2')) return ['valo-iron-2.png', 'valo-iron-2.jpg'];
+      if (r.includes('iron') || r.includes('fer')) return ['valo-iron-1.png', 'valo-iron-1.jpg'];
+
+      return ['valo-bronze-3.png', 'valo-bronze-3.jpg'];
+    }
+
+    // 8. Chargement automatique des statistiques depuis stats.json
     window.addEventListener('DOMContentLoaded', () => {
       fetch('./stats.json?t=' + Date.now())
         .then(response => {
@@ -907,10 +970,16 @@
             const rr = document.getElementById('valo-dedicated-rr');
             const kd = document.getElementById('valo-dedicated-kd');
             const hs = document.getElementById('valo-dedicated-hs');
-            if (r && (v.rang || v.rank)) r.innerText = v.rang || v.rank;
+            const rankVal = v.rang || v.rank || 'Bronze 3';
+
+            if (r) r.innerText = rankVal;
             if (rr && v.rr) rr.innerText = `Score : ${v.rr} • Peak Silver 3`;
             if (kd && v.kd) kd.innerText = v.kd;
             if (hs && v.hs) hs.innerText = v.hs;
+
+            // Chargement du badge Valorant
+            const valoBadges = getValoRankBadgeFallbacks(rankVal);
+            setupImageWithFallbacks('valo-badge-img', valoBadges);
           }
         })
         .catch(err => console.error("Erreur stats :", err));
