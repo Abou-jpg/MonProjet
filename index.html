@@ -528,7 +528,7 @@
       </div>
     </div>
 
-    <!-- VALORANT : PAGE DÉDIÉE AVEC BADGES SVG -->
+    <!-- VALORANT : PAGE DÉDIÉE AVEC BADGES SVG & SECOURS CDN RIOT -->
     <div id="gaming-valo-screen" class="hidden max-w-4xl mx-auto">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
@@ -560,11 +560,11 @@
           </span>
         </div>
 
-        <!-- Section Badge SVG + Rang Valorant -->
+        <!-- Section Badge + Rang Valorant -->
         <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div class="flex items-center gap-6">
             <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
-              <img id="valo-badge-img" src="valo-bronze-3.svg" alt="Badge Valorant" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">
+              <img id="valo-badge-img" src="https://media.valorant-api.com/competitivetiers/03621f52-342b-77e7-4f49-ed82dc47a6d4/8/largeicon.png" alt="Badge Valorant" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">
             </div>
             <div>
               <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
@@ -784,58 +784,58 @@
       return ['platine-2.jpg.png', 'platine-2.jpg'];
     }
 
-    // 7. Badges Valorant SVG (Correspondance exacte avec tes fichiers GitHub)
+    // 7. Badges Valorant (Fichiers locaux SVG + Secours Direct Riot Games CDN)
     function getValoRankBadgeFallbacks(rankStr) {
-      if (!rankStr) return ['valo-bronze-3.svg', 'valo-bronze-3.png'];
-      const r = rankStr.toLowerCase();
+      const r = (rankStr || '').toLowerCase();
+      const baseApi = 'https://media.valorant-api.com/competitivetiers/03621f52-342b-77e7-4f49-ed82dc47a6d4';
 
-      // Radiant
-      if (r.includes('radiant')) return ['valo-radiant.svg', 'valo-radiant.png'];
+      // Radiant (Tier 27)
+      if (r.includes('radiant')) return ['valo-radiant.svg', `${baseApi}/27/largeicon.png`];
 
-      // Immortel
-      if (r.includes('immortal 3') || r.includes('immortel 3')) return ['valo-immortel-3.svg', 'valo-immortal-3.svg'];
-      if (r.includes('immortal 2') || r.includes('immortel 2')) return ['valo-immortel-2.svg', 'valo-immortal-2.svg'];
-      if (r.includes('immortal') || r.includes('immortel')) return ['valo-immortel-1.svg', 'valo-immortal-1.svg'];
+      // Immortel (Tiers 24, 25, 26)
+      if (r.includes('immortal 3') || r.includes('immortel 3')) return ['valo-immortel-3.svg', `${baseApi}/26/largeicon.png`];
+      if (r.includes('immortal 2') || r.includes('immortel 2')) return ['valo-immortel-2.svg', `${baseApi}/25/largeicon.png`];
+      if (r.includes('immortal') || r.includes('immortel')) return ['valo-immortel-1.svg', `${baseApi}/24/largeicon.png`];
 
-      // Ascendant
-      if (r.includes('ascendant 3')) return ['valo-ascendant-3.svg', 'valo-ascendant-3.png'];
-      if (r.includes('ascendant 2')) return ['valo-ascendant-2.svg', 'valo-ascendant-2.png'];
-      if (r.includes('ascendant')) return ['valo-ascendant-1.svg', 'valo-ascendant-1.png'];
+      // Ascendant (Tiers 21, 22, 23)
+      if (r.includes('ascendant 3')) return ['valo-ascendant-3.svg', `${baseApi}/23/largeicon.png`];
+      if (r.includes('ascendant 2')) return ['valo-ascendant-2.svg', `${baseApi}/22/largeicon.png`];
+      if (r.includes('ascendant')) return ['valo-ascendant-1.svg', `${baseApi}/21/largeicon.png`];
 
-      // Diamond
-      if (r.includes('diamond 3') || r.includes('diamant 3')) return ['valo-diamond-3.svg', 'valo-diamond-3.png'];
-      if (r.includes('diamond 2') || r.includes('diamant 2')) return ['valo-diamond-2.svg', 'valo-diamond-2.png'];
-      if (r.includes('diamond') || r.includes('diamant')) return ['valo-diamond-1.svg', 'valo-diamond-1.png'];
+      // Diamond (Tiers 18, 19, 20)
+      if (r.includes('diamond 3') || r.includes('diamant 3')) return ['valo-diamond-3.svg', `${baseApi}/20/largeicon.png`];
+      if (r.includes('diamond 2') || r.includes('diamant 2')) return ['valo-diamond-2.svg', `${baseApi}/19/largeicon.png`];
+      if (r.includes('diamond') || r.includes('diamant')) return ['valo-diamond-1.svg', `${baseApi}/18/largeicon.png`];
 
-      // Platinum
-      if (r.includes('platinum 3') || r.includes('platine 3')) return ['valo-platinum-3.svg', 'valo-platine-3.svg'];
-      if (r.includes('platinum 2') || r.includes('platine 2')) return ['valo-platinum-2.svg', 'valo-platine-2.svg'];
-      if (r.includes('platinum') || r.includes('platine')) return ['valo-platinum-1.svg', 'valo-platine-1.svg'];
+      // Platinum (Tiers 15, 16, 17)
+      if (r.includes('platinum 3') || r.includes('platine 3')) return ['valo-platinum-3.svg', `${baseApi}/17/largeicon.png`];
+      if (r.includes('platinum 2') || r.includes('platine 2')) return ['valo-platinum-2.svg', `${baseApi}/16/largeicon.png`];
+      if (r.includes('platinum') || r.includes('platine')) return ['valo-platinum-1.svg', `${baseApi}/15/largeicon.png`];
 
-      // Gold
-      if (r.includes('gold 3') || r.includes('or 3')) return ['valo-gold-3.svg', 'valo-gold-3.png'];
-      if (r.includes('gold 2') || r.includes('or 2')) return ['valo-gold-2.svg', 'valo-gold-2.png'];
-      if (r.includes('gold') || r.includes('or')) return ['valo-gold-1.svg', 'valo-gold-1.png'];
+      // Gold (Tiers 12, 13, 14)
+      if (r.includes('gold 3') || r.includes('or 3')) return ['valo-gold-3.svg', `${baseApi}/14/largeicon.png`];
+      if (r.includes('gold 2') || r.includes('or 2')) return ['valo-gold-2.svg', `${baseApi}/13/largeicon.png`];
+      if (r.includes('gold') || r.includes('or')) return ['valo-gold-1.svg', `${baseApi}/12/largeicon.png`];
 
-      // Silver
-      if (r.includes('silver 3') || r.includes('argent 3')) return ['valo-silver-3.svg', 'valo-argent-3.svg'];
-      if (r.includes('silver 2') || r.includes('argent 2')) return ['valo-silver-2.svg', 'valo-argent-2.svg'];
-      if (r.includes('silver') || r.includes('argent')) return ['valo-silver-1.svg', 'valo-argent-1.svg'];
+      // Silver (Tiers 9, 10, 11)
+      if (r.includes('silver 3') || r.includes('argent 3')) return ['valo-silver-3.svg', `${baseApi}/11/largeicon.png`];
+      if (r.includes('silver 2') || r.includes('argent 2')) return ['valo-silver-2.svg', `${baseApi}/10/largeicon.png`];
+      if (r.includes('silver') || r.includes('argent')) return ['valo-silver-1.svg', `${baseApi}/9/largeicon.png`];
 
-      // Bronze
-      if (r.includes('bronze 3')) return ['valo-bronze-3.svg', 'valo-bronze-3.png'];
-      if (r.includes('bronze 2')) return ['valo-bronze-2.svg', 'valo-bronze-2.png'];
-      if (r.includes('bronze')) return ['valo-bronze-1.svg', 'valo-bronze-1.png'];
+      // Bronze (Tiers 6, 7, 8)
+      if (r.includes('bronze 3')) return ['valo-bronze-3.svg', 'bronze-3.jpg.png', `${baseApi}/8/largeicon.png`];
+      if (r.includes('bronze 2')) return ['valo-bronze-2.svg', `${baseApi}/7/largeicon.png`];
+      if (r.includes('bronze')) return ['valo-bronze-1.svg', `${baseApi}/6/largeicon.png`];
 
-      // Iron
-      if (r.includes('iron 3') || r.includes('fer 3')) return ['valo-iron-3.svg', 'valo-iron-3.png'];
-      if (r.includes('iron 2') || r.includes('fer 2')) return ['valo-iron-2.svg', 'valo-iron-2.png'];
-      if (r.includes('iron') || r.includes('fer')) return ['valo-iron-1.svg', 'valo-iron-1.png'];
+      // Iron (Tiers 3, 4, 5)
+      if (r.includes('iron 3') || r.includes('fer 3')) return ['valo-iron-3.svg', `${baseApi}/5/largeicon.png`];
+      if (r.includes('iron 2') || r.includes('fer 2')) return ['valo-iron-2.svg', `${baseApi}/4/largeicon.png`];
+      if (r.includes('iron') || r.includes('fer')) return ['valo-iron-1.svg', `${baseApi}/3/largeicon.png`];
 
-      return ['valo-bronze-3.svg', 'valo-bronze-3.png'];
+      return ['valo-bronze-3.svg', `${baseApi}/8/largeicon.png`];
     }
 
-    // 8. Chargement automatique des stats depuis stats.json
+    // 8. Chargement automatique des stats
     window.addEventListener('DOMContentLoaded', () => {
       fetch('./stats.json?t=' + Date.now())
         .then(response => {
