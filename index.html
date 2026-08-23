@@ -529,7 +529,7 @@
       </div>
     </div>
 
-    <!-- VALORANT : PAGE DÉDIÉE AVEC BADGES SVG EXCLUSIFS -->
+    <!-- VALORANT : PAGE DÉDIÉE -->
     <div id="gaming-valo-screen" class="hidden max-w-4xl mx-auto">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
@@ -561,11 +561,11 @@
           </span>
         </div>
 
-        <!-- Section Badge SVG Valorant -->
+        <!-- Section Badge Valorant -->
         <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div class="flex items-center gap-6">
             <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
-              <img id="valo-badge-img" src="valo-bronze-3.svg" alt="Badge Valorant" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">
+              <img id="valo-badge-img" src="" alt="Badge Valorant" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">
             </div>
             <div>
               <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
@@ -592,108 +592,6 @@
             <i data-lucide="external-link" class="w-4 h-4"></i>
           </a>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- AUTRES VUES -->
-  <div id="view-sport" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400"><i data-lucide="activity" class="w-6 h-6"></i></div>
-      <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Sport Pro Data & Calendrier</h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-lg font-semibold text-zinc-950 dark:text-white mb-2">Football</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">• Real Madrid & Olympique Lyonnais<br>• Sélections Algérie / France<br>• Focus : Amira Benaïssa (Fleury / Algérie)</p>
-      </div>
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-lg font-semibold text-zinc-950 dark:text-white mb-2">Basket & Tennis</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">• San Antonio Spurs (Wemby)<br>• Équipe de Gabby Williams<br>• Carlos Alcaraz & Emma Raducanu</p>
-      </div>
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-lg font-semibold text-zinc-950 dark:text-white mb-2">Volleyball Pro</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">• Les Mariannes 92<br>• Équipe de France Féminine</p>
-      </div>
-    </div>
-  </div>
-
-  <div id="view-watchlist" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400"><i data-lucide="clapperboard" class="w-6 h-6"></i></div>
-      <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Watchlist & Clips MCU</h2>
-    </div>
-    <div class="glass-card p-6 rounded-2xl">
-      <h3 class="text-lg font-semibold text-zinc-950 dark:text-white mb-2">Production Montage MCU (TikTok / Shorts)</h3>
-      <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-4 font-medium">Montage Premiere Pro des réactions du stream d'Abdou.</p>
-      <div class="inline-flex items-center gap-2 text-xs text-emerald-800 dark:text-emerald-300 bg-emerald-500/10 px-3.5 py-2 rounded-lg border border-emerald-500/30 font-semibold">
-        <i data-lucide="scissors" class="w-4 h-4"></i>
-        Priorité : Hooks percutants & sous-titrage dynamique
-      </div>
-    </div>
-  </div>
-
-  <div id="view-planning" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400"><i data-lucide="calendar" class="w-6 h-6"></i></div>
-      <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Planning Hebdomadaire</h2>
-    </div>
-    <div class="glass-card p-6 rounded-2xl">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs text-zinc-500 dark:text-zinc-400 font-medium">
-        <div class="p-3 bg-amber-50 dark:bg-white/5 rounded-xl border border-amber-200/50 dark:border-white/5">
-          <span class="text-zinc-950 dark:text-white font-bold block mb-1">Matin & Après-midi</span>
-          Fac Éco-Gestion & TD
-        </div>
-        <div class="p-3 bg-amber-50 dark:bg-white/5 rounded-xl border border-amber-200/50 dark:border-white/5">
-          <span class="text-zinc-950 dark:text-white font-bold block mb-1">Fin d'après-midi</span>
-          Montage MCU Premiere Pro
-        </div>
-        <div class="p-3 bg-amber-50 dark:bg-white/5 rounded-xl border border-amber-200/50 dark:border-white/5">
-          <span class="text-zinc-950 dark:text-white font-bold block mb-1">Soirée</span>
-          Entraînement Volley / Révisions
-        </div>
-        <div class="p-3 bg-amber-50 dark:bg-white/5 rounded-xl border border-amber-200/50 dark:border-white/5">
-          <span class="text-zinc-950 dark:text-white font-bold block mb-1">Week-end</span>
-          Matchs Nanterre & Foot Cardio
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="view-volley" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400"><i data-lucide="shield" class="w-6 h-6"></i></div>
-      <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Volley Club Nanterre • Espace DS</h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-1">Seniors Départemental</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Gestion et suivi des équipes Filles et Garçons.</p>
-      </div>
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-1">Pôle Jeunes & Relève</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Détection, suivi des présences et surclassements.</p>
-      </div>
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-1">Administration & Matchs</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Licences, réservations de salle et matériel.</p>
-      </div>
-    </div>
-  </div>
-
-  <div id="view-perso" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400"><i data-lucide="user" class="w-6 h-6"></i></div>
-      <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Personnel & Objectifs</h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-2">L2 Éco-Gestion</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Rentrée 15 Septembre • Accent sur les TD et la gestion de projet.</p>
-      </div>
-      <div class="glass-card p-6 rounded-2xl">
-        <h3 class="text-base font-semibold text-zinc-950 dark:text-white mb-2">Permis de Conduire</h3>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Lancement Code de la route en Octobre (Mode Blitz 3-4 semaines).</p>
       </div>
     </div>
   </div>
@@ -835,7 +733,7 @@
       lucide.createIcons();
     }
 
-    // 5. Gestionnaire universel d'images
+    // 5. Gestionnaire universel d'images anti-blocage
     function setupImageWithFallbacks(elementId, candidates) {
       const el = document.getElementById(elementId);
       if (!el || !candidates || candidates.length === 0) return;
@@ -845,8 +743,13 @@
         idx++;
         if (idx < candidates.length) {
           this.src = candidates[idx];
+        } else {
+          this.onerror = null;
         }
       };
+      
+      // Force le rechargement propre
+      el.src = '';
       el.src = candidates[0];
     }
 
@@ -887,66 +790,58 @@
       return ['platine-2.jpg.png', 'platine-2.jpg'];
     }
 
-    // 7. Badges Valorant EXCLUSIFS (Fichiers valo-*.svg + Fallback RAW GitHub instantané)
+    // 7. Badges Valorant EXCLUSIFS (SVG locaux + CDN officiel Valorant-API)
     function getValoRankBadgeFallbacks(rankStr) {
       const r = (rankStr || '').toLowerCase();
-      const rawBase = 'https://raw.githubusercontent.com/abou-jpg/MonProjet/main';
-
-      function makeList(fileName) {
-        return [
-          fileName,
-          `./${fileName}`,
-          `${rawBase}/${fileName}`
-        ];
-      }
+      const api = 'https://media.valorant-api.com/competitivetiers/03621f52-342b-77e7-4f49-ed82dc47a6d4';
 
       // Radiant
-      if (r.includes('radiant')) return makeList('valo-radiant.svg');
+      if (r.includes('radiant')) return ['valo-radiant.svg', `${api}/27/largeicon.png`];
 
       // Immortel
-      if (r.includes('immortal 3') || r.includes('immortel 3')) return makeList('valo-immortel-3.svg');
-      if (r.includes('immortal 2') || r.includes('immortel 2')) return makeList('valo-immortel-2.svg');
-      if (r.includes('immortal') || r.includes('immortel')) return makeList('valo-immortel-1.svg');
+      if (r.includes('immortal 3') || r.includes('immortel 3')) return ['valo-immortel-3.svg', 'valo-immortal-3.svg', `${api}/26/largeicon.png`];
+      if (r.includes('immortal 2') || r.includes('immortel 2')) return ['valo-immortel-2.svg', 'valo-immortal-2.svg', `${api}/25/largeicon.png`];
+      if (r.includes('immortal') || r.includes('immortel')) return ['valo-immortel-1.svg', 'valo-immortal-1.svg', `${api}/24/largeicon.png`];
 
       // Ascendant
-      if (r.includes('ascendant 3')) return makeList('valo-ascendant-3.svg');
-      if (r.includes('ascendant 2')) return makeList('valo-ascendant-2.svg');
-      if (r.includes('ascendant')) return makeList('valo-ascendant-1.svg');
+      if (r.includes('ascendant 3')) return ['valo-ascendant-3.svg', `${api}/23/largeicon.png`];
+      if (r.includes('ascendant 2')) return ['valo-ascendant-2.svg', `${api}/22/largeicon.png`];
+      if (r.includes('ascendant')) return ['valo-ascendant-1.svg', `${api}/21/largeicon.png`];
 
       // Diamond
-      if (r.includes('diamond 3') || r.includes('diamant 3')) return makeList('valo-diamond-3.svg');
-      if (r.includes('diamond 2') || r.includes('diamant 2')) return makeList('valo-diamond-2.svg');
-      if (r.includes('diamond') || r.includes('diamant')) return makeList('valo-diamond-1.svg');
+      if (r.includes('diamond 3') || r.includes('diamant 3')) return ['valo-diamond-3.svg', `${api}/20/largeicon.png`];
+      if (r.includes('diamond 2') || r.includes('diamant 2')) return ['valo-diamond-2.svg', `${api}/19/largeicon.png`];
+      if (r.includes('diamond') || r.includes('diamant')) return ['valo-diamond-1.svg', `${api}/18/largeicon.png`];
 
       // Platinum
-      if (r.includes('platinum 3') || r.includes('platine 3')) return makeList('valo-platinum-3.svg');
-      if (r.includes('platinum 2') || r.includes('platine 2')) return makeList('valo-platinum-2.svg');
-      if (r.includes('platinum') || r.includes('platine')) return makeList('valo-platinum-1.svg');
+      if (r.includes('platinum 3') || r.includes('platine 3')) return ['valo-platinum-3.svg', 'valo-platine-3.svg', `${api}/17/largeicon.png`];
+      if (r.includes('platinum 2') || r.includes('platine 2')) return ['valo-platinum-2.svg', 'valo-platine-2.svg', `${api}/16/largeicon.png`];
+      if (r.includes('platinum') || r.includes('platine')) return ['valo-platinum-1.svg', 'valo-platine-1.svg', `${api}/15/largeicon.png`];
 
       // Gold
-      if (r.includes('gold 3') || r.includes('or 3')) return makeList('valo-gold-3.svg');
-      if (r.includes('gold 2') || r.includes('or 2')) return makeList('valo-gold-2.svg');
-      if (r.includes('gold') || r.includes('or')) return makeList('valo-gold-1.svg');
+      if (r.includes('gold 3') || r.includes('or 3')) return ['valo-gold-3.svg', `${api}/14/largeicon.png`];
+      if (r.includes('gold 2') || r.includes('or 2')) return ['valo-gold-2.svg', `${api}/13/largeicon.png`];
+      if (r.includes('gold') || r.includes('or')) return ['valo-gold-1.svg', `${api}/12/largeicon.png`];
 
       // Silver
-      if (r.includes('silver 3') || r.includes('argent 3')) return makeList('valo-silver-3.svg');
-      if (r.includes('silver 2') || r.includes('argent 2')) return makeList('valo-silver-2.svg');
-      if (r.includes('silver') || r.includes('argent')) return makeList('valo-silver-1.svg');
+      if (r.includes('silver 3') || r.includes('argent 3')) return ['valo-silver-3.svg', 'valo-argent-3.svg', `${api}/11/largeicon.png`];
+      if (r.includes('silver 2') || r.includes('argent 2')) return ['valo-silver-2.svg', 'valo-argent-2.svg', `${api}/10/largeicon.png`];
+      if (r.includes('silver') || r.includes('argent')) return ['valo-silver-1.svg', 'valo-argent-1.svg', `${api}/9/largeicon.png`];
 
-      // Bronze (Valorant SVG uniquement)
-      if (r.includes('bronze 3')) return makeList('valo-bronze-3.svg');
-      if (r.includes('bronze 2')) return makeList('valo-bronze-2.svg');
-      if (r.includes('bronze')) return makeList('valo-bronze-1.svg');
+      // Bronze
+      if (r.includes('bronze 3')) return ['valo-bronze-3.svg', `${api}/8/largeicon.png`];
+      if (r.includes('bronze 2')) return ['valo-bronze-2.svg', `${api}/7/largeicon.png`];
+      if (r.includes('bronze')) return ['valo-bronze-1.svg', `${api}/6/largeicon.png`];
 
       // Iron
-      if (r.includes('iron 3') || r.includes('fer 3')) return makeList('valo-iron-3.svg');
-      if (r.includes('iron 2') || r.includes('fer 2')) return makeList('valo-iron-2.svg');
-      if (r.includes('iron') || r.includes('fer')) return makeList('valo-iron-1.svg');
+      if (r.includes('iron 3') || r.includes('fer 3')) return ['valo-iron-3.svg', `${api}/5/largeicon.png`];
+      if (r.includes('iron 2') || r.includes('fer 2')) return ['valo-iron-2.svg', `${api}/4/largeicon.png`];
+      if (r.includes('iron') || r.includes('fer')) return ['valo-iron-1.svg', `${api}/3/largeicon.png`];
 
-      return makeList('valo-bronze-3.svg');
+      return ['valo-bronze-3.svg', `${api}/8/largeicon.png`];
     }
 
-    // 8. Chargement automatique des stats
+    // 8. Chargement automatique des statistiques
     window.addEventListener('DOMContentLoaded', () => {
       fetch('./stats.json?t=' + Date.now())
         .then(response => {
@@ -978,7 +873,10 @@
             setupImageWithFallbacks('valo-badge-img', valoBadges);
           }
         })
-        .catch(err => console.error("Erreur stats :", err));
+        .catch(err => {
+          console.error("Erreur stats :", err);
+          setupImageWithFallbacks('valo-badge-img', getValoRankBadgeFallbacks('Bronze 3'));
+        });
     });
   </script>
 </body>
