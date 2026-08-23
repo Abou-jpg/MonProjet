@@ -84,30 +84,27 @@
       border-color: rgba(52, 211, 153, 0.8);
     }
 
-    /* Cartes des Modes RL */
-    .mode-card {
+    /* Cartes verticales de sélection de mode */
+    .mode-vertical-card {
       position: relative;
       border-radius: 1.25rem;
       overflow: hidden;
       cursor: pointer;
-      border: 2px solid transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      background: rgba(14, 26, 20, 0.6);
+      backdrop-filter: blur(10px);
     }
-    .mode-card:hover {
-      transform: translateY(-5px) scale(1.02);
-      border-color: rgba(52, 211, 153, 0.6);
-      box-shadow: 0 14px 28px rgba(16, 185, 129, 0.25);
-    }
-    .mode-card.active {
-      border-color: #10b981;
-      box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+    .mode-vertical-card:hover {
       transform: translateY(-4px);
+      border-color: rgba(52, 211, 153, 0.7);
+      box-shadow: 0 12px 30px -5px rgba(16, 185, 129, 0.3);
     }
   </style>
 </head>
 <body class="text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors duration-300">
 
+  <!-- NAVBAR -->
   <header class="w-full border-b border-amber-900/10 dark:border-white/5 bg-[#fcfbf4]/80 dark:bg-[#070d0a]/80 backdrop-blur-md sticky top-0 z-50 transition-colors">
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
       <nav class="flex items-center gap-6 text-sm font-medium overflow-x-auto" id="main-nav">
@@ -133,6 +130,9 @@
     </div>
   </header>
 
+  <!-- ========================================== -->
+  <!-- NIVEAU 1 : ACCUEIL PRINCIPAL               -->
+  <!-- ========================================== -->
   <div id="view-accueil" class="view-section max-w-7xl mx-auto px-6 pt-16 pb-20">
     <div class="max-w-3xl">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/25 text-emerald-800 dark:text-emerald-300 text-xs font-semibold mb-6">
@@ -158,6 +158,7 @@
       </div>
     </div>
 
+    <!-- GRILLE DES 6 POLES -->
     <div class="pt-6 border-t border-amber-900/10 dark:border-white/5">
       <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-3">
         <span>— navigation rapide</span>
@@ -234,8 +235,12 @@
     </div>
   </div>
 
+  <!-- ========================================== -->
+  <!-- NIVEAU 2 : ESPACE GAMING DÉDIÉ             -->
+  <!-- ========================================== -->
   <div id="view-gaming" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
     
+    <!-- HUB DES 3 JEUX -->
     <div id="gaming-hub-screen">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
@@ -254,6 +259,7 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
+        <!-- CARTE ROCKET LEAGUE -->
         <div onclick="openRLDetails()" class="game-poster-card group">
           <div class="game-poster-bg" style="background-image: url('rl.jpg'), url('rl.jpg.png');"></div>
           <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
@@ -275,13 +281,14 @@
                 ID : abdel92jr
               </p>
               <div class="w-full py-3 px-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-emerald-500 group-hover:text-black transition">
-                <span>Sélectionner 1v1 • 2v2 • 3v3</span>
+                <span>Choisir 1v1 • 2v2 • 3v3</span>
                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- LEAGUE OF LEGENDS -->
         <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
           <div>
             <div class="flex justify-between items-start mb-4">
@@ -307,6 +314,7 @@
           </div>
         </div>
 
+        <!-- VALORANT -->
         <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
           <div>
             <div class="flex justify-between items-start mb-3">
@@ -350,17 +358,17 @@
       </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- NIVEAU 3 : LISTE VERTICALE DES 3 MODES     -->
+    <!-- ========================================== -->
     <div id="gaming-rl-screen" class="hidden">
+      <!-- Fil d'Ariane -->
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
         <button onclick="closeRLDetails()" class="hover:text-emerald-400 transition">Gaming</button>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span class="text-white">Rocket League</span>
-        <span id="breadcrumb-mode-part" class="hidden flex items-center gap-2">
-          <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-          <span id="breadcrumb-mode-name" class="text-emerald-400 font-bold">1 VS 1</span>
-        </span>
+        <span class="text-emerald-400 font-bold">Rocket League</span>
       </div>
 
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
@@ -381,84 +389,137 @@
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <!-- DISPOSITION STRICTEMENT VERTICALE (STACK) -->
+      <div class="flex flex-col gap-5 max-w-4xl mx-auto">
         
-        <div onclick="selectRLMode('1v1')" id="card-mode-1v1" class="mode-card group">
-          <img src="1vs1.jpg" onerror="this.onerror=null; this.src='1vs1.jpg.png';" alt="Mode 1v1" class="w-full h-44 object-cover">
-          <div class="p-4 bg-zinc-900/90 border-t border-white/5 flex items-center justify-between">
-            <div>
-              <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Solo</span>
-              <h3 class="text-lg font-bold text-white">Duel 1 VS 1</h3>
+        <!-- BANNIÈRE 1v1 -->
+        <div onclick="openRLRankPage('1v1')" class="mode-vertical-card group">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+            <div class="sm:w-3/5 h-36 overflow-hidden">
+              <img id="banner-img-1v1" src="1vs1.jpg" alt="1 VS 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             </div>
-            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
-              <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i>
-            </span>
-          </div>
-        </div>
-
-        <div onclick="selectRLMode('2v2')" id="card-mode-2v2" class="mode-card group">
-          <img src="2vs2.jpg" onerror="this.onerror=null; this.src='2vs2.jpg.png';" alt="Mode 2v2" class="w-full h-44 object-cover">
-          <div class="p-4 bg-zinc-900/90 border-t border-white/5 flex items-center justify-between">
-            <div>
-              <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-400 block">Mode Principal</span>
-              <h3 class="text-lg font-bold text-white">Double 2 VS 2</h3>
-            </div>
-            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
-              <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i>
-            </span>
-          </div>
-        </div>
-
-        <div onclick="selectRLMode('3v3')" id="card-mode-3v3" class="mode-card group">
-          <img src="3vs3.jpg" onerror="this.onerror=null; this.src='3vs3.jpg.png';" alt="Mode 3v3" class="w-full h-44 object-cover">
-          <div class="p-4 bg-zinc-900/90 border-t border-white/5 flex items-center justify-between">
-            <div>
-              <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Équipe</span>
-              <h3 class="text-lg font-bold text-white">Standard 3 VS 3</h3>
-            </div>
-            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
-              <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i>
-            </span>
-          </div>
-        </div>
-
-      </div>
-
-      <div id="rl-rank-display" class="hidden max-w-2xl mx-auto">
-        <div class="glass-card rounded-2xl overflow-hidden border-2 border-emerald-500/40 p-6 sm:p-8 bg-zinc-950/80 shadow-2xl animate-fade-in">
-          
-          <div class="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
-            <div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-400 block" id="rl-selected-subtitle">MODE SOLO SÉLECTIONNÉ</span>
-              <h3 class="text-2xl font-black text-white" id="rl-selected-title">Duel 1 VS 1</h3>
-            </div>
-            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-              Synchronisé
-            </span>
-          </div>
-
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-            <div class="flex items-center gap-5">
-              <img id="rl-selected-badge" src="ou-3.jpg.png" alt="Badge" class="w-20 h-20 object-contain drop-shadow-[0_0_18px_rgba(16,185,129,0.35)]">
+            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
               <div>
-                <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
-                <span id="rl-selected-rank" class="text-3xl font-black text-white">Chargement...</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Solo</span>
+                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Duel 1 VS 1</h3>
+                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
               </div>
             </div>
+          </div>
+        </div>
 
-            <div class="sm:text-right flex sm:flex-col justify-between items-center sm:items-end border-t sm:border-t-0 pt-4 sm:pt-0 border-white/5">
-              <span class="text-[11px] text-zinc-400 block">Saison Compétitive</span>
-              <span class="text-sm font-bold text-emerald-400">Tracker Network Actif</span>
+        <!-- BANNIÈRE 2v2 -->
+        <div onclick="openRLRankPage('2v2')" class="mode-vertical-card group">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+            <div class="sm:w-3/5 h-36 overflow-hidden">
+              <img id="banner-img-2v2" src="2vs2.jpg" alt="2 VS 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
+              <div>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-400 block">Mode Principal</span>
+                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Double 2 VS 2</h3>
+                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BANNIÈRE 3v3 -->
+        <div onclick="openRLRankPage('3v3')" class="mode-vertical-card group">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+            <div class="sm:w-3/5 h-36 overflow-hidden">
+              <img id="banner-img-3v3" src="3vs3.jpg" alt="3 VS 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
+              <div>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Équipe</span>
+                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Standard 3 VS 3</h3>
+                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- NIVEAU 4 : PAGE DÉDIÉE UNIQUE POUR LE RANG -->
+    <!-- ========================================== -->
+    <div id="gaming-rl-rank-page" class="hidden max-w-4xl mx-auto">
+      <!-- Fil d'Ariane -->
+      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="closeRLDetails()" class="hover:text-emerald-400 transition">Gaming</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="backToRLModes()" class="hover:text-emerald-400 transition">Rocket League</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <span id="rankpage-breadcrumb-mode" class="text-emerald-400 font-bold">1 VS 1</span>
+      </div>
+
+      <!-- Bouton Retour direct -->
+      <div class="mb-6">
+        <button onclick="backToRLModes()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-emerald-500 hover:text-black dark:hover:bg-emerald-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          Choisir un autre mode
+        </button>
+      </div>
+
+      <!-- Grande Carte Unique de Rang -->
+      <div class="glass-card rounded-3xl overflow-hidden border border-emerald-500/40 p-6 sm:p-10 bg-[#0b1611]/90 shadow-2xl">
+        
+        <!-- Bannière du mode sélectionné en tête -->
+        <div class="w-full h-48 sm:h-64 rounded-2xl overflow-hidden mb-8 border border-white/10 shadow-lg">
+          <img id="rankpage-banner-img" src="1vs1.jpg" alt="Bannière Mode" class="w-full h-full object-cover">
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-white/10">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 block mb-1" id="rankpage-mode-subtitle">MODE SOLO</span>
+            <h2 class="text-3xl sm:text-4xl font-black text-white" id="rankpage-mode-title">Duel 1 VS 1</h2>
+          </div>
+          <span class="text-xs font-semibold px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 w-fit">
+            Synchronisation Active
+          </span>
+        </div>
+
+        <!-- Section Badge + Rang -->
+        <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div class="flex items-center gap-6">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
+              <img id="rankpage-badge-img" src="ou-3.jpg.png" alt="Badge de rang" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+            </div>
+            <div>
+              <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
+              <div class="text-3xl sm:text-4xl font-black text-white tracking-tight" id="rankpage-rank-text">Chargement...</div>
+              <span class="text-xs text-emerald-400 font-medium block mt-1">Epic ID : abdel92jr</span>
             </div>
           </div>
 
+          <div class="sm:text-right border-t sm:border-t-0 pt-4 sm:pt-0 border-white/5">
+            <a href="https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview" target="_blank" class="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold inline-flex items-center gap-2 transition shadow-lg shadow-emerald-500/20">
+              <span>Voir sur Tracker Network</span>
+              <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+          </div>
         </div>
-      </div>
 
+      </div>
     </div>
 
   </div>
 
+  <!-- AUTRES VUES DU SITE -->
   <div id="view-sport" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
     <div class="flex items-center gap-3 mb-6">
       <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400"><i data-lucide="activity" class="w-6 h-6"></i></div>
@@ -560,14 +621,15 @@
     </div>
   </div>
 
+  <!-- SCRIPT ROUTEUR SPA & STATS DYNAMIQUES -->
   <script>
     lucide.createIcons();
 
-    // Variable pour stocker les stats chargées
+    // Cache local des stats
     let rlStatsCache = {
-      '1v1': 'Chargement...',
-      '2v2': 'Chargement...',
-      '3v3': 'Chargement...'
+      '1v1': 'Gold III (Division III)',
+      '2v2': 'Platinum II (Division I)',
+      '3v3': 'Platinum II (Division III)'
     };
 
     // 1. Thème Sombre / Clair
@@ -601,115 +663,143 @@
       lucide.createIcons();
     }
 
-    // 3. Navigation Gaming : Hub <-> Rocket League
+    // 3. Navigation Gaming Hub <-> Liste Modes RL
     function openRLDetails() {
       document.getElementById('gaming-hub-screen').classList.add('hidden');
       document.getElementById('gaming-rl-screen').classList.remove('hidden');
-      document.getElementById('rl-rank-display').classList.add('hidden');
-      document.getElementById('breadcrumb-mode-part').classList.add('hidden');
-      document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
-      lucide.createIcons();
+      document.getElementById('gaming-rl-rank-page').classList.add('hidden');
+      
+      // Chargement sécurisé des 3 bannières avec fallback
+      setupImageWithFallbacks('banner-img-1v1', ['1vs1.jpg', '1vs1.jpg.png', '1vs1.png']);
+      setupImageWithFallbacks('banner-img-2v2', ['2vs2.jpg', '2vs2.jpg.png', '2vs2.png']);
+      setupImageWithFallbacks('banner-img-3v3', ['3vs3.jpg', '3vs3.jpg.png', '3vs3.png']);
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
     }
 
     function closeRLDetails() {
       document.getElementById('gaming-rl-screen').classList.add('hidden');
+      document.getElementById('gaming-rl-rank-page').classList.add('hidden');
       document.getElementById('gaming-hub-screen').classList.remove('hidden');
       lucide.createIcons();
     }
 
-    // 4. Sélection du Mode RL (1v1, 2v2, 3v3) et Affichage du Rang
-    function selectRLMode(mode) {
-      // Activer visuellement la carte cliquée
-      document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
-      const activeCard = document.getElementById(`card-mode-${mode}`);
-      if (activeCard) activeCard.classList.add('active');
-
-      // Mettre à jour le fil d'Ariane
-      const breadcrumbPart = document.getElementById('breadcrumb-mode-part');
-      const breadcrumbName = document.getElementById('breadcrumb-mode-name');
-      breadcrumbPart.classList.remove('hidden');
-      breadcrumbName.innerText = mode.toUpperCase().replace('V', ' VS ');
-
-      // Mettre à jour le titre et sous-titre
-      const titles = {
-        '1v1': { title: 'Duel 1 VS 1', subtitle: 'MODE SOLO' },
-        '2v2': { title: 'Double 2 VS 2', subtitle: 'MODE PRINCIPAL' },
-        '3v3': { title: 'Standard 3 VS 3', subtitle: 'MODE ÉQUIPE' }
-      };
-
-      document.getElementById('rl-selected-title').innerText = titles[mode].title;
-      document.getElementById('rl-selected-subtitle').innerText = titles[mode].subtitle;
-
-      // Récupérer et afficher le rang
-      const rankText = rlStatsCache[mode] || 'Non Classé';
-      document.getElementById('rl-selected-rank').innerText = rankText;
-
-      // Charger le badge correspondant
-      const badgeImg = document.getElementById('rl-selected-badge');
-      badgeImg.src = getRLRankBadge(rankText);
-
-      // Afficher le conteneur de rang avec animation
-      const displayCard = document.getElementById('rl-rank-display');
-      displayCard.classList.remove('hidden');
-      displayCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
+    function backToRLModes() {
+      document.getElementById('gaming-rl-rank-page').classList.add('hidden');
+      document.getElementById('gaming-rl-screen').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
     }
 
-    // 5. Détection dynamique des badges avec support de tous les formats du dépôt
-    function getRLRankBadge(rankStr) {
-      if (!rankStr) return 'ou-3.jpg.png';
-      const r = rankStr.toLowerCase();
+    // 4. Ouverture de la PAGE DÉDIÉE pour un mode
+    function openRLRankPage(mode) {
+      document.getElementById('gaming-rl-screen').classList.add('hidden');
+      document.getElementById('gaming-rl-rank-page').classList.remove('hidden');
 
-      // SSL & GC
-      if (r.includes('supersonic') || r.includes('ssl')) return 'ssl.webp.webp';
-      if (r.includes('grand champion iii') || r.includes('gc3') || r.includes('gc 3')) return 'gc-3.webp.webp';
-      if (r.includes('grand champion ii') || r.includes('gc2') || r.includes('gc 2')) return 'gc-2.webp.webp';
-      if (r.includes('grand champion') || r.includes('gc1') || r.includes('gc 1')) return 'gc-1.webp.webp';
+      const meta = {
+        '1v1': { title: 'Duel 1 VS 1', subtitle: 'MODE SOLO', banner: ['1vs1.jpg', '1vs1.jpg.png', '1vs1.png'] },
+        '2v2': { title: 'Double 2 VS 2', subtitle: 'MODE PRINCIPAL', banner: ['2vs2.jpg', '2vs2.jpg.png', '2vs2.png'] },
+        '3v3': { title: 'Standard 3 VS 3', subtitle: 'MODE ÉQUIPE', banner: ['3vs3.jpg', '3vs3.jpg.png', '3vs3.png'] }
+      };
 
-      // Champion
-      if (r.includes('champion iii') || r.includes('c3')) return 'champion-3.jpg.png';
-      if (r.includes('champion ii') || r.includes('c2')) return 'champion-2.jpg.png';
-      if (r.includes('champion i') || r.includes('c1')) return 'champion-1.jpg.png';
+      const info = meta[mode];
+      document.getElementById('rankpage-breadcrumb-mode').innerText = info.title;
+      document.getElementById('rankpage-mode-title').innerText = info.title;
+      document.getElementById('rankpage-mode-subtitle').innerText = info.subtitle;
 
-      // Diamant
-      if (r.includes('diamond iii') || r.includes('diamant iii') || r.includes('d3')) return 'diamant-3.jpg.png';
-      if (r.includes('diamond ii') || r.includes('diamant ii') || r.includes('d2')) return 'diamant-2.jpg.png';
-      if (r.includes('diamond i') || r.includes('diamant i') || r.includes('d1')) return 'diamant-1.jpg.png';
+      // Bannière en grand
+      setupImageWithFallbacks('rankpage-banner-img', info.banner);
 
-      // Platine
-      if (r.includes('platinum iii') || r.includes('platine iii') || r.includes('p3')) return 'platine-3.jpg.png';
-      if (r.includes('platinum ii') || r.includes('platine ii') || r.includes('p2')) return 'platine-2.jpg.png';
-      if (r.includes('platinum i') || r.includes('platine i') || r.includes('p1')) return 'platine-1.jpg.png';
+      // Texte du Rang
+      const rankText = rlStatsCache[mode] || 'Non Classé';
+      document.getElementById('rankpage-rank-text').innerText = rankText;
 
-      // Or / Gold (gestion ou- et or-)
-      if (r.includes('gold iii') || r.includes('or iii') || r.includes('gold 3') || r.includes('or 3') || r.includes('g3')) return 'ou-3.jpg.png';
-      if (r.includes('gold ii') || r.includes('or ii') || r.includes('gold 2') || r.includes('or 2') || r.includes('g2')) return 'ou-2.jpg.png';
-      if (r.includes('gold i') || r.includes('or i') || r.includes('gold 1') || r.includes('or 1') || r.includes('g1')) return 'ou-1.jpg.png';
+      // Badge de Rang avec multi-fallback
+      const badgeList = getRLRankBadgeFallbacks(rankText);
+      setupImageWithFallbacks('rankpage-badge-img', badgeList);
 
-      // Argent
-      if (r.includes('silver iii') || r.includes('argent iii')) return 'argent-3.jpg.png';
-      if (r.includes('silver ii') || r.includes('argent ii')) return 'argent-2.jpg.png';
-      if (r.includes('silver i') || r.includes('argent i')) return 'argent-1.jpg.png';
-
-      // Bronze
-      if (r.includes('bronze iii')) return 'bronze-3.jpg.png';
-      if (r.includes('bronze ii')) return 'bronze-2.jpg.png';
-      if (r.includes('bronze i')) return 'bronze-1.jpg.png';
-
-      return 'platine-2.jpg.png';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
     }
 
-    // 6. Chargement des statistiques depuis stats.json
+    // 5. Fonction universelle anti-erreur d'image (essaie chaque nom de la liste)
+    function setupImageWithFallbacks(elementId, candidates) {
+      const el = document.getElementById(elementId);
+      if (!el || !candidates || candidates.length === 0) return;
+
+      let idx = 0;
+      el.onerror = function() {
+        idx++;
+        if (idx < candidates.length) {
+          this.src = candidates[idx];
+        }
+      };
+      el.src = candidates[0];
+    }
+
+    // 6. Générateur de liste de secours pour chaque rang
+    function getRLRankBadgeFallbacks(rankStr) {
+      if (!rankStr) return ['ou-3.jpg.png', 'or-3.jpg', 'platine-2.jpg.png'];
+      const r = rankStr.toLowerCase();
+
+      // Supersonic Legend
+      if (r.includes('supersonic') || r.includes('ssl')) {
+        return ['ssl.webp.webp', 'ssl.webp', 'ssl.png'];
+      }
+
+      // Grand Champion
+      if (r.includes('grand champion iii') || r.includes('gc3') || r.includes('gc 3')) return ['gc-3.webp.webp', 'gc-3.webp', 'gc-3.png'];
+      if (r.includes('grand champion ii') || r.includes('gc2') || r.includes('gc 2')) return ['gc-2.webp.webp', 'gc-2.webp', 'gc-2.png'];
+      if (r.includes('grand champion') || r.includes('gc1') || r.includes('gc 1')) return ['gc-1.webp.webp', 'gc-1.webp', 'gc-1.png'];
+
+      // Champion
+      if (r.includes('champion iii') || r.includes('c3')) return ['champion-3.jpg.png', 'champion-3.jpg', 'champion-3.png'];
+      if (r.includes('champion ii') || r.includes('c2')) return ['champion-2.jpg.png', 'champion-2.jpg', 'champion-2-.jpg', 'champion-2.png'];
+      if (r.includes('champion i') || r.includes('c1')) return ['champion-1.jpg.png', 'champion-1.jpg', 'champion-1.png'];
+
+      // Diamant
+      if (r.includes('diamond iii') || r.includes('diamant iii') || r.includes('d3')) return ['diamant-3.jpg.png', 'diamant-3.jpg', 'diamand-3.jpg'];
+      if (r.includes('diamond ii') || r.includes('diamant ii') || r.includes('d2')) return ['diamant-2.jpg.png', 'diamant-2.jpg', 'diamand-2.jpg'];
+      if (r.includes('diamond i') || r.includes('diamant i') || r.includes('d1')) return ['diamant-1.jpg.png', 'diamant-1.jpg', 'diamant 1.jpg'];
+
+      // Platine
+      if (r.includes('platinum iii') || r.includes('platine iii') || r.includes('p3')) return ['platine-3.jpg.png', 'platine-3.jpg', 'platine-3.png'];
+      if (r.includes('platinum ii') || r.includes('platine ii') || r.includes('p2')) return ['platine-2.jpg.png', 'platine-2.jpg', 'platine-2.png'];
+      if (r.includes('platinum i') || r.includes('platine i') || r.includes('p1')) return ['platine-1.jpg.png', 'platine-1.jpg', 'platine-1.png'];
+
+      // Or / Gold (gestion blindée de ou-3, or-3, gold-3)
+      if (r.includes('gold iii') || r.includes('or iii') || r.includes('gold 3') || r.includes('or 3') || r.includes('g3')) {
+        return ['ou-3.jpg.png', 'or-3.jpg.png', 'or-3.jpg', 'gold-3.png', 'ou-3.jpg'];
+      }
+      if (r.includes('gold ii') || r.includes('or ii') || r.includes('gold 2') || r.includes('or 2') || r.includes('g2')) {
+        return ['ou-2.jpg.png', 'or-2.jpg.png', 'or-2.jpg', 'gold-2.png', 'ou-2.jpg'];
+      }
+      if (r.includes('gold i') || r.includes('or i') || r.includes('gold 1') || r.includes('or 1') || r.includes('g1')) {
+        return ['ou-1.jpg.png', 'or-1.jpg.png', 'or-1.jpg', 'gold-1.png', 'ou-1.jpg'];
+      }
+
+      // Argent
+      if (r.includes('silver iii') || r.includes('argent iii')) return ['argent-3.jpg.png', 'argent-3.jpg', 'argent-3.png'];
+      if (r.includes('silver ii') || r.includes('argent ii')) return ['argent-2.jpg.png', 'argent-2.jpg', 'argent-2.png'];
+      if (r.includes('silver i') || r.includes('argent i')) return ['argent-1.jpg.png', 'argent-1.jpg', 'argent-1.png'];
+
+      // Bronze
+      if (r.includes('bronze iii')) return ['bronze-3.jpg.png', 'bronze-3.jpg', 'bronze-3.png'];
+      if (r.includes('bronze ii')) return ['bronze-2.jpg.png', 'bronze-2.jpg', 'bronze-2.png'];
+      if (r.includes('bronze i')) return ['bronze-1.jpg.png', 'bronze-1.jpg', 'bronze-1.png'];
+
+      return ['platine-2.jpg.png', 'platine-2.jpg'];
+    }
+
+    // 7. Chargement automatique des statistiques
     window.addEventListener('DOMContentLoaded', () => {
       fetch('./stats.json?t=' + Date.now())
         .then(response => {
-          if (!response.ok) throw new Error("stats.json introuvable");
+          if (!response.ok) throw new Error("stats.json non trouvé");
           return response.json();
         })
         .then(data => {
-          // Stockage en cache des stats Rocket League
           if (data.rocketLeague) {
             const rl = data.rocketLeague;
             if (rl.duel1v1) rlStatsCache['1v1'] = rl.duel1v1;
@@ -717,7 +807,6 @@
             if (rl.standard3v3) rlStatsCache['3v3'] = rl.standard3v3;
           }
 
-          // Valorant
           if (data.valorant) {
             const v = data.valorant;
             const r = document.getElementById('valo-rank');
