@@ -1,103 +1,60 @@
-const { chromium } = require('playwright');
 const fs = require('fs');
+const path = require('path');
 
-async function scrapeRocketLeague() {
-  console.log("Lancement du scraper...");
-  const browser = await chromium.launch({
-    headless: true,
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-blink-features=AutomationControlled',
-      '--window-size=1920,1080'
-    ]
-  });
-
-  const context = await browser.newContext({
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-    viewport: { width: 1920, height: 1080 }
-  });
-
-  const page = await context.newPage();
-
-  await page.addInitScript(() => {
-    Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
-  });
-
-  let stats = {
+async function fetchStats() {
+  const statsPath = path.join(__dirname, '../stats.json');
+  
+  // Lecture des stats existantes pour conserver les données en cas d'échec d'une API
+  let currentStats = {
     rocketLeague: {
-      duel1v1: "Non classé",
-      doubles2v2: "Non classé",
-      standard3v3: "Non classé",
-      lastUpdated: new Date().toISOString()
+      duel1v1: "Gold III (Division III)",
+      doubles2v2: "Platinum II (Division I)",
+      standard3v3: "Platinum II (Division III)"
     },
     valorant: {
-      rank: "Bronze 3",
-      rr: "38 RR",
+      rang: "Bronze 3",
+      rr: "38",
       kd: "0.74",
       hs: "15.6%"
     }
   };
 
-  try {
-    await page.goto('https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview', {
-      waitUntil: 'domcontentloaded',
-      timeout: 45000
-    });
-
-    await page.waitForTimeout(8000);
-
-    const scraped = await page.evaluate(() => {
-      const res = {};
-      const rows = Array.from(document.querySelectorAll('tr, .trn-table__row, .playlist'));
-
-      const rankTiers = [
-        'Supersonic Legend', 'Grand Champion III', 'Grand Champion II', 'Grand Champion I', 'Grand Champion',
-        'Champion III', 'Champion II', 'Champion I', 'Champion',
-        'Diamond III', 'Diamond II', 'Diamond I', 'Diamond', 'Diamant III', 'Diamant II', 'Diamant I', 'Diamant',
-        'Platinum III', 'Platinum II', 'Platinum I', 'Platinum', 'Platine III', 'Platine II', 'Platine I', 'Platine',
-        'Gold III', 'Gold II', 'Gold I', 'Gold', 'Or III', 'Or II', 'Or I', 'Or',
-        'Silver III', 'Silver II', 'Silver I', 'Silver', 'Argent III', 'Argent II', 'Argent I', 'Argent',
-        'Bronze III', 'Bronze II', 'Bronze I', 'Bronze', 'Unranked', 'Non classé'
-      ];
-
-      function extractFromRow(row, modeKey) {
-        const text = row.innerText || '';
-        
-        // Recherche du palier exact dans tout le texte de la ligne
-        const foundTier = rankTiers.find(tier => new RegExp(`\\b${tier}\\b`, 'i').test(text));
-        
-        // Recherche de la division
-        const divMatch = text.match(/Division\s*([I|V|X\d]+)/i);
-        const div = divMatch ? divMatch[0] : '';
-
-        if (foundTier) {
-          res[modeKey] = div && !foundTier.toLowerCase().includes('division') ? `${foundTier} (${div})` : foundTier;
-        }
-      }
-
-      rows.forEach(r => {
-        const rowText = r.innerText || '';
-        if (/Ranked\s*Duel\s*1v1|Duel\s*1v1/i.test(rowText)) extractFromRow(r, 'duel1v1');
-        if (/Ranked\s*Doubles\s*2v2|Doubles\s*2v2/i.test(rowText)) extractFromRow(r, 'doubles2v2');
-        if (/Ranked\s*Standard\s*3v3|Standard\s*3v3/i.test(rowText)) extractFromRow(r, 'standard3v3');
-      });
-
-      return res;
-    });
-
-    console.log("=== VRAIS RANGS EXTRAITS ===", scraped);
-
-    if (scraped.duel1v1) stats.rocketLeague.duel1v1 = scraped.duel1v1;
-    if (scraped.doubles2v2) stats.rocketLeague.doubles2v2 = scraped.doubles2v2;
-    if (scraped.standard3v3) stats.rocketLeague.standard3v3 = scraped.standard3v3;
-
-  } catch (err) {
-    console.error("Erreur scraper :", err.message);
-  } finally {
-    fs.writeFileSync('stats.json', JSON.stringify(stats, null, 2));
-    await browser.close();
+  if (fs.existsSync(statsPath)) {
+    try {
+      currentStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
+    } catch (e) {
+      console.warn("Impossible de lire l'ancien stats.json, initialisation par défaut.");
+    }
   }
+
+  // 1. Mise à jour Valorant (Abouu92jr#0213 • Serveur EU)
+  try {
+    console.log("Récupération des stats Valorant...");
+    const valoRes = await fetch('https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu');
+    
+    if (valoRes.ok) {
+      const valoText = await valoRes.text(); // Format retourné : "Bronze 3, RR: 38"
+      console.log("Réponse Valorant :", valoText);
+      
+      // Extraction du rang et des RR
+      const parts = valoText.split(',');
+      if (parts[0]) {
+        currentStats.valorant.rang = parts[0].trim();
+      }
+      if (parts[1] && parts[1].includes('RR:')) {
+        const rrMatch = parts[1].match(/RR:\s*(\d+)/);
+        if (rrMatch) currentStats.valorant.rr = rrMatch[1];
+      }
+    } else {
+      console.warn("API Valorant indisponible, conservation des stats précédentes.");
+    }
+  } catch (err) {
+    console.error("Erreur lors de la récupération Valorant :", err.message);
+  }
+
+  // 2. Écriture du fichier stats.json à la racine
+  fs.writeFileSync(statsPath, JSON.stringify(currentStats, null, 2), 'utf8');
+  console.log("stats.json mis à jour avec succès !");
 }
 
-scrapeRocketLeague();
+fetchStats();
