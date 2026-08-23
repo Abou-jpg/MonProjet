@@ -236,7 +236,6 @@
   <!-- ========================================== -->
   <div id="view-gaming" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
     
-    <!-- HUB DES 3 JEUX -->
     <div id="gaming-hub-screen">
       <div class="flex items-center justify-between mb-8 pb-4 border-b border-amber-900/10 dark:border-white/5">
         <div class="flex items-center gap-3">
@@ -252,7 +251,6 @@
         </div>
       </div>
 
-      <!-- LES 3 CARTES -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         <!-- CARTE ROCKET LEAGUE -->
@@ -399,7 +397,7 @@
           <div id="content-1v1" class="accordion-content border-t border-zinc-200/50 dark:border-white/5 px-6 pb-6 pt-4 bg-black/5 dark:bg-black/20">
             <div class="p-4 rounded-xl bg-zinc-900/60 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="flex items-center gap-4">
-                <img id="img-badge-1v1" src="rl/ranks/or-1.jpg" alt="Badge 1v1" class="w-16 h-16 object-contain rounded-lg drop-shadow-[0_0_12px_rgba(234,179,8,0.3)]">
+                <img id="img-badge-1v1" src="ou-3.jpg.png" alt="Badge 1v1" class="w-16 h-16 object-contain rounded-lg drop-shadow-[0_0_12px_rgba(234,179,8,0.3)]">
                 <div>
                   <span class="text-[11px] text-zinc-400 block mb-0.5">Rang Compétitif Actuel</span>
                   <span id="rl-1v1" class="text-2xl font-black text-white">Chargement...</span>
@@ -432,7 +430,7 @@
           <div id="content-2v2" class="accordion-content border-t border-zinc-200/50 dark:border-white/5 px-6 pb-6 pt-4 bg-emerald-500/5">
             <div class="p-4 rounded-xl bg-zinc-900/70 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="flex items-center gap-4">
-                <img id="img-badge-2v2" src="rl/ranks/platine-2.jpg" alt="Badge 2v2" class="w-16 h-16 object-contain rounded-lg drop-shadow-[0_0_15px_rgba(56,189,248,0.4)]">
+                <img id="img-badge-2v2" src="platine-2.jpg.png" alt="Badge 2v2" class="w-16 h-16 object-contain rounded-lg drop-shadow-[0_0_15px_rgba(56,189,248,0.4)]">
                 <div>
                   <span class="text-[11px] text-emerald-400 block mb-0.5">Rang Compétitif Actuel</span>
                   <span id="rl-2v2" class="text-2xl font-black text-emerald-400">Chargement...</span>
@@ -465,7 +463,7 @@
           <div id="content-3v3" class="accordion-content border-t border-zinc-200/50 dark:border-white/5 px-6 pb-6 pt-4 bg-black/5 dark:bg-black/20">
             <div class="p-4 rounded-xl bg-zinc-900/60 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="flex items-center gap-4">
-                <img id="img-badge-3v3" src="rl/ranks/platine-2.jpg" alt="Badge 3v3" class="w-16 h-16 object-contain rounded-lg drop-shadow-[0_0_15px_rgba(56,189,248,0.4)]">
+                <img id="img-badge-3v3" src="platine-2.jpg.png" alt="Badge 3v3" class="w-16 h-16 object-contain rounded-lg drop-shadow-[0_0_15px_rgba(56,189,248,0.4)]">
                 <div>
                   <span class="text-[11px] text-zinc-400 block mb-0.5">Rang Compétitif Actuel</span>
                   <span id="rl-3v3" class="text-2xl font-black text-white">Chargement...</span>
@@ -654,50 +652,50 @@
       }
     }
 
-    // 5. Détection dynamique du badge selon le texte extrait du tracker
+    // 5. Détection dynamique des badges avec les noms réels présents sur le dépôt
     function getRLRankBadge(rankStr) {
-      if (!rankStr) return 'rl/ranks/or-1.jpg';
+      if (!rankStr) return 'ou-1.jpg.png';
       const r = rankStr.toLowerCase();
 
-      // Supersonic Legend (.webp)
-      if (r.includes('supersonic') || r.includes('ssl')) return 'rl/ranks/ssl.webp';
+      // Supersonic Legend
+      if (r.includes('supersonic') || r.includes('ssl')) return 'ssl.webp.webp';
 
-      // Grand Champion (.webp)
-      if (r.includes('grand champion iii') || r.includes('gc3') || r.includes('gc 3')) return 'rl/ranks/gc-3.webp';
-      if (r.includes('grand champion ii') || r.includes('gc2') || r.includes('gc 2')) return 'rl/ranks/gc-2.webp';
-      if (r.includes('grand champion') || r.includes('gc1') || r.includes('gc 1')) return 'rl/ranks/gc-1.webp';
+      // Grand Champion
+      if (r.includes('grand champion iii') || r.includes('gc3') || r.includes('gc 3')) return 'gc-3.webp.webp';
+      if (r.includes('grand champion ii') || r.includes('gc2') || r.includes('gc 2')) return 'gc-2.webp.webp';
+      if (r.includes('grand champion') || r.includes('gc1') || r.includes('gc 1')) return 'gc-1.webp.webp';
 
-      // Champion (.jpg)
-      if (r.includes('champion iii') || r.includes('c3')) return 'rl/ranks/champion-3.jpg';
-      if (r.includes('champion ii') || r.includes('c2')) return 'rl/ranks/champion-2-.jpg';
-      if (r.includes('champion i') || r.includes('c1')) return 'rl/ranks/champion-1.jpg';
+      // Champion
+      if (r.includes('champion iii') || r.includes('c3')) return 'champion-3.jpg.png';
+      if (r.includes('champion ii') || r.includes('c2')) return 'champion-2.jpg.png';
+      if (r.includes('champion i') || r.includes('c1')) return 'champion-1.jpg.png';
 
-      // Diamant (.jpg)
-      if (r.includes('diamond iii') || r.includes('diamant iii') || r.includes('d3')) return 'rl/ranks/diamand-3.jpg';
-      if (r.includes('diamond ii') || r.includes('diamant ii') || r.includes('d2')) return 'rl/ranks/diamand-2.jpg';
-      if (r.includes('diamond i') || r.includes('diamant i') || r.includes('d1')) return 'rl/ranks/diamant 1.jpg';
+      // Diamant
+      if (r.includes('diamond iii') || r.includes('diamant iii') || r.includes('d3')) return 'diamant-3.jpg.png';
+      if (r.includes('diamond ii') || r.includes('diamant ii') || r.includes('d2')) return 'diamant-2.jpg.png';
+      if (r.includes('diamond i') || r.includes('diamant i') || r.includes('d1')) return 'diamant-1.jpg.png';
 
-      // Platine (.jpg)
-      if (r.includes('platinum iii') || r.includes('platine iii') || r.includes('p3')) return 'rl/ranks/platine-3.jpg';
-      if (r.includes('platinum ii') || r.includes('platine ii') || r.includes('p2')) return 'rl/ranks/platine-2.jpg';
-      if (r.includes('platinum i') || r.includes('platine i') || r.includes('p1')) return 'rl/ranks/platine-1.jpg';
+      // Platine
+      if (r.includes('platinum iii') || r.includes('platine iii') || r.includes('p3')) return 'platine-3.jpg.png';
+      if (r.includes('platinum ii') || r.includes('platine ii') || r.includes('p2')) return 'platine-2.jpg.png';
+      if (r.includes('platinum i') || r.includes('platine i') || r.includes('p1')) return 'platine-1.jpg.png';
 
-      // Or (.jpg)
-      if (r.includes('gold iii') || r.includes('or iii') || r.includes('g3')) return 'rl/ranks/or-3.jpg';
-      if (r.includes('gold ii') || r.includes('or ii') || r.includes('g2')) return 'rl/ranks/or-2.jpg';
-      if (r.includes('gold i') || r.includes('or i') || r.includes('g1')) return 'rl/ranks/or-1.jpg';
+      // Or / Gold (Gère le préfixe ou-)
+      if (r.includes('gold iii') || r.includes('or iii') || r.includes('g3')) return 'ou-3.jpg.png';
+      if (r.includes('gold ii') || r.includes('or ii') || r.includes('g2')) return 'ou-2.jpg.png';
+      if (r.includes('gold i') || r.includes('or i') || r.includes('g1')) return 'ou-1.jpg.png';
 
-      // Argent (.jpg)
-      if (r.includes('silver iii') || r.includes('argent iii')) return 'rl/ranks/argent-3.jpg';
-      if (r.includes('silver ii') || r.includes('argent ii')) return 'rl/ranks/argent-2.jpg';
-      if (r.includes('silver i') || r.includes('argent i')) return 'rl/ranks/argent-1.jpg';
+      // Argent
+      if (r.includes('silver iii') || r.includes('argent iii')) return 'argent-3.jpg.png';
+      if (r.includes('silver ii') || r.includes('argent ii')) return 'argent-2.jpg.png';
+      if (r.includes('silver i') || r.includes('argent i')) return 'argent-1.jpg.png';
 
-      // Bronze (.jpg)
-      if (r.includes('bronze iii')) return 'rl/ranks/bronze-3.jpg';
-      if (r.includes('bronze ii')) return 'rl/ranks/bronze-2.jpg';
-      if (r.includes('bronze i')) return 'rl/ranks/bronze-1.jpg';
+      // Bronze
+      if (r.includes('bronze iii')) return 'bronze-3.jpg.png';
+      if (r.includes('bronze ii')) return 'bronze-2.jpg.png';
+      if (r.includes('bronze i')) return 'bronze-1.jpg.png';
 
-      return 'rl/ranks/platine-2.jpg';
+      return 'platine-2.jpg.png';
     }
 
     // 6. Chargement automatique des statistiques depuis stats.json
