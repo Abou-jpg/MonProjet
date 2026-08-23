@@ -2,12 +2,11 @@
   "rocketLeague": {
     "duel1v1": "Gold III (Division III)",
     "doubles2v2": "Platinum II (Division I)",
-    "standard3v3": "Platinum II (Division III)",
-    "lastUpdated": "2026-08-23T21:55:01.906Z"
+    "standard3v3": "Platinum II (Division III)"
   },
   "valorant": {
-    "rank": "Bronze 3",
-    "rr": "38 RR",
+    "rang": "Bronze 3",
+    "rr": "38",
     "kd": "0.74",
     "hs": "15.6%"
   }
