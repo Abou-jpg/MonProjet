@@ -164,7 +164,6 @@
       background-color: #ef4444;
     }
 
-    /* Scrollbar personnalisée */
     .gcal-scroll-area::-webkit-scrollbar {
       width: 10px;
     }
@@ -221,7 +220,7 @@
       <h1 class="text-4xl md:text-6xl font-normal tracking-tight text-zinc-950 dark:text-white font-serif-title leading-tight mb-6">
         Tous mes projets, <br><span class="italic text-emerald-700 dark:text-emerald-400">au même endroit.</span>
       </h1>
-      <p class="text-zinc-600 dark:text-zinc-400 text-base md:lg leading-relaxed mb-8">
+      <p class="text-zinc-600 dark:text-zinc-400 text-base md:text-lg leading-relaxed mb-8">
         Le tableau de bord centralisé pour le planning hebdomadaire, le gaming, le sport, les vidéos et les études.
       </p>
 
@@ -355,7 +354,7 @@
           <div id="gcal-day-headers" class="contents"></div>
         </div>
 
-        <!-- 2. Grille horaire 08:00 -> 23:00 agrandie avec scroll vertical fluide -->
+        <!-- 2. Grille horaire 08:00 -> 23:00 agrandie -->
         <div class="gcal-scroll-area relative overflow-y-auto max-h-[820px]">
           <div id="gcal-time-grid" class="grid grid-cols-[70px_repeat(7,1fr)] sm:grid-cols-[80px_repeat(7,1fr)]"></div>
         </div>
@@ -831,7 +830,6 @@
       const dayHeadersContainer = document.getElementById('gcal-day-headers');
       dayHeadersContainer.innerHTML = '';
 
-      // Ordre européen : Lundi à Dimanche
       const dayLabels = ['LUN.', 'MAR.', 'MER.', 'JEU.', 'VEN.', 'SAM.', 'DIM.'];
       const weekDates = [];
       const todayStr = '2026-08-24';
@@ -857,7 +855,6 @@
       const timeGridContainer = document.getElementById('gcal-time-grid');
       timeGridContainer.innerHTML = '';
 
-      // Horaires en français (24h)
       const hours = [
         { label: '08:00', h: 8 }, { label: '09:00', h: 9 }, { label: '10:00', h: 10 },
         { label: '11:00', h: 11 }, { label: '12:00', h: 12 }, { label: '13:00', h: 13 },
@@ -928,7 +925,7 @@
       const colIndex = weekDates.indexOf(todayStr);
 
       if (colIndex !== -1) {
-        const curH = 21; // Heure actuelle
+        const curH = 21;
         const curM = 45;
 
         if (curH >= 8) {
@@ -1146,25 +1143,31 @@
     }
 
     function getRLRankBadgeFallbacks(rankStr) {
-      if (!rankStr) return ['ou-3.jpg.png', 'or-3.jpg.png', 'platine-2.jpg.png'];
+      if (!rankStr) return ['ou-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-9.png'];
       const r = rankStr.toLowerCase();
-      if (r.includes('supersonic') || r.includes('ssl')) return ['ssl.webp.webp', 'ssl.webp', 'ssl.png'];
-      if (r.includes('grand champion iii') || r.includes('gc3')) return ['gc-3.webp.webp', 'gc-3.webp', 'gc-3.png'];
-      if (r.includes('grand champion ii') || r.includes('gc2')) return ['gc-2.webp.webp', 'gc-2.webp', 'gc-2.png'];
-      if (r.includes('grand champion') || r.includes('gc1')) return ['gc-1.webp.webp', 'gc-1.webp', 'gc-1.png'];
-      if (r.includes('champion iii') || r.includes('c3')) return ['champion-3.jpg.png', 'champion-3.jpg'];
-      if (r.includes('champion ii') || r.includes('c2')) return ['champion-2.jpg.png', 'champion-2.jpg'];
-      if (r.includes('champion i') || r.includes('c1')) return ['champion-1.jpg.png', 'champion-1.jpg'];
-      if (r.includes('diamond iii') || r.includes('diamant iii')) return ['diamant-3.jpg.png', 'diamant-3.jpg'];
-      if (r.includes('diamond ii') || r.includes('diamant ii')) return ['diamant-2.jpg.png', 'diamant-2.jpg'];
-      if (r.includes('diamond i') || r.includes('diamant i')) return ['diamant-1.jpg.png', 'diamant-1.jpg'];
-      if (r.includes('platinum iii') || r.includes('platine iii')) return ['platine-3.jpg.png', 'platine-3.jpg'];
-      if (r.includes('platinum ii') || r.includes('platine ii')) return ['platine-2.jpg.png', 'platine-2.jpg'];
-      if (r.includes('platinum i') || r.includes('platine i')) return ['platine-1.jpg.png', 'platine-1.jpg'];
-      if (r.includes('gold iii') || r.includes('or iii') || r.includes('gold 3')) return ['ou-3.jpg.png', 'or-3.jpg.png', 'gold-3.jpg.png'];
-      if (r.includes('gold ii') || r.includes('or ii') || r.includes('gold 2')) return ['ou-2.jpg.png', 'or-2.jpg.png', 'gold-2.jpg.png'];
-      if (r.includes('gold i') || r.includes('or i') || r.includes('gold 1')) return ['ou-1.jpg.png', 'or-1.jpg.png', 'gold-1.jpg.png'];
-      return ['platine-2.jpg.png', 'platine-2.jpg'];
+
+      if (r.includes('supersonic') || r.includes('ssl')) return ['ssl.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-22.png'];
+      if (r.includes('grand champion iii') || r.includes('gc3')) return ['gc-3.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-21.png'];
+      if (r.includes('grand champion ii') || r.includes('gc2')) return ['gc-2.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-20.png'];
+      if (r.includes('grand champion') || r.includes('gc1')) return ['gc-1.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-19.png'];
+      
+      if (r.includes('champion iii') || r.includes('c3') || r.includes('champion 3')) return ['champion-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-18.png'];
+      if (r.includes('champion ii') || r.includes('c2') || r.includes('champion 2')) return ['champion-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-17.png'];
+      if (r.includes('champion i') || r.includes('c1') || r.includes('champion 1')) return ['champion-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-16.png'];
+
+      if (r.includes('diamond iii') || r.includes('diamant iii') || r.includes('diamond 3')) return ['diamant-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-15.png'];
+      if (r.includes('diamond ii') || r.includes('diamant ii') || r.includes('diamond 2')) return ['diamant-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-14.png'];
+      if (r.includes('diamond i') || r.includes('diamant i') || r.includes('diamond 1')) return ['diamant-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-13.png'];
+
+      if (r.includes('platinum iii') || r.includes('platine iii') || r.includes('platinum 3')) return ['platine-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-12.png'];
+      if (r.includes('platinum ii') || r.includes('platine ii') || r.includes('platinum 2')) return ['platine-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-11.png'];
+      if (r.includes('platinum i') || r.includes('platine i') || r.includes('platinum 1')) return ['platine-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-10.png'];
+
+      if (r.includes('gold iii') || r.includes('or iii') || r.includes('gold 3')) return ['ou-3.jpg.png', 'or-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-9.png'];
+      if (r.includes('gold ii') || r.includes('or ii') || r.includes('gold 2')) return ['ou-2.jpg.png', 'or-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-8.png'];
+      if (r.includes('gold i') || r.includes('or i') || r.includes('gold 1')) return ['ou-1.jpg.png', 'or-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-7.png'];
+
+      return ['https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-11.png'];
     }
 
     function getValoRankBadgeFallbacks(rankStr) {
