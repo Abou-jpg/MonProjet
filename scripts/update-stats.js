@@ -22,61 +22,68 @@ async function fetchStats() {
     try {
       currentStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
     } catch (e) {
-      console.warn("Utilisation de la mémoire par défaut.");
+      console.warn("Utilisation du stats.json existant.");
     }
   }
 
-  // 1. ROCKET LEAGUE (TRN API)
-  const apiKey = process.env.TRN_API_KEY;
-  if (apiKey) {
-    try {
-      const trnRes = await fetch('https://public-api.tracker.gg/v2/rocket-league/standard/profile/epic/abdel92jr', {
-        headers: {
-          'TRN-Api-Key': apiKey,
-          'Accept': 'application/json'
+  // ==========================================
+  // 1. ROCKET LEAGUE (API GRATUITE & DIRECTE)
+  // ==========================================
+  console.log("--> Récupération des rangs Rocket League...");
+  try {
+    const rlRes = await fetch('https://api.yannismate.de/rank/epic/abdel92jr');
+    if (rlRes.ok) {
+      const text = await rlRes.text();
+      console.log("Réponse RL reçue :", text);
+
+      // Exemple reçu : "Ranked Duel 1v1: Gold III Div III | Ranked Doubles 2v2: Platinum II Div I | Ranked Standard 3v3: Platinum II Div III"
+      const segments = text.split('|');
+      segments.forEach(seg => {
+        const clean = seg.trim();
+        if (clean.includes('1v1') || clean.includes('Duel')) {
+          const parts = clean.split(':');
+          if (parts[1]) currentStats.rocketLeague.duel1v1 = parts[1].trim();
+        }
+        if (clean.includes('2v2') || clean.includes('Doubles')) {
+          const parts = clean.split(':');
+          if (parts[1]) currentStats.rocketLeague.doubles2v2 = parts[1].trim();
+        }
+        if (clean.includes('3v3') || clean.includes('Standard')) {
+          const parts = clean.split(':');
+          if (parts[1]) currentStats.rocketLeague.standard3v3 = parts[1].trim();
         }
       });
-
-      if (trnRes.ok) {
-        const json = await trnRes.json();
-        const segments = json?.data?.segments || [];
-
-        segments.forEach(seg => {
-          const mode = seg?.metadata?.name || '';
-          const tier = seg?.stats?.tier?.metadata?.name || '';
-          const div = seg?.stats?.division?.metadata?.name || '';
-          const full = div ? `${tier} (${div})` : tier;
-
-          if (mode.includes('Ranked Duel 1v1')) currentStats.rocketLeague.duel1v1 = full;
-          if (mode.includes('Ranked Doubles 2v2')) currentStats.rocketLeague.doubles2v2 = full;
-          if (mode.includes('Ranked Standard 3v3')) currentStats.rocketLeague.standard3v3 = full;
-        });
-        console.log("Stats RL mises à jour :", currentStats.rocketLeague);
-      } else {
-        console.warn(`API TRN code ${trnRes.status} : conservation des données.`);
-      }
-    } catch (e) {
-      console.error("Erreur API RL :", e.message);
+      console.log("Nouveaux rangs RL enregistrés :", currentStats.rocketLeague);
+    } else {
+      console.warn("API RL temporairement indisponible.");
     }
+  } catch (errRL) {
+    console.error("Erreur récupération RL :", errRL.message);
   }
 
-  // 2. VALORANT
+  // ==========================================
+  // 2. VALORANT (API REST OFFICIELLE)
+  // ==========================================
+  console.log("--> Récupération des stats Valorant...");
   try {
     const valoRes = await fetch('https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu');
     if (valoRes.ok) {
-      const txt = await valoRes.text();
-      const parts = txt.split(',');
+      const valoText = await valoRes.text();
+      console.log("Réponse Valorant :", valoText);
+      const parts = valoText.split(',');
       if (parts[0]) currentStats.valorant.rang = parts[0].trim();
       if (parts[1] && parts[1].includes('RR:')) {
-        const m = parts[1].match(/RR:\s*(\d+)/);
-        if (m) currentStats.valorant.rr = m[1];
+        const rrMatch = parts[1].match(/RR:\s*(\d+)/);
+        if (rrMatch) currentStats.valorant.rr = rrMatch[1];
       }
     }
-  } catch (e) {
-    console.error("Erreur Valorant :", e.message);
+  } catch (errValo) {
+    console.error("Erreur Valorant :", errValo.message);
   }
 
+  // Sauvegarde dans stats.json
   fs.writeFileSync(statsPath, JSON.stringify(currentStats, null, 2), 'utf8');
+  console.log("--> stats.json mis à jour avec succès !");
 }
 
 fetchStats();
