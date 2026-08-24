@@ -1,15 +1,18 @@
 const fs = require('fs');
 const path = require('path');
-const { chromium } = require('playwright');
+const { chromium } = require('playwright-extra');
+const stealth = require('puppeteer-extra-plugin-stealth')();
+
+chromium.use(stealth);
 
 async function fetchStats() {
   const statsPath = path.join(__dirname, '../stats.json');
 
   let currentStats = {
     rocketLeague: {
-      duel1v1: "Gold III (Division III)",
-      doubles2v2: "Platinum II (Division I)",
-      standard3v3: "Platinum II (Division III)"
+      duel1v1: "Non Classé",
+      doubles2v2: "Non Classé",
+      standard3v3: "Non Classé"
     },
     valorant: {
       rang: "Bronze 3",
@@ -23,124 +26,118 @@ async function fetchStats() {
     try {
       currentStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
     } catch (e) {
-      console.warn("Fichier stats.json initialisé avec les valeurs par défaut.");
+      console.warn("Initialisation du fichier stats.json.");
     }
   }
 
-  // ========================================================
-  // 1. ROCKET LEAGUE : MÉTHODE 1 (API DIRECTE TRN)
-  // ========================================================
-  console.log(">>> [1/2] Tentative de récupération Rocket League...");
-  let rlSuccess = false;
-
+  // ==========================================
+  // 1. ROCKET LEAGUE (Scraping Furtif Automatisé)
+  // ==========================================
+  console.log("--> [1/2] Lancement de l'extraction Rocket League...");
+  let browser;
   try {
-    const trnUrl = 'https://api.tracker.gg/api/v2/rocket-league/standard/profile/epic/abdel92jr';
-    const trnRes = await fetch(trnUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-        'Accept': 'application/json'
-      }
+    browser = await chromium.launch({
+      headless: true,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-web-security',
+        '--disable-features=IsolateOrigins,site-per-process'
+      ]
     });
 
-    if (trnRes.ok) {
-      const data = await trnRes.json();
-      const segments = data?.data?.segments || [];
+    const context = await browser.newContext({
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+      viewport: { width: 1920, height: 1080 },
+      locale: 'fr-FR',
+      timezoneId: 'Europe/Paris'
+    });
 
-      segments.forEach(seg => {
-        const modeName = seg.metadata?.name;
-        const rankName = seg.stats?.tier?.metadata?.name;
-        const divName = seg.stats?.division?.metadata?.name;
+    const page = await context.newPage();
+    const targetUrl = 'https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview';
+    
+    await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 40000 });
+    await page.waitForTimeout(5000); // Laisse le temps aux composants dynamiques de charger
 
-        if (modeName && rankName) {
-          const fullRank = divName ? `${rankName} (${divName})` : rankName;
-          if (modeName === 'Ranked Duel 1v1') currentStats.rocketLeague.duel1v1 = fullRank;
-          if (modeName === 'Ranked Doubles 2v2') currentStats.rocketLeague.doubles2v2 = fullRank;
-          if (modeName === 'Ranked Standard 3v3') currentStats.rocketLeague.standard3v3 = fullRank;
-        }
-      });
-      console.log("RL récupéré avec succès via API Directe :", currentStats.rocketLeague);
-      rlSuccess = true;
-    }
-  } catch (errApi) {
-    console.warn("Échec API directe RL, passage au scraping Playwright...", errApi.message);
-  }
+    const extractedRanks = await page.evaluate(() => {
+      const results = {};
+      const fullText = document.body.innerText;
+      const lines = fullText.split('\n').map(s => s.trim()).filter(Boolean);
 
-  // ========================================================
-  // 1. BIS : ROCKET LEAGUE (SCRAPING PLAYWRIGHT ANTI-BOT)
-  // ========================================================
-  if (!rlSuccess) {
-    let browser;
-    try {
-      browser = await chromium.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-      });
+      const rankRegex = /(Bronze|Silver|Gold|Platinum|Diamond|Champion|Grand Champion|Supersonic Legend)\s+[I|V|X\d]+(\s*\(Division\s*[I|V|X\d]+\))?/i;
 
-      const context = await browser.newContext({
-        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
-      });
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
 
-      const page = await context.newPage();
-      await page.goto('https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview', {
-        waitUntil: 'domcontentloaded',
-        timeout: 30000
-      });
-
-      await page.waitForTimeout(4000);
-
-      const scraped = await page.evaluate(() => {
-        const text = document.body.innerText;
-        const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-        const res = {};
-
-        for (let i = 0; i < lines.length; i++) {
-          if (lines[i].includes('Ranked Duel 1v1')) {
-            res.duel1v1 = lines.slice(i, i + 6).find(l => /(Bronze|Silver|Gold|Platinum|Diam|Champ|Grand)/i.test(l));
-          }
-          if (lines[i].includes('Ranked Doubles 2v2')) {
-            res.doubles2v2 = lines.slice(i, i + 6).find(l => /(Bronze|Silver|Gold|Platinum|Diam|Champ|Grand)/i.test(l));
-          }
-          if (lines[i].includes('Ranked Standard 3v3')) {
-            res.standard3v3 = lines.slice(i, i + 6).find(l => /(Bronze|Silver|Gold|Platinum|Diam|Champ|Grand)/i.test(l));
+        // Duel 1v1
+        if (line.includes('Ranked Duel 1v1') || line === 'Ranked Duel 1v1') {
+          for (let j = i + 1; j < Math.min(i + 8, lines.length); j++) {
+            if (rankRegex.test(lines[j])) {
+              results.duel1v1 = lines[j];
+              break;
+            }
           }
         }
-        return res;
-      });
 
-      if (scraped.duel1v1) currentStats.rocketLeague.duel1v1 = scraped.duel1v1;
-      if (scraped.doubles2v2) currentStats.rocketLeague.doubles2v2 = scraped.doubles2v2;
-      if (scraped.standard3v3) currentStats.rocketLeague.standard3v3 = scraped.standard3v3;
-      console.log("RL récupéré via Playwright :", scraped);
-    } catch (errScrape) {
-      console.error("Échec du scraping RL :", errScrape.message);
-    } finally {
-      if (browser) await browser.close();
-    }
+        // Doubles 2v2
+        if (line.includes('Ranked Doubles 2v2') || line === 'Ranked Doubles 2v2') {
+          for (let j = i + 1; j < Math.min(i + 8, lines.length); j++) {
+            if (rankRegex.test(lines[j])) {
+              results.doubles2v2 = lines[j];
+              break;
+            }
+          }
+        }
+
+        // Standard 3v3
+        if (line.includes('Ranked Standard 3v3') || line === 'Ranked Standard 3v3') {
+          for (let j = i + 1; j < Math.min(i + 8, lines.length); j++) {
+            if (rankRegex.test(lines[j])) {
+              results.standard3v3 = lines[j];
+              break;
+            }
+          }
+        }
+      }
+      return results;
+    });
+
+    if (extractedRanks.duel1v1) currentStats.rocketLeague.duel1v1 = extractedRanks.duel1v1;
+    if (extractedRanks.doubles2v2) currentStats.rocketLeague.doubles2v2 = extractedRanks.doubles2v2;
+    if (extractedRanks.standard3v3) currentStats.rocketLeague.standard3v3 = extractedRanks.standard3v3;
+
+    console.log("Rangs Rocket League extraits :", extractedRanks);
+  } catch (errRL) {
+    console.error("Erreur d'extraction Rocket League :", errRL.message);
+  } finally {
+    if (browser) await browser.close();
   }
 
-  // ========================================================
-  // 2. VALORANT (API REST OFFICIELLE)
-  // ========================================================
-  console.log(">>> [2/2] Récupération Valorant...");
+  // ==========================================
+  // 2. VALORANT (API Automatisée)
+  // ==========================================
+  console.log("--> [2/2] Lancement de l'extraction Valorant...");
   try {
     const valoRes = await fetch('https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu');
     if (valoRes.ok) {
       const valoText = await valoRes.text();
-      console.log("Réponse Valorant :", valoText);
       const parts = valoText.split(',');
       if (parts[0]) currentStats.valorant.rang = parts[0].trim();
       if (parts[1] && parts[1].includes('RR:')) {
-        const matchRR = parts[1].match(/RR:\s*(\d+)/);
-        if (matchRR) currentStats.valorant.rr = matchRR[1];
+        const rrMatch = parts[1].match(/RR:\s*(\d+)/);
+        if (rrMatch) currentStats.valorant.rr = rrMatch[1];
       }
+      console.log("Valorant mis à jour :", currentStats.valorant);
     }
   } catch (errValo) {
     console.error("Erreur Valorant :", errValo.message);
   }
 
-  // Sauvegarde
+  // ==========================================
+  // 3. SAUVEGARDE DANS STATS.JSON
+  // ==========================================
   fs.writeFileSync(statsPath, JSON.stringify(currentStats, null, 2), 'utf8');
-  console.log(">>> Écriture de stats.json terminée avec succès !");
+  console.log("--> Fichier stats.json synchronisé avec succès !");
 }
 
 fetchStats();
