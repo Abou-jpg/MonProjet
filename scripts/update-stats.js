@@ -1,18 +1,14 @@
 const fs = require('fs');
 const path = require('path');
-const { chromium } = require('playwright-extra');
-const stealth = require('puppeteer-extra-plugin-stealth')();
-
-chromium.use(stealth);
 
 async function fetchStats() {
   const statsPath = path.join(__dirname, '../stats.json');
 
   let currentStats = {
     rocketLeague: {
-      duel1v1: "Non Classé",
-      doubles2v2: "Non Classé",
-      standard3v3: "Non Classé"
+      duel1v1: "Gold III (Division III)",
+      doubles2v2: "Platinum II (Division I)",
+      standard3v3: "Platinum II (Division III)"
     },
     valorant: {
       rang: "Bronze 3",
@@ -26,118 +22,61 @@ async function fetchStats() {
     try {
       currentStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
     } catch (e) {
-      console.warn("Initialisation du fichier stats.json.");
+      console.warn("Utilisation de la mémoire par défaut.");
     }
   }
 
-  // ==========================================
-  // 1. ROCKET LEAGUE (Scraping Furtif Automatisé)
-  // ==========================================
-  console.log("--> [1/2] Lancement de l'extraction Rocket League...");
-  let browser;
-  try {
-    browser = await chromium.launch({
-      headless: true,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-web-security',
-        '--disable-features=IsolateOrigins,site-per-process'
-      ]
-    });
-
-    const context = await browser.newContext({
-      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-      viewport: { width: 1920, height: 1080 },
-      locale: 'fr-FR',
-      timezoneId: 'Europe/Paris'
-    });
-
-    const page = await context.newPage();
-    const targetUrl = 'https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview';
-    
-    await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 40000 });
-    await page.waitForTimeout(5000); // Laisse le temps aux composants dynamiques de charger
-
-    const extractedRanks = await page.evaluate(() => {
-      const results = {};
-      const fullText = document.body.innerText;
-      const lines = fullText.split('\n').map(s => s.trim()).filter(Boolean);
-
-      const rankRegex = /(Bronze|Silver|Gold|Platinum|Diamond|Champion|Grand Champion|Supersonic Legend)\s+[I|V|X\d]+(\s*\(Division\s*[I|V|X\d]+\))?/i;
-
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-
-        // Duel 1v1
-        if (line.includes('Ranked Duel 1v1') || line === 'Ranked Duel 1v1') {
-          for (let j = i + 1; j < Math.min(i + 8, lines.length); j++) {
-            if (rankRegex.test(lines[j])) {
-              results.duel1v1 = lines[j];
-              break;
-            }
-          }
+  // 1. ROCKET LEAGUE (TRN API)
+  const apiKey = process.env.TRN_API_KEY;
+  if (apiKey) {
+    try {
+      const trnRes = await fetch('https://public-api.tracker.gg/v2/rocket-league/standard/profile/epic/abdel92jr', {
+        headers: {
+          'TRN-Api-Key': apiKey,
+          'Accept': 'application/json'
         }
+      });
 
-        // Doubles 2v2
-        if (line.includes('Ranked Doubles 2v2') || line === 'Ranked Doubles 2v2') {
-          for (let j = i + 1; j < Math.min(i + 8, lines.length); j++) {
-            if (rankRegex.test(lines[j])) {
-              results.doubles2v2 = lines[j];
-              break;
-            }
-          }
-        }
+      if (trnRes.ok) {
+        const json = await trnRes.json();
+        const segments = json?.data?.segments || [];
 
-        // Standard 3v3
-        if (line.includes('Ranked Standard 3v3') || line === 'Ranked Standard 3v3') {
-          for (let j = i + 1; j < Math.min(i + 8, lines.length); j++) {
-            if (rankRegex.test(lines[j])) {
-              results.standard3v3 = lines[j];
-              break;
-            }
-          }
-        }
+        segments.forEach(seg => {
+          const mode = seg?.metadata?.name || '';
+          const tier = seg?.stats?.tier?.metadata?.name || '';
+          const div = seg?.stats?.division?.metadata?.name || '';
+          const full = div ? `${tier} (${div})` : tier;
+
+          if (mode.includes('Ranked Duel 1v1')) currentStats.rocketLeague.duel1v1 = full;
+          if (mode.includes('Ranked Doubles 2v2')) currentStats.rocketLeague.doubles2v2 = full;
+          if (mode.includes('Ranked Standard 3v3')) currentStats.rocketLeague.standard3v3 = full;
+        });
+        console.log("Stats RL mises à jour :", currentStats.rocketLeague);
+      } else {
+        console.warn(`API TRN code ${trnRes.status} : conservation des données.`);
       }
-      return results;
-    });
-
-    if (extractedRanks.duel1v1) currentStats.rocketLeague.duel1v1 = extractedRanks.duel1v1;
-    if (extractedRanks.doubles2v2) currentStats.rocketLeague.doubles2v2 = extractedRanks.doubles2v2;
-    if (extractedRanks.standard3v3) currentStats.rocketLeague.standard3v3 = extractedRanks.standard3v3;
-
-    console.log("Rangs Rocket League extraits :", extractedRanks);
-  } catch (errRL) {
-    console.error("Erreur d'extraction Rocket League :", errRL.message);
-  } finally {
-    if (browser) await browser.close();
+    } catch (e) {
+      console.error("Erreur API RL :", e.message);
+    }
   }
 
-  // ==========================================
-  // 2. VALORANT (API Automatisée)
-  // ==========================================
-  console.log("--> [2/2] Lancement de l'extraction Valorant...");
+  // 2. VALORANT
   try {
     const valoRes = await fetch('https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu');
     if (valoRes.ok) {
-      const valoText = await valoRes.text();
-      const parts = valoText.split(',');
+      const txt = await valoRes.text();
+      const parts = txt.split(',');
       if (parts[0]) currentStats.valorant.rang = parts[0].trim();
       if (parts[1] && parts[1].includes('RR:')) {
-        const rrMatch = parts[1].match(/RR:\s*(\d+)/);
-        if (rrMatch) currentStats.valorant.rr = rrMatch[1];
+        const m = parts[1].match(/RR:\s*(\d+)/);
+        if (m) currentStats.valorant.rr = m[1];
       }
-      console.log("Valorant mis à jour :", currentStats.valorant);
     }
-  } catch (errValo) {
-    console.error("Erreur Valorant :", errValo.message);
+  } catch (e) {
+    console.error("Erreur Valorant :", e.message);
   }
 
-  // ==========================================
-  // 3. SAUVEGARDE DANS STATS.JSON
-  // ==========================================
   fs.writeFileSync(statsPath, JSON.stringify(currentStats, null, 2), 'utf8');
-  console.log("--> Fichier stats.json synchronisé avec succès !");
 }
 
 fetchStats();
