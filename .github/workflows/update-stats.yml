@@ -2,7 +2,7 @@ name: Update Stats
 
 on:
   schedule:
-    # S'exécute automatiquement à :15 et :45 chaque heure
+    # S'exécute automatiquement toutes les 30 minutes
     - cron: '15,45 * * * *'
   workflow_dispatch:
 
@@ -22,12 +22,12 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Playwright & Dependencies
+      - name: Install Dependencies & Stealth Browser
         run: |
-          npm install playwright
+          npm install playwright playwright-extra puppeteer-extra-plugin-stealth
           npx playwright install --with-deps chromium
 
-      - name: Run scraping script
+      - name: Run automated stats script
         run: node scripts/update-stats.js
 
       - name: Commit and Push changes
@@ -35,5 +35,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add stats.json
-          git commit -m "Auto-update stats [skip ci]" || exit 0
+          git commit -m "Auto-update stats [automated]" || exit 0
           git push
