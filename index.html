@@ -12,7 +12,7 @@
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-serif-title { font-family: 'Playfair Display', serif; }
 
-    /* Mode Sombre */
+    /* Mode Sombre Global */
     html.dark body {
       background-color: #070d0a;
       background-image: 
@@ -22,7 +22,7 @@
       background-attachment: fixed;
     }
 
-    /* Mode Clair */
+    /* Mode Clair Global */
     html:not(.dark) body {
       background-color: #fcfbf4;
       background-image: 
@@ -32,7 +32,7 @@
       background-attachment: fixed;
     }
 
-    /* Cartes Glassmorphism */
+    /* Cartes Glassmorphism Standards */
     html.dark .glass-card {
       background: rgba(14, 26, 20, 0.55);
       backdrop-filter: blur(14px);
@@ -52,13 +52,8 @@
       box-shadow: 0 4px 20px -2px rgba(180, 83, 9, 0.04);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    html:not(.dark) .glass-card:hover {
-      background: #ffffff;
-      border-color: rgba(217, 119, 6, 0.35);
-      box-shadow: 0 12px 28px -5px rgba(217, 119, 6, 0.12);
-    }
 
-    /* Cartes Affiches Gaming */
+    /* Gaming Posters */
     .game-poster-card {
       position: relative;
       height: 420px;
@@ -66,7 +61,7 @@
       overflow: hidden;
       cursor: pointer;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
     }
     .game-poster-bg {
       position: absolute;
@@ -75,15 +70,9 @@
       background-position: center;
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .game-poster-card:hover .game-poster-bg {
-      transform: scale(1.08);
-    }
-    .game-poster-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-    }
+    .game-poster-card:hover .game-poster-bg { transform: scale(1.08); }
+    .game-poster-card:hover { transform: translateY(-8px); }
 
-    /* Cartes verticales Rocket League */
     .mode-vertical-card {
       position: relative;
       border-radius: 1.25rem;
@@ -97,8 +86,53 @@
     .mode-vertical-card:hover {
       transform: translateY(-4px);
       border-color: rgba(52, 211, 153, 0.7);
-      box-shadow: 0 12px 30px -5px rgba(16, 185, 129, 0.3);
     }
+
+    /* PLANNING / CALENDAR DBZ THEME */
+    .calendar-dbz-wrapper {
+      position: relative;
+      border-radius: 2rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    }
+    .calendar-dbz-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center bottom;
+      z-index: 0;
+    }
+    .calendar-dbz-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8, 14, 18, 0.82) 0%, rgba(10, 16, 22, 0.88) 100%);
+      backdrop-filter: blur(8px);
+      z-index: 1;
+    }
+    .calendar-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Grille calendrier mois */
+    .cal-day-cell {
+      min-height: 105px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .cal-day-cell:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .cal-day-cell.is-today {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    /* Scrollbar personnalisée */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
   </style>
 </head>
 <body class="text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors duration-300">
@@ -140,17 +174,17 @@
         Tous mes projets, <br><span class="italic text-emerald-700 dark:text-emerald-400">au même endroit.</span>
       </h1>
       <p class="text-zinc-600 dark:text-zinc-400 text-base md:text-lg leading-relaxed mb-8">
-        Le tableau de bord centralisé pour le gaming, le suivi sportif, les séries, la planification, le club de volley de Nanterre et les études.
+        Le tableau de bord centralisé pour le planning, le gaming, le sport, les vidéos et les études.
       </p>
 
       <div class="flex flex-wrap items-center gap-4 mb-16">
         <button onclick="navigateTab('planning')" class="bg-emerald-700 dark:bg-emerald-600 hover:bg-emerald-800 text-white px-6 py-3 rounded-full text-sm font-semibold transition flex items-center gap-2 shadow-lg shadow-emerald-700/20">
           <i data-lucide="calendar" class="w-4 h-4"></i>
-          Voir mon planning
+          Ouvrir mon agenda
         </button>
-        <button onclick="navigateTab('volley')" class="glass-card text-zinc-900 dark:text-white px-6 py-3 rounded-full text-sm font-medium transition flex items-center gap-2">
-          <i data-lucide="trophy" class="w-4 h-4 text-amber-500"></i>
-          Club de Volley Nanterre
+        <button onclick="navigateTab('gaming')" class="glass-card text-zinc-900 dark:text-white px-6 py-3 rounded-full text-sm font-medium transition flex items-center gap-2">
+          <i data-lucide="gamepad-2" class="w-4 h-4 text-emerald-500"></i>
+          Mes Rangs Gaming
         </button>
       </div>
     </div>
@@ -163,7 +197,18 @@
       <h2 class="text-2xl font-serif-title text-zinc-950 dark:text-white mb-6">Les 6 Pôles d'Activité</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div onclick="navigateTab('gaming')" class="glass-card p-6 rounded-2xl group block cursor-pointer border border-emerald-500/30">
+        <div onclick="navigateTab('planning')" class="glass-card p-6 rounded-2xl group block cursor-pointer border border-amber-500/40">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition">
+              <i data-lucide="calendar" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition"></i>
+          </div>
+          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">Planning & Agenda DBZ</h3>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Google Calendar avec gestion de tâches et vue Mois/Semaine.</p>
+        </div>
+
+        <div onclick="navigateTab('gaming')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
           <div class="flex items-center justify-between mb-4">
             <div class="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition">
               <i data-lucide="gamepad-2" class="w-5 h-5"></i>
@@ -171,7 +216,7 @@
             <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition"></i>
           </div>
           <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition">Gaming & ELO</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Rocket League, LoL, Valorant et statistiques en temps réel.</p>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Rocket League, LoL, Valorant auto-synchronisés.</p>
         </div>
 
         <div onclick="navigateTab('sport')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
@@ -182,7 +227,7 @@
             <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition"></i>
           </div>
           <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">Sport Pro Data</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Real Madrid, OL, Benaïssa, Spurs/Wemby, Alcaraz, Mariannes.</p>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Real Madrid, OL, Benaïssa, Spurs/Wemby, Alcaraz.</p>
         </div>
 
         <div onclick="navigateTab('watchlist')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
@@ -193,18 +238,7 @@
             <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition"></i>
           </div>
           <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition">Watchlist & Clips</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Montage Premiere Pro clips MCU, animes et documentaires.</p>
-        </div>
-
-        <div onclick="navigateTab('planning')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition">
-              <i data-lucide="calendar" class="w-5 h-5"></i>
-            </div>
-            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition"></i>
-          </div>
-          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">Planning Hebdo</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Organisation L2 Éco-Gestion, montage et séances sport.</p>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Montage Premiere Pro clips MCU et séries.</p>
         </div>
 
         <div onclick="navigateTab('volley')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
@@ -215,7 +249,7 @@
             <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition"></i>
           </div>
           <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition">Volley Nanterre</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Pôle Directeur Sportif, Seniors Dép (F/G), Jeunes.</p>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Pôle Directeur Sportif, Seniors et Jeunes.</p>
         </div>
 
         <div onclick="navigateTab('perso')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
@@ -229,6 +263,137 @@
           <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">L2 Éco-Gestion, Permis auto et Compétences.</p>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- NIVEAU 2 : ESPACE PLANNING / GOOGLE CALENDAR DBZ -->
+  <div id="view-planning" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-20">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-bold uppercase tracking-wider mb-1">
+          Agenda Connecté
+        </div>
+        <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Planning & Emploi du Temps</h2>
+      </div>
+
+      <button onclick="openAddEventModal()" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs flex items-center gap-2 transition shadow-lg shadow-emerald-500/20">
+        <i data-lucide="plus" class="w-4 h-4"></i>
+        <span>Nouvel événement</span>
+      </button>
+    </div>
+
+    <!-- WRAPPER CALENDRIER AVEC FOND KAME HOUSE DBZ -->
+    <div class="calendar-dbz-wrapper">
+      <div class="calendar-dbz-bg" id="cal-dbz-bg" style="background-image: url('dragon ball z arriere plan.jpg'), url('dragon ball z arriere plan.png'), url('dragon ball z arriere plan.jpeg');"></div>
+      <div class="calendar-dbz-overlay"></div>
+
+      <div class="calendar-content p-4 sm:p-8">
+        <!-- Barre de contrôle de l'Agenda -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 pb-6 border-b border-white/10 mb-6">
+          <div class="flex items-center gap-3">
+            <button onclick="calendarToday()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold text-white transition">
+              Aujourd'hui
+            </button>
+            <div class="flex items-center bg-black/40 rounded-xl border border-white/10 p-1">
+              <button onclick="calendarPrev()" class="p-1.5 hover:bg-white/10 rounded-lg text-white transition">
+                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+              </button>
+              <button onclick="calendarNext()" class="p-1.5 hover:bg-white/10 rounded-lg text-white transition">
+                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+              </button>
+            </div>
+            <h3 id="calendar-current-label" class="text-xl sm:text-2xl font-black text-white ml-2 capitalize tracking-wide drop-shadow-md">
+              Août 2026
+            </h3>
+          </div>
+
+          <!-- Filtres de vues & Catégories -->
+          <div class="flex items-center gap-2">
+            <div class="bg-black/40 border border-white/10 p-1 rounded-xl flex">
+              <button onclick="setCalendarView('month')" id="btn-view-month" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-black transition">
+                Mois
+              </button>
+              <button onclick="setCalendarView('week')" id="btn-view-week" class="px-4 py-1.5 rounded-lg text-xs font-bold text-zinc-300 hover:text-white transition">
+                Semaine
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. VUE MOIS -->
+        <div id="calendar-month-view">
+          <!-- En-têtes des jours de la semaine -->
+          <div class="grid grid-cols-7 text-center font-bold text-xs uppercase tracking-wider text-amber-300/90 py-2 border-b border-white/10 mb-2">
+            <div>Lun</div><div>Mar</div><div>Mer</div><div>Jeu</div><div>Ven</div><div>Sam</div><div>Dim</div>
+          </div>
+          <!-- Grille des jours du mois -->
+          <div id="calendar-month-grid" class="grid grid-cols-7 gap-2"></div>
+        </div>
+
+        <!-- 2. VUE SEMAINE -->
+        <div id="calendar-week-view" class="hidden">
+          <div id="calendar-week-header" class="grid grid-cols-7 text-center font-bold text-xs uppercase tracking-wider text-amber-300/90 py-3 border-b border-white/10 mb-2"></div>
+          <div id="calendar-week-grid" class="grid grid-cols-7 gap-2 min-h-[420px]"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALE : AJOUTER UN ÉVÉNEMENT -->
+  <div id="modal-add-event" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="glass-card bg-[#0d1612]/95 border border-emerald-500/40 w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+          <i data-lucide="calendar-plus" class="w-5 h-5 text-emerald-400"></i>
+          Ajouter une tâche / séance
+        </h3>
+        <button onclick="closeAddEventModal()" class="text-zinc-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="form-add-event" onsubmit="saveNewEvent(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Titre de l'activité</label>
+          <input type="text" id="event-title" required placeholder="Ex: Entraînement Volley, Cours Éco, Montage MCU" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Date</label>
+            <input type="date" id="event-date" required class="w-full bg-black/50 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-400">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Début</label>
+            <input type="time" id="event-start-time" value="14:00" required class="w-full bg-black/50 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-400">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Fin</label>
+            <input type="time" id="event-end-time" value="16:00" required class="w-full bg-black/50 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-400">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Catégorie & Couleur</label>
+          <select id="event-category" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+            <option value="volley">🏐 Volley Nanterre (Orange Amber)</option>
+            <option value="eco">📚 L2 Éco-Gestion (Bleu Ciel)</option>
+            <option value="montage">🎬 Montage MCU / Vidéos (Violet)</option>
+            <option value="gaming">🎮 Gaming & ELO (Vert Émeraude)</option>
+            <option value="perso">⭐ Personnel & Pro (Rose Corail)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Description / Lieu (optionnel)</label>
+          <input type="text" id="event-desc" placeholder="Ex: Gymnase Nanterre / Amphi A" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-emerald-400">
+        </div>
+
+        <div class="pt-4 flex justify-end gap-3">
+          <button type="button" onclick="closeAddEventModal()" class="px-5 py-2.5 rounded-xl bg-white/10 text-white text-xs font-bold hover:bg-white/20 transition">Annuler</button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition shadow-lg shadow-emerald-500/20">Enregistrer</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -529,7 +694,7 @@
       </div>
     </div>
 
-    <!-- VALORANT : PAGE DÉDIÉE AVEC BADGES DU DOSSIER 'Rank valo' -->
+    <!-- VALORANT : PAGE DÉDIÉE -->
     <div id="gaming-valo-screen" class="hidden max-w-4xl mx-auto">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
@@ -561,7 +726,6 @@
           </span>
         </div>
 
-        <!-- Section Badge SVG Valorant -->
         <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div class="flex items-center gap-6">
             <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
@@ -596,24 +760,252 @@
     </div>
   </div>
 
-  <!-- SCRIPT ROUTEUR SPA & STATS -->
+  <!-- SCRIPT ROUTEUR SPA, PLANNING & STATS -->
   <script>
     lucide.createIcons();
 
+    // ==========================================
+    // 1. GESTION DU CALENDRIER GOOGLE / DBZ
+    // ==========================================
+    let calendarDate = new Date(2026, 7, 24); // Août 2026
+    let calendarView = 'month'; // 'month' ou 'week'
+
+    const categoryColors = {
+      volley: { bg: 'bg-amber-500/20 border-amber-500/50 text-amber-300', dot: 'bg-amber-400' },
+      eco: { bg: 'bg-blue-500/20 border-blue-500/50 text-blue-300', dot: 'bg-blue-400' },
+      montage: { bg: 'bg-purple-500/20 border-purple-500/50 text-purple-300', dot: 'bg-purple-400' },
+      gaming: { bg: 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300', dot: 'bg-emerald-400' },
+      perso: { bg: 'bg-rose-500/20 border-rose-500/50 text-rose-300', dot: 'bg-rose-400' }
+    };
+
+    // Chargement des événements avec persistance locale
+    let userEvents = JSON.parse(localStorage.getItem('hq_user_events')) || [
+      { id: '1', title: 'Entraînement Volley Nanterre', date: '2026-08-25', start: '19:30', end: '21:30', category: 'volley', desc: 'Gymnase Voltaire' },
+      { id: '2', title: 'Montage Vidéo MCU TikTok', date: '2026-08-26', start: '14:00', end: '17:00', category: 'montage', desc: 'Export Premiere Pro' },
+      { id: '3', title: 'Session Rank Valorant / RL', date: '2026-08-28', start: '21:00', end: '23:30', category: 'gaming', desc: 'Duo Q' },
+      { id: '4', title: 'Rentrée Universitaire L2 Éco', date: '2026-09-15', start: '09:00', end: '12:00', category: 'eco', desc: 'Amphi Principal' }
+    ];
+
+    function renderCalendar() {
+      const year = calendarDate.getFullYear();
+      const month = calendarDate.getMonth();
+      const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+      
+      const label = document.getElementById('calendar-current-label');
+      if (label) label.innerText = `${monthNames[month]} ${year}`;
+
+      if (calendarView === 'month') {
+        renderMonthGrid(year, month);
+      } else {
+        renderWeekGrid();
+      }
+      lucide.createIcons();
+    }
+
+    function renderMonthGrid(year, month) {
+      const grid = document.getElementById('calendar-month-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const firstDayIndex = (new Date(year, month, 1).getDay() + 6) % 7; // Lundi = 0
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const prevMonthDays = new Date(year, month, 0).getDate();
+
+      // Jours du mois précédent (inactifs)
+      for (let i = firstDayIndex - 1; i >= 0; i--) {
+        const d = prevMonthDays - i;
+        grid.innerHTML += `<div class="cal-day-cell p-2 rounded-xl bg-black/20 border border-white/5 opacity-30 text-xs font-semibold text-zinc-500">${d}</div>`;
+      }
+
+      // Jours du mois courant
+      const todayStr = '2026-08-24';
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const isToday = (dateStr === todayStr);
+        const dayEvents = userEvents.filter(ev => ev.date === dateStr);
+
+        let eventsHtml = dayEvents.map(ev => {
+          const c = categoryColors[ev.category] || categoryColors.perso;
+          return `
+            <div class="flex items-center justify-between text-[11px] font-medium px-2 py-1 rounded-lg border ${c.bg} mb-1 truncate group" title="${ev.start} - ${ev.title}">
+              <span class="truncate flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full ${c.dot}"></span>
+                <span class="font-bold opacity-90">${ev.start}</span> ${ev.title}
+              </span>
+              <button onclick="deleteEvent('${ev.id}', event)" class="opacity-0 group-hover:opacity-100 hover:text-red-400 ml-1 transition">
+                &times;
+              </button>
+            </div>
+          `;
+        }).join('');
+
+        grid.innerHTML += `
+          <div onclick="quickAddDate('${dateStr}')" class="cal-day-cell p-2 rounded-xl bg-black/40 border border-white/10 cursor-pointer flex flex-col justify-between ${isToday ? 'is-today' : ''}">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold ${isToday ? 'text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded-md' : 'text-zinc-300'}">${day}</span>
+              ${dayEvents.length > 0 ? `<span class="w-2 h-2 rounded-full bg-amber-400"></span>` : ''}
+            </div>
+            <div class="mt-1 flex-1 overflow-y-auto max-h-[80px]">
+              ${eventsHtml}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function renderWeekGrid() {
+      const header = document.getElementById('calendar-week-header');
+      const grid = document.getElementById('calendar-week-grid');
+      if (!header || !grid) return;
+
+      header.innerHTML = '';
+      grid.innerHTML = '';
+
+      const curr = new Date(calendarDate);
+      const dayIndex = (curr.getDay() + 6) % 7;
+      const monday = new Date(curr);
+      monday.setDate(curr.getDate() - dayIndex);
+
+      const dayNames = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        const isToday = (dStr === '2026-08-24');
+
+        header.innerHTML += `
+          <div class="p-2 rounded-xl ${isToday ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : ''}">
+            <div>${dayNames[i]}</div>
+            <div class="text-lg font-black text-white">${d.getDate()}</div>
+          </div>
+        `;
+
+        const dayEvents = userEvents.filter(ev => ev.date === dStr);
+        let eventsHtml = dayEvents.map(ev => {
+          const c = categoryColors[ev.category] || categoryColors.perso;
+          return `
+            <div class="p-2.5 rounded-xl border ${c.bg} mb-2 text-xs shadow-md group relative">
+              <div class="flex items-center justify-between font-bold mb-1">
+                <span>${ev.start} - ${ev.end}</span>
+                <button onclick="deleteEvent('${ev.id}', event)" class="hover:text-red-400 font-bold">&times;</button>
+              </div>
+              <div class="font-bold text-white">${ev.title}</div>
+              ${ev.desc ? `<div class="text-[10px] opacity-75 mt-1">${ev.desc}</div>` : ''}
+            </div>
+          `;
+        }).join('');
+
+        grid.innerHTML += `
+          <div onclick="quickAddDate('${dStr}')" class="p-3 rounded-2xl bg-black/40 border border-white/10 min-h-[380px] flex flex-col justify-start cursor-pointer hover:bg-white/5 transition">
+            ${eventsHtml || '<span class="text-[11px] text-zinc-600 italic">Aucun événement</span>'}
+          </div>
+        `;
+      }
+    }
+
+    function setCalendarView(view) {
+      calendarView = view;
+      const btnM = document.getElementById('btn-view-month');
+      const btnW = document.getElementById('btn-view-week');
+      const viewM = document.getElementById('calendar-month-view');
+      const viewW = document.getElementById('calendar-week-view');
+
+      if (view === 'month') {
+        btnM.className = 'px-4 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-black transition';
+        btnW.className = 'px-4 py-1.5 rounded-lg text-xs font-bold text-zinc-300 hover:text-white transition';
+        viewM.classList.remove('hidden');
+        viewW.classList.add('hidden');
+      } else {
+        btnW.className = 'px-4 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-black transition';
+        btnM.className = 'px-4 py-1.5 rounded-lg text-xs font-bold text-zinc-300 hover:text-white transition';
+        viewW.classList.remove('hidden');
+        viewM.classList.add('hidden');
+      }
+      renderCalendar();
+    }
+
+    function calendarPrev() {
+      if (calendarView === 'month') {
+        calendarDate.setMonth(calendarDate.getMonth() - 1);
+      } else {
+        calendarDate.setDate(calendarDate.getDate() - 7);
+      }
+      renderCalendar();
+    }
+
+    function calendarNext() {
+      if (calendarView === 'month') {
+        calendarDate.setMonth(calendarDate.getMonth() + 1);
+      } else {
+        calendarDate.setDate(calendarDate.getDate() + 7);
+      }
+      renderCalendar();
+    }
+
+    function calendarToday() {
+      calendarDate = new Date(2026, 7, 24);
+      renderCalendar();
+    }
+
+    function openAddEventModal(defaultDate = null) {
+      document.getElementById('modal-add-event').classList.remove('hidden');
+      if (defaultDate) {
+        document.getElementById('event-date').value = defaultDate;
+      } else {
+        document.getElementById('event-date').value = '2026-08-24';
+      }
+    }
+
+    function closeAddEventModal() {
+      document.getElementById('modal-add-event').classList.add('hidden');
+    }
+
+    function quickAddDate(dateStr) {
+      openAddEventModal(dateStr);
+    }
+
+    function saveNewEvent(e) {
+      e.preventDefault();
+      const newEv = {
+        id: Date.now().toString(),
+        title: document.getElementById('event-title').value,
+        date: document.getElementById('event-date').value,
+        start: document.getElementById('event-start-time').value,
+        end: document.getElementById('event-end-time').value,
+        category: document.getElementById('event-category').value,
+        desc: document.getElementById('event-desc').value
+      };
+
+      userEvents.push(newEv);
+      localStorage.setItem('hq_user_events', JSON.stringify(userEvents));
+      closeAddEventModal();
+      document.getElementById('form-add-event').reset();
+      renderCalendar();
+    }
+
+    function deleteEvent(id, e) {
+      if (e) e.stopPropagation();
+      userEvents = userEvents.filter(ev => ev.id !== id);
+      localStorage.setItem('hq_user_events', JSON.stringify(userEvents));
+      renderCalendar();
+    }
+
+    // ==========================================
+    // 2. ROUTEUR SPA & STATS EXISTANTES
+    // ==========================================
     let rlStatsCache = {
       '1v1': 'Gold III (Division III)',
       '2v2': 'Platinum II (Division I)',
       '3v3': 'Platinum II (Division III)'
     };
 
-    // 1. Thème Sombre / Clair
     const themeToggleBtn = document.getElementById('themeToggle');
     themeToggleBtn.addEventListener('click', () => {
       document.documentElement.classList.toggle('dark');
       lucide.createIcons();
     });
 
-    // 2. Navigation principale (SPA)
     function navigateTab(tabName) {
       document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
 
@@ -629,6 +1021,10 @@
         activeBtn.className = 'nav-tab text-emerald-700 dark:text-emerald-400 font-semibold border-b-2 border-emerald-600 dark:border-emerald-400 pb-0.5';
       }
 
+      if (tabName === 'planning') {
+        renderCalendar();
+      }
+
       if (tabName === 'gaming') {
         closeRLDetails();
         closeOtherGames();
@@ -638,7 +1034,6 @@
       lucide.createIcons();
     }
 
-    // 3. Navigation Gaming Rocket League
     function openRLDetails() {
       document.getElementById('gaming-hub-screen').classList.add('hidden');
       document.getElementById('gaming-rl-screen').classList.remove('hidden');
@@ -695,19 +1090,10 @@
       lucide.createIcons();
     }
 
-    // 4. Navigation Gaming LoL & Valorant
     function openLoLDetails() {
       document.getElementById('gaming-hub-screen').classList.add('hidden');
       document.getElementById('gaming-lol-screen').classList.remove('hidden');
-      
-      setupImageWithFallbacks('lol-banner-img', [
-        'Neeko.jpg', 
-        'neeko.jpg', 
-        'Neeko.jpg.png', 
-        'neeko.jpg.png', 
-        'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Neeko_0.jpg'
-      ]);
-      
+      setupImageWithFallbacks('lol-banner-img', ['Neeko.jpg', 'neeko.jpg', 'Neeko.jpg.png', 'neeko.jpg.png']);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
     }
@@ -715,7 +1101,6 @@
     function openValoDetails() {
       document.getElementById('gaming-hub-screen').classList.add('hidden');
       document.getElementById('gaming-valo-screen').classList.remove('hidden');
-      
       setupImageWithFallbacks('valo-banner-img', ['valo.jpg', 'valo.jpg.png', 'valo.png']);
       
       const currentValoRank = document.getElementById('valo-dedicated-rank').innerText;
@@ -733,7 +1118,6 @@
       lucide.createIcons();
     }
 
-    // 5. Gestionnaire universel d'images anti-blocage
     function setupImageWithFallbacks(elementId, candidates) {
       const el = document.getElementById(elementId);
       if (!el || !candidates || candidates.length === 0) return;
@@ -747,49 +1131,32 @@
           this.onerror = null;
         }
       };
-      
       el.src = '';
       el.src = candidates[0];
     }
 
-    // 6. Badges Rocket League EXCLUSIFS
     function getRLRankBadgeFallbacks(rankStr) {
       if (!rankStr) return ['ou-3.jpg.png', 'or-3.jpg.png', 'platine-2.jpg.png'];
       const r = rankStr.toLowerCase();
-
       if (r.includes('supersonic') || r.includes('ssl')) return ['ssl.webp.webp', 'ssl.webp', 'ssl.png'];
       if (r.includes('grand champion iii') || r.includes('gc3')) return ['gc-3.webp.webp', 'gc-3.webp', 'gc-3.png'];
       if (r.includes('grand champion ii') || r.includes('gc2')) return ['gc-2.webp.webp', 'gc-2.webp', 'gc-2.png'];
       if (r.includes('grand champion') || r.includes('gc1')) return ['gc-1.webp.webp', 'gc-1.webp', 'gc-1.png'];
-
       if (r.includes('champion iii') || r.includes('c3')) return ['champion-3.jpg.png', 'champion-3.jpg'];
       if (r.includes('champion ii') || r.includes('c2')) return ['champion-2.jpg.png', 'champion-2.jpg'];
       if (r.includes('champion i') || r.includes('c1')) return ['champion-1.jpg.png', 'champion-1.jpg'];
-
       if (r.includes('diamond iii') || r.includes('diamant iii')) return ['diamant-3.jpg.png', 'diamant-3.jpg'];
       if (r.includes('diamond ii') || r.includes('diamant ii')) return ['diamant-2.jpg.png', 'diamant-2.jpg'];
       if (r.includes('diamond i') || r.includes('diamant i')) return ['diamant-1.jpg.png', 'diamant-1.jpg'];
-
       if (r.includes('platinum iii') || r.includes('platine iii')) return ['platine-3.jpg.png', 'platine-3.jpg'];
       if (r.includes('platinum ii') || r.includes('platine ii')) return ['platine-2.jpg.png', 'platine-2.jpg'];
       if (r.includes('platinum i') || r.includes('platine i')) return ['platine-1.jpg.png', 'platine-1.jpg'];
-
-      if (r.includes('gold iii') || r.includes('or iii') || r.includes('gold 3')) return ['ou-3.jpg.png', 'or-3.jpg.png', 'gold-3.jpg.png', 'ou-3.jpg'];
-      if (r.includes('gold ii') || r.includes('or ii') || r.includes('gold 2')) return ['ou-2.jpg.png', 'or-2.jpg.png', 'gold-2.jpg.png', 'ou-2.jpg'];
-      if (r.includes('gold i') || r.includes('or i') || r.includes('gold 1')) return ['ou-1.jpg.png', 'or-1.jpg.png', 'gold-1.jpg.png', 'ou-1.jpg'];
-
-      if (r.includes('silver iii') || r.includes('argent iii')) return ['argent-3.jpg.png', 'argent-3.jpg'];
-      if (r.includes('silver ii') || r.includes('argent ii')) return ['argent-2.jpg.png', 'argent-2.jpg'];
-      if (r.includes('silver i') || r.includes('argent i')) return ['argent-1.jpg.png', 'argent-1.jpg'];
-
-      if (r.includes('bronze iii')) return ['bronze-3.jpg.png', 'bronze-3.jpg'];
-      if (r.includes('bronze ii')) return ['bronze-2.jpg.png', 'bronze-2.jpg'];
-      if (r.includes('bronze i')) return ['bronze-1.jpg.png', 'bronze-1.jpg'];
-
+      if (r.includes('gold iii') || r.includes('or iii') || r.includes('gold 3')) return ['ou-3.jpg.png', 'or-3.jpg.png', 'gold-3.jpg.png'];
+      if (r.includes('gold ii') || r.includes('or ii') || r.includes('gold 2')) return ['ou-2.jpg.png', 'or-2.jpg.png', 'gold-2.jpg.png'];
+      if (r.includes('gold i') || r.includes('or i') || r.includes('gold 1')) return ['ou-1.jpg.png', 'or-1.jpg.png', 'gold-1.jpg.png'];
       return ['platine-2.jpg.png', 'platine-2.jpg'];
     }
 
-    // 7. Badges Valorant EXCLUSIFS (Ciblage spécifique du dossier 'Rank valo')
     function getValoRankBadgeFallbacks(rankStr) {
       const r = (rankStr || '').toLowerCase();
       const api = 'https://media.valorant-api.com/competitivetiers/03621f52-342b-77e7-4f49-ed82dc47a6d4';
@@ -806,45 +1173,28 @@
         ];
       }
 
-      // Radiant
       if (r.includes('radiant')) return makeList('valo-radiant.svg', 27);
-
-      // Immortel
       if (r.includes('immortal 3') || r.includes('immortel 3')) return makeList('valo-immortel-3.svg', 26);
       if (r.includes('immortal 2') || r.includes('immortel 2')) return makeList('valo-immortel-2.svg', 25);
       if (r.includes('immortal') || r.includes('immortel')) return makeList('valo-immortel-1.svg', 24);
-
-      // Ascendant
       if (r.includes('ascendant 3')) return makeList('valo-ascendant-3.svg', 23);
       if (r.includes('ascendant 2')) return makeList('valo-ascendant-2.svg', 22);
       if (r.includes('ascendant')) return makeList('valo-ascendant-1.svg', 21);
-
-      // Diamond
       if (r.includes('diamond 3') || r.includes('diamant 3')) return makeList('valo-diamond-3.svg', 20);
       if (r.includes('diamond 2') || r.includes('diamant 2')) return makeList('valo-diamond-2.svg', 19);
       if (r.includes('diamond') || r.includes('diamant')) return makeList('valo-diamond-1.svg', 18);
-
-      // Platinum
       if (r.includes('platinum 3') || r.includes('platine 3')) return makeList('valo-platinum-3.svg', 17);
       if (r.includes('platinum 2') || r.includes('platine 2')) return makeList('valo-platinum-2.svg', 16);
       if (r.includes('platinum') || r.includes('platine')) return makeList('valo-platinum-1.svg', 15);
-
-      // Gold
       if (r.includes('gold 3') || r.includes('or 3')) return makeList('valo-gold-3.svg', 14);
       if (r.includes('gold 2') || r.includes('or 2')) return makeList('valo-gold-2.svg', 13);
       if (r.includes('gold') || r.includes('or')) return makeList('valo-gold-1.svg', 12);
-
-      // Silver
       if (r.includes('silver 3') || r.includes('argent 3')) return makeList('valo-silver-3.svg', 11);
       if (r.includes('silver 2') || r.includes('argent 2')) return makeList('valo-silver-2.svg', 10);
       if (r.includes('silver') || r.includes('argent')) return makeList('valo-silver-1.svg', 9);
-
-      // Bronze
       if (r.includes('bronze 3')) return makeList('valo-bronze-3.svg', 8);
       if (r.includes('bronze 2')) return makeList('valo-bronze-2.svg', 7);
       if (r.includes('bronze')) return makeList('valo-bronze-1.svg', 6);
-
-      // Iron
       if (r.includes('iron 3') || r.includes('fer 3')) return makeList('valo-iron-3.svg', 5);
       if (r.includes('iron 2') || r.includes('fer 2')) return makeList('valo-iron-2.svg', 4);
       if (r.includes('iron') || r.includes('fer')) return makeList('valo-iron-1.svg', 3);
@@ -852,8 +1202,10 @@
       return makeList('valo-bronze-3.svg', 8);
     }
 
-    // 8. Chargement automatique des statistiques
+    // Chargement stats.json
     window.addEventListener('DOMContentLoaded', () => {
+      renderCalendar();
+
       fetch('./stats.json?t=' + Date.now())
         .then(response => {
           if (!response.ok) throw new Error("stats.json introuvable");
