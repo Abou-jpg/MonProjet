@@ -22,51 +22,63 @@ async function fetchStats() {
     try {
       currentStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
     } catch (e) {
-      console.warn("Utilisation du stats.json existant.");
+      console.warn("Utilisation de la mémoire par défaut.");
     }
   }
 
   // ==========================================
-  // 1. ROCKET LEAGUE (API GRATUITE & DIRECTE)
+  // 1. ROCKET LEAGUE (API STREAMER AVEC HEADERS)
   // ==========================================
   console.log("--> Récupération des rangs Rocket League...");
   try {
-    const rlRes = await fetch('https://api.yannismate.de/rank/epic/abdel92jr');
+    const rlUrl = 'https://api.yannismate.de/rank/epic/abdel92jr';
+    const rlRes = await fetch(rlUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'Accept': 'text/plain, */*'
+      }
+    });
+
     if (rlRes.ok) {
       const text = await rlRes.text();
-      console.log("Réponse RL reçue :", text);
+      console.log("Réponse RL brute :", text);
 
       // Exemple reçu : "Ranked Duel 1v1: Gold III Div III | Ranked Doubles 2v2: Platinum II Div I | Ranked Standard 3v3: Platinum II Div III"
       const segments = text.split('|');
       segments.forEach(seg => {
         const clean = seg.trim();
-        if (clean.includes('1v1') || clean.includes('Duel')) {
+        if (clean.toLowerCase().includes('1v1') || clean.toLowerCase().includes('duel')) {
           const parts = clean.split(':');
           if (parts[1]) currentStats.rocketLeague.duel1v1 = parts[1].trim();
         }
-        if (clean.includes('2v2') || clean.includes('Doubles')) {
+        if (clean.toLowerCase().includes('2v2') || clean.toLowerCase().includes('doubles')) {
           const parts = clean.split(':');
           if (parts[1]) currentStats.rocketLeague.doubles2v2 = parts[1].trim();
         }
-        if (clean.includes('3v3') || clean.includes('Standard')) {
+        if (clean.toLowerCase().includes('3v3') || clean.toLowerCase().includes('standard')) {
           const parts = clean.split(':');
           if (parts[1]) currentStats.rocketLeague.standard3v3 = parts[1].trim();
         }
       });
-      console.log("Nouveaux rangs RL enregistrés :", currentStats.rocketLeague);
+      console.log("Rangs RL mis à jour :", currentStats.rocketLeague);
     } else {
-      console.warn("API RL temporairement indisponible.");
+      console.warn(`API RL a répondu avec le statut ${rlRes.status}`);
     }
   } catch (errRL) {
-    console.error("Erreur récupération RL :", errRL.message);
+    console.error("Erreur RL :", errRL.message);
   }
 
   // ==========================================
-  // 2. VALORANT (API REST OFFICIELLE)
+  // 2. VALORANT (API OFFICIELLE)
   // ==========================================
   console.log("--> Récupération des stats Valorant...");
   try {
-    const valoRes = await fetch('https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu');
+    const valoRes = await fetch('https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+      }
+    });
+
     if (valoRes.ok) {
       const valoText = await valoRes.text();
       console.log("Réponse Valorant :", valoText);
@@ -81,7 +93,9 @@ async function fetchStats() {
     console.error("Erreur Valorant :", errValo.message);
   }
 
-  // Sauvegarde dans stats.json
+  // ==========================================
+  // 3. ENREGISTREMENT DANS STATS.JSON
+  // ==========================================
   fs.writeFileSync(statsPath, JSON.stringify(currentStats, null, 2), 'utf8');
   console.log("--> stats.json mis à jour avec succès !");
 }
