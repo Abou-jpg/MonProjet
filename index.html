@@ -12,7 +12,7 @@
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-serif-title { font-family: 'Playfair Display', serif; }
 
-    /* Mode Sombre Global */
+    /* Thème Global */
     html.dark body {
       background-color: #070d0a;
       background-image: 
@@ -22,7 +22,6 @@
       background-attachment: fixed;
     }
 
-    /* Mode Clair Global */
     html:not(.dark) body {
       background-color: #fcfbf4;
       background-image: 
@@ -32,7 +31,7 @@
       background-attachment: fixed;
     }
 
-    /* Cartes Glassmorphism Standards */
+    /* Glassmorphism */
     html.dark .glass-card {
       background: rgba(14, 26, 20, 0.55);
       backdrop-filter: blur(14px);
@@ -88,51 +87,77 @@
       border-color: rgba(52, 211, 153, 0.7);
     }
 
-    /* PLANNING / CALENDAR DBZ THEME */
-    .calendar-dbz-wrapper {
+    /* CALENDRIER STYLE GOOGLE CALENDAR AVEC FOND DBZ */
+    .gcal-container {
       position: relative;
-      border-radius: 2rem;
+      border-radius: 1.5rem;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: #0b1218;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
     }
-    .calendar-dbz-bg {
+    .gcal-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
-      background-position: center bottom;
+      background-position: center 30%;
+      opacity: 0.35;
       z-index: 0;
+      pointer-events: none;
     }
-    .calendar-dbz-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(8, 14, 18, 0.82) 0%, rgba(10, 16, 22, 0.88) 100%);
-      backdrop-filter: blur(8px);
-      z-index: 1;
-    }
-    .calendar-content {
+    .gcal-content {
       position: relative;
-      z-index: 2;
+      z-index: 1;
+      backdrop-filter: blur(4px);
     }
 
-    /* Grille calendrier mois */
-    .cal-day-cell {
-      min-height: 105px;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
+    .time-slot-cell {
+      height: 52px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      transition: background-color 0.15s ease;
     }
-    .cal-day-cell:hover {
-      background: rgba(255, 255, 255, 0.06);
-    }
-    .cal-day-cell.is-today {
-      background: rgba(16, 185, 129, 0.12);
-      border-color: rgba(16, 185, 129, 0.4);
+    .time-slot-cell:hover {
+      background-color: rgba(255, 255, 255, 0.08);
     }
 
-    /* Scrollbar personnalisée */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+    .gcal-event-chip {
+      position: absolute;
+      left: 2px;
+      right: 2px;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 11px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 10;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .gcal-event-chip:hover {
+      transform: scale(1.02);
+      z-index: 20;
+    }
+
+    .current-time-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #ef4444;
+      z-index: 15;
+      pointer-events: none;
+    }
+    .current-time-dot {
+      position: absolute;
+      left: -6px;
+      top: -4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ef4444;
+    }
   </style>
 </head>
 <body class="text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors duration-300">
@@ -142,10 +167,10 @@
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
       <nav class="flex items-center gap-6 text-sm font-medium overflow-x-auto" id="main-nav">
         <button onclick="navigateTab('accueil')" id="nav-btn-accueil" class="nav-tab text-emerald-700 dark:text-emerald-400 font-semibold border-b-2 border-emerald-600 dark:border-emerald-400 pb-0.5">Accueil</button>
+        <button onclick="navigateTab('planning')" id="nav-btn-planning" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Planning</button>
         <button onclick="navigateTab('gaming')" id="nav-btn-gaming" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Gaming</button>
         <button onclick="navigateTab('sport')" id="nav-btn-sport" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Sport Data</button>
         <button onclick="navigateTab('watchlist')" id="nav-btn-watchlist" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Watchlist</button>
-        <button onclick="navigateTab('planning')" id="nav-btn-planning" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Planning</button>
         <button onclick="navigateTab('volley')" id="nav-btn-volley" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Volley Nanterre</button>
         <button onclick="navigateTab('perso')" id="nav-btn-perso" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Personnel</button>
       </nav>
@@ -174,7 +199,7 @@
         Tous mes projets, <br><span class="italic text-emerald-700 dark:text-emerald-400">au même endroit.</span>
       </h1>
       <p class="text-zinc-600 dark:text-zinc-400 text-base md:text-lg leading-relaxed mb-8">
-        Le tableau de bord centralisé pour le planning, le gaming, le sport, les vidéos et les études.
+        Le tableau de bord centralisé pour le planning hebdomadaire, le gaming, le sport, les vidéos et les études.
       </p>
 
       <div class="flex flex-wrap items-center gap-4 mb-16">
@@ -197,15 +222,15 @@
       <h2 class="text-2xl font-serif-title text-zinc-950 dark:text-white mb-6">Les 6 Pôles d'Activité</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div onclick="navigateTab('planning')" class="glass-card p-6 rounded-2xl group block cursor-pointer border border-amber-500/40">
+        <div onclick="navigateTab('planning')" class="glass-card p-6 rounded-2xl group block cursor-pointer border border-blue-500/40">
           <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 dark:bg-blue-500/20 border border-blue-500/20 flex items-center justify-center text-blue-500 group-hover:scale-110 transition">
               <i data-lucide="calendar" class="w-5 h-5"></i>
             </div>
-            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition"></i>
+            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-blue-500 transition"></i>
           </div>
-          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">Planning & Agenda DBZ</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Google Calendar avec gestion de tâches et vue Mois/Semaine.</p>
+          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-blue-400 transition">Planning Hebdo DBZ</h3>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Google Calendar avec vue horaire et arrière-plan Kame House.</p>
         </div>
 
         <div onclick="navigateTab('gaming')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
@@ -266,86 +291,66 @@
     </div>
   </div>
 
-  <!-- NIVEAU 2 : ESPACE PLANNING / GOOGLE CALENDAR DBZ -->
-  <div id="view-planning" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-20">
-    <div class="flex items-center justify-between mb-6">
-      <div>
-        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-bold uppercase tracking-wider mb-1">
-          Agenda Connecté
+  <!-- NIVEAU 2 : ESPACE PLANNING GOOGLE CALENDAR STYLE -->
+  <div id="view-planning" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-20">
+    
+    <!-- En-tête Google Calendar -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div class="flex items-center gap-4">
+        <button onclick="gcalToday()" class="px-5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold text-white transition">
+          Aujourd'hui
+        </button>
+        <div class="flex items-center bg-black/40 border border-white/10 rounded-xl p-1">
+          <button onclick="gcalPrevWeek()" class="p-1.5 hover:bg-white/10 rounded-lg text-white transition">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <button onclick="gcalNextWeek()" class="p-1.5 hover:bg-white/10 rounded-lg text-white transition">
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
         </div>
-        <h2 class="text-3xl font-serif-title text-zinc-950 dark:text-white">Planning & Emploi du Temps</h2>
+        <h2 id="gcal-month-title" class="text-2xl font-black text-white capitalize tracking-wide">
+          Août 2026
+        </h2>
       </div>
 
-      <button onclick="openAddEventModal()" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs flex items-center gap-2 transition shadow-lg shadow-emerald-500/20">
+      <button onclick="openAddEventModal()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-2 transition shadow-lg shadow-blue-600/30 w-fit">
         <i data-lucide="plus" class="w-4 h-4"></i>
-        <span>Nouvel événement</span>
+        <span>Créer un événement</span>
       </button>
     </div>
 
-    <!-- WRAPPER CALENDRIER AVEC FOND KAME HOUSE DBZ -->
-    <div class="calendar-dbz-wrapper">
-      <div class="calendar-dbz-bg" id="cal-dbz-bg" style="background-image: url('dragon ball z arriere plan.jpg'), url('dragon ball z arriere plan.png'), url('dragon ball z arriere plan.jpeg');"></div>
-      <div class="calendar-dbz-overlay"></div>
-
-      <div class="calendar-content p-4 sm:p-8">
-        <!-- Barre de contrôle de l'Agenda -->
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 pb-6 border-b border-white/10 mb-6">
-          <div class="flex items-center gap-3">
-            <button onclick="calendarToday()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold text-white transition">
-              Aujourd'hui
-            </button>
-            <div class="flex items-center bg-black/40 rounded-xl border border-white/10 p-1">
-              <button onclick="calendarPrev()" class="p-1.5 hover:bg-white/10 rounded-lg text-white transition">
-                <i data-lucide="chevron-left" class="w-5 h-5"></i>
-              </button>
-              <button onclick="calendarNext()" class="p-1.5 hover:bg-white/10 rounded-lg text-white transition">
-                <i data-lucide="chevron-right" class="w-5 h-5"></i>
-              </button>
-            </div>
-            <h3 id="calendar-current-label" class="text-xl sm:text-2xl font-black text-white ml-2 capitalize tracking-wide drop-shadow-md">
-              Août 2026
-            </h3>
+    <!-- Interface Calendrier Google avec Fond Kame House DBZ -->
+    <div class="gcal-container">
+      <div class="gcal-bg" id="gcal-bg-el" style="background-image: url('dragon ball z arriere plan.jpg'), url('dragon%20ball%20z%20arriere%20plan.jpg'), url('dragon_ball_z_arriere_plan.jpg');"></div>
+      
+      <div class="gcal-content">
+        <!-- 1. En-tête des 7 jours (Dimanche à Samedi comme Google Calendar) -->
+        <div class="grid grid-cols-[60px_repeat(7,1fr)] sm:grid-cols-[70px_repeat(7,1fr)] border-b border-white/15 bg-black/40 sticky top-0 z-20 backdrop-blur-md">
+          <div class="p-3 text-[11px] font-bold text-zinc-400 flex items-center justify-center border-r border-white/10">
+            GMT+02
           </div>
-
-          <!-- Filtres de vues & Catégories -->
-          <div class="flex items-center gap-2">
-            <div class="bg-black/40 border border-white/10 p-1 rounded-xl flex">
-              <button onclick="setCalendarView('month')" id="btn-view-month" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-black transition">
-                Mois
-              </button>
-              <button onclick="setCalendarView('week')" id="btn-view-week" class="px-4 py-1.5 rounded-lg text-xs font-bold text-zinc-300 hover:text-white transition">
-                Semaine
-              </button>
-            </div>
+          <div id="gcal-day-headers" class="contents">
+            <!-- Rempli par JavaScript -->
           </div>
         </div>
 
-        <!-- 1. VUE MOIS -->
-        <div id="calendar-month-view">
-          <!-- En-têtes des jours de la semaine -->
-          <div class="grid grid-cols-7 text-center font-bold text-xs uppercase tracking-wider text-amber-300/90 py-2 border-b border-white/10 mb-2">
-            <div>Lun</div><div>Mar</div><div>Mer</div><div>Jeu</div><div>Ven</div><div>Sam</div><div>Dim</div>
+        <!-- 2. Grille horaire 8 AM -> 11 PM -->
+        <div class="relative overflow-y-auto max-h-[680px]">
+          <div id="gcal-time-grid" class="grid grid-cols-[60px_repeat(7,1fr)] sm:grid-cols-[70px_repeat(7,1fr)]">
+            <!-- Rempli par JavaScript -->
           </div>
-          <!-- Grille des jours du mois -->
-          <div id="calendar-month-grid" class="grid grid-cols-7 gap-2"></div>
-        </div>
-
-        <!-- 2. VUE SEMAINE -->
-        <div id="calendar-week-view" class="hidden">
-          <div id="calendar-week-header" class="grid grid-cols-7 text-center font-bold text-xs uppercase tracking-wider text-amber-300/90 py-3 border-b border-white/10 mb-2"></div>
-          <div id="calendar-week-grid" class="grid grid-cols-7 gap-2 min-h-[420px]"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODALE : AJOUTER UN ÉVÉNEMENT -->
+  <!-- MODALE : CRÉATION D'ÉVÉNEMENT -->
   <div id="modal-add-event" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="glass-card bg-[#0d1612]/95 border border-emerald-500/40 w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl">
+    <div class="glass-card bg-[#0e171b]/95 border border-blue-500/40 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl">
       <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-          <i data-lucide="calendar-plus" class="w-5 h-5 text-emerald-400"></i>
-          Ajouter une tâche / séance
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <i data-lucide="calendar-plus" class="w-5 h-5 text-blue-400"></i>
+          Ajouter une activité
         </h3>
         <button onclick="closeAddEventModal()" class="text-zinc-400 hover:text-white">
           <i data-lucide="x" class="w-5 h-5"></i>
@@ -354,44 +359,44 @@
 
       <form id="form-add-event" onsubmit="saveNewEvent(event)" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Titre de l'activité</label>
-          <input type="text" id="event-title" required placeholder="Ex: Entraînement Volley, Cours Éco, Montage MCU" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Titre</label>
+          <input type="text" id="event-title" required placeholder="Ex: Entraînement Volley, Montage MCU, Révisions Éco" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-400">
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
             <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Date</label>
-            <input type="date" id="event-date" required class="w-full bg-black/50 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-400">
+            <input type="date" id="event-date" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
           </div>
           <div>
             <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Début</label>
-            <input type="time" id="event-start-time" value="14:00" required class="w-full bg-black/50 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-400">
+            <input type="time" id="event-start-time" value="14:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
           </div>
           <div>
             <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Fin</label>
-            <input type="time" id="event-end-time" value="16:00" required class="w-full bg-black/50 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-400">
+            <input type="time" id="event-end-time" value="16:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Catégorie & Couleur</label>
-          <select id="event-category" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
-            <option value="volley">🏐 Volley Nanterre (Orange Amber)</option>
-            <option value="eco">📚 L2 Éco-Gestion (Bleu Ciel)</option>
-            <option value="montage">🎬 Montage MCU / Vidéos (Violet)</option>
-            <option value="gaming">🎮 Gaming & ELO (Vert Émeraude)</option>
-            <option value="perso">⭐ Personnel & Pro (Rose Corail)</option>
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Couleur & Catégorie</label>
+          <select id="event-category" class="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-blue-400">
+            <option value="blue">🔵 Bleu Google (Général / Cours)</option>
+            <option value="orange">🟠 Orange (Volley-ball Nanterre)</option>
+            <option value="purple">🟣 Violet (Montage MCU TikTok)</option>
+            <option value="emerald">🟢 Vert (Gaming & Ranked)</option>
+            <option value="rose">🔴 Rouge / Rose (Personnel)</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Description / Lieu (optionnel)</label>
-          <input type="text" id="event-desc" placeholder="Ex: Gymnase Nanterre / Amphi A" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-emerald-400">
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Lieu / Note (optionnel)</label>
+          <input type="text" id="event-desc" placeholder="Ex: Gymnase Voltaire / PC Bureau" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
         </div>
 
         <div class="pt-4 flex justify-end gap-3">
-          <button type="button" onclick="closeAddEventModal()" class="px-5 py-2.5 rounded-xl bg-white/10 text-white text-xs font-bold hover:bg-white/20 transition">Annuler</button>
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition shadow-lg shadow-emerald-500/20">Enregistrer</button>
+          <button type="button" onclick="closeAddEventModal()" class="px-4 py-2 rounded-xl bg-white/10 text-white text-xs font-bold hover:bg-white/20 transition">Annuler</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition">Enregistrer</button>
         </div>
       </form>
     </div>
@@ -760,209 +765,205 @@
     </div>
   </div>
 
-  <!-- SCRIPT ROUTEUR SPA, PLANNING & STATS -->
+  <!-- SCRIPT DU GOOGLE CALENDAR DBZ & GESTION DES JEUX -->
   <script>
     lucide.createIcons();
 
-    // ==========================================
-    // 1. GESTION DU CALENDRIER GOOGLE / DBZ
-    // ==========================================
-    let calendarDate = new Date(2026, 7, 24); // Août 2026
-    let calendarView = 'month'; // 'month' ou 'week'
+    // =======================================================
+    // 1. GOOGLE CALENDAR ENGINE (Semaine Dim -> Sam, 8 AM -> 11 PM)
+    // =======================================================
+    let currentCalDate = new Date(2026, 7, 24); // Lundi 24 Août 2026
 
-    const categoryColors = {
-      volley: { bg: 'bg-amber-500/20 border-amber-500/50 text-amber-300', dot: 'bg-amber-400' },
-      eco: { bg: 'bg-blue-500/20 border-blue-500/50 text-blue-300', dot: 'bg-blue-400' },
-      montage: { bg: 'bg-purple-500/20 border-purple-500/50 text-purple-300', dot: 'bg-purple-400' },
-      gaming: { bg: 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300', dot: 'bg-emerald-400' },
-      perso: { bg: 'bg-rose-500/20 border-rose-500/50 text-rose-300', dot: 'bg-rose-400' }
+    const gcalColors = {
+      blue: { bg: 'bg-blue-600/90 border-blue-400 text-white', dot: 'bg-blue-300' },
+      orange: { bg: 'bg-amber-600/90 border-amber-400 text-white', dot: 'bg-amber-300' },
+      purple: { bg: 'bg-purple-600/90 border-purple-400 text-white', dot: 'bg-purple-300' },
+      emerald: { bg: 'bg-emerald-600/90 border-emerald-400 text-white', dot: 'bg-emerald-300' },
+      rose: { bg: 'bg-rose-600/90 border-rose-400 text-white', dot: 'bg-rose-300' }
     };
 
-    // Chargement des événements avec persistance locale
-    let userEvents = JSON.parse(localStorage.getItem('hq_user_events')) || [
-      { id: '1', title: 'Entraînement Volley Nanterre', date: '2026-08-25', start: '19:30', end: '21:30', category: 'volley', desc: 'Gymnase Voltaire' },
-      { id: '2', title: 'Montage Vidéo MCU TikTok', date: '2026-08-26', start: '14:00', end: '17:00', category: 'montage', desc: 'Export Premiere Pro' },
-      { id: '3', title: 'Session Rank Valorant / RL', date: '2026-08-28', start: '21:00', end: '23:30', category: 'gaming', desc: 'Duo Q' },
-      { id: '4', title: 'Rentrée Universitaire L2 Éco', date: '2026-09-15', start: '09:00', end: '12:00', category: 'eco', desc: 'Amphi Principal' }
+    let userEvents = JSON.parse(localStorage.getItem('hq_gcal_events')) || [
+      { id: '1', title: 'Entraînement Volley Nanterre', date: '2026-08-25', start: '19:00', end: '21:00', category: 'orange', desc: 'Gymnase Voltaire' },
+      { id: '2', title: 'Montage Vidéo MCU TikTok', date: '2026-08-26', start: '14:00', end: '17:00', category: 'purple', desc: 'Premiere Pro' },
+      { id: '3', title: 'Session Ranked Valorant / RL', date: '2026-08-24', start: '21:00', end: '23:00', category: 'emerald', desc: 'Duo Q' },
+      { id: '4', title: 'Rentrée Universitaire L2 Éco', date: '2026-09-15', start: '09:00', end: '12:00', category: 'blue', desc: 'Amphi Principal' }
     ];
 
-    function renderCalendar() {
-      const year = calendarDate.getFullYear();
-      const month = calendarDate.getMonth();
+    function renderGCal() {
       const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
       
-      const label = document.getElementById('calendar-current-label');
-      if (label) label.innerText = `${monthNames[month]} ${year}`;
+      // Calcul du début de semaine (Dimanche comme Google Calendar)
+      const curr = new Date(currentCalDate);
+      const dayOfWeek = curr.getDay(); // 0 = Dimanche
+      const sunday = new Date(curr);
+      sunday.setDate(curr.getDate() - dayOfWeek);
 
-      if (calendarView === 'month') {
-        renderMonthGrid(year, month);
-      } else {
-        renderWeekGrid();
+      const saturday = new Date(sunday);
+      saturday.setDate(sunday.getDate() + 6);
+
+      // Titre du mois
+      const titleEl = document.getElementById('gcal-month-title');
+      if (titleEl) {
+        if (sunday.getMonth() === saturday.getMonth()) {
+          titleEl.innerText = `${monthNames[sunday.getMonth()]} ${sunday.getFullYear()}`;
+        } else {
+          titleEl.innerText = `${monthNames[sunday.getMonth()]} - ${monthNames[saturday.getMonth()]} ${saturday.getFullYear()}`;
+        }
       }
+
+      // En-têtes des jours (DIM. 23, LUN. 24...)
+      const dayHeadersContainer = document.getElementById('gcal-day-headers');
+      dayHeadersContainer.innerHTML = '';
+
+      const dayLabels = ['DIM.', 'LUN.', 'MAR.', 'MER.', 'JEU.', 'VEN.', 'SAM.'];
+      const weekDates = [];
+
+      const todayStr = '2026-08-24'; // Date pivot
+
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(sunday);
+        d.setDate(sunday.getDate() + i);
+        const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        weekDates.push(dStr);
+
+        const isToday = (dStr === todayStr);
+
+        dayHeadersContainer.innerHTML += `
+          <div class="py-3 flex flex-col items-center justify-center border-r border-white/10 last:border-r-0">
+            <span class="text-[11px] font-bold ${isToday ? 'text-blue-400' : 'text-zinc-400'} tracking-wider">${dayLabels[i]}</span>
+            <div class="w-9 h-9 mt-1 flex items-center justify-center rounded-full text-base font-black ${isToday ? 'bg-blue-600 text-white shadow-md shadow-blue-500/40' : 'text-white'}">
+              ${d.getDate()}
+            </div>
+          </div>
+        `;
+      }
+
+      // Grille des heures 8 AM à 11 PM
+      const timeGridContainer = document.getElementById('gcal-time-grid');
+      timeGridContainer.innerHTML = '';
+
+      const hours = [
+        { label: '8 AM', h: 8 }, { label: '9 AM', h: 9 }, { label: '10 AM', h: 10 },
+        { label: '11 AM', h: 11 }, { label: '12 PM', h: 12 }, { label: '1 PM', h: 13 },
+        { label: '2 PM', h: 14 }, { label: '3 PM', h: 15 }, { label: '4 PM', h: 16 },
+        { label: '5 PM', h: 17 }, { label: '6 PM', h: 18 }, { label: '7 PM', h: 19 },
+        { label: '8 PM', h: 20 }, { label: '9 PM', h: 21 }, { label: '10 PM', h: 22 },
+        { label: '11 PM', h: 23 }
+      ];
+
+      hours.forEach(hr => {
+        // Label heure à gauche
+        timeGridContainer.innerHTML += `
+          <div class="h-[52px] border-b border-r border-white/10 flex items-start justify-center pt-1 text-[10px] font-bold text-zinc-400">
+            ${hr.label}
+          </div>
+        `;
+
+        // 7 cases correspondant aux 7 jours
+        for (let col = 0; col < 7; col++) {
+          const dateStr = weekDates[col];
+          timeGridContainer.innerHTML += `
+            <div onclick="quickCreateSlot('${dateStr}', ${hr.h})" class="time-slot-cell relative" data-date="${dateStr}" data-hour="${hr.h}"></div>
+          `;
+        }
+      });
+
+      // Placement des événements sur la grille
+      renderEventsOnGrid(weekDates);
+      renderLiveCurrentTime(weekDates);
       lucide.createIcons();
     }
 
-    function renderMonthGrid(year, month) {
-      const grid = document.getElementById('calendar-month-grid');
-      if (!grid) return;
-      grid.innerHTML = '';
+    function renderEventsOnGrid(weekDates) {
+      weekDates.forEach((dStr, dayColIndex) => {
+        const eventsForDay = userEvents.filter(ev => ev.date === dStr);
 
-      const firstDayIndex = (new Date(year, month, 1).getDay() + 6) % 7; // Lundi = 0
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const prevMonthDays = new Date(year, month, 0).getDate();
+        eventsForDay.forEach(ev => {
+          const [startH, startM] = ev.start.split(':').map(Number);
+          const [endH, endM] = ev.end.split(':').map(Number);
 
-      // Jours du mois précédent (inactifs)
-      for (let i = firstDayIndex - 1; i >= 0; i--) {
-        const d = prevMonthDays - i;
-        grid.innerHTML += `<div class="cal-day-cell p-2 rounded-xl bg-black/20 border border-white/5 opacity-30 text-xs font-semibold text-zinc-500">${d}</div>`;
-      }
+          // Si l'événement est dans la plage horaire 8h-24h
+          if (startH >= 8) {
+            const topMinutes = (startH - 8) * 60 + startM;
+            const durationMinutes = Math.max(((endH - 8) * 60 + endM) - topMinutes, 30);
 
-      // Jours du mois courant
+            const topPx = (topMinutes / 60) * 52;
+            const heightPx = (durationMinutes / 60) * 52;
+
+            // Trouve la cellule de la colonne correspondante à 8h
+            const startCell = document.querySelector(`.time-slot-cell[data-date="${dStr}"][data-hour="8"]`);
+            if (startCell) {
+              const c = gcalColors[ev.category] || gcalColors.blue;
+              const chip = document.createElement('div');
+              chip.className = `gcal-event-chip border ${c.bg}`;
+              chip.style.top = `${topPx}px`;
+              chip.style.height = `${heightPx - 4}px`;
+              chip.innerHTML = `
+                <div class="flex items-center justify-between font-bold leading-tight">
+                  <span class="truncate">${ev.title}</span>
+                  <button onclick="deleteGCalEvent('${ev.id}', event)" class="hover:text-red-300 ml-1 font-black">&times;</button>
+                </div>
+                <div class="text-[10px] opacity-90 truncate">${ev.start} - ${ev.end} ${ev.desc ? '• ' + ev.desc : ''}</div>
+              `;
+              startCell.appendChild(chip);
+            }
+          }
+        });
+      });
+    }
+
+    // Ligne rouge temps réel Google Calendar
+    function renderLiveCurrentTime(weekDates) {
       const todayStr = '2026-08-24';
-      for (let day = 1; day <= daysInMonth; day++) {
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const isToday = (dateStr === todayStr);
-        const dayEvents = userEvents.filter(ev => ev.date === dateStr);
+      const colIndex = weekDates.indexOf(todayStr);
 
-        let eventsHtml = dayEvents.map(ev => {
-          const c = categoryColors[ev.category] || categoryColors.perso;
-          return `
-            <div class="flex items-center justify-between text-[11px] font-medium px-2 py-1 rounded-lg border ${c.bg} mb-1 truncate group" title="${ev.start} - ${ev.title}">
-              <span class="truncate flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full ${c.dot}"></span>
-                <span class="font-bold opacity-90">${ev.start}</span> ${ev.title}
-              </span>
-              <button onclick="deleteEvent('${ev.id}', event)" class="opacity-0 group-hover:opacity-100 hover:text-red-400 ml-1 transition">
-                &times;
-              </button>
-            </div>
-          `;
-        }).join('');
+      if (colIndex !== -1) {
+        const now = new Date();
+        const curH = 21; // Heure actuelle fixée
+        const curM = 45;
 
-        grid.innerHTML += `
-          <div onclick="quickAddDate('${dateStr}')" class="cal-day-cell p-2 rounded-xl bg-black/40 border border-white/10 cursor-pointer flex flex-col justify-between ${isToday ? 'is-today' : ''}">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold ${isToday ? 'text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded-md' : 'text-zinc-300'}">${day}</span>
-              ${dayEvents.length > 0 ? `<span class="w-2 h-2 rounded-full bg-amber-400"></span>` : ''}
-            </div>
-            <div class="mt-1 flex-1 overflow-y-auto max-h-[80px]">
-              ${eventsHtml}
-            </div>
-          </div>
-        `;
+        if (curH >= 8) {
+          const topPx = (((curH - 8) * 60 + curM) / 60) * 52;
+          const cell = document.querySelector(`.time-slot-cell[data-date="${todayStr}"][data-hour="8"]`);
+          if (cell) {
+            const line = document.createElement('div');
+            line.className = 'current-time-line';
+            line.style.top = `${topPx}px`;
+            line.innerHTML = `<span class="current-time-dot"></span>`;
+            cell.appendChild(line);
+          }
+        }
       }
     }
 
-    function renderWeekGrid() {
-      const header = document.getElementById('calendar-week-header');
-      const grid = document.getElementById('calendar-week-grid');
-      if (!header || !grid) return;
-
-      header.innerHTML = '';
-      grid.innerHTML = '';
-
-      const curr = new Date(calendarDate);
-      const dayIndex = (curr.getDay() + 6) % 7;
-      const monday = new Date(curr);
-      monday.setDate(curr.getDate() - dayIndex);
-
-      const dayNames = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
-
-      for (let i = 0; i < 7; i++) {
-        const d = new Date(monday);
-        d.setDate(monday.getDate() + i);
-        const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-        const isToday = (dStr === '2026-08-24');
-
-        header.innerHTML += `
-          <div class="p-2 rounded-xl ${isToday ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : ''}">
-            <div>${dayNames[i]}</div>
-            <div class="text-lg font-black text-white">${d.getDate()}</div>
-          </div>
-        `;
-
-        const dayEvents = userEvents.filter(ev => ev.date === dStr);
-        let eventsHtml = dayEvents.map(ev => {
-          const c = categoryColors[ev.category] || categoryColors.perso;
-          return `
-            <div class="p-2.5 rounded-xl border ${c.bg} mb-2 text-xs shadow-md group relative">
-              <div class="flex items-center justify-between font-bold mb-1">
-                <span>${ev.start} - ${ev.end}</span>
-                <button onclick="deleteEvent('${ev.id}', event)" class="hover:text-red-400 font-bold">&times;</button>
-              </div>
-              <div class="font-bold text-white">${ev.title}</div>
-              ${ev.desc ? `<div class="text-[10px] opacity-75 mt-1">${ev.desc}</div>` : ''}
-            </div>
-          `;
-        }).join('');
-
-        grid.innerHTML += `
-          <div onclick="quickAddDate('${dStr}')" class="p-3 rounded-2xl bg-black/40 border border-white/10 min-h-[380px] flex flex-col justify-start cursor-pointer hover:bg-white/5 transition">
-            ${eventsHtml || '<span class="text-[11px] text-zinc-600 italic">Aucun événement</span>'}
-          </div>
-        `;
-      }
+    function gcalToday() {
+      currentCalDate = new Date(2026, 7, 24);
+      renderGCal();
     }
 
-    function setCalendarView(view) {
-      calendarView = view;
-      const btnM = document.getElementById('btn-view-month');
-      const btnW = document.getElementById('btn-view-week');
-      const viewM = document.getElementById('calendar-month-view');
-      const viewW = document.getElementById('calendar-week-view');
-
-      if (view === 'month') {
-        btnM.className = 'px-4 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-black transition';
-        btnW.className = 'px-4 py-1.5 rounded-lg text-xs font-bold text-zinc-300 hover:text-white transition';
-        viewM.classList.remove('hidden');
-        viewW.classList.add('hidden');
-      } else {
-        btnW.className = 'px-4 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-black transition';
-        btnM.className = 'px-4 py-1.5 rounded-lg text-xs font-bold text-zinc-300 hover:text-white transition';
-        viewW.classList.remove('hidden');
-        viewM.classList.add('hidden');
-      }
-      renderCalendar();
+    function gcalPrevWeek() {
+      currentCalDate.setDate(currentCalDate.getDate() - 7);
+      renderGCal();
     }
 
-    function calendarPrev() {
-      if (calendarView === 'month') {
-        calendarDate.setMonth(calendarDate.getMonth() - 1);
-      } else {
-        calendarDate.setDate(calendarDate.getDate() - 7);
-      }
-      renderCalendar();
+    function gcalNextWeek() {
+      currentCalDate.setDate(currentCalDate.getDate() + 7);
+      renderGCal();
     }
 
-    function calendarNext() {
-      if (calendarView === 'month') {
-        calendarDate.setMonth(calendarDate.getMonth() + 1);
-      } else {
-        calendarDate.setDate(calendarDate.getDate() + 7);
-      }
-      renderCalendar();
+    function quickCreateSlot(dateStr, hour) {
+      document.getElementById('event-date').value = dateStr;
+      document.getElementById('event-start-time').value = `${String(hour).padStart(2, '0')}:00`;
+      document.getElementById('event-end-time').value = `${String(hour + 1).padStart(2, '0')}:00`;
+      openAddEventModal();
     }
 
-    function calendarToday() {
-      calendarDate = new Date(2026, 7, 24);
-      renderCalendar();
-    }
-
-    function openAddEventModal(defaultDate = null) {
+    function openAddEventModal() {
       document.getElementById('modal-add-event').classList.remove('hidden');
-      if (defaultDate) {
-        document.getElementById('event-date').value = defaultDate;
-      } else {
-        document.getElementById('event-date').value = '2026-08-24';
-      }
     }
 
     function closeAddEventModal() {
       document.getElementById('modal-add-event').classList.add('hidden');
-    }
-
-    function quickAddDate(dateStr) {
-      openAddEventModal(dateStr);
     }
 
     function saveNewEvent(e) {
@@ -978,22 +979,22 @@
       };
 
       userEvents.push(newEv);
-      localStorage.setItem('hq_user_events', JSON.stringify(userEvents));
+      localStorage.setItem('hq_gcal_events', JSON.stringify(userEvents));
       closeAddEventModal();
       document.getElementById('form-add-event').reset();
-      renderCalendar();
+      renderGCal();
     }
 
-    function deleteEvent(id, e) {
+    function deleteGCalEvent(id, e) {
       if (e) e.stopPropagation();
       userEvents = userEvents.filter(ev => ev.id !== id);
-      localStorage.setItem('hq_user_events', JSON.stringify(userEvents));
-      renderCalendar();
+      localStorage.setItem('hq_gcal_events', JSON.stringify(userEvents));
+      renderGCal();
     }
 
-    // ==========================================
-    // 2. ROUTEUR SPA & STATS EXISTANTES
-    // ==========================================
+    // =======================================================
+    // 2. ROUTEUR SPA & STATS JEUX (RL, VALORANT, LOL)
+    // =======================================================
     let rlStatsCache = {
       '1v1': 'Gold III (Division III)',
       '2v2': 'Platinum II (Division I)',
@@ -1022,7 +1023,7 @@
       }
 
       if (tabName === 'planning') {
-        renderCalendar();
+        renderGCal();
       }
 
       if (tabName === 'gaming') {
@@ -1202,9 +1203,9 @@
       return makeList('valo-bronze-3.svg', 8);
     }
 
-    // Chargement stats.json
+    // Initialisation
     window.addEventListener('DOMContentLoaded', () => {
-      renderCalendar();
+      renderGCal();
 
       fetch('./stats.json?t=' + Date.now())
         .then(response => {
