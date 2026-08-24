@@ -2,7 +2,7 @@ name: Update Stats
 
 on:
   schedule:
-    # S'exécute automatiquement toutes les 30 minutes (à :15 et :45)
+    # S'exécute automatiquement à :15 et :45 chaque heure
     - cron: '15,45 * * * *'
   workflow_dispatch:
 
@@ -14,26 +14,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Récupérer le code du dépôt
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Installer Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Installer les dépendances Playwright
+      - name: Install Playwright & Dependencies
         run: |
           npm install playwright
           npx playwright install --with-deps chromium
 
-      - name: Exécuter le script de scraping
+      - name: Run scraping script
         run: node scripts/update-stats.js
 
-      - name: Enregistrer et publier les nouvelles stats
+      - name: Commit and Push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add stats.json
-          git commit -m "Mise à jour automatique des stats [skip ci]" || echo "Aucune modification détectée"
+          git commit -m "Auto-update stats [skip ci]" || exit 0
           git push
