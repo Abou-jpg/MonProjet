@@ -94,27 +94,35 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.2);
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
-      background-image: linear-gradient(rgba(11, 18, 24, 0.38), rgba(11, 18, 24, 0.58)), url('dragon%20ball%20z%20arriere%20plan.jpg'), url('dragon ball z arriere plan.jpg');
+      background: #090e13;
+    }
+
+    .gcal-bg {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(11, 18, 24, 0.45), rgba(11, 18, 24, 0.65)), url('dragon%20ball%20z%20arriere%20plan.jpg'), url('dragon ball z arriere plan.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .gcal-content {
       position: relative;
-      z-index: 2;
+      z-index: 1;
     }
 
     .time-slot-cell {
-      height: 64px;
+      height: 68px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       border-right: 1px solid rgba(255, 255, 255, 0.12);
       cursor: pointer;
-      background: rgba(8, 14, 20, 0.12);
+      background: rgba(8, 14, 20, 0.15);
       transition: background-color 0.15s ease;
     }
     .time-slot-cell:hover {
-      background-color: rgba(255, 255, 255, 0.16);
+      background-color: rgba(255, 255, 255, 0.2);
     }
 
     .gcal-event-chip {
@@ -122,10 +130,10 @@
       left: 3px;
       right: 3px;
       border-radius: 8px;
-      padding: 5px 8px;
+      padding: 6px 10px;
       font-size: 11px;
       overflow: hidden;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
       cursor: pointer;
       z-index: 10;
       backdrop-filter: blur(8px);
@@ -154,6 +162,24 @@
       height: 10px;
       border-radius: 50%;
       background-color: #ef4444;
+    }
+
+    /* Scrollbar personnalisée */
+    .gcal-scroll-area::-webkit-scrollbar {
+      width: 10px;
+    }
+    .gcal-scroll-area::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .gcal-scroll-area::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
+    .gcal-scroll-area::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.45);
+      background-clip: content-box;
     }
   </style>
 </head>
@@ -195,7 +221,7 @@
       <h1 class="text-4xl md:text-6xl font-normal tracking-tight text-zinc-950 dark:text-white font-serif-title leading-tight mb-6">
         Tous mes projets, <br><span class="italic text-emerald-700 dark:text-emerald-400">au même endroit.</span>
       </h1>
-      <p class="text-zinc-600 dark:text-zinc-400 text-base md:text-lg leading-relaxed mb-8">
+      <p class="text-zinc-600 dark:text-zinc-400 text-base md:lg leading-relaxed mb-8">
         Le tableau de bord centralisé pour le planning hebdomadaire, le gaming, le sport, les vidéos et les études.
       </p>
 
@@ -227,7 +253,7 @@
             <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-blue-500 transition"></i>
           </div>
           <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-blue-400 transition">Planning Hebdo DBZ</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Google Calendar avec vue horaire et arrière-plan Kame House.</p>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Google Calendar Lun-Dim avec vue horaire 24h et Kame House.</p>
         </div>
 
         <div onclick="navigateTab('gaming')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
@@ -289,7 +315,7 @@
   </div>
 
   <!-- NIVEAU 2 : ESPACE PLANNING GOOGLE CALENDAR XXL -->
-  <div id="view-planning" class="view-section hidden max-w-[1500px] mx-auto px-2 sm:px-6 pt-6 pb-20">
+  <div id="view-planning" class="view-section hidden max-w-[1600px] mx-auto px-2 sm:px-6 pt-6 pb-20">
     
     <!-- En-tête Google Calendar -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -318,17 +344,19 @@
 
     <!-- Interface Calendrier Google XXL avec Fond Kame House DBZ -->
     <div class="gcal-container">
+      <div class="gcal-bg"></div>
+
       <div class="gcal-content">
-        <!-- 1. En-tête des 7 jours (Dimanche à Samedi) -->
-        <div class="grid grid-cols-[70px_repeat(7,1fr)] sm:grid-cols-[80px_repeat(7,1fr)] border-b border-white/20 bg-black/60 sticky top-0 z-20 backdrop-blur-md">
+        <!-- 1. En-tête des 7 jours (Lundi à Dimanche) -->
+        <div class="grid grid-cols-[70px_repeat(7,1fr)] sm:grid-cols-[80px_repeat(7,1fr)] border-b border-white/20 bg-black/70 sticky top-0 z-20 backdrop-blur-md">
           <div class="p-3.5 text-[11px] font-bold text-zinc-400 flex items-center justify-center border-r border-white/15">
             GMT+02
           </div>
           <div id="gcal-day-headers" class="contents"></div>
         </div>
 
-        <!-- 2. Grille horaire 8 AM -> 11 PM agrandie -->
-        <div class="relative overflow-y-auto max-h-[780px]">
+        <!-- 2. Grille horaire 08:00 -> 23:00 agrandie avec scroll vertical fluide -->
+        <div class="gcal-scroll-area relative overflow-y-auto max-h-[820px]">
           <div id="gcal-time-grid" class="grid grid-cols-[70px_repeat(7,1fr)] sm:grid-cols-[80px_repeat(7,1fr)]"></div>
         </div>
       </div>
@@ -761,7 +789,7 @@
     lucide.createIcons();
 
     // =======================================================
-    // 1. GOOGLE CALENDAR ENGINE (Semaine Dim -> Sam, 8 AM -> 11 PM)
+    // 1. GOOGLE CALENDAR ENGINE (Semaine Lun -> Dim, 08:00 -> 23:00)
     // =======================================================
     let currentCalDate = new Date(2026, 7, 24); // Lundi 24 Août 2026
 
@@ -784,32 +812,33 @@
       const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
       
       const curr = new Date(currentCalDate);
-      const dayOfWeek = curr.getDay(); // 0 = Dimanche
-      const sunday = new Date(curr);
-      sunday.setDate(curr.getDate() - dayOfWeek);
+      const dayOfWeek = (curr.getDay() + 6) % 7; // Lundi = 0, Dimanche = 6
+      const monday = new Date(curr);
+      monday.setDate(curr.getDate() - dayOfWeek);
 
-      const saturday = new Date(sunday);
-      saturday.setDate(sunday.getDate() + 6);
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
 
       const titleEl = document.getElementById('gcal-month-title');
       if (titleEl) {
-        if (sunday.getMonth() === saturday.getMonth()) {
-          titleEl.innerText = `${monthNames[sunday.getMonth()]} ${sunday.getFullYear()}`;
+        if (monday.getMonth() === sunday.getMonth()) {
+          titleEl.innerText = `${monthNames[monday.getMonth()]} ${monday.getFullYear()}`;
         } else {
-          titleEl.innerText = `${monthNames[sunday.getMonth()]} - ${monthNames[saturday.getMonth()]} ${saturday.getFullYear()}`;
+          titleEl.innerText = `${monthNames[monday.getMonth()]} - ${monthNames[sunday.getMonth()]} ${sunday.getFullYear()}`;
         }
       }
 
       const dayHeadersContainer = document.getElementById('gcal-day-headers');
       dayHeadersContainer.innerHTML = '';
 
-      const dayLabels = ['DIM.', 'LUN.', 'MAR.', 'MER.', 'JEU.', 'VEN.', 'SAM.'];
+      // Ordre européen : Lundi à Dimanche
+      const dayLabels = ['LUN.', 'MAR.', 'MER.', 'JEU.', 'VEN.', 'SAM.', 'DIM.'];
       const weekDates = [];
       const todayStr = '2026-08-24';
 
       for (let i = 0; i < 7; i++) {
-        const d = new Date(sunday);
-        d.setDate(sunday.getDate() + i);
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
         const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
         weekDates.push(dStr);
 
@@ -828,18 +857,19 @@
       const timeGridContainer = document.getElementById('gcal-time-grid');
       timeGridContainer.innerHTML = '';
 
+      // Horaires en français (24h)
       const hours = [
-        { label: '8 AM', h: 8 }, { label: '9 AM', h: 9 }, { label: '10 AM', h: 10 },
-        { label: '11 AM', h: 11 }, { label: '12 PM', h: 12 }, { label: '1 PM', h: 13 },
-        { label: '2 PM', h: 14 }, { label: '3 PM', h: 15 }, { label: '4 PM', h: 16 },
-        { label: '5 PM', h: 17 }, { label: '6 PM', h: 18 }, { label: '7 PM', h: 19 },
-        { label: '8 PM', h: 20 }, { label: '9 PM', h: 21 }, { label: '10 PM', h: 22 },
-        { label: '11 PM', h: 23 }
+        { label: '08:00', h: 8 }, { label: '09:00', h: 9 }, { label: '10:00', h: 10 },
+        { label: '11:00', h: 11 }, { label: '12:00', h: 12 }, { label: '13:00', h: 13 },
+        { label: '14:00', h: 14 }, { label: '15:00', h: 15 }, { label: '16:00', h: 16 },
+        { label: '17:00', h: 17 }, { label: '18:00', h: 18 }, { label: '19:00', h: 19 },
+        { label: '20:00', h: 20 }, { label: '21:00', h: 21 }, { label: '22:00', h: 22 },
+        { label: '23:00', h: 23 }
       ];
 
       hours.forEach(hr => {
         timeGridContainer.innerHTML += `
-          <div class="h-[64px] border-b border-r border-white/15 flex items-start justify-center pt-1.5 text-[11px] font-bold text-zinc-300 bg-black/40">
+          <div class="h-[68px] border-b border-r border-white/15 flex items-start justify-center pt-1.5 text-[11px] font-bold text-zinc-300 bg-black/40">
             ${hr.label}
           </div>
         `;
@@ -869,8 +899,8 @@
             const topMinutes = (startH - 8) * 60 + startM;
             const durationMinutes = Math.max(((endH - 8) * 60 + endM) - topMinutes, 30);
 
-            const topPx = (topMinutes / 60) * 64;
-            const heightPx = (durationMinutes / 60) * 64;
+            const topPx = (topMinutes / 60) * 68;
+            const heightPx = (durationMinutes / 60) * 68;
 
             const startCell = document.querySelector(`.time-slot-cell[data-date="${dStr}"][data-hour="8"]`);
             if (startCell) {
@@ -902,7 +932,7 @@
         const curM = 45;
 
         if (curH >= 8) {
-          const topPx = (((curH - 8) * 60 + curM) / 60) * 64;
+          const topPx = (((curH - 8) * 60 + curM) / 60) * 68;
           const cell = document.querySelector(`.time-slot-cell[data-date="${todayStr}"][data-hour="8"]`);
           if (cell) {
             const line = document.createElement('div');
