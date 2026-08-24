@@ -87,52 +87,48 @@
       border-color: rgba(52, 211, 153, 0.7);
     }
 
-    /* CALENDRIER STYLE GOOGLE CALENDAR AVEC FOND DBZ */
+    /* CALENDRIER XXL AVEC FOND KAME HOUSE DBZ */
     .gcal-container {
       position: relative;
-      border-radius: 1.5rem;
+      border-radius: 1.75rem;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: #0b1218;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-    }
-    .gcal-bg {
-      position: absolute;
-      inset: 0;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+      background-image: linear-gradient(rgba(11, 18, 24, 0.38), rgba(11, 18, 24, 0.58)), url('dragon%20ball%20z%20arriere%20plan.jpg'), url('dragon ball z arriere plan.jpg');
       background-size: cover;
-      background-position: center 30%;
-      opacity: 0.35;
-      z-index: 0;
-      pointer-events: none;
+      background-position: center;
+      background-repeat: no-repeat;
     }
+
     .gcal-content {
       position: relative;
-      z-index: 1;
-      backdrop-filter: blur(4px);
+      z-index: 2;
     }
 
     .time-slot-cell {
-      height: 52px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      height: 64px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
       cursor: pointer;
+      background: rgba(8, 14, 20, 0.12);
       transition: background-color 0.15s ease;
     }
     .time-slot-cell:hover {
-      background-color: rgba(255, 255, 255, 0.08);
+      background-color: rgba(255, 255, 255, 0.16);
     }
 
     .gcal-event-chip {
       position: absolute;
-      left: 2px;
-      right: 2px;
+      left: 3px;
+      right: 3px;
       border-radius: 8px;
-      padding: 4px 8px;
+      padding: 5px 8px;
       font-size: 11px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
       cursor: pointer;
       z-index: 10;
+      backdrop-filter: blur(8px);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .gcal-event-chip:hover {
@@ -148,6 +144,7 @@
       background-color: #ef4444;
       z-index: 15;
       pointer-events: none;
+      box-shadow: 0 0 8px #ef4444;
     }
     .current-time-dot {
       position: absolute;
@@ -291,54 +288,48 @@
     </div>
   </div>
 
-  <!-- NIVEAU 2 : ESPACE PLANNING GOOGLE CALENDAR STYLE -->
-  <div id="view-planning" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-20">
+  <!-- NIVEAU 2 : ESPACE PLANNING GOOGLE CALENDAR XXL -->
+  <div id="view-planning" class="view-section hidden max-w-[1500px] mx-auto px-2 sm:px-6 pt-6 pb-20">
     
     <!-- En-tête Google Calendar -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
       <div class="flex items-center gap-4">
-        <button onclick="gcalToday()" class="px-5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold text-white transition">
+        <button onclick="gcalToday()" class="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold text-white transition shadow">
           Aujourd'hui
         </button>
-        <div class="flex items-center bg-black/40 border border-white/10 rounded-xl p-1">
-          <button onclick="gcalPrevWeek()" class="p-1.5 hover:bg-white/10 rounded-lg text-white transition">
-            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+        <div class="flex items-center bg-black/50 border border-white/10 rounded-xl p-1">
+          <button onclick="gcalPrevWeek()" class="p-2 hover:bg-white/10 rounded-lg text-white transition">
+            <i data-lucide="chevron-left" class="w-5 h-5"></i>
           </button>
-          <button onclick="gcalNextWeek()" class="p-1.5 hover:bg-white/10 rounded-lg text-white transition">
-            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          <button onclick="gcalNextWeek()" class="p-2 hover:bg-white/10 rounded-lg text-white transition">
+            <i data-lucide="chevron-right" class="w-5 h-5"></i>
           </button>
         </div>
-        <h2 id="gcal-month-title" class="text-2xl font-black text-white capitalize tracking-wide">
+        <h2 id="gcal-month-title" class="text-2xl sm:text-3xl font-black text-white capitalize tracking-wide drop-shadow-lg">
           Août 2026
         </h2>
       </div>
 
-      <button onclick="openAddEventModal()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-2 transition shadow-lg shadow-blue-600/30 w-fit">
+      <button onclick="openAddEventModal()" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-2 transition shadow-lg shadow-blue-600/30 w-fit">
         <i data-lucide="plus" class="w-4 h-4"></i>
         <span>Créer un événement</span>
       </button>
     </div>
 
-    <!-- Interface Calendrier Google avec Fond Kame House DBZ -->
+    <!-- Interface Calendrier Google XXL avec Fond Kame House DBZ -->
     <div class="gcal-container">
-      <div class="gcal-bg" id="gcal-bg-el" style="background-image: url('dragon ball z arriere plan.jpg'), url('dragon%20ball%20z%20arriere%20plan.jpg'), url('dragon_ball_z_arriere_plan.jpg');"></div>
-      
       <div class="gcal-content">
-        <!-- 1. En-tête des 7 jours (Dimanche à Samedi comme Google Calendar) -->
-        <div class="grid grid-cols-[60px_repeat(7,1fr)] sm:grid-cols-[70px_repeat(7,1fr)] border-b border-white/15 bg-black/40 sticky top-0 z-20 backdrop-blur-md">
-          <div class="p-3 text-[11px] font-bold text-zinc-400 flex items-center justify-center border-r border-white/10">
+        <!-- 1. En-tête des 7 jours (Dimanche à Samedi) -->
+        <div class="grid grid-cols-[70px_repeat(7,1fr)] sm:grid-cols-[80px_repeat(7,1fr)] border-b border-white/20 bg-black/60 sticky top-0 z-20 backdrop-blur-md">
+          <div class="p-3.5 text-[11px] font-bold text-zinc-400 flex items-center justify-center border-r border-white/15">
             GMT+02
           </div>
-          <div id="gcal-day-headers" class="contents">
-            <!-- Rempli par JavaScript -->
-          </div>
+          <div id="gcal-day-headers" class="contents"></div>
         </div>
 
-        <!-- 2. Grille horaire 8 AM -> 11 PM -->
-        <div class="relative overflow-y-auto max-h-[680px]">
-          <div id="gcal-time-grid" class="grid grid-cols-[60px_repeat(7,1fr)] sm:grid-cols-[70px_repeat(7,1fr)]">
-            <!-- Rempli par JavaScript -->
-          </div>
+        <!-- 2. Grille horaire 8 AM -> 11 PM agrandie -->
+        <div class="relative overflow-y-auto max-h-[780px]">
+          <div id="gcal-time-grid" class="grid grid-cols-[70px_repeat(7,1fr)] sm:grid-cols-[80px_repeat(7,1fr)]"></div>
         </div>
       </div>
     </div>
@@ -792,7 +783,6 @@
     function renderGCal() {
       const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
       
-      // Calcul du début de semaine (Dimanche comme Google Calendar)
       const curr = new Date(currentCalDate);
       const dayOfWeek = curr.getDay(); // 0 = Dimanche
       const sunday = new Date(curr);
@@ -801,7 +791,6 @@
       const saturday = new Date(sunday);
       saturday.setDate(sunday.getDate() + 6);
 
-      // Titre du mois
       const titleEl = document.getElementById('gcal-month-title');
       if (titleEl) {
         if (sunday.getMonth() === saturday.getMonth()) {
@@ -811,14 +800,12 @@
         }
       }
 
-      // En-têtes des jours (DIM. 23, LUN. 24...)
       const dayHeadersContainer = document.getElementById('gcal-day-headers');
       dayHeadersContainer.innerHTML = '';
 
       const dayLabels = ['DIM.', 'LUN.', 'MAR.', 'MER.', 'JEU.', 'VEN.', 'SAM.'];
       const weekDates = [];
-
-      const todayStr = '2026-08-24'; // Date pivot
+      const todayStr = '2026-08-24';
 
       for (let i = 0; i < 7; i++) {
         const d = new Date(sunday);
@@ -829,16 +816,15 @@
         const isToday = (dStr === todayStr);
 
         dayHeadersContainer.innerHTML += `
-          <div class="py-3 flex flex-col items-center justify-center border-r border-white/10 last:border-r-0">
-            <span class="text-[11px] font-bold ${isToday ? 'text-blue-400' : 'text-zinc-400'} tracking-wider">${dayLabels[i]}</span>
-            <div class="w-9 h-9 mt-1 flex items-center justify-center rounded-full text-base font-black ${isToday ? 'bg-blue-600 text-white shadow-md shadow-blue-500/40' : 'text-white'}">
+          <div class="py-3.5 flex flex-col items-center justify-center border-r border-white/15 last:border-r-0">
+            <span class="text-[11px] font-bold ${isToday ? 'text-blue-400' : 'text-zinc-300'} tracking-wider">${dayLabels[i]}</span>
+            <div class="w-10 h-10 mt-1 flex items-center justify-center rounded-full text-base font-black ${isToday ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/50' : 'text-white'}">
               ${d.getDate()}
             </div>
           </div>
         `;
       }
 
-      // Grille des heures 8 AM à 11 PM
       const timeGridContainer = document.getElementById('gcal-time-grid');
       timeGridContainer.innerHTML = '';
 
@@ -852,14 +838,12 @@
       ];
 
       hours.forEach(hr => {
-        // Label heure à gauche
         timeGridContainer.innerHTML += `
-          <div class="h-[52px] border-b border-r border-white/10 flex items-start justify-center pt-1 text-[10px] font-bold text-zinc-400">
+          <div class="h-[64px] border-b border-r border-white/15 flex items-start justify-center pt-1.5 text-[11px] font-bold text-zinc-300 bg-black/40">
             ${hr.label}
           </div>
         `;
 
-        // 7 cases correspondant aux 7 jours
         for (let col = 0; col < 7; col++) {
           const dateStr = weekDates[col];
           timeGridContainer.innerHTML += `
@@ -868,42 +852,39 @@
         }
       });
 
-      // Placement des événements sur la grille
       renderEventsOnGrid(weekDates);
       renderLiveCurrentTime(weekDates);
       lucide.createIcons();
     }
 
     function renderEventsOnGrid(weekDates) {
-      weekDates.forEach((dStr, dayColIndex) => {
+      weekDates.forEach((dStr) => {
         const eventsForDay = userEvents.filter(ev => ev.date === dStr);
 
         eventsForDay.forEach(ev => {
           const [startH, startM] = ev.start.split(':').map(Number);
           const [endH, endM] = ev.end.split(':').map(Number);
 
-          // Si l'événement est dans la plage horaire 8h-24h
           if (startH >= 8) {
             const topMinutes = (startH - 8) * 60 + startM;
             const durationMinutes = Math.max(((endH - 8) * 60 + endM) - topMinutes, 30);
 
-            const topPx = (topMinutes / 60) * 52;
-            const heightPx = (durationMinutes / 60) * 52;
+            const topPx = (topMinutes / 60) * 64;
+            const heightPx = (durationMinutes / 60) * 64;
 
-            // Trouve la cellule de la colonne correspondante à 8h
             const startCell = document.querySelector(`.time-slot-cell[data-date="${dStr}"][data-hour="8"]`);
             if (startCell) {
               const c = gcalColors[ev.category] || gcalColors.blue;
               const chip = document.createElement('div');
               chip.className = `gcal-event-chip border ${c.bg}`;
               chip.style.top = `${topPx}px`;
-              chip.style.height = `${heightPx - 4}px`;
+              chip.style.height = `${heightPx - 5}px`;
               chip.innerHTML = `
                 <div class="flex items-center justify-between font-bold leading-tight">
                   <span class="truncate">${ev.title}</span>
                   <button onclick="deleteGCalEvent('${ev.id}', event)" class="hover:text-red-300 ml-1 font-black">&times;</button>
                 </div>
-                <div class="text-[10px] opacity-90 truncate">${ev.start} - ${ev.end} ${ev.desc ? '• ' + ev.desc : ''}</div>
+                <div class="text-[10px] opacity-90 truncate mt-0.5">${ev.start} - ${ev.end} ${ev.desc ? '• ' + ev.desc : ''}</div>
               `;
               startCell.appendChild(chip);
             }
@@ -912,18 +893,16 @@
       });
     }
 
-    // Ligne rouge temps réel Google Calendar
     function renderLiveCurrentTime(weekDates) {
       const todayStr = '2026-08-24';
       const colIndex = weekDates.indexOf(todayStr);
 
       if (colIndex !== -1) {
-        const now = new Date();
-        const curH = 21; // Heure actuelle fixée
+        const curH = 21; // Heure actuelle
         const curM = 45;
 
         if (curH >= 8) {
-          const topPx = (((curH - 8) * 60 + curM) / 60) * 52;
+          const topPx = (((curH - 8) * 60 + curM) / 60) * 64;
           const cell = document.querySelector(`.time-slot-cell[data-date="${todayStr}"][data-hour="8"]`);
           if (cell) {
             const line = document.createElement('div');
