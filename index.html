@@ -68,20 +68,22 @@
       box-shadow: 0 16px 36px -8px rgba(245, 158, 11, 0.3);
     }
 
-    /* Carré Épisode 5 Lignes */
+    /* Cartes Épisodes Style Streaming */
     .episode-card {
       position: relative;
+      height: 200px;
       border-radius: 1.25rem;
       overflow: hidden;
+      cursor: pointer;
       border: 1px solid rgba(255, 255, 255, 0.1);
       background-size: cover;
       background-position: center;
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .episode-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px) scale(1.02);
       border-color: rgba(245, 158, 11, 0.8);
-      box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.25);
+      box-shadow: 0 14px 30px -6px rgba(245, 158, 11, 0.35);
     }
 
     /* Gaming Posters */
@@ -679,7 +681,7 @@
       </div>
     </div>
 
-    <!-- 4. PAGE DE LA GRILLE DES 52 ÉPISODES (AVEC FOND & 5 LIGNES) -->
+    <!-- 4. PAGE DE LA GRILLE DES 52 ÉPISODES (ÉPURÉE & SANS TEXTE SUPERFLU) -->
     <div id="palmares-episodes-screen" class="hidden">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
@@ -703,12 +705,12 @@
             <h2 id="episodes-header-title" class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">
               Martine • Saison 1
             </h2>
-            <p class="text-xs text-zinc-400 mt-1">Grille des 52 épisodes complets</p>
+            <p class="text-xs text-zinc-400 mt-1">52 Épisodes</p>
           </div>
         </div>
       </div>
 
-      <!-- Grille des 52 carrés -->
+      <!-- Grille épurée des 52 carrés -->
       <div id="episodes-grid-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         <!-- 52 carrés injectés dynamiquement en JS -->
       </div>
@@ -1142,7 +1144,7 @@
     lucide.createIcons();
 
     // =======================================================
-    // 1. PALMARÈS (DONNÉES, SAISONS & GRILLE 52 ÉPISODES)
+    // 1. PALMARÈS (DONNÉES, SAISONS & GRILLE ÉPISODES PROPRE)
     // =======================================================
     const palmaresCatalog = {
       'dessins-animes': {
@@ -1265,7 +1267,6 @@
     let currentShowId = null;
     let currentSeasonNumber = 1;
 
-    // 1. Ouvrir une Catégorie
     function openPalmaresCategory(catKey) {
       activeSelectedCategory = catKey;
       const cat = palmaresCatalog[catKey];
@@ -1341,7 +1342,6 @@
         const card = document.createElement('div');
         card.className = "palmares-category-hub-card glass-card flex flex-col group";
         
-        // Clic sur l'œuvre
         card.onclick = () => {
           if (item.hasSeasons) {
             openShowSeasons(item.id, item.title);
@@ -1396,7 +1396,6 @@
       lucide.createIcons();
     }
 
-    // 2. Ouvrir la sélection des saisons (ex: Martine)
     function openShowSeasons(showId, showTitle) {
       currentShowId = showId;
       hideAllPalmaresScreens();
@@ -1419,7 +1418,7 @@
       }
     }
 
-    // 3. Ouvrir la grille des 52 épisodes avec fond et 5 lignes
+    // Grille 52 épisodes moderne avec Martine en arrière-plan
     function openSeasonEpisodes(showId, seasonNum) {
       currentShowId = showId;
       currentSeasonNumber = seasonNum;
@@ -1436,50 +1435,32 @@
       const grid = document.getElementById('episodes-grid-container');
       grid.innerHTML = '';
 
-      // Image d'arrière-plan avec fallback automatique (martine-s1.jpg -> martine.jpg)
       const bgImgCandidate = seasonNum === 1 ? 'martine-s1.jpg' : 'martine-s2.jpg';
 
-      // Génération automatique des 52 carrés de 5 lignes
       for (let ep = 1; ep <= 52; ep++) {
         const card = document.createElement('div');
-        card.className = "episode-card glass-card p-4 flex flex-col justify-between min-h-[220px] relative overflow-hidden group";
+        card.className = "episode-card glass-card p-5 flex flex-col justify-between relative overflow-hidden group";
         
-        // Image de fond stylisée avec dégradé sombre lisible
-        card.style.backgroundImage = `linear-gradient(rgba(7, 13, 10, 0.85), rgba(7, 13, 10, 0.94)), url('${bgImgCandidate}'), url('martine.jpg')`;
+        card.style.backgroundImage = `linear-gradient(rgba(7, 13, 10, 0.45), rgba(7, 13, 10, 0.90)), url('${bgImgCandidate}'), url('martine.jpg')`;
 
         card.innerHTML = `
-          <!-- Numéro en haut à gauche -->
-          <div class="flex items-center justify-between mb-3 z-10">
-            <span class="bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-0.5 rounded-md shadow-md">
+          <div class="flex items-center justify-between z-10">
+            <span class="bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md">
               #${ep}
             </span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-black/60 border border-white/10 text-amber-400">
+            <span class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-amber-400">
               S${seasonNum} • E${ep}
             </span>
           </div>
 
-          <!-- Les 5 Lignes Dédiées -->
-          <div class="space-y-1.5 z-10">
-            <!-- Ligne 1: Titre Épisode -->
-            <div class="text-sm font-black text-white group-hover:text-amber-400 transition-colors truncate">
-              L1: Épisode ${ep} • Aventure de Martine
+          <div class="z-10 mt-auto">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-300">Disponible</span>
             </div>
-            <!-- Ligne 2: Thème / Synopsis -->
-            <div class="text-xs text-zinc-300 font-medium truncate">
-              L2: Découverte, amitié et nature avec Patapouf
-            </div>
-            <!-- Ligne 3: Personnages clés -->
-            <div class="text-[11px] text-zinc-400 truncate">
-              L3: Martine, Jean, Patapouf, Claire
-            </div>
-            <!-- Ligne 4: Note & Appréciation -->
-            <div class="text-xs font-bold text-amber-400 flex items-center gap-1">
-              <span>L4: ★ 10/10 • Culte</span>
-            </div>
-            <!-- Ligne 5: Statut -->
-            <div class="text-[11px] font-bold text-emerald-400 flex items-center gap-1">
-              <span>L5: ✓ Épisode disponible</span>
-            </div>
+            <h3 class="text-base font-black text-white group-hover:text-amber-400 transition-colors">
+              Épisode ${ep}
+            </h3>
           </div>
         `;
 
