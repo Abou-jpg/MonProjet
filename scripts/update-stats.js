@@ -2,10 +2,16 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-function curlGet(url) {
+function runCurl(url) {
   try {
-    return execSync(`curl -sL --max-time 15 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" "${url}"`, { encoding: 'utf8' }).trim();
-  } catch (e) {
+    // -4 force l'IPv4 pour éviter le blocage réseau de GitHub Actions
+    // -k ignore les erreurs de certificat SSL
+    // -sL suit les redirections proprement
+    const cmd = `curl -4 -sL -k --max-time 12 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" "${url}"`;
+    const res = execSync(cmd, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }).trim();
+    return res;
+  } catch (err) {
+    console.warn(`Erreur cURL sur ${url} :`, err.message);
     return null;
   }
 }
@@ -31,22 +37,34 @@ async function fetchStats() {
     try {
       currentStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
     } catch (e) {
-      console.warn("Utilisation de la mémoire par défaut.");
+      console.warn("Utilisation de la mémoire locale existante.");
     }
   }
 
   // ==========================================
-  // 1. ROCKET LEAGUE (cURL SYSTÈME DIRECT)
+  // 1. ROCKET LEAGUE (API MULTI-SERVEURS)
   // ==========================================
-  console.log("--> Récupération des rangs Rocket League via cURL...");
-  let rlText = curlGet('https://api.yannismate.de/rank/epic/abdel92jr');
-  if (!rlText || rlText.length === 0 || rlText.includes('404')) {
-    rlText = curlGet('http://api.yannismate.de/rank/epic/abdel92jr');
+  console.log("--> [1/2] Récupération des rangs Rocket League...");
+  
+  const rlEndpoints = [
+    'https://api.yannismate.de/rank/epic/abdel92jr',
+    'http://api.yannismate.de/rank/epic/abdel92jr',
+    'https://api.yannismate.de/rank/epic/abdel92jr?disable_div=false'
+  ];
+
+  let rlData = null;
+  for (const url of rlEndpoints) {
+    console.log(`Tentative sur : ${url}`);
+    const out = runCurl(url);
+    if (out && out.length > 5 && !out.includes('404') && !out.includes('error')) {
+      rlData = out;
+      break;
+    }
   }
 
-  if (rlText) {
-    console.log("Réponse RL brute :", rlText);
-    const segments = rlText.split('|');
+  if (rlData) {
+    console.log("Réponse RL brute reçue :", rlData);
+    const segments = rlData.split('|');
     segments.forEach(seg => {
       const clean = seg.trim();
       if (clean.toLowerCase().includes('1v1') || clean.toLowerCase().includes('duel')) {
@@ -62,17 +80,17 @@ async function fetchStats() {
         if (parts[1]) currentStats.rocketLeague.standard3v3 = parts[1].trim();
       }
     });
-    console.log("Rangs RL enregistrés :", currentStats.rocketLeague);
+    console.log("Nouveaux rangs RL enregistrés :", currentStats.rocketLeague);
   } else {
-    console.warn("Impossible de joindre l'API RL via cURL.");
+    console.warn("Serveurs RL injoignables : conservation des rangs précédents.");
   }
 
   // ==========================================
-  // 2. VALORANT (cURL SYSTÈME DIRECT)
+  // 2. VALORANT (API OFFICIELLE)
   // ==========================================
-  console.log("--> Récupération des stats Valorant...");
-  const valoText = curlGet('https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu');
-  if (valoText) {
+  console.log("--> [2/2] Récupération des stats Valorant...");
+  const valoText = runCurl('https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu');
+  if (valoText && !valoText.includes('error')) {
     console.log("Réponse Valorant :", valoText);
     const parts = valoText.split(',');
     if (parts[0]) currentStats.valorant.rang = parts[0].trim();
@@ -86,7 +104,7 @@ async function fetchStats() {
   // 3. SAUVEGARDE STATS.JSON
   // ==========================================
   fs.writeFileSync(statsPath, JSON.stringify(currentStats, null, 2), 'utf8');
-  console.log("--> stats.json mis à jour avec succès !");
+  console.log("--> stats.json synchronisé avec succès !");
 }
 
 fetchStats();
