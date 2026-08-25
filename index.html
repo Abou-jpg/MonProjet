@@ -8,7 +8,7 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Fonts & Icônes -->
+  <!-- Google Fonts & Font Awesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
       padding: 0;
     }
     body {
-      background: linear-gradient(rgba(15, 23, 42, 0.90), rgba(15, 23, 42, 0.96)), 
+      background: linear-gradient(rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.95)), 
                   url('dragon ball z arriere plan.jpg') no-repeat center center fixed !important;
       background-size: cover !important;
     }
@@ -74,19 +74,19 @@
 
       <!-- Liens rapides -->
       <div class="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-bold">
-        <a href="#stats-section" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 hover:border-slate-600 transition-all flex items-center gap-1.5">
+        <a href="#stats-section" class="px-3.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 hover:border-slate-600 transition-all flex items-center gap-1.5">
           <i class="fa-solid fa-gamepad"></i> Stats
         </a>
-        <a href="#planning-section" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 hover:border-slate-600 transition-all flex items-center gap-1.5">
+        <a href="#planning-section" class="px-3.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 hover:border-slate-600 transition-all flex items-center gap-1.5">
           <i class="fa-solid fa-calendar-days"></i> Planning
         </a>
-        <a href="#palmares-section" class="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-black border border-amber-400 shadow-md shadow-amber-500/20 transition-all flex items-center gap-1.5">
-          <i class="fa-solid fa-trophy"></i> Palmarès
+        <a href="#watchlist-section" class="px-3.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:bg-amber-500/20 transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-film"></i> Watchlist
         </a>
       </div>
 
       <!-- Horloge (24h) -->
-      <div class="hidden md:flex items-center gap-2.5 bg-slate-900 border border-slate-700/80 px-3.5 py-1.5 rounded-xl text-amber-400 font-mono text-sm font-bold">
+      <div class="hidden md:flex items-center gap-2.5 bg-slate-900 border border-slate-700/80 px-3.5 py-1.5 rounded-xl text-amber-400 font-mono text-sm font-bold shadow-inner">
         <i class="fa-regular fa-clock"></i>
         <span id="live-clock">--:--:--</span>
       </div>
@@ -274,9 +274,11 @@
             <div class="text-center pb-2 border-b border-slate-700/60">
               <span class="text-xs font-black text-amber-400 uppercase">Dimanche</span>
             </div>
-            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
-              <span class="text-[10px] text-amber-400 font-bold block">20:30 – 23:00</span>
-              <p class="font-bold text-slate-200 mt-1">Watchlist & Détente</p>
+            <div class="space-y-2">
+              <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
+                <span class="text-[10px] text-amber-400 font-bold block">20:30 – 23:00</span>
+                <p class="font-bold text-slate-200 mt-1">Watchlist & Détente</p>
+              </div>
             </div>
           </div>
 
@@ -285,31 +287,105 @@
     </section>
 
     <!-- ========================================================== -->
-    <!-- 4. SECTION PALMARÈS                                        -->
+    <!-- 4. SECTION WATCHLIST (INTÉGRÉE EN DUR DANS LE HTML)        -->
     <!-- ========================================================== -->
-    <section id="palmares-section">
+    <section id="watchlist-section">
       <div class="flex items-center justify-between mb-5">
         <div class="flex items-center gap-3">
           <div class="w-2.5 h-7 bg-amber-500 rounded-full"></div>
           <h2 class="text-xl sm:text-2xl font-black uppercase tracking-wider text-amber-500">
-            PALMARÈS
+            WATCHLIST
           </h2>
         </div>
       </div>
 
-      <!-- Onglets des 6 catégories -->
-      <div class="flex flex-wrap gap-2 mb-4 pb-2 border-b border-slate-700/60" id="palmares-nav">
-        <!-- Généré dynamiquement en JS -->
-      </div>
+      <!-- Grille des cartes -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        
+        <!-- Carte 1 -->
+        <div class="custom-card rounded-2xl overflow-hidden shadow-xl flex flex-col hover:border-slate-500 transition-all">
+          <div class="relative w-full aspect-[2/3] bg-slate-950 overflow-hidden">
+            <img src="https://placehold.co/400x600/1e293b/f8fafc?text=Re:Zero" alt="Re:Zero" class="w-full h-full object-cover">
+            <span class="absolute top-2.5 left-2.5 bg-amber-500 text-slate-950 text-xs font-black px-2 py-0.5 rounded-md shadow-md">
+              #1
+            </span>
+            <span class="absolute top-2.5 right-2.5 bg-slate-900/90 border border-slate-700 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
+              Anime
+            </span>
+            <div class="absolute bottom-2.5 right-2.5 bg-slate-900/90 border border-slate-700 px-2 py-0.5 rounded-md flex items-center gap-1">
+              <span class="text-amber-400 text-xs">★</span>
+              <span class="text-white text-xs font-bold">10/10</span>
+            </div>
+          </div>
+          <div class="p-4 bg-[#1e293b]">
+            <h3 class="font-extrabold text-sm text-white">Re:Zero</h3>
+            <p class="text-xs text-slate-400 mt-1">Série / Arc Sanctuaire</p>
+          </div>
+        </div>
 
-      <!-- Sous-catégories (affichées quand nécessaire) -->
-      <div class="flex flex-wrap gap-2 mb-6 hidden" id="palmares-subnav">
-        <!-- Généré dynamiquement en JS -->
-      </div>
+        <!-- Carte 2 -->
+        <div class="custom-card rounded-2xl overflow-hidden shadow-xl flex flex-col hover:border-slate-500 transition-all">
+          <div class="relative w-full aspect-[2/3] bg-slate-950 overflow-hidden">
+            <img src="https://placehold.co/400x600/1e293b/f8fafc?text=Naruto" alt="Naruto Shippuden" class="w-full h-full object-cover">
+            <span class="absolute top-2.5 left-2.5 bg-amber-500 text-slate-950 text-xs font-black px-2 py-0.5 rounded-md shadow-md">
+              #2
+            </span>
+            <span class="absolute top-2.5 right-2.5 bg-slate-900/90 border border-slate-700 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
+              Anime
+            </span>
+            <div class="absolute bottom-2.5 right-2.5 bg-slate-900/90 border border-slate-700 px-2 py-0.5 rounded-md flex items-center gap-1">
+              <span class="text-amber-400 text-xs">★</span>
+              <span class="text-white text-xs font-bold">9.5/10</span>
+            </div>
+          </div>
+          <div class="p-4 bg-[#1e293b]">
+            <h3 class="font-extrabold text-sm text-white">Naruto Shippuden</h3>
+            <p class="text-xs text-slate-400 mt-1">Arc Pain / Guerre Ninja</p>
+          </div>
+        </div>
 
-      <!-- Grille d'affichage des cartes -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="palmares-grid">
-        <!-- Généré dynamiquement en JS -->
+        <!-- Carte 3 -->
+        <div class="custom-card rounded-2xl overflow-hidden shadow-xl flex flex-col hover:border-slate-500 transition-all">
+          <div class="relative w-full aspect-[2/3] bg-slate-950 overflow-hidden">
+            <img src="https://placehold.co/400x600/1e293b/f8fafc?text=Spider-Man" alt="Spider-Man" class="w-full h-full object-cover">
+            <span class="absolute top-2.5 left-2.5 bg-amber-500 text-slate-950 text-xs font-black px-2 py-0.5 rounded-md shadow-md">
+              #3
+            </span>
+            <span class="absolute top-2.5 right-2.5 bg-slate-900/90 border border-slate-700 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
+              Film MCU
+            </span>
+            <div class="absolute bottom-2.5 right-2.5 bg-slate-900/90 border border-slate-700 px-2 py-0.5 rounded-md flex items-center gap-1">
+              <span class="text-amber-400 text-xs">★</span>
+              <span class="text-white text-xs font-bold">9.5/10</span>
+            </div>
+          </div>
+          <div class="p-4 bg-[#1e293b]">
+            <h3 class="font-extrabold text-sm text-white">Spider-Man: No Way Home</h3>
+            <p class="text-xs text-slate-400 mt-1">Multivers Marvel Studios</p>
+          </div>
+        </div>
+
+        <!-- Carte 4 -->
+        <div class="custom-card rounded-2xl overflow-hidden shadow-xl flex flex-col hover:border-slate-500 transition-all">
+          <div class="relative w-full aspect-[2/3] bg-slate-950 overflow-hidden">
+            <img src="https://placehold.co/400x600/1e293b/f8fafc?text=Borderland" alt="Alice in Borderland" class="w-full h-full object-cover">
+            <span class="absolute top-2.5 left-2.5 bg-amber-500 text-slate-950 text-xs font-black px-2 py-0.5 rounded-md shadow-md">
+              #4
+            </span>
+            <span class="absolute top-2.5 right-2.5 bg-slate-900/90 border border-slate-700 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
+              Série
+            </span>
+            <div class="absolute bottom-2.5 right-2.5 bg-slate-900/90 border border-slate-700 px-2 py-0.5 rounded-md flex items-center gap-1">
+              <span class="text-amber-400 text-xs">★</span>
+              <span class="text-white text-xs font-bold">9/10</span>
+            </div>
+          </div>
+          <div class="p-4 bg-[#1e293b]">
+            <h3 class="font-extrabold text-sm text-white">Alice in Borderland</h3>
+            <p class="text-xs text-slate-400 mt-1">Saison 1 & 2</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -361,143 +437,7 @@
       }
     }
 
-    // Gestion du Palmarès
-    let palData = null;
-    let activeCat = 0;
-    let activeSub = 0;
-
-    async function loadPalmares() {
-      try {
-        const res = await fetch(`palmares.json?t=${Date.now()}`);
-        if (!res.ok) throw new Error("Fichier introuvable");
-        palData = await res.json();
-        renderNav();
-        renderCards();
-      } catch (err) {
-        console.warn("Erreur chargement palmares.json :", err);
-      }
-    }
-
-    function renderNav() {
-      const nav = document.getElementById('palmares-nav');
-      if (!nav || !palData?.categories) return;
-      nav.innerHTML = '';
-
-      palData.categories.forEach((cat, idx) => {
-        const btn = document.createElement('button');
-        const isActive = idx === activeCat;
-        btn.className = `px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold tracking-wide transition-all ${
-          isActive
-            ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
-            : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700'
-        }`;
-        btn.textContent = cat.name;
-        btn.onclick = () => {
-          activeCat = idx;
-          activeSub = 0;
-          renderNav();
-          renderCards();
-        };
-        nav.appendChild(btn);
-      });
-    }
-
-    function renderSubNav(cat) {
-      const subnav = document.getElementById('palmares-subnav');
-      if (!cat.hasSubcategories || !cat.subcategories) {
-        subnav.classList.add('hidden');
-        return;
-      }
-      subnav.classList.remove('hidden');
-      subnav.innerHTML = '';
-
-      cat.subcategories.forEach((sub, idx) => {
-        const btn = document.createElement('button');
-        const isActive = idx === activeSub;
-        btn.className = `px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-          isActive
-            ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40'
-            : 'bg-slate-900/80 text-slate-400 border border-slate-800 hover:text-slate-200'
-        }`;
-        btn.textContent = sub.name;
-        btn.onclick = () => {
-          activeSub = idx;
-          renderSubNav(cat);
-          renderCards();
-        };
-        subnav.appendChild(btn);
-      });
-    }
-
-    function renderCards() {
-      if (!palData?.categories) return;
-      const curCat = palData.categories[activeCat];
-      renderSubNav(curCat);
-
-      const grid = document.getElementById('palmares-grid');
-      grid.innerHTML = '';
-
-      let items = [];
-      if (curCat.hasSubcategories && curCat.subcategories) {
-        items = curCat.subcategories[activeSub]?.items || [];
-      } else {
-        items = curCat.items || [];
-      }
-
-      if (items.length === 0) {
-        grid.innerHTML = `
-          <div class="col-span-full py-12 text-center text-slate-500 font-bold text-sm">
-            Aucun élément pour l'instant.
-          </div>
-        `;
-        return;
-      }
-
-      items.forEach(item => {
-        const card = document.createElement('div');
-        card.className = "custom-card rounded-2xl overflow-hidden shadow-xl flex flex-col hover:border-slate-500 transition-all";
-
-        card.innerHTML = `
-          <div class="relative w-full aspect-[2/3] bg-slate-950 overflow-hidden">
-            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
-            
-            <span class="absolute top-2.5 left-2.5 bg-amber-500 text-slate-950 text-xs font-black px-2 py-0.5 rounded-md shadow-md">
-              ${item.rank || '#'}
-            </span>
-
-            ${item.tag ? `
-              <span class="absolute top-2.5 right-2.5 bg-slate-900/90 border border-slate-700 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
-                ${item.tag}
-              </span>
-            ` : ''}
-
-            <div class="absolute bottom-2.5 right-2.5 bg-slate-900/90 border border-slate-700 px-2 py-0.5 rounded-md flex items-center gap-1">
-              <span class="text-amber-400 text-xs">★</span>
-              <span class="text-white text-xs font-bold">${item.rating || '-'}</span>
-            </div>
-          </div>
-
-          <div class="p-4 flex-1 flex flex-col justify-between bg-[#1e293b]">
-            <div>
-              <h3 class="font-extrabold text-sm text-white line-clamp-1">
-                ${item.title}
-              </h3>
-              ${item.comment ? `
-                <p class="text-xs text-slate-400 mt-1.5 line-clamp-2">
-                  "${item.comment}"
-                </p>
-              ` : ''}
-            </div>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      loadStats();
-      loadPalmares();
-    });
+    document.addEventListener('DOMContentLoaded', loadStats);
   </script>
 </body>
 </html>
