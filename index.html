@@ -52,10 +52,10 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Cartes Hub 3x2 Palmarès */
+    /* Cartes Hub 3x2 Palmarès Grand Format */
     .palmares-category-hub-card {
       position: relative;
-      height: 310px;
+      height: 440px;
       border-radius: 1.5rem;
       overflow: hidden;
       cursor: pointer;
@@ -65,7 +65,7 @@
     .palmares-category-hub-card:hover {
       transform: translateY(-6px);
       border-color: rgba(245, 158, 11, 0.8);
-      box-shadow: 0 12px 30px -8px rgba(245, 158, 11, 0.25);
+      box-shadow: 0 16px 36px -8px rgba(245, 158, 11, 0.3);
     }
 
     /* Gaming Posters */
@@ -379,58 +379,58 @@
       </h2>
     </div>
 
-    <!-- GRILLE 3x2 DES 6 GRANDES CATÉGORIES -->
+    <!-- GRILLE 3x2 DES 6 GRANDES CATÉGORIES (IMAGES AGRANDIES À 300px) -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       
-      <!-- 1. DESSIN ANIMÉ -->
+      <!-- 1. DESSINS ANIMÉS -->
       <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Dessins animés')">
-        <div class="relative w-full h-[190px] overflow-hidden bg-black/60">
-          <img id="pal-img-1" src="dessins-animes.jpg" onerror="this.src='https://placehold.co/600x400/0b1611/fbbf24?text=Dessins+Animés'" alt="Dessins animés" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
+        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+          <img id="pal-img-1" src="dessins-animes.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Dessins+Animés'" alt="Dessins animés" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
           
-          <span class="absolute top-3 left-3 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-0.5 rounded-md shadow-md uppercase">
+          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
             #1
           </span>
-          <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md border border-white/10 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
+          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
             Animation
           </span>
-          <div class="absolute bottom-2.5 right-3 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-lg border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white">
+          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
             <span class="text-amber-400">★</span>
             <span>Masterclass</span>
           </div>
         </div>
-        <div class="p-4 flex flex-col justify-between">
-          <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+        <div class="p-5 flex flex-col justify-between">
+          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
             Dessins animés
           </h3>
-          <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
             Séries animées de référence, classiques cultes et souvenirs marquants.
           </p>
         </div>
       </div>
 
-      <!-- 2. ANIME -->
+      <!-- 2. ANIMES -->
       <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Animes')">
-        <div class="relative w-full h-[190px] overflow-hidden bg-black/60">
-          <img id="pal-img-2" src="animes.jpg" onerror="this.src='https://placehold.co/600x400/0b1611/fbbf24?text=Animes'" alt="Animes" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
+        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+          <img id="pal-img-2" src="animes.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Animes'" alt="Animes" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
           
-          <span class="absolute top-3 left-3 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-0.5 rounded-md shadow-md uppercase">
+          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
             #2
           </span>
-          <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md border border-white/10 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
+          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
             Japan Animation
           </span>
-          <div class="absolute bottom-2.5 right-3 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-lg border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white">
+          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
             <span class="text-amber-400">★</span>
             <span>Masterclass</span>
           </div>
         </div>
-        <div class="p-4 flex flex-col justify-between">
-          <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+        <div class="p-5 flex flex-col justify-between">
+          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
             Animes
           </h3>
-          <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
             Séries japonaises, arcs dramatiques, shōnen et scénarios cultes.
           </p>
         </div>
@@ -438,26 +438,26 @@
 
       <!-- 3. FILMS -->
       <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Films (Films solos, Sagas, Animation)')">
-        <div class="relative w-full h-[190px] overflow-hidden bg-black/60">
-          <img id="pal-img-3" src="films.jpg" onerror="this.src='https://placehold.co/600x400/0b1611/fbbf24?text=Films'" alt="Films" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
+        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+          <img id="pal-img-3" src="films.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Films'" alt="Films" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
           
-          <span class="absolute top-3 left-3 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-0.5 rounded-md shadow-md uppercase">
+          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
             #3
           </span>
-          <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md border border-white/10 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
+          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
             3 Sous-catégories
           </span>
-          <div class="absolute bottom-2.5 right-3 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-lg border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white">
+          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
             <span class="text-amber-400">★</span>
             <span>Cinéma</span>
           </div>
         </div>
-        <div class="p-4 flex flex-col justify-between">
-          <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+        <div class="p-5 flex flex-col justify-between">
+          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
             Films
           </h3>
-          <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
             Films solos, Sagas complètes et Longs-métrages d'animation.
           </p>
         </div>
@@ -465,26 +465,26 @@
 
       <!-- 4. SÉRIES -->
       <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Séries')">
-        <div class="relative w-full h-[190px] overflow-hidden bg-black/60">
-          <img id="pal-img-4" src="series.jpg" onerror="this.src='https://placehold.co/600x400/0b1611/fbbf24?text=Séries'" alt="Séries" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
+        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+          <img id="pal-img-4" src="series.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Séries'" alt="Séries" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
           
-          <span class="absolute top-3 left-3 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-0.5 rounded-md shadow-md uppercase">
+          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
             #4
           </span>
-          <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md border border-white/10 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
+          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
             Live Action
           </span>
-          <div class="absolute bottom-2.5 right-3 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-lg border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white">
+          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
             <span class="text-amber-400">★</span>
             <span>Fiction</span>
           </div>
         </div>
-        <div class="p-4 flex flex-col justify-between">
-          <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+        <div class="p-5 flex flex-col justify-between">
+          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
             Séries
           </h3>
-          <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
             Séries live-action, thrillers, survie et fictions dramatiques.
           </p>
         </div>
@@ -492,26 +492,26 @@
 
       <!-- 5. JEUX -->
       <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Jeux (Jeux d\'anime, Jeux)')">
-        <div class="relative w-full h-[190px] overflow-hidden bg-black/60">
-          <img id="pal-img-5" src="jeux.jpg" onerror="this.src='https://placehold.co/600x400/0b1611/fbbf24?text=Jeux'" alt="Jeux" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
+        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+          <img id="pal-img-5" src="jeux.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Jeux'" alt="Jeux" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
           
-          <span class="absolute top-3 left-3 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-0.5 rounded-md shadow-md uppercase">
+          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
             #5
           </span>
-          <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md border border-white/10 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
+          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
             2 Sous-catégories
           </span>
-          <div class="absolute bottom-2.5 right-3 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-lg border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white">
+          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
             <span class="text-amber-400">★</span>
             <span>Gaming</span>
           </div>
         </div>
-        <div class="p-4 flex flex-col justify-between">
-          <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+        <div class="p-5 flex flex-col justify-between">
+          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
             Jeux
           </h3>
-          <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
             Jeux vidéo adaptés d'animes et hits gaming généralistes.
           </p>
         </div>
@@ -519,26 +519,26 @@
 
       <!-- 6. ÉMISSIONS -->
       <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Émissions (Podcasts, Reportages, Émissions)')">
-        <div class="relative w-full h-[190px] overflow-hidden bg-black/60">
-          <img id="pal-img-6" src="emissions.jpg" onerror="this.src='https://placehold.co/600x400/0b1611/fbbf24?text=Émissions'" alt="Émissions" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
+        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+          <img id="pal-img-6" src="emissions.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Émissions'" alt="Émissions" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
           
-          <span class="absolute top-3 left-3 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-0.5 rounded-md shadow-md uppercase">
+          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
             #6
           </span>
-          <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md border border-white/10 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
+          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
             3 Sous-catégories
           </span>
-          <div class="absolute bottom-2.5 right-3 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-lg border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white">
+          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
             <span class="text-amber-400">★</span>
             <span>Talk & Docs</span>
           </div>
         </div>
-        <div class="p-4 flex flex-col justify-between">
-          <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+        <div class="p-5 flex flex-col justify-between">
+          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
             Émissions
           </h3>
-          <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
             Podcasts en ligne, Grands reportages et Formats TV cultes.
           </p>
         </div>
