@@ -1,1 +1,214 @@
-
+{
+  "categories": [
+    {
+      "id": "dessins-animes",
+      "name": "Dessins animés",
+      "hasSubcategories": false,
+      "items": [
+        {
+          "title": "Avatar : Le Dernier Maître de l'Air",
+          "tag": "Nickelodeon",
+          "rank": "#1",
+          "rating": "10/10",
+          "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Avatar",
+          "comment": "Une référence absolue en termes d'écriture et d'évolution de personnages."
+        },
+        {
+          "title": "Star Wars: The Clone Wars",
+          "tag": "Lucasfilm",
+          "rank": "#2",
+          "rating": "9.5/10",
+          "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Clone+Wars",
+          "comment": "L'arc Mandalore et le final de la saison 7 sont légendaires."
+        }
+      ]
+    },
+    {
+      "id": "animes",
+      "name": "Animes",
+      "hasSubcategories": false,
+      "items": [
+        {
+          "title": "Re:Zero",
+          "tag": "Isekai",
+          "rank": "#1",
+          "rating": "10/10",
+          "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Re:Zero",
+          "comment": "Tension dramatique folle et boucles temporelles magistralement maîtrisées."
+        },
+        {
+          "title": "Naruto Shippuden",
+          "tag": "Shōnen",
+          "rank": "#2",
+          "rating": "9.5/10",
+          "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Naruto",
+          "comment": "L'arc Pain et les antagonistes restent inégalés."
+        },
+        {
+          "title": "Chainsaw Man",
+          "tag": "Action / Dark",
+          "rank": "#3",
+          "rating": "9/10",
+          "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Chainsaw+Man",
+          "comment": "Animation MAPPA hors du commun et rythme frénétique."
+        }
+      ]
+    },
+    {
+      "id": "films",
+      "name": "Films",
+      "hasSubcategories": true,
+      "subcategories": [
+        {
+          "id": "films-solos",
+          "name": "Films solos",
+          "items": [
+            {
+              "title": "Spider-Man: No Way Home",
+              "tag": "MCU",
+              "rank": "#1",
+              "rating": "9.5/10",
+              "image": "https://placehold.co/400x600/1e293b/f8fafc?text=No+Way+Home",
+              "comment": "La réunion multivers au sommet du cinéma de super-héros."
+            }
+          ]
+        },
+        {
+          "id": "sagas",
+          "name": "Sagas",
+          "items": [
+            {
+              "title": "The Infinity Saga",
+              "tag": "Marvel Studios",
+              "rank": "#1",
+              "rating": "10/10",
+              "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Infinity+Saga",
+              "comment": "23 films pour un dénouement historique avec Infinity War et Endgame."
+            }
+          ]
+        },
+        {
+          "id": "films-animation",
+          "name": "Films d'animation",
+          "items": [
+            {
+              "title": "Spider-Man: Across the Spider-Verse",
+              "tag": "Sony Animation",
+              "rank": "#1",
+              "rating": "10/10",
+              "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Spider-Verse",
+              "comment": "Une révolution visuelle et une bande-son spectaculaire."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "series",
+      "name": "Séries",
+      "hasSubcategories": false,
+      "items": [
+        {
+          "title": "Alice in Borderland",
+          "tag": "Survie / Thriller",
+          "rank": "#1",
+          "rating": "9.5/10",
+          "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Borderland",
+          "comment": "Des épreuves de survie d'une tension extrême."
+        },
+        {
+          "title": "Squid Game",
+          "tag": "Drame / Dystopie",
+          "rank": "#2",
+          "rating": "9/10",
+          "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Squid+Game",
+          "comment": "Scénario choc et direction artistique marquante."
+        }
+      ]
+    },
+    {
+      "id": "jeux",
+      "name": "Jeux",
+      "hasSubcategories": true,
+      "subcategories": [
+        {
+          "id": "jeux-anime",
+          "name": "Jeux d'anime",
+          "items": [
+            {
+              "title": "Naruto Shippuden: Ultimate Ninja Storm 4",
+              "tag": "CyberConnect2",
+              "rank": "#1",
+              "rating": "9.5/10",
+              "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Storm+4",
+              "comment": "La référence du combat 3D d'anime et des cinématiques de boss."
+            }
+          ]
+        },
+        {
+          "id": "jeux-generaux",
+          "name": "Jeux tout court",
+          "items": [
+            {
+              "title": "Marvel's Spider-Man Remastered",
+              "tag": "PlayStation / Insomniac",
+              "rank": "#1",
+              "rating": "10/10",
+              "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Spider-Man+PS5",
+              "comment": "Gameplay de déplacement fluide, New York vivant et scénario prenant."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "emissions",
+      "name": "Émissions",
+      "hasSubcategories": true,
+      "subcategories": [
+        {
+          "id": "podcasts",
+          "name": "Podcasts",
+          "items": [
+            {
+              "title": "Popcorn",
+              "tag": "Web Talk",
+              "rank": "#1",
+              "rating": "9/10",
+              "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Popcorn",
+              "comment": "Le rendez-vous talk-show incontournable sur Twitch."
+            }
+          ]
+        },
+        {
+          "id": "reportages",
+          "name": "Reportages",
+          "items": [
+            {
+              "title": "Secrets d'Histoire",
+              "tag": "Culture / Doc",
+              "rank": "#1",
+              "rating": "9/10",
+              "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Secrets+d'Histoire",
+              "comment": "Récits historiques captivants et bien documentés."
+            }
+          ]
+        },
+        {
+          "id": "emissions-tv",
+          "name": "Émissions",
+          "items": [
+            {
+              "title": "Koh-Lanta",
+              "tag": "Stratégie / Survie",
+              "rank": "#1",
+              "rating": "9/10",
+              "image": "https://placehold.co/400x600/1e293b/f8fafc?text=Koh-Lanta",
+              "comment": "L'épreuve des poteaux et les conseils légendaires."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
