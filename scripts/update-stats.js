@@ -2,24 +2,63 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-function fetchViaProxy(targetUrl) {
+function fetchViaJina(url) {
   try {
-    // Passe par le proxy Jina pour contourner le bannissement IP de GitHub Actions
-    const proxyUrl = `https://r.jina.ai/${targetUrl}`;
-    const cmd = `curl -sL --max-time 20 -H "Accept: text/plain" "${proxyUrl}"`;
+    const proxyUrl = `https://r.jina.ai/${url}`;
+    const cmd = `curl -sL --max-time 25 -H "Accept: text/plain" -H "X-No-Cache: true" "${proxyUrl}"`;
     return execSync(cmd, { encoding: 'utf8' }).trim();
   } catch (err) {
+    console.warn(`Erreur récupération sur ${url} :`, err.message);
     return null;
   }
 }
 
-function fetchDirect(url) {
-  try {
-    const cmd = `curl -sL --max-time 10 -A "Mozilla/5.0" "${url}"`;
-    return execSync(cmd, { encoding: 'utf8' }).trim();
-  } catch (err) {
+function parseRanksFromText(text) {
+  const results = {};
+  if (!text) return results;
+
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  const rankRegex = /(Bronze|Silver|Gold|Platinum|Diamond|Champion|Grand Champion|Supersonic Legend)\s+([IVX\d]+)/i;
+  const divRegex = /Division\s+([IVX\d]+)/i;
+
+  function findRankAfter(index) {
+    let rankFound = null;
+    let divFound = null;
+    for (let i = index + 1; i < Math.min(index + 12, lines.length); i++) {
+      const line = lines[i];
+      const match = line.match(rankRegex);
+      if (match && !rankFound) {
+        rankFound = `${match[1]} ${match[2]}`;
+      }
+      const divMatch = line.match(divRegex);
+      if (divMatch && !divFound) {
+        divFound = `Division ${divMatch[1]}`;
+      }
+      if (rankFound && divFound) break;
+    }
+    if (rankFound) {
+      return divFound ? `${rankFound} (${divFound})` : rankFound;
+    }
     return null;
   }
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].toLowerCase();
+    if (line.includes('ranked duel 1v1') || line.includes('duel 1v1')) {
+      const r = findRankAfter(i);
+      if (r) results.duel1v1 = r;
+    }
+    if (line.includes('ranked doubles 2v2') || line.includes('doubles 2v2')) {
+      const r = findRankAfter(i);
+      if (r) results.doubles2v2 = r;
+    }
+    if (line.includes('ranked standard 3v3') || line.includes('standard 3v3')) {
+      const r = findRankAfter(i);
+      if (r) results.standard3v3 = r;
+    }
+  }
+
+  return results;
 }
 
 async function fetchStats() {
@@ -27,9 +66,9 @@ async function fetchStats() {
 
   let currentStats = {
     rocketLeague: {
-      duel1v1: "Gold III (Division III)",
-      doubles2v2: "Platinum II (Division I)",
-      standard3v3: "Platinum II (Division III)"
+      duel1v1: "Non Classé",
+      doubles2v2: "Non Classé",
+      standard3v3: "Non Classé"
     },
     valorant: {
       rang: "Bronze 3",
@@ -43,63 +82,48 @@ async function fetchStats() {
     try {
       currentStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
     } catch (e) {
-      console.warn("Utilisation de la mémoire locale existante.");
+      console.warn("Utilisation de la base existante.");
     }
   }
 
   // ==========================================
-  // 1. ROCKET LEAGUE (VIA PASSERELLE ANTI-BLOCAGE)
+  // 1. ROCKET LEAGUE (TRACKER NETWORK DIRECT)
   // ==========================================
-  console.log("--> [1/2] Récupération des rangs Rocket League via passerelle...");
+  console.log("--> [1/2] Lecture du profil Tracker Network Rocket League...");
+  const rlOverviewUrl = 'https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview';
+  const rlPageContent = fetchViaJina(rlOverviewUrl);
 
-  let rlRaw = fetchViaProxy('https://api.yannismate.de/rank/epic/abdel92jr');
+  if (rlPageContent && rlPageContent.length > 200) {
+    console.log("Page Tracker Network récupérée avec succès ! Extraction des rangs...");
+    const extracted = parseRanksFromText(rlPageContent);
+    
+    if (extracted.duel1v1) currentStats.rocketLeague.duel1v1 = extracted.duel1v1;
+    if (extracted.doubles2v2) currentStats.rocketLeague.doubles2v2 = extracted.doubles2v2;
+    if (extracted.standard3v3) currentStats.rocketLeague.standard3v3 = extracted.standard3v3;
 
-  if (!rlRaw || rlRaw.length < 5) {
-    console.log("Tentative directe sans passerelle...");
-    rlRaw = fetchDirect('https://api.yannismate.de/rank/epic/abdel92jr');
-  }
-
-  if (rlRaw) {
-    console.log("Réponse RL brute reçue :", rlRaw);
-
-    // Si la réponse vient de Jina, on nettoie le texte
-    const cleanContent = rlRaw.replace(/Title:.*\n|URL Source:.*\n|Markdown Content:\n/g, '').trim();
-
-    const segments = cleanContent.split('|');
-    segments.forEach(seg => {
-      const clean = seg.trim();
-      if (clean.toLowerCase().includes('1v1') || clean.toLowerCase().includes('duel')) {
-        const parts = clean.split(':');
-        if (parts[1]) currentStats.rocketLeague.duel1v1 = parts[1].trim();
-      }
-      if (clean.toLowerCase().includes('2v2') || clean.toLowerCase().includes('doubles')) {
-        const parts = clean.split(':');
-        if (parts[1]) currentStats.rocketLeague.doubles2v2 = parts[1].trim();
-      }
-      if (clean.toLowerCase().includes('3v3') || clean.toLowerCase().includes('standard')) {
-        const parts = clean.split(':');
-        if (parts[1]) currentStats.rocketLeague.standard3v3 = parts[1].trim();
-      }
-    });
-
-    console.log("Rangs RL synchronisés :", currentStats.rocketLeague);
+    console.log("Vrais rangs Rocket League extraits :", currentStats.rocketLeague);
   } else {
-    console.warn("API RL temporairement indisponible : conservation des rangs précédents.");
+    console.warn("Impossible de lire la page RL : conservation des rangs précédents.");
   }
 
   // ==========================================
-  // 2. VALORANT (DIRECT)
+  // 2. VALORANT (API OFFICIELLE)
   // ==========================================
   console.log("--> [2/2] Récupération des stats Valorant...");
-  const valoText = fetchDirect('https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu');
-  if (valoText && !valoText.includes('error')) {
-    console.log("Réponse Valorant :", valoText);
-    const parts = valoText.split(',');
-    if (parts[0]) currentStats.valorant.rang = parts[0].trim();
-    if (parts[1] && parts[1].includes('RR:')) {
-      const rrMatch = parts[1].match(/RR:\s*(\d+)/);
-      if (rrMatch) currentStats.valorant.rr = rrMatch[1];
+  try {
+    const valoCmd = `curl -sL --max-time 10 "https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu"`;
+    const valoText = execSync(valoCmd, { encoding: 'utf8' }).trim();
+    if (valoText && !valoText.includes('error')) {
+      console.log("Réponse Valorant :", valoText);
+      const parts = valoText.split(',');
+      if (parts[0]) currentStats.valorant.rang = parts[0].trim();
+      if (parts[1] && parts[1].includes('RR:')) {
+        const rrMatch = parts[1].match(/RR:\s*(\d+)/);
+        if (rrMatch) currentStats.valorant.rr = rrMatch[1];
+      }
     }
+  } catch (errValo) {
+    console.error("Erreur Valorant :", errValo.message);
   }
 
   // ==========================================
