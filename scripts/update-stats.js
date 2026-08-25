@@ -2,16 +2,22 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-function runCurl(url) {
+function fetchViaProxy(targetUrl) {
   try {
-    // -4 force l'IPv4 pour éviter le blocage réseau de GitHub Actions
-    // -k ignore les erreurs de certificat SSL
-    // -sL suit les redirections proprement
-    const cmd = `curl -4 -sL -k --max-time 12 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" "${url}"`;
-    const res = execSync(cmd, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }).trim();
-    return res;
+    // Passe par le proxy Jina pour contourner le bannissement IP de GitHub Actions
+    const proxyUrl = `https://r.jina.ai/${targetUrl}`;
+    const cmd = `curl -sL --max-time 20 -H "Accept: text/plain" "${proxyUrl}"`;
+    return execSync(cmd, { encoding: 'utf8' }).trim();
   } catch (err) {
-    console.warn(`Erreur cURL sur ${url} :`, err.message);
+    return null;
+  }
+}
+
+function fetchDirect(url) {
+  try {
+    const cmd = `curl -sL --max-time 10 -A "Mozilla/5.0" "${url}"`;
+    return execSync(cmd, { encoding: 'utf8' }).trim();
+  } catch (err) {
     return null;
   }
 }
@@ -42,29 +48,24 @@ async function fetchStats() {
   }
 
   // ==========================================
-  // 1. ROCKET LEAGUE (API MULTI-SERVEURS)
+  // 1. ROCKET LEAGUE (VIA PASSERELLE ANTI-BLOCAGE)
   // ==========================================
-  console.log("--> [1/2] Récupération des rangs Rocket League...");
-  
-  const rlEndpoints = [
-    'https://api.yannismate.de/rank/epic/abdel92jr',
-    'http://api.yannismate.de/rank/epic/abdel92jr',
-    'https://api.yannismate.de/rank/epic/abdel92jr?disable_div=false'
-  ];
+  console.log("--> [1/2] Récupération des rangs Rocket League via passerelle...");
 
-  let rlData = null;
-  for (const url of rlEndpoints) {
-    console.log(`Tentative sur : ${url}`);
-    const out = runCurl(url);
-    if (out && out.length > 5 && !out.includes('404') && !out.includes('error')) {
-      rlData = out;
-      break;
-    }
+  let rlRaw = fetchViaProxy('https://api.yannismate.de/rank/epic/abdel92jr');
+
+  if (!rlRaw || rlRaw.length < 5) {
+    console.log("Tentative directe sans passerelle...");
+    rlRaw = fetchDirect('https://api.yannismate.de/rank/epic/abdel92jr');
   }
 
-  if (rlData) {
-    console.log("Réponse RL brute reçue :", rlData);
-    const segments = rlData.split('|');
+  if (rlRaw) {
+    console.log("Réponse RL brute reçue :", rlRaw);
+
+    // Si la réponse vient de Jina, on nettoie le texte
+    const cleanContent = rlRaw.replace(/Title:.*\n|URL Source:.*\n|Markdown Content:\n/g, '').trim();
+
+    const segments = cleanContent.split('|');
     segments.forEach(seg => {
       const clean = seg.trim();
       if (clean.toLowerCase().includes('1v1') || clean.toLowerCase().includes('duel')) {
@@ -80,16 +81,17 @@ async function fetchStats() {
         if (parts[1]) currentStats.rocketLeague.standard3v3 = parts[1].trim();
       }
     });
-    console.log("Nouveaux rangs RL enregistrés :", currentStats.rocketLeague);
+
+    console.log("Rangs RL synchronisés :", currentStats.rocketLeague);
   } else {
-    console.warn("Serveurs RL injoignables : conservation des rangs précédents.");
+    console.warn("API RL temporairement indisponible : conservation des rangs précédents.");
   }
 
   // ==========================================
-  // 2. VALORANT (API OFFICIELLE)
+  // 2. VALORANT (DIRECT)
   // ==========================================
   console.log("--> [2/2] Récupération des stats Valorant...");
-  const valoText = runCurl('https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu');
+  const valoText = fetchDirect('https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu');
   if (valoText && !valoText.includes('error')) {
     console.log("Réponse Valorant :", valoText);
     const parts = valoText.split(',');
