@@ -3,119 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HQ Dashboard & Palmarès</title>
+  <title>HQ DASHBOARD</title>
   
-  <!-- Tailwind CSS CDN -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts & Font Awesome -->
+  <!-- Fonts & Icônes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-
   <style>
-    html {
-      background-color: #0b0f19;
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      background-color: #0f172a !important;
+      color: #f8fafc !important;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
     }
     body {
-      background-color: #0b0f19;
-      background-image: linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.92)), 
-                        url('dragon%20ball%20z%20arriere%20plan.jpg'),
-                        url('dragon ball z arriere plan.jpg');
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-attachment: fixed;
-      background-size: cover;
-      color: #f8fafc;
+      background: linear-gradient(rgba(15, 23, 42, 0.90), rgba(15, 23, 42, 0.96)), 
+                  url('dragon ball z arriere plan.jpg') no-repeat center center fixed !important;
+      background-size: cover !important;
     }
-    .glass-panel {
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .custom-card {
+      background-color: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
       height: 6px;
+      width: 6px;
     }
     .custom-scrollbar::-webkit-scrollbar-track {
-      background: rgba(15, 23, 42, 0.5);
+      background: #0f172a;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(245, 158, 11, 0.3);
+      background: #334155;
       border-radius: 9999px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: rgba(245, 158, 11, 0.6);
+      background: #f59e0b;
     }
   </style>
 </head>
-<body class="min-h-screen font-sans antialiased custom-scrollbar">
+<body class="custom-scrollbar antialiased">
 
   <!-- ========================================================== -->
-  <!-- BARRE DE NAVIGATION SUPÉRIEURE                              -->
+  <!-- 1. NAVBAR SUPÉRIEURE                                       -->
   <!-- ========================================================== -->
-  <nav class="sticky top-0 z-50 glass-panel border-b border-white/10 px-6 py-4 mb-8">
+  <header class="sticky top-0 z-50 bg-[#1e293b]/90 backdrop-blur-md border-b border-slate-700/60 px-6 py-4 mb-8">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Logo & Titre -->
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/30">
-          <i class="fa-solid fa-dragon text-slate-950 text-xl"></i>
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/20 text-slate-950 font-black text-xl">
+          <i class="fa-solid fa-dragon"></i>
         </div>
         <div>
-          <h1 class="text-xl font-black tracking-wider uppercase bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-500">
-            HQ Dashboard
+          <h1 class="text-xl font-black tracking-wider uppercase text-amber-500">
+            HQ DASHBOARD
           </h1>
-          <p class="text-xs text-slate-400 font-medium tracking-wide">Interface Centrale & Statistiques</p>
+          <p class="text-xs text-slate-400 font-medium">Interface Centrale & Statistiques</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-2 sm:gap-4 text-sm font-bold">
-        <a href="#gaming-stats" class="px-3.5 py-1.5 rounded-lg hover:bg-white/10 transition-colors text-slate-300 hover:text-amber-400">
-          <i class="fa-solid fa-gamepad mr-1.5"></i>Stats
+      <!-- Liens rapides -->
+      <div class="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-bold">
+        <a href="#stats-section" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 hover:border-slate-600 transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-gamepad"></i> Stats
         </a>
-        <a href="#planning-section" class="px-3.5 py-1.5 rounded-lg hover:bg-white/10 transition-colors text-slate-300 hover:text-amber-400">
-          <i class="fa-solid fa-calendar-week mr-1.5"></i>Planning
+        <a href="#planning-section" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700 hover:border-slate-600 transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-calendar-days"></i> Planning
         </a>
-        <a href="#palmares-section" class="px-3.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-400/30 text-amber-400 hover:bg-amber-500/20 transition-all">
-          <i class="fa-solid fa-trophy mr-1.5"></i>Palmarès
+        <a href="#palmares-section" class="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-black border border-amber-400 shadow-md shadow-amber-500/20 transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-trophy"></i> Palmarès
         </a>
       </div>
 
-      <div class="hidden md:flex items-center gap-3 bg-slate-900/80 border border-white/10 px-4 py-2 rounded-xl shadow-inner">
-        <i class="fa-regular fa-clock text-amber-400"></i>
-        <span id="live-clock" class="text-sm font-bold tracking-wider text-slate-200">--:--:--</span>
+      <!-- Horloge (24h) -->
+      <div class="hidden md:flex items-center gap-2.5 bg-slate-900 border border-slate-700/80 px-3.5 py-1.5 rounded-xl text-amber-400 font-mono text-sm font-bold">
+        <i class="fa-regular fa-clock"></i>
+        <span id="live-clock">--:--:--</span>
       </div>
+
     </div>
-  </nav>
+  </header>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-24 space-y-12">
 
     <!-- ========================================================== -->
-    <!-- SECTION 1 : STATS GAMING                                   -->
+    <!-- 2. SECTION STATISTIQUES COMPÉTITIVES                       -->
     <!-- ========================================================== -->
-    <section id="gaming-stats">
-      <div class="flex items-center justify-between mb-6">
+    <section id="stats-section">
+      <div class="flex items-center justify-between mb-5">
         <div class="flex items-center gap-3">
-          <div class="w-2.5 h-8 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"></div>
-          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-wide text-white">
-            Statistiques Compétitives
+          <div class="w-2.5 h-7 bg-amber-500 rounded-full"></div>
+          <h2 class="text-xl sm:text-2xl font-black uppercase tracking-wider text-white">
+            STATISTIQUES COMPÉTITIVES
           </h2>
         </div>
-        <span class="text-xs text-slate-300 flex items-center gap-2 bg-slate-900/80 border border-white/10 px-3.5 py-1.5 rounded-full font-bold">
+        <span class="text-xs text-slate-400 bg-slate-800/80 border border-slate-700 px-3 py-1 rounded-full font-bold flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           Auto-Sync GitHub
         </span>
@@ -124,69 +116,67 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         <!-- CARTE VALORANT -->
-        <div class="glass-panel rounded-3xl p-6 relative overflow-hidden border border-red-500/20 hover:border-red-500/40 transition-all shadow-2xl">
-          <div class="absolute -right-8 -top-8 w-40 h-40 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
-          <div class="flex items-center justify-between mb-6">
+        <div class="custom-card rounded-2xl p-6 shadow-xl relative overflow-hidden">
+          <div class="flex items-center justify-between mb-5">
             <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-2xl bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-500 shadow-lg">
-                <i class="fa-solid fa-crosshairs text-2xl"></i>
+              <div class="w-10 h-10 rounded-xl bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 text-lg">
+                <i class="fa-solid fa-crosshairs"></i>
               </div>
               <div>
-                <h3 class="text-lg font-black text-white">Valorant</h3>
+                <h3 class="text-base font-black text-white">Valorant</h3>
                 <p class="text-xs text-slate-400">Abouu92jr #0213 (EU)</p>
               </div>
             </div>
-            <span id="valo-rank-badge" class="px-3.5 py-1 rounded-xl text-xs font-black bg-red-500/20 border border-red-500/40 text-red-400 shadow-sm">
-              Chargement...
+            <span id="valo-rank-badge" class="px-3 py-1 rounded-lg text-xs font-black bg-red-500/20 border border-red-500/30 text-red-400">
+              Silver 1
             </span>
           </div>
 
           <div class="grid grid-cols-3 gap-3">
-            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
-              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Rang</span>
-              <span id="valo-rank" class="text-base sm:text-lg font-black text-white">--</span>
+            <div class="bg-slate-900/90 border border-slate-700/60 p-3 rounded-xl text-center">
+              <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Rang</span>
+              <span id="valo-rank" class="text-sm sm:text-base font-black text-white">Silver 1</span>
             </div>
-            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
-              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Score RR</span>
-              <span id="valo-rr" class="text-base sm:text-lg font-black text-amber-400">--</span>
+            <div class="bg-slate-900/90 border border-slate-700/60 p-3 rounded-xl text-center">
+              <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Score RR</span>
+              <span id="valo-rr" class="text-sm sm:text-base font-black text-amber-400">31 RR</span>
             </div>
-            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
-              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">K/D | HS%</span>
-              <span id="valo-kd" class="text-base sm:text-lg font-black text-slate-200">0.74 | 15.6%</span>
+            <div class="bg-slate-900/90 border border-slate-700/60 p-3 rounded-xl text-center">
+              <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">K/D | HS%</span>
+              <span id="valo-kd" class="text-sm sm:text-base font-black text-slate-200">0.74 | 15.6%</span>
             </div>
           </div>
         </div>
 
         <!-- CARTE ROCKET LEAGUE -->
-        <div class="glass-panel rounded-3xl p-6 relative overflow-hidden border border-blue-500/20 hover:border-blue-500/40 transition-all shadow-2xl">
-          <div class="absolute -right-8 -top-8 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-          <div class="flex items-center justify-between mb-6">
+        <div class="custom-card rounded-2xl p-6 shadow-xl relative overflow-hidden">
+          <div class="flex items-center justify-between mb-5">
             <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shadow-lg">
-                <i class="fa-solid fa-car-side text-2xl"></i>
+              <div class="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-lg">
+                <i class="fa-solid fa-car-side"></i>
               </div>
               <div>
-                <h3 class="text-lg font-black text-white">Rocket League</h3>
+                <h3 class="text-base font-black text-white">Rocket League</h3>
                 <p class="text-xs text-slate-400">Epic: abdel92jr</p>
               </div>
             </div>
-            <span class="px-3.5 py-1 rounded-xl text-xs font-black bg-blue-500/20 border border-blue-500/40 text-blue-400 shadow-sm">
+            <span class="px-3 py-1 rounded-lg text-xs font-black bg-blue-500/20 border border-blue-500/30 text-blue-400">
               Saison Active
             </span>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
-              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Duel 1v1</span>
-              <span id="rl-1v1" class="text-xs sm:text-sm font-black text-white">--</span>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-slate-900/90 border border-slate-700/60 p-3 rounded-xl text-center">
+              <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Duel 1v1</span>
+              <span id="rl-1v1" class="text-xs sm:text-sm font-black text-white">Platinum I (Division III)</span>
             </div>
-            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
-              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Doubles 2v2</span>
-              <span id="rl-2v2" class="text-xs sm:text-sm font-black text-amber-400">--</span>
+            <div class="bg-slate-900/90 border border-slate-700/60 p-3 rounded-xl text-center">
+              <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Doubles 2v2</span>
+              <span id="rl-2v2" class="text-xs sm:text-sm font-black text-amber-400">Platinum II (Division III)</span>
             </div>
-            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
-              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Standard 3v3</span>
-              <span id="rl-3v3" class="text-xs sm:text-sm font-black text-white">--</span>
+            <div class="bg-slate-900/90 border border-slate-700/60 p-3 rounded-xl text-center">
+              <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Standard 3v3</span>
+              <span id="rl-3v3" class="text-xs sm:text-sm font-black text-white">Platinum II (Division II)</span>
             </div>
           </div>
         </div>
@@ -195,112 +185,98 @@
     </section>
 
     <!-- ========================================================== -->
-    <!-- SECTION 2 : PLANNING HEBDOMADAIRE                          -->
+    <!-- 3. SECTION PLANNING HEBDOMADAIRE                           -->
     <!-- ========================================================== -->
     <section id="planning-section">
-      <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center justify-between mb-5">
         <div class="flex items-center gap-3">
-          <div class="w-2.5 h-8 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"></div>
-          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-wide text-white">
-            Planning Hebdomadaire
+          <div class="w-2.5 h-7 bg-amber-500 rounded-full"></div>
+          <h2 class="text-xl sm:text-2xl font-black uppercase tracking-wider text-white">
+            PLANNING HEBDOMADAIRE
           </h2>
         </div>
-        <span class="text-xs text-slate-300 bg-slate-900/80 border border-white/10 px-3.5 py-1.5 rounded-full font-bold">
+        <span class="text-xs text-slate-400 bg-slate-800/80 border border-slate-700 px-3 py-1 rounded-full font-bold">
           Format 24h
         </span>
       </div>
 
-      <div class="glass-panel rounded-3xl p-6 overflow-x-auto custom-scrollbar shadow-2xl">
-        <div class="grid grid-cols-7 gap-4 min-w-[850px]">
+      <div class="custom-card rounded-2xl p-5 overflow-x-auto custom-scrollbar shadow-xl">
+        <div class="grid grid-cols-7 gap-3 min-w-[800px]">
           
           <!-- Lundi -->
-          <div class="flex flex-col gap-3">
-            <div class="text-center pb-3 border-b border-white/10">
-              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Lundi</span>
+          <div class="flex flex-col gap-2">
+            <div class="text-center pb-2 border-b border-slate-700/60">
+              <span class="text-xs font-black text-amber-400 uppercase">Lundi</span>
             </div>
-            <div class="space-y-2">
-              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
-                <span class="text-[10px] text-amber-400 font-bold block">14:00 - 16:30</span>
-                <p class="font-semibold text-slate-200 mt-0.5">Montage & Vidéos</p>
-              </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
+              <span class="text-[10px] text-amber-400 font-bold block">14:00 – 16:30</span>
+              <p class="font-bold text-slate-200 mt-1">Montage & Vidéos</p>
             </div>
           </div>
 
           <!-- Mardi -->
-          <div class="flex flex-col gap-3">
-            <div class="text-center pb-3 border-b border-white/10">
-              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Mardi</span>
+          <div class="flex flex-col gap-2">
+            <div class="text-center pb-2 border-b border-slate-700/60">
+              <span class="text-xs font-black text-amber-400 uppercase">Mardi</span>
             </div>
-            <div class="space-y-2">
-              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
-                <span class="text-[10px] text-amber-400 font-bold block">18:00 - 20:00</span>
-                <p class="font-semibold text-slate-200 mt-0.5">Session Ranked</p>
-              </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
+              <span class="text-[10px] text-amber-400 font-bold block">18:00 – 20:00</span>
+              <p class="font-bold text-slate-200 mt-1">Session Ranked</p>
             </div>
           </div>
 
           <!-- Mercredi -->
-          <div class="flex flex-col gap-3">
-            <div class="text-center pb-3 border-b border-white/10">
-              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Mercredi</span>
+          <div class="flex flex-col gap-2">
+            <div class="text-center pb-2 border-b border-slate-700/60">
+              <span class="text-xs font-black text-amber-400 uppercase">Mercredi</span>
             </div>
-            <div class="space-y-2">
-              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
-                <span class="text-[10px] text-amber-400 font-bold block">15:00 - 18:00</span>
-                <p class="font-semibold text-slate-200 mt-0.5">Projets HQ / Création</p>
-              </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
+              <span class="text-[10px] text-amber-400 font-bold block">15:00 – 18:00</span>
+              <p class="font-bold text-slate-200 mt-1">Projets HQ / Création</p>
             </div>
           </div>
 
           <!-- Jeudi -->
-          <div class="flex flex-col gap-3">
-            <div class="text-center pb-3 border-b border-white/10">
-              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Jeudi</span>
+          <div class="flex flex-col gap-2">
+            <div class="text-center pb-2 border-b border-slate-700/60">
+              <span class="text-xs font-black text-amber-400 uppercase">Jeudi</span>
             </div>
-            <div class="space-y-2">
-              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
-                <span class="text-[10px] text-amber-400 font-bold block">19:00 - 21:00</span>
-                <p class="font-semibold text-slate-200 mt-0.5">Entraînement Volley</p>
-              </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
+              <span class="text-[10px] text-amber-400 font-bold block">19:00 – 21:00</span>
+              <p class="font-bold text-slate-200 mt-1">Entraînement Volley</p>
             </div>
           </div>
 
           <!-- Vendredi -->
-          <div class="flex flex-col gap-3">
-            <div class="text-center pb-3 border-b border-white/10">
-              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Vendredi</span>
+          <div class="flex flex-col gap-2">
+            <div class="text-center pb-2 border-b border-slate-700/60">
+              <span class="text-xs font-black text-amber-400 uppercase">Vendredi</span>
             </div>
-            <div class="space-y-2">
-              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
-                <span class="text-[10px] text-amber-400 font-bold block">21:00 - 23:30</span>
-                <p class="font-semibold text-slate-200 mt-0.5">Soirée Tournoi / Squad</p>
-              </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
+              <span class="text-[10px] text-amber-400 font-bold block">21:00 – 23:30</span>
+              <p class="font-bold text-slate-200 mt-1">Soirée Tournoi / Squad</p>
             </div>
           </div>
 
           <!-- Samedi -->
-          <div class="flex flex-col gap-3">
-            <div class="text-center pb-3 border-b border-white/10">
-              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Samedi</span>
+          <div class="flex flex-col gap-2">
+            <div class="text-center pb-2 border-b border-slate-700/60">
+              <span class="text-xs font-black text-amber-400 uppercase">Samedi</span>
             </div>
-            <div class="space-y-2">
-              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
-                <span class="text-[10px] text-amber-400 font-bold block">14:00 - 18:00</span>
-                <p class="font-semibold text-slate-200 mt-0.5">Matchs & Sport</p>
-              </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
+              <span class="text-[10px] text-amber-400 font-bold block">14:00 – 18:00</span>
+              <p class="font-bold text-slate-200 mt-1">Matchs & Sport</p>
             </div>
           </div>
 
           <!-- Dimanche -->
-          <div class="flex flex-col gap-3">
-            <div class="text-center pb-3 border-b border-white/10">
-              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Dimanche</span>
+          <div class="flex flex-col gap-2">
+            <div class="text-center pb-2 border-b border-slate-700/60">
+              <span class="text-xs font-black text-amber-400 uppercase">Dimanche</span>
             </div>
-            <div class="space-y-2">
-              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
-                <span class="text-[10px] text-amber-400 font-bold block">20:30 - 23:00</span>
-                <p class="font-semibold text-slate-200 mt-0.5">Watchlist & Détente</p>
-              </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
+              <span class="text-[10px] text-amber-400 font-bold block">20:30 – 23:00</span>
+              <p class="font-bold text-slate-200 mt-1">Watchlist & Détente</p>
             </div>
           </div>
 
@@ -309,41 +285,41 @@
     </section>
 
     <!-- ========================================================== -->
-    <!-- SECTION 3 : PALMARÈS                                       -->
+    <!-- 4. SECTION PALMARÈS                                        -->
     <!-- ========================================================== -->
     <section id="palmares-section">
-      <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center justify-between mb-5">
         <div class="flex items-center gap-3">
-          <div class="w-2.5 h-8 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"></div>
-          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500">
-            Palmarès
+          <div class="w-2.5 h-7 bg-amber-500 rounded-full"></div>
+          <h2 class="text-xl sm:text-2xl font-black uppercase tracking-wider text-amber-500">
+            PALMARÈS
           </h2>
         </div>
       </div>
 
-      <!-- Navigation Catégories Principales -->
-      <div class="flex flex-wrap gap-2.5 mb-6 border-b border-white/10 pb-4" id="palmares-categories-nav">
-        <!-- Rempli par JavaScript -->
+      <!-- Onglets des 6 catégories -->
+      <div class="flex flex-wrap gap-2 mb-4 pb-2 border-b border-slate-700/60" id="palmares-nav">
+        <!-- Généré dynamiquement en JS -->
       </div>
 
-      <!-- Sous-Catégories -->
-      <div class="flex flex-wrap gap-2 mb-8 hidden" id="palmares-subcategories-nav">
-        <!-- Rempli par JavaScript -->
+      <!-- Sous-catégories (affichées quand nécessaire) -->
+      <div class="flex flex-wrap gap-2 mb-6 hidden" id="palmares-subnav">
+        <!-- Généré dynamiquement en JS -->
       </div>
 
-      <!-- Grille du Palmarès -->
+      <!-- Grille d'affichage des cartes -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="palmares-grid">
-        <!-- Injecté dynamiquement -->
+        <!-- Généré dynamiquement en JS -->
       </div>
     </section>
 
   </main>
 
   <!-- ========================================================== -->
-  <!-- SCRIPTS D'EXÉCUTION                                        -->
+  <!-- 5. JAVASCRIPT DU DASHBOARD                                 -->
   <!-- ========================================================== -->
   <script>
-    // 1. HORLOGE TEMPS RÉEL (24h)
+    // Horloge 24h
     function updateClock() {
       const now = new Date();
       const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Europe/Paris' };
@@ -355,7 +331,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // 2. STATS COMPÉTITIVES
+    // Synchronisation stats.json
     async function loadStats() {
       try {
         const response = await fetch(`stats.json?t=${Date.now()}`);
@@ -363,149 +339,151 @@
         const data = await response.json();
 
         if (data.valorant) {
-          document.getElementById('valo-rank').textContent = data.valorant.rang || '--';
-          document.getElementById('valo-rank-badge').textContent = data.valorant.rang || 'Classé';
-          document.getElementById('valo-rr').textContent = `${data.valorant.rr || '0'} RR`;
+          if (data.valorant.rang) {
+            document.getElementById('valo-rank').textContent = data.valorant.rang;
+            document.getElementById('valo-rank-badge').textContent = data.valorant.rang;
+          }
+          if (data.valorant.rr) {
+            document.getElementById('valo-rr').textContent = `${data.valorant.rr} RR`;
+          }
           if (data.valorant.kd && data.valorant.hs) {
             document.getElementById('valo-kd').textContent = `${data.valorant.kd} | ${data.valorant.hs}`;
           }
         }
 
         if (data.rocketLeague) {
-          document.getElementById('rl-1v1').textContent = data.rocketLeague.duel1v1 || 'Non Classé';
-          document.getElementById('rl-2v2').textContent = data.rocketLeague.doubles2v2 || 'Non Classé';
-          document.getElementById('rl-3v3').textContent = data.rocketLeague.standard3v3 || 'Non Classé';
+          if (data.rocketLeague.duel1v1) document.getElementById('rl-1v1').textContent = data.rocketLeague.duel1v1;
+          if (data.rocketLeague.doubles2v2) document.getElementById('rl-2v2').textContent = data.rocketLeague.doubles2v2;
+          if (data.rocketLeague.standard3v3) document.getElementById('rl-3v3').textContent = data.rocketLeague.standard3v3;
         }
       } catch (e) {
-        console.warn("Impossible de charger stats.json :", e);
+        console.warn("stats.json introuvable :", e);
       }
     }
 
-    // 3. PALMARÈS DYNAMIQUE
-    let palmaresData = null;
-    let activeCatIndex = 0;
-    let activeSubCatIndex = 0;
+    // Gestion du Palmarès
+    let palData = null;
+    let activeCat = 0;
+    let activeSub = 0;
 
     async function loadPalmares() {
       try {
         const res = await fetch(`palmares.json?t=${Date.now()}`);
-        if (!res.ok) throw new Error("Fichier non trouvé");
-        palmaresData = await res.json();
-        renderCategoryNav();
-        renderPalmares();
+        if (!res.ok) throw new Error("Fichier introuvable");
+        palData = await res.json();
+        renderNav();
+        renderCards();
       } catch (err) {
-        console.error("Erreur de chargement de palmares.json :", err);
+        console.warn("Erreur chargement palmares.json :", err);
       }
     }
 
-    function renderCategoryNav() {
-      const nav = document.getElementById('palmares-categories-nav');
-      if (!nav || !palmaresData?.categories) return;
+    function renderNav() {
+      const nav = document.getElementById('palmares-nav');
+      if (!nav || !palData?.categories) return;
       nav.innerHTML = '';
 
-      palmaresData.categories.forEach((cat, idx) => {
+      palData.categories.forEach((cat, idx) => {
         const btn = document.createElement('button');
-        const isActive = idx === activeCatIndex;
-        btn.className = `px-5 py-2.5 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 border ${
+        const isActive = idx === activeCat;
+        btn.className = `px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold tracking-wide transition-all ${
           isActive
-            ? 'bg-amber-500 text-slate-950 border-amber-400 shadow-lg shadow-amber-500/25 scale-105'
-            : 'bg-slate-900/80 text-slate-300 border-white/10 hover:bg-slate-800 hover:text-white'
+            ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
+            : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700'
         }`;
         btn.textContent = cat.name;
         btn.onclick = () => {
-          activeCatIndex = idx;
-          activeSubCatIndex = 0;
-          renderCategoryNav();
-          renderPalmares();
+          activeCat = idx;
+          activeSub = 0;
+          renderNav();
+          renderCards();
         };
         nav.appendChild(btn);
       });
     }
 
-    function renderSubCategoryNav(category) {
-      const subNav = document.getElementById('palmares-subcategories-nav');
-      if (!category.hasSubcategories || !category.subcategories) {
-        subNav.classList.add('hidden');
+    function renderSubNav(cat) {
+      const subnav = document.getElementById('palmares-subnav');
+      if (!cat.hasSubcategories || !cat.subcategories) {
+        subnav.classList.add('hidden');
         return;
       }
+      subnav.classList.remove('hidden');
+      subnav.innerHTML = '';
 
-      subNav.classList.remove('hidden');
-      subNav.innerHTML = '';
-
-      category.subcategories.forEach((sub, idx) => {
+      cat.subcategories.forEach((sub, idx) => {
         const btn = document.createElement('button');
-        const isActive = idx === activeSubCatIndex;
-        btn.className = `px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all border ${
+        const isActive = idx === activeSub;
+        btn.className = `px-3 py-1 rounded-lg text-xs font-bold transition-all ${
           isActive
-            ? 'bg-amber-400/20 text-amber-300 border-amber-400/50 shadow-sm'
-            : 'bg-slate-800/60 text-slate-400 border-white/5 hover:text-slate-200'
+            ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40'
+            : 'bg-slate-900/80 text-slate-400 border border-slate-800 hover:text-slate-200'
         }`;
         btn.textContent = sub.name;
         btn.onclick = () => {
-          activeSubCatIndex = idx;
-          renderSubCategoryNav(category);
-          renderPalmares();
+          activeSub = idx;
+          renderSubNav(cat);
+          renderCards();
         };
-        subNav.appendChild(btn);
+        subnav.appendChild(btn);
       });
     }
 
-    function renderPalmares() {
-      if (!palmaresData?.categories) return;
-      const currentCat = palmaresData.categories[activeCatIndex];
-      renderSubCategoryNav(currentCat);
+    function renderCards() {
+      if (!palData?.categories) return;
+      const curCat = palData.categories[activeCat];
+      renderSubNav(curCat);
 
       const grid = document.getElementById('palmares-grid');
       grid.innerHTML = '';
 
-      let itemsToDisplay = [];
-      if (currentCat.hasSubcategories && currentCat.subcategories) {
-        itemsToDisplay = currentCat.subcategories[activeSubCatIndex]?.items || [];
+      let items = [];
+      if (curCat.hasSubcategories && curCat.subcategories) {
+        items = curCat.subcategories[activeSub]?.items || [];
       } else {
-        itemsToDisplay = currentCat.items || [];
+        items = curCat.items || [];
       }
 
-      if (itemsToDisplay.length === 0) {
+      if (items.length === 0) {
         grid.innerHTML = `
-          <div class="col-span-full py-16 text-center text-slate-500 font-medium">
-            Aucune œuvre enregistrée dans cette catégorie pour le moment.
+          <div class="col-span-full py-12 text-center text-slate-500 font-bold text-sm">
+            Aucun élément pour l'instant.
           </div>
         `;
         return;
       }
 
-      itemsToDisplay.forEach(item => {
+      items.forEach(item => {
         const card = document.createElement('div');
-        card.className = "group relative rounded-3xl overflow-hidden bg-slate-900/85 border border-white/10 hover:border-amber-400/50 transition-all duration-300 hover:-translate-y-1.5 shadow-2xl flex flex-col";
+        card.className = "custom-card rounded-2xl overflow-hidden shadow-xl flex flex-col hover:border-slate-500 transition-all";
 
         card.innerHTML = `
-          <div class="relative w-full aspect-[2/3] overflow-hidden bg-slate-950">
-            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-transparent"></div>
+          <div class="relative w-full aspect-[2/3] bg-slate-950 overflow-hidden">
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
             
-            <span class="absolute top-3 left-3 bg-amber-500 text-slate-950 text-xs font-black px-2.5 py-1 rounded-xl shadow-md uppercase">
-              ${item.rank || '★'}
+            <span class="absolute top-2.5 left-2.5 bg-amber-500 text-slate-950 text-xs font-black px-2 py-0.5 rounded-md shadow-md">
+              ${item.rank || '#'}
             </span>
 
             ${item.tag ? `
-              <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-amber-300 border border-amber-400/30 text-[11px] font-bold px-2 py-0.5 rounded-md">
+              <span class="absolute top-2.5 right-2.5 bg-slate-900/90 border border-slate-700 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
                 ${item.tag}
               </span>
             ` : ''}
 
-            <div class="absolute bottom-3 right-3 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 flex items-center gap-1.5">
+            <div class="absolute bottom-2.5 right-2.5 bg-slate-900/90 border border-slate-700 px-2 py-0.5 rounded-md flex items-center gap-1">
               <span class="text-amber-400 text-xs">★</span>
               <span class="text-white text-xs font-bold">${item.rating || '-'}</span>
             </div>
           </div>
 
-          <div class="p-4 flex-1 flex flex-col justify-between">
+          <div class="p-4 flex-1 flex flex-col justify-between bg-[#1e293b]">
             <div>
-              <h3 class="font-bold text-base text-white group-hover:text-amber-300 transition-colors line-clamp-1">
+              <h3 class="font-extrabold text-sm text-white line-clamp-1">
                 ${item.title}
               </h3>
               ${item.comment ? `
-                <p class="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                <p class="text-xs text-slate-400 mt-1.5 line-clamp-2">
                   "${item.comment}"
                 </p>
               ` : ''}
@@ -516,7 +494,6 @@
       });
     }
 
-    // INITIALISATION
     document.addEventListener('DOMContentLoaded', () => {
       loadStats();
       loadPalmares();
