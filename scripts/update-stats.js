@@ -4,79 +4,35 @@ const { execSync } = require('child_process');
 
 function fetchViaJina(url) {
   try {
-    // Horodatage dynamique anti-cache pour forcer les données à la seconde près
-    const cacheBuster = `nocache_${Date.now()}`;
-    const targetWithBuster = url.includes('?') ? `${url}&_t=${cacheBuster}` : `${url}?_t=${cacheBuster}`;
+    const targetWithBuster = url.includes('?') ? `${url}&_t=${Date.now()}` : `${url}?_t=${Date.now()}`;
     const proxyUrl = `https://r.jina.ai/${targetWithBuster}`;
-
-    const cmd = `curl -sL --max-time 25 -H "Accept: text/plain" -H "X-No-Cache: true" "${proxyUrl}"`;
+    const cmd = `curl -sL --max-time 30 -H "Accept: text/plain" -H "X-No-Cache: true" "${proxyUrl}"`;
     return execSync(cmd, { encoding: 'utf8' }).trim();
   } catch (err) {
-    console.warn(`Erreur lors de la récupération sur ${url} :`, err.message);
+    console.warn(`Erreur récupération sur ${url} :`, err.message);
     return null;
   }
 }
 
-function parseCurrentRanks(text) {
-  const results = {};
-  if (!text) return results;
+function extractRankFromChunk(text, modeRegex) {
+  const match = text.match(modeRegex);
+  if (!match) return null;
 
-  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-  const rankRegex = /(Bronze|Silver|Gold|Platinum|Diamond|Champion|Grand Champion|Supersonic Legend)\s+([IVX\d]+)/i;
-  const divRegex = /Division\s+([IVX\d]+)/i;
+  // Récupère les 600 caractères suivant immédiatement le titre du mode
+  const startIndex = match.index;
+  const chunk = text.slice(startIndex, startIndex + 600);
 
-  function findFirstRankAfter(index) {
-    let rankFound = null;
-    let divFound = null;
+  const rankMatch = chunk.match(/\b(Bronze|Silver|Gold|Platinum|Diamond|Champion|Grand Champion|Supersonic Legend)\s+([IVX\d]+)/i);
+  const divMatch = chunk.match(/Division\s+([IVX\d]+)/i);
 
-    for (let i = index + 1; i < Math.min(index + 10, lines.length); i++) {
-      const line = lines[i];
-
-      // Évite de déborder sur le mode suivant
-      if (line.toLowerCase().includes('ranked') || line.toLowerCase().includes('un-ranked')) {
-        break;
-      }
-
-      const match = line.match(rankRegex);
-      if (match && !rankFound) {
-        rankFound = `${match[1]} ${match[2]}`;
-      }
-
-      const divMatch = line.match(divRegex);
-      if (divMatch && !divFound) {
-        divFound = `Division ${divMatch[1]}`;
-      }
-
-      if (rankFound && divFound) break;
-    }
-
-    if (rankFound) {
-      return divFound ? `${rankFound} (${divFound})` : rankFound;
-    }
-    return null;
+  if (rankMatch) {
+    const tierName = rankMatch[1].charAt(0).toUpperCase() + rankMatch[1].slice(1).toLowerCase();
+    const tierLevel = rankMatch[2].toUpperCase();
+    const rank = `${tierName} ${tierLevel}`;
+    const div = divMatch ? `Division ${divMatch[1].toUpperCase()}` : null;
+    return div ? `${rank} (${div})` : rank;
   }
-
-  // Ne prend QUE la première occurrence (la saison active en haut de page)
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].toLowerCase();
-
-    if ((line.includes('ranked duel 1v1') || line.includes('duel 1v1')) && !results.duel1v1) {
-      const r = findFirstRankAfter(i);
-      if (r) results.duel1v1 = r;
-    }
-
-    if ((line.includes('ranked doubles 2v2') || line.includes('doubles 2v2')) && !results.doubles2v2) {
-      const r = findFirstRankAfter(i);
-      if (r) results.doubles2v2 = r;
-    }
-
-    if ((line.includes('ranked standard 3v3') || line.includes('standard 3v3')) && !results.standard3v3) {
-      const r = findFirstRankAfter(i);
-      if (r) results.standard3v3 = r;
-    }
-  }
-
-  return results;
+  return null;
 }
 
 async function fetchStats() {
@@ -100,39 +56,43 @@ async function fetchStats() {
     try {
       currentStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
     } catch (e) {
-      console.warn("Utilisation de la base existante.");
+      console.warn("Utilisation de la mémoire locale existante.");
     }
   }
 
   // ==========================================
-  // 1. ROCKET LEAGUE (TRACKER NETWORK TEMPS RÉEL)
+  // 1. ROCKET LEAGUE (TRACKER NETWORK)
   // ==========================================
-  console.log("--> [1/2] Lecture temps réel du profil Tracker Network Rocket League...");
-  const rlOverviewUrl = 'https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview';
-  const rlPageContent = fetchViaJina(rlOverviewUrl);
+  console.log("--> [1/2] Récupération Tracker Network Rocket League...");
+  const rlUrl = 'https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview';
+  const rawPage = fetchViaJina(rlUrl);
 
-  if (rlPageContent && rlPageContent.length > 200) {
-    const extracted = parseCurrentRanks(rlPageContent);
-    console.log("Données actuelles extraites :", extracted);
+  if (rawPage && rawPage.length > 200) {
+    console.log("Page reçue avec succès (" + rawPage.length + " caractères). Extraction...");
 
-    if (extracted.duel1v1) currentStats.rocketLeague.duel1v1 = extracted.duel1v1;
-    if (extracted.doubles2v2) currentStats.rocketLeague.doubles2v2 = extracted.doubles2v2;
-    if (extracted.standard3v3) currentStats.rocketLeague.standard3v3 = extracted.standard3v3;
+    const r1v1 = extractRankFromChunk(rawPage, /Ranked\s+Duel\s+1v1|Duel\s+1v1/i);
+    const r2v2 = extractRankFromChunk(rawPage, /Ranked\s+Doubles\s+2v2|Doubles\s+2v2/i);
+    const r3v3 = extractRankFromChunk(rawPage, /Ranked\s+Standard\s+3v3|Standard\s+3v3/i);
 
-    console.log("Rangs Rocket League mis à jour :", currentStats.rocketLeague);
+    console.log("Extraction brute :", { r1v1, r2v2, r3v3 });
+
+    if (r1v1) currentStats.rocketLeague.duel1v1 = r1v1;
+    if (r2v2) currentStats.rocketLeague.doubles2v2 = r2v2;
+    if (r3v3) currentStats.rocketLeague.standard3v3 = r3v3;
+
+    console.log("Rangs Rocket League enregistrés :", currentStats.rocketLeague);
   } else {
-    console.warn("Page RL inaccessible : conservation des données précédentes.");
+    console.warn("Page RL non accessible.");
   }
 
   // ==========================================
   // 2. VALORANT
   // ==========================================
-  console.log("--> [2/2] Récupération des stats Valorant...");
+  console.log("--> [2/2] Récupération Valorant...");
   try {
     const valoCmd = `curl -sL --max-time 10 "https://vaccie.pythonanywhere.com/mmr/Abouu92jr/0213/eu"`;
     const valoText = execSync(valoCmd, { encoding: 'utf8' }).trim();
     if (valoText && !valoText.includes('error')) {
-      console.log("Réponse Valorant :", valoText);
       const parts = valoText.split(',');
       if (parts[0]) currentStats.valorant.rang = parts[0].trim();
       if (parts[1] && parts[1].includes('RR:')) {
@@ -145,7 +105,7 @@ async function fetchStats() {
   }
 
   // ==========================================
-  // 3. SAUVEGARDE DANS STATS.JSON
+  // 3. SAUVEGARDE
   // ==========================================
   fs.writeFileSync(statsPath, JSON.stringify(currentStats, null, 2), 'utf8');
   console.log("--> stats.json synchronisé avec succès !");
