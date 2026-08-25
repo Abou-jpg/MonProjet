@@ -52,7 +52,7 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Cartes Hub 3x2 Palmarès Grand Format */
+    /* Cartes Hub 3x2 Palmarès */
     .palmares-category-hub-card {
       position: relative;
       height: 440px;
@@ -66,6 +66,22 @@
       transform: translateY(-6px);
       border-color: rgba(245, 158, 11, 0.8);
       box-shadow: 0 16px 36px -8px rgba(245, 158, 11, 0.3);
+    }
+
+    /* Carré Épisode 5 Lignes */
+    .episode-card {
+      position: relative;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .episode-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(245, 158, 11, 0.8);
+      box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.25);
     }
 
     /* Gaming Posters */
@@ -364,7 +380,7 @@
   </div>
 
   <!-- ======================================================= -->
-  <!-- NIVEAU 2 : ESPACE PALMARÈS (HUB 3x2 + PAGE DÉTAILLÉE)     -->
+  <!-- NIVEAU 2 : ESPACE PALMARÈS                                -->
   <!-- ======================================================= -->
   <div id="view-palmares" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
     
@@ -385,7 +401,7 @@
         <!-- 1. DESSINS ANIMÉS -->
         <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('dessins-animes')">
           <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
-            <img src="dessins-animes.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Dessins+Animés'" alt="Dessins animés" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <img src="martine.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Dessins+Animés'" alt="Dessins animés" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
             
             <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
@@ -412,7 +428,7 @@
         <!-- 2. ANIMES -->
         <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('animes')">
           <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
-            <img src="animes.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Animes'" alt="Animes" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <img src="hunter.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Animes'" alt="Animes" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
             
             <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
@@ -547,7 +563,7 @@
       </div>
     </div>
 
-    <!-- 2. PAGE DÉTAILLÉE DE LA CATÉGORIE SÉLECTIONNÉE -->
+    <!-- 2. PAGE DÉTAILLÉE D'UNE CATÉGORIE -->
     <div id="palmares-detail-screen" class="hidden">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
@@ -579,6 +595,122 @@
       <!-- Grille des Cartes (#1, #2, #3...) -->
       <div id="palmares-detail-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Rempli par JavaScript -->
+      </div>
+    </div>
+
+    <!-- 3. PAGE DES SAISONS D'UNE SÉRIE (EX: MARTINE) -->
+    <div id="palmares-seasons-screen" class="hidden">
+      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+        <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="backToPalmaresHub()" class="hover:text-amber-400 transition">Palmarès</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="backToCurrentCategory()" class="hover:text-amber-400 transition" id="seasons-breadcrumb-cat">Dessins animés</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <span id="seasons-breadcrumb-title" class="text-amber-400 font-bold">Martine</span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div class="flex items-center gap-4">
+          <button onclick="backToCurrentCategory()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-amber-500 hover:text-black dark:hover:bg-amber-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            Retour
+          </button>
+          <div>
+            <h2 id="seasons-show-title" class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">
+              Martine
+            </h2>
+            <p class="text-xs text-zinc-400 mt-1">Sélectionne une saison pour accéder aux 52 épisodes</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Les 2 Grosses Cartes Saisons -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto pt-4">
+        <!-- SAISON 1 -->
+        <div onclick="openSeasonEpisodes('martine', 1)" class="palmares-category-hub-card glass-card group border-amber-500/30 hover:border-amber-400">
+          <div class="relative w-full h-[280px] overflow-hidden bg-black/60">
+            <img src="martine-s1.jpg" onerror="this.onerror=null; this.src='martine.jpg';" alt="Martine Saison 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
+            <span class="absolute top-4 left-4 bg-amber-500 text-zinc-950 text-xs font-black px-3 py-1 rounded-lg shadow-md uppercase">
+              Saison 1
+            </span>
+            <span class="absolute top-4 right-4 bg-black/80 backdrop-blur-md border border-white/10 text-amber-400 text-xs font-bold px-3 py-1 rounded-lg">
+              52 Épisodes
+            </span>
+          </div>
+          <div class="p-6 flex items-center justify-between">
+            <div>
+              <h3 class="text-2xl font-black text-white group-hover:text-amber-400 transition-colors">
+                Saison 1
+              </h3>
+              <p class="text-xs text-zinc-400 mt-1">Accéder aux épisodes #1 à #52</p>
+            </div>
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-black transition">
+              <i data-lucide="arrow-right" class="w-6 h-6"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- SAISON 2 -->
+        <div onclick="openSeasonEpisodes('martine', 2)" class="palmares-category-hub-card glass-card group border-amber-500/30 hover:border-amber-400">
+          <div class="relative w-full h-[280px] overflow-hidden bg-black/60">
+            <img src="martine-s2.jpg" onerror="this.onerror=null; this.src='martine.jpg';" alt="Martine Saison 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
+            <span class="absolute top-4 left-4 bg-amber-500 text-zinc-950 text-xs font-black px-3 py-1 rounded-lg shadow-md uppercase">
+              Saison 2
+            </span>
+            <span class="absolute top-4 right-4 bg-black/80 backdrop-blur-md border border-white/10 text-amber-400 text-xs font-bold px-3 py-1 rounded-lg">
+              52 Épisodes
+            </span>
+          </div>
+          <div class="p-6 flex items-center justify-between">
+            <div>
+              <h3 class="text-2xl font-black text-white group-hover:text-amber-400 transition-colors">
+                Saison 2
+              </h3>
+              <p class="text-xs text-zinc-400 mt-1">Accéder aux épisodes #1 à #52</p>
+            </div>
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-black transition">
+              <i data-lucide="arrow-right" class="w-6 h-6"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. PAGE DE LA GRILLE DES 52 ÉPISODES (AVEC FOND & 5 LIGNES) -->
+    <div id="palmares-episodes-screen" class="hidden">
+      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+        <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="backToPalmaresHub()" class="hover:text-amber-400 transition">Palmarès</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="backToCurrentCategory()" class="hover:text-amber-400 transition" id="episodes-breadcrumb-cat">Dessins animés</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="backToSeasonsList()" class="hover:text-amber-400 transition" id="episodes-breadcrumb-title">Martine</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <span id="episodes-breadcrumb-season" class="text-amber-400 font-bold">Saison 1</span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div class="flex items-center gap-4">
+          <button onclick="backToSeasonsList()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-amber-500 hover:text-black dark:hover:bg-amber-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            Changer de saison
+          </button>
+          <div>
+            <h2 id="episodes-header-title" class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">
+              Martine • Saison 1
+            </h2>
+            <p class="text-xs text-zinc-400 mt-1">Grille des 52 épisodes complets</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grille des 52 carrés -->
+      <div id="episodes-grid-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <!-- 52 carrés injectés dynamiquement en JS -->
       </div>
     </div>
 
@@ -1010,21 +1142,39 @@
     lucide.createIcons();
 
     // =======================================================
-    // 1. PALMARÈS (DONNÉES & SYSTÈME DE NAVIGATION SPA)
+    // 1. PALMARÈS (DONNÉES, SAISONS & GRILLE 52 ÉPISODES)
     // =======================================================
     const palmaresCatalog = {
       'dessins-animes': {
         name: "Dessins animés",
         hasSub: false,
         items: [
-          { rank: "#1", title: "Martine", tag: "Classique", rating: "10/10", image: "martine.jpg", comment: "Le dessin animé de référence du palmarès." }
+          { 
+            id: 'martine',
+            hasSeasons: true,
+            rank: "#1", 
+            title: "Martine", 
+            tag: "Animation 3D", 
+            rating: "10/10", 
+            image: "martine.jpg", 
+            comment: "Les aventures cultes de Martine, Patapouf et ses amis (Saisons 1 & 2)." 
+          }
         ]
       },
       'animes': {
         name: "Animes",
         hasSub: false,
         items: [
-          { rank: "#1", title: "Hunter x Hunter", tag: "Shōnen / Aventure", rating: "10/10", image: "hunter.jpg", comment: "L'arc Kimera Ants, l'examen Hunter et le système de Nen magistral." }
+          { 
+            id: 'hunter',
+            hasSeasons: false,
+            rank: "#1", 
+            title: "Hunter x Hunter", 
+            tag: "Shōnen / Aventure", 
+            rating: "10/10", 
+            image: "hunter.jpg", 
+            comment: "L'arc Kimera Ants, l'examen Hunter et le système de Nen magistral." 
+          }
         ]
       },
       'films': {
@@ -1035,21 +1185,21 @@
             id: 'films-solos',
             name: 'Films solos',
             items: [
-              { rank: "#1", title: "Spider-Man: No Way Home", tag: "MCU", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=No+Way+Home", comment: "La réunion multivers au sommet du cinéma de super-héros." }
+              { id: 'spiderman', hasSeasons: false, rank: "#1", title: "Spider-Man: No Way Home", tag: "MCU", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=No+Way+Home", comment: "La réunion multivers au sommet du cinéma de super-héros." }
             ]
           },
           {
             id: 'sagas',
             name: 'Sagas',
             items: [
-              { rank: "#1", title: "The Infinity Saga", tag: "Marvel Studios", rating: "10/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Infinity+Saga", comment: "23 films pour une conclusion historique avec Infinity War et Endgame." }
+              { id: 'infinity', hasSeasons: false, rank: "#1", title: "The Infinity Saga", tag: "Marvel Studios", rating: "10/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Infinity+Saga", comment: "23 films pour une conclusion historique avec Infinity War et Endgame." }
             ]
           },
           {
             id: 'films-animation',
             name: "Films d'animation",
             items: [
-              { rank: "#1", title: "Spider-Man: Across the Spider-Verse", tag: "Sony Animation", rating: "10/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Spider-Verse", comment: "Une révolution visuelle, graphique et sonore totale." }
+              { id: 'spiderverse', hasSeasons: false, rank: "#1", title: "Spider-Man: Across the Spider-Verse", tag: "Sony Animation", rating: "10/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Spider-Verse", comment: "Une révolution visuelle, graphique et sonore totale." }
             ]
           }
         ]
@@ -1058,7 +1208,7 @@
         name: "Séries",
         hasSub: false,
         items: [
-          { rank: "#1", title: "Alice in Borderland", tag: "Survie / Thriller", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Borderland", comment: "Des épreuves de survie à suspense haletant du début à la fin." }
+          { id: 'borderland', hasSeasons: false, rank: "#1", title: "Alice in Borderland", tag: "Survie / Thriller", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Borderland", comment: "Des épreuves de survie à suspense haletant du début à la fin." }
         ]
       },
       'jeux': {
@@ -1069,14 +1219,14 @@
             id: 'jeux-anime',
             name: "Jeux d'anime",
             items: [
-              { rank: "#1", title: "Naruto Shippuden: UNS 4", tag: "CyberConnect2", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Storm+4", comment: "La référence du combat 3D et des cinématiques interactives." }
+              { id: 'storm4', hasSeasons: false, rank: "#1", title: "Naruto Shippuden: UNS 4", tag: "CyberConnect2", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Storm+4", comment: "La référence du combat 3D et des cinématiques interactives." }
             ]
           },
           {
             id: 'jeux-tout-court',
             name: "Jeux",
             items: [
-              { rank: "#1", title: "Marvel's Spider-Man Remastered", tag: "PlayStation / Insomniac", rating: "10/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Spider-Man+PS5", comment: "Gameplay de balancement fluide et histoire touchante." }
+              { id: 'spiderman-ps5', hasSeasons: false, rank: "#1", title: "Marvel's Spider-Man Remastered", tag: "PlayStation / Insomniac", rating: "10/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Spider-Man+PS5", comment: "Gameplay de balancement fluide et histoire touchante." }
             ]
           }
         ]
@@ -1089,21 +1239,21 @@
             id: 'podcasts',
             name: "Podcasts",
             items: [
-              { rank: "#1", title: "Popcorn", tag: "Twitch / Domingo", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Popcorn", comment: "Le talk-show internet le plus complet et divertissant." }
+              { id: 'popcorn', hasSeasons: false, rank: "#1", title: "Popcorn", tag: "Twitch / Domingo", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Popcorn", comment: "Le talk-show internet le plus complet et divertissant." }
             ]
           },
           {
             id: 'reportages',
             name: "Reportages",
             items: [
-              { rank: "#1", title: "Secrets d'Histoire", tag: "Culture / France TV", rating: "9/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Secrets+Histoire", comment: "Récits historiques passionnants et immersifs." }
+              { id: 'secrets-histoire', hasSeasons: false, rank: "#1", title: "Secrets d'Histoire", tag: "Culture / France TV", rating: "9/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Secrets+Histoire", comment: "Récits historiques passionnants et immersifs." }
             ]
           },
           {
             id: 'emissions-tv',
             name: "Émissions",
             items: [
-              { rank: "#1", title: "Koh-Lanta", tag: "Survie / Denis Brogniart", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Koh-Lanta", comment: "Les poteaux, l'orientation et les stratégies de conseils cultes." }
+              { id: 'kohlanta', hasSeasons: false, rank: "#1", title: "Koh-Lanta", tag: "Survie / Denis Brogniart", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Koh-Lanta", comment: "Les poteaux, l'orientation et les stratégies de conseils cultes." }
             ]
           }
         ]
@@ -1112,7 +1262,10 @@
 
     let activeSelectedCategory = null;
     let activeSelectedSubCategory = null;
+    let currentShowId = null;
+    let currentSeasonNumber = 1;
 
+    // 1. Ouvrir une Catégorie
     function openPalmaresCategory(catKey) {
       activeSelectedCategory = catKey;
       const cat = palmaresCatalog[catKey];
@@ -1122,7 +1275,7 @@
         activeSelectedSubCategory = null;
       }
 
-      document.getElementById('palmares-hub-screen').classList.add('hidden');
+      hideAllPalmaresScreens();
       document.getElementById('palmares-detail-screen').classList.remove('hidden');
 
       document.getElementById('palmares-breadcrumb-cat').innerText = cat.name;
@@ -1133,10 +1286,18 @@
     }
 
     function backToPalmaresHub() {
-      document.getElementById('palmares-detail-screen').classList.add('hidden');
+      hideAllPalmaresScreens();
       document.getElementById('palmares-hub-screen').classList.remove('hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
+    }
+
+    function backToCurrentCategory() {
+      if (activeSelectedCategory) {
+        openPalmaresCategory(activeSelectedCategory);
+      } else {
+        backToPalmaresHub();
+      }
     }
 
     function renderPalmaresDetailView() {
@@ -1179,6 +1340,15 @@
       items.forEach(item => {
         const card = document.createElement('div');
         card.className = "palmares-category-hub-card glass-card flex flex-col group";
+        
+        // Clic sur l'œuvre
+        card.onclick = () => {
+          if (item.hasSeasons) {
+            openShowSeasons(item.id, item.title);
+          } else {
+            alert(`Fiche : ${item.title}`);
+          }
+        };
 
         card.innerHTML = `
           <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
@@ -1202,13 +1372,21 @@
           </div>
 
           <div class="p-5 flex flex-col justify-between">
-            <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors line-clamp-1">
-              ${item.title}
-            </h3>
-            ${item.comment ? `
-              <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
-                "${item.comment}"
-              </p>
+            <div>
+              <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors line-clamp-1">
+                ${item.title}
+              </h3>
+              ${item.comment ? `
+                <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+                  "${item.comment}"
+                </p>
+              ` : ''}
+            </div>
+            ${item.hasSeasons ? `
+              <span class="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-amber-400">
+                <span>Voir les Saisons 1 & 2</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </span>
             ` : ''}
           </div>
         `;
@@ -1216,6 +1394,107 @@
       });
 
       lucide.createIcons();
+    }
+
+    // 2. Ouvrir la sélection des saisons (ex: Martine)
+    function openShowSeasons(showId, showTitle) {
+      currentShowId = showId;
+      hideAllPalmaresScreens();
+      document.getElementById('palmares-seasons-screen').classList.remove('hidden');
+
+      const catName = palmaresCatalog[activeSelectedCategory]?.name || 'Dessins animés';
+      document.getElementById('seasons-breadcrumb-cat').innerText = catName;
+      document.getElementById('seasons-breadcrumb-title').innerText = showTitle;
+      document.getElementById('seasons-show-title').innerText = showTitle;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function backToSeasonsList() {
+      if (currentShowId) {
+        openShowSeasons(currentShowId, 'Martine');
+      } else {
+        backToCurrentCategory();
+      }
+    }
+
+    // 3. Ouvrir la grille des 52 épisodes avec fond et 5 lignes
+    function openSeasonEpisodes(showId, seasonNum) {
+      currentShowId = showId;
+      currentSeasonNumber = seasonNum;
+
+      hideAllPalmaresScreens();
+      document.getElementById('palmares-episodes-screen').classList.remove('hidden');
+
+      const catName = palmaresCatalog[activeSelectedCategory]?.name || 'Dessins animés';
+      document.getElementById('episodes-breadcrumb-cat').innerText = catName;
+      document.getElementById('episodes-breadcrumb-title').innerText = 'Martine';
+      document.getElementById('episodes-breadcrumb-season').innerText = `Saison ${seasonNum}`;
+      document.getElementById('episodes-header-title').innerText = `Martine • Saison ${seasonNum}`;
+
+      const grid = document.getElementById('episodes-grid-container');
+      grid.innerHTML = '';
+
+      // Image d'arrière-plan avec fallback automatique (martine-s1.jpg -> martine.jpg)
+      const bgImgCandidate = seasonNum === 1 ? 'martine-s1.jpg' : 'martine-s2.jpg';
+
+      // Génération automatique des 52 carrés de 5 lignes
+      for (let ep = 1; ep <= 52; ep++) {
+        const card = document.createElement('div');
+        card.className = "episode-card glass-card p-4 flex flex-col justify-between min-h-[220px] relative overflow-hidden group";
+        
+        // Image de fond stylisée avec dégradé sombre lisible
+        card.style.backgroundImage = `linear-gradient(rgba(7, 13, 10, 0.85), rgba(7, 13, 10, 0.94)), url('${bgImgCandidate}'), url('martine.jpg')`;
+
+        card.innerHTML = `
+          <!-- Numéro en haut à gauche -->
+          <div class="flex items-center justify-between mb-3 z-10">
+            <span class="bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-0.5 rounded-md shadow-md">
+              #${ep}
+            </span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-black/60 border border-white/10 text-amber-400">
+              S${seasonNum} • E${ep}
+            </span>
+          </div>
+
+          <!-- Les 5 Lignes Dédiées -->
+          <div class="space-y-1.5 z-10">
+            <!-- Ligne 1: Titre Épisode -->
+            <div class="text-sm font-black text-white group-hover:text-amber-400 transition-colors truncate">
+              L1: Épisode ${ep} • Aventure de Martine
+            </div>
+            <!-- Ligne 2: Thème / Synopsis -->
+            <div class="text-xs text-zinc-300 font-medium truncate">
+              L2: Découverte, amitié et nature avec Patapouf
+            </div>
+            <!-- Ligne 3: Personnages clés -->
+            <div class="text-[11px] text-zinc-400 truncate">
+              L3: Martine, Jean, Patapouf, Claire
+            </div>
+            <!-- Ligne 4: Note & Appréciation -->
+            <div class="text-xs font-bold text-amber-400 flex items-center gap-1">
+              <span>L4: ★ 10/10 • Culte</span>
+            </div>
+            <!-- Ligne 5: Statut -->
+            <div class="text-[11px] font-bold text-emerald-400 flex items-center gap-1">
+              <span>L5: ✓ Épisode disponible</span>
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function hideAllPalmaresScreens() {
+      document.getElementById('palmares-hub-screen').classList.add('hidden');
+      document.getElementById('palmares-detail-screen').classList.add('hidden');
+      document.getElementById('palmares-seasons-screen').classList.add('hidden');
+      document.getElementById('palmares-episodes-screen').classList.add('hidden');
     }
 
     // =======================================================
