@@ -68,7 +68,7 @@
       box-shadow: 0 16px 36px -8px rgba(245, 158, 11, 0.3);
     }
 
-    /* Gaming Posters */
+    /* Posters Gaming */
     .game-poster-card {
       position: relative;
       height: 420px;
@@ -364,187 +364,225 @@
   </div>
 
   <!-- ======================================================= -->
-  <!-- NIVEAU 2 : ESPACE PALMARÈS (GRILLE DES 6 CATÉGORIES 3x2) -->
+  <!-- NIVEAU 2 : ESPACE PALMARÈS (HUB 3x2 + PAGE DÉTAILLÉE)     -->
   <!-- ======================================================= -->
   <div id="view-palmares" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
     
-    <!-- EN-TÊTE EXACT -->
-    <div class="mb-8">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-400 text-[11px] font-extrabold uppercase tracking-wider mb-3 shadow-sm">
-        <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-400"></i>
-        <span>HALL OF FAME &amp; ŒUVRES CULTES</span>
+    <!-- 1. HUB PRINCIPAL DES 6 CATÉGORIES (GRILLE 3x2) -->
+    <div id="palmares-hub-screen">
+      <div class="mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-400 text-[11px] font-extrabold uppercase tracking-wider mb-3 shadow-sm">
+          <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span>HALL OF FAME &amp; ŒUVRES CULTES</span>
+        </div>
+        <h2 class="text-4xl md:text-6xl font-serif-title text-zinc-950 dark:text-white font-normal tracking-tight">
+          Mon Palmarès
+        </h2>
       </div>
-      <h2 class="text-4xl md:text-6xl font-serif-title text-zinc-950 dark:text-white font-normal tracking-tight">
-        Mon Palmarès
-      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- 1. DESSINS ANIMÉS -->
+        <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('dessins-animes')">
+          <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+            <img src="dessins-animes.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Dessins+Animés'" alt="Dessins animés" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
+            
+            <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+              #1
+            </span>
+            <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
+              Animation
+            </span>
+            <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
+              <span class="text-amber-400">★</span>
+              <span>Masterclass</span>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between">
+            <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
+              Dessins animés
+            </h3>
+            <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+              Séries animées de référence, classiques cultes et souvenirs marquants.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2. ANIMES -->
+        <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('animes')">
+          <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+            <img src="animes.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Animes'" alt="Animes" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
+            
+            <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+              #2
+            </span>
+            <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
+              Japan Animation
+            </span>
+            <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
+              <span class="text-amber-400">★</span>
+              <span>Masterclass</span>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between">
+            <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
+              Animes
+            </h3>
+            <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+              Séries japonaises, arcs dramatiques, shōnen et scénarios cultes.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3. FILMS -->
+        <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('films')">
+          <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+            <img src="films.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Films'" alt="Films" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
+            
+            <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+              #3
+            </span>
+            <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
+              3 Sous-catégories
+            </span>
+            <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
+              <span class="text-amber-400">★</span>
+              <span>Cinéma</span>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between">
+            <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
+              Films
+            </h3>
+            <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+              Films solos, Sagas complètes et Longs-métrages d'animation.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4. SÉRIES -->
+        <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('series')">
+          <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+            <img src="series.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Séries'" alt="Séries" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
+            
+            <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+              #4
+            </span>
+            <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
+              Live Action
+            </span>
+            <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
+              <span class="text-amber-400">★</span>
+              <span>Fiction</span>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between">
+            <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
+              Séries
+            </h3>
+            <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+              Séries live-action, thrillers, survie et fictions dramatiques.
+            </p>
+          </div>
+        </div>
+
+        <!-- 5. JEUX -->
+        <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('jeux')">
+          <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+            <img src="jeux.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Jeux'" alt="Jeux" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
+            
+            <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+              #5
+            </span>
+            <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
+              2 Sous-catégories
+            </span>
+            <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
+              <span class="text-amber-400">★</span>
+              <span>Gaming</span>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between">
+            <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
+              Jeux
+            </h3>
+            <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+              Jeux vidéo adaptés d'animes et hits gaming généralistes.
+            </p>
+          </div>
+        </div>
+
+        <!-- 6. ÉMISSIONS -->
+        <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('emissions')">
+          <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+            <img src="emissions.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Émissions'" alt="Émissions" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
+            
+            <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+              #6
+            </span>
+            <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
+              3 Sous-catégories
+            </span>
+            <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
+              <span class="text-amber-400">★</span>
+              <span>Talk & Docs</span>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between">
+            <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
+              Émissions
+            </h3>
+            <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+              Podcasts en ligne, Grands reportages et Formats TV cultes.
+            </p>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <!-- GRILLE 3x2 DES 6 GRANDES CATÉGORIES (IMAGES AGRANDIES À 300px) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      
-      <!-- 1. DESSINS ANIMÉS -->
-      <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Dessins animés')">
-        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
-          <img id="pal-img-1" src="dessins-animes.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Dessins+Animés'" alt="Dessins animés" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
-          
-          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
-            #1
-          </span>
-          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
-            Animation
-          </span>
-          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
-            <span class="text-amber-400">★</span>
-            <span>Masterclass</span>
+    <!-- 2. PAGE DÉTAILLÉE DE LA CATÉGORIE SÉLECTIONNÉE -->
+    <div id="palmares-detail-screen" class="hidden">
+      <!-- Fil d'Ariane & Bouton Retour -->
+      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+        <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="backToPalmaresHub()" class="hover:text-amber-400 transition">Palmarès</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <span id="palmares-breadcrumb-cat" class="text-amber-400 font-bold">Catégorie</span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div class="flex items-center gap-4">
+          <button onclick="backToPalmaresHub()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-amber-500 hover:text-black dark:hover:bg-amber-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            Toutes les catégories
+          </button>
+          <div>
+            <h2 id="palmares-detail-title" class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">
+              Nom Catégorie
+            </h2>
           </div>
-        </div>
-        <div class="p-5 flex flex-col justify-between">
-          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
-            Dessins animés
-          </h3>
-          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
-            Séries animées de référence, classiques cultes et souvenirs marquants.
-          </p>
         </div>
       </div>
 
-      <!-- 2. ANIMES -->
-      <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Animes')">
-        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
-          <img id="pal-img-2" src="animes.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Animes'" alt="Animes" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
-          
-          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
-            #2
-          </span>
-          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
-            Japan Animation
-          </span>
-          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
-            <span class="text-amber-400">★</span>
-            <span>Masterclass</span>
-          </div>
-        </div>
-        <div class="p-5 flex flex-col justify-between">
-          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
-            Animes
-          </h3>
-          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
-            Séries japonaises, arcs dramatiques, shōnen et scénarios cultes.
-          </p>
-        </div>
+      <!-- Sous-Catégories en pilules (si existantes) -->
+      <div id="palmares-detail-subcats" class="flex flex-wrap items-center gap-2 mb-8 hidden">
+        <!-- Rempli par JavaScript -->
       </div>
 
-      <!-- 3. FILMS -->
-      <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Films (Films solos, Sagas, Animation)')">
-        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
-          <img id="pal-img-3" src="films.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Films'" alt="Films" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
-          
-          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
-            #3
-          </span>
-          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
-            3 Sous-catégories
-          </span>
-          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
-            <span class="text-amber-400">★</span>
-            <span>Cinéma</span>
-          </div>
-        </div>
-        <div class="p-5 flex flex-col justify-between">
-          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
-            Films
-          </h3>
-          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
-            Films solos, Sagas complètes et Longs-métrages d'animation.
-          </p>
-        </div>
+      <!-- Grille des Cartes (#1, #2, #3...) -->
+      <div id="palmares-detail-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rempli par JavaScript -->
       </div>
-
-      <!-- 4. SÉRIES -->
-      <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Séries')">
-        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
-          <img id="pal-img-4" src="series.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Séries'" alt="Séries" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
-          
-          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
-            #4
-          </span>
-          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
-            Live Action
-          </span>
-          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
-            <span class="text-amber-400">★</span>
-            <span>Fiction</span>
-          </div>
-        </div>
-        <div class="p-5 flex flex-col justify-between">
-          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
-            Séries
-          </h3>
-          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
-            Séries live-action, thrillers, survie et fictions dramatiques.
-          </p>
-        </div>
-      </div>
-
-      <!-- 5. JEUX -->
-      <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Jeux (Jeux d\'anime, Jeux)')">
-        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
-          <img id="pal-img-5" src="jeux.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Jeux'" alt="Jeux" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
-          
-          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
-            #5
-          </span>
-          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
-            2 Sous-catégories
-          </span>
-          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
-            <span class="text-amber-400">★</span>
-            <span>Gaming</span>
-          </div>
-        </div>
-        <div class="p-5 flex flex-col justify-between">
-          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
-            Jeux
-          </h3>
-          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
-            Jeux vidéo adaptés d'animes et hits gaming généralistes.
-          </p>
-        </div>
-      </div>
-
-      <!-- 6. ÉMISSIONS -->
-      <div class="palmares-category-hub-card glass-card group" onclick="alert('Catégorie : Émissions (Podcasts, Reportages, Émissions)')">
-        <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
-          <img id="pal-img-6" src="emissions.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Émissions'" alt="Émissions" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
-          
-          <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
-            #6
-          </span>
-          <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
-            3 Sous-catégories
-          </span>
-          <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
-            <span class="text-amber-400">★</span>
-            <span>Talk & Docs</span>
-          </div>
-        </div>
-        <div class="p-5 flex flex-col justify-between">
-          <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
-            Émissions
-          </h3>
-          <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
-            Podcasts en ligne, Grands reportages et Formats TV cultes.
-          </p>
-        </div>
-      </div>
-
     </div>
+
   </div>
 
   <!-- NIVEAU 2 : ESPACE GAMING -->
@@ -973,7 +1011,271 @@
     lucide.createIcons();
 
     // =======================================================
-    // 1. GOOGLE CALENDAR ENGINE
+    // 1. PALMARÈS (DONNÉES & SYSTÈME DE NAVIGATION SPA)
+    // =======================================================
+    const palmaresCatalog = {
+      'dessins-animes': {
+        name: "Dessins animés",
+        hasSub: false,
+        items: [
+          { rank: "#1", title: "Avatar : Le Dernier Maître de l'Air", tag: "Nickelodeon", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Avatar", comment: "Le chef-d'œuvre absolu de narration et d'évolution de personnages." },
+          { rank: "#2", title: "Star Wars: The Clone Wars", tag: "Lucasfilm", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Clone+Wars", comment: "Le siège de Mandalore et l'arc final de la saison 7 sont légendaires." },
+          { rank: "#3", title: "Teen Titans", tag: "DC Animated", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Teen+Titans", comment: "La rivalité Robin / Slade et l'humour culte de l'équipe." },
+          { rank: "#4", title: "Ben 10: Alien Force", tag: "Cartoon Network", rating: "8.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Ben+10", comment: "L'Omnitrix, Kevin, Gwen et l'invasion des Highbreed." },
+          { rank: "#5", title: "Spider-Man (1994)", tag: "Marvel Animation", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Spider-Man+94", comment: "Le générique culte et les meilleurs arcs narratifs des comics." },
+          { rank: "#6", title: "Arcane", tag: "Riot / Fortiche", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Arcane", comment: "L'animation la plus impressionnante de l'histoire moderne." }
+        ]
+      },
+      'animes': {
+        name: "Animes",
+        hasSub: false,
+        items: [
+          { rank: "#1", title: "Re:Zero - Starting Life in Another World", tag: "Isekai / Dark", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Re:Zero", comment: "Tension dramatique folle et boucles temporelles magistralement maîtrisées." },
+          { rank: "#2", title: "Naruto Shippuden", tag: "Shōnen", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Naruto", comment: "L'arc Pain, l'histoire d'Itachi et les antagonistes légendaires." },
+          { rank: "#3", title: "Chainsaw Man", tag: "Action / Dark", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Chainsaw+Man", comment: "Animation MAPPA sensationnelle et ambiance ultra nerveuse." },
+          { rank: "#4", title: "Violet Evergarden", tag: "Drame / Kyoto", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Violet+Evergarden", comment: "Visuellement sublime et d'une puissance émotionnelle rare." },
+          { rank: "#5", title: "Jujutsu Kaisen", tag: "Shōnen / Dark", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Jujutsu+Kaisen", comment: "L'incident de Shibuya et les combats les plus dynamiques du moment." },
+          { rank: "#6", title: "L'Attaque des Titans", tag: "Dark Fantasy", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=SNK", comment: "Un chef-d'œuvre de révélations et de géopolitique fictionnelle." }
+        ]
+      },
+      'films': {
+        name: "Films",
+        hasSub: true,
+        subcategories: [
+          {
+            id: 'films-solos',
+            name: 'Films solos',
+            items: [
+              { rank: "#1", title: "Spider-Man: No Way Home", tag: "MCU", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=No+Way+Home", comment: "La réunion multivers au sommet du cinéma de super-héros." },
+              { rank: "#2", title: "The Dark Knight", tag: "DC / Nolan", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=The+Dark+Knight", comment: "Le Joker de Heath Ledger et une tension magistrale." },
+              { rank: "#3", title: "Interstellar", tag: "Sci-Fi / Nolan", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Interstellar", comment: "Bande originale de Hans Zimmer et voyage spatial hors norme." },
+              { rank: "#4", title: "Avengers: Infinity War", tag: "MCU", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Infinity+War", comment: "Thanos au sommet et un rythme qui ne faiblit jamais." },
+              { rank: "#5", title: "Inception", tag: "Sci-Fi", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Inception", comment: "L'art du braquage mental et des rêves imbriqués." },
+              { rank: "#6", title: "Gladiator", tag: "Épopée", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Gladiator", comment: "Maximus et la vengeance à travers le Colisée romain." }
+            ]
+          },
+          {
+            id: 'sagas',
+            name: 'Sagas',
+            items: [
+              { rank: "#1", title: "The Infinity Saga", tag: "Marvel Studios", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Infinity+Saga", comment: "23 films pour une conclusion historique avec Infinity War et Endgame." },
+              { rank: "#2", title: "Trilogie Spider-Man (Tobey Maguire)", tag: "Sam Raimi", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Spider-Man+Trilogy", comment: "Les bases du genre de super-héros au cinéma." },
+              { rank: "#3", title: "Le Seigneur des Anneaux", tag: "Peter Jackson", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=LOTR", comment: "La plus grande trilogie de fantasy de tous les temps." },
+              { rank: "#4", title: "Harry Potter", tag: "Warner Bros", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Harry+Potter", comment: "L'univers magique par excellence sur 8 films cultes." },
+              { rank: "#5", title: "Trilogie The Dark Knight", tag: "Christopher Nolan", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Dark+Knight+Trilogy", comment: "Batman réinventé de façon réaliste et magistrale." },
+              { rank: "#6", title: "Star Wars (Épisodes I à VI)", tag: "George Lucas", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Star+Wars", comment: "L'ascension et la chute d'Anakin Skywalker." }
+            ]
+          },
+          {
+            id: 'films-animation',
+            name: "Films d'animation",
+            items: [
+              { rank: "#1", title: "Spider-Man: Across the Spider-Verse", tag: "Sony Animation", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Spider-Verse", comment: "Une révolution visuelle, graphique et sonore totale." },
+              { rank: "#2", title: "Le Roi Lion", tag: "Disney", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Le+Roi+Lion", comment: "Le chef-d'œuvre intemporel de l'animation traditionnelle." },
+              { rank: "#3", title: "Le Voyage de Chihiro", tag: "Studio Ghibli", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Chihiro", comment: "La poésie et l'imaginaire inégalé de Hayao Miyazaki." },
+              { rank: "#4", title: "Dragons (How to Train Your Dragon)", tag: "DreamWorks", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Dragons", comment: "La relation Harold / Krokmou et la musique de John Powell." },
+              { rank: "#5", title: "Your Name.", tag: "Makoto Shinkai", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Your+Name", comment: "Une merveille esthétique et une histoire bouleversante." },
+              { rank: "#6", title: "Ratatouille", tag: "Pixar", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Ratatouille", comment: "Une lettre d'amour à la cuisine et à la passion créative." }
+            ]
+          }
+        ]
+      },
+      'series': {
+        name: "Séries",
+        hasSub: false,
+        items: [
+          { rank: "#1", title: "Alice in Borderland", tag: "Survie / Thriller", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Borderland", comment: "Des épreuves de survie à suspense haletant du début à la fin." },
+          { rank: "#2", title: "Squid Game", tag: "Dystopie / Drame", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Squid+Game", comment: "Direction artistique marquante et critique sociale percutante." },
+          { rank: "#3", title: "Breaking Bad", tag: "Crime / Drame", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Breaking+Bad", comment: "L'écriture la plus rigoureuse et le meilleur final de série." },
+          { rank: "#4", title: "Loki", tag: "MCU / TVA", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Loki", comment: "La fin de la saison 2 est l'un des meilleurs moments de tout Marvel." },
+          { rank: "#5", title: "Stranger Things", tag: "Sci-Fi / Nostalgie", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Stranger+Things", comment: "L'Upside Down, les années 80 et des personnages attachants." },
+          { rank: "#6", title: "Peaky Blinders", tag: "Gang / Histoire", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Peaky+Blinders", comment: "Thomas Shelby, le charisme et la mise en scène stylisée." }
+        ]
+      },
+      'jeux': {
+        name: "Jeux",
+        hasSub: true,
+        subcategories: [
+          {
+            id: 'jeux-anime',
+            name: "Jeux d'anime",
+            items: [
+              { rank: "#1", title: "Naruto Shippuden: UNS 4", tag: "CyberConnect2", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Storm+4", comment: "La référence du combat 3D et des cinématiques interactives." },
+              { rank: "#2", title: "Dragon Ball Xenoverse 2", tag: "Bandai Namco", rating: "8.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Xenoverse+2", comment: "Un contenu titanesque et un plaisir de personnalisation intact." },
+              { rank: "#3", title: "Dragon Ball FighterZ", tag: "Arc System Works", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=FighterZ", comment: "L'anime en mouvement avec un gameplay 2D d'une technicité folle." },
+              { rank: "#4", title: "Dragon Ball: Sparking! ZERO", tag: "Spike Chunsoft", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Sparking+Zero", comment: "Le digne héritier de Budokai Tenkaichi 3 avec 180+ persos." },
+              { rank: "#5", title: "One Piece: Pirate Warriors 4", tag: "Omega Force", rating: "8.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=OP+PW4", comment: "Défouloir total avec les pouvoirs de Luffy, Kaido et Shanks." },
+              { rank: "#6", title: "Bleach: Brave Souls", tag: "KLab Games", rating: "8/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Bleach+Brave", comment: "Le jeu mobile / PC le plus complet sur l'univers de Bleach." }
+            ]
+          },
+          {
+            id: 'jeux-tout-court',
+            name: "Jeux",
+            items: [
+              { rank: "#1", title: "Marvel's Spider-Man Remastered", tag: "PlayStation / Insomniac", rating: "10/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Spider-Man+PS5", comment: "Gameplay de balancement fluide et histoire touchante." },
+              { rank: "#2", title: "Rocket League", tag: "Epic Games / Psyonix", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Rocket+League", comment: "Le summum du gameplay compétitif sans hasard." },
+              { rank: "#3", title: "Marvel's Spider-Man: Miles Morales", tag: "PlayStation", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Miles+Morales", comment: "Les pouvoirs bio-électriques et l'ambiance hivernale à Harlem." },
+              { rank: "#4", title: "Valorant", tag: "Riot Games", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Valorant", comment: "Le FPS tactique par excellence avec les capacités d'agents." },
+              { rank: "#5", title: "League of Legends", tag: "Riot Games", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=League+of+Legends", comment: "Le MOBA légendaire avec Neeko et la stratégie de teamfight." },
+              { rank: "#6", title: "Roblox", tag: "Roblox Corp", rating: "8.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Roblox", comment: "La plateforme sandbox infinie pour jouer avec la squad." }
+            ]
+          }
+        ]
+      },
+      'emissions': {
+        name: "Émissions",
+        hasSub: true,
+        subcategories: [
+          {
+            id: 'podcasts',
+            name: "Podcasts",
+            items: [
+              { rank: "#1", title: "Popcorn", tag: "Twitch / Domingo", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Popcorn", comment: "Le talk-show internet le plus complet et divertissant." },
+              { rank: "#2", title: "Zack en Roue Libre", tag: "Interview / Zack Nani", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Zack+Nani", comment: "Des parcours de vie inspirants et des anecdotes exclusives." },
+              { rank: "#3", title: "Génération Do It Yourself", tag: "Business / Mathieu Stefani", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=GDIY", comment: "Les coulisses des plus grands entrepreneurs et sportifs." },
+              { rank: "#4", title: "Canapé Six Places", tag: "Lifestyle / Léna Situations", rating: "8.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Canape+6+Places", comment: "Des discussions chill et sincères avec des invités variés." },
+              { rank: "#5", title: "Le QG", tag: "YouTube / Guillaume Pley", rating: "8.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Le+QG", comment: "Des interviews décalées et des jeux de plateau dynamiques." },
+              { rank: "#6", title: "After Foot RMC", tag: "Football / RMC", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=After+Foot", comment: "Le débrief footballistique le plus passionné de France." }
+            ]
+          },
+          {
+            id: 'reportages',
+            name: "Reportages",
+            items: [
+              { rank: "#1", title: "Secrets d'Histoire", tag: "Culture / Stéphane Bern", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Secrets+Histoire", comment: "Récits historiques passionnants et immersifs." },
+              { rank: "#2", title: "J'irai dormir chez vous", tag: "Aventure / Antoine de Maximy", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Maximy", comment: "L'authenticité brute et les rencontres aux 4 coins du globe." },
+              { rank: "#3", title: "Rendez-vous en terre inconnue", tag: "France TV", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Terre+Inconnue", comment: "L'émotion pure et la découverte de cultures isolées." },
+              { rank: "#4", title: "Enquête Exclusive", tag: "M6 / Bernard de la Villardière", rating: "8.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Enquete+Exclusive", comment: "Des reportages sur le terrain partout dans le monde." },
+              { rank: "#5", title: "Des Racines et des Ailes", tag: "Patrimoine / France 3", rating: "8.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Racines+Ailes", comment: "La mise en valeur des plus beaux paysages et monuments." },
+              { rank: "#6", title: "Faut pas rêver", tag: "Voyage / France TV", rating: "8.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Faut+Pas+Rever", comment: "De grands reportages humains et dépaysants." }
+            ]
+          },
+          {
+            id: 'emissions-tv',
+            name: "Émissions",
+            items: [
+              { rank: "#1", title: "Koh-Lanta", tag: "Survie / Denis Brogniart", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Koh-Lanta", comment: "Les poteaux, l'orientation et les stratégies de conseils cultes." },
+              { rank: "#2", title: "Fort Boyard", tag: "Jeu Culte / France 2", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Fort+Boyard", comment: "Les énigmes du Père Fouras et les clés dans les cellules." },
+              { rank: "#3", title: "Pékin Express", tag: "Course / Stéphane Rotenberg", rating: "9.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Pekin+Express", comment: "La course à 1€ par jour et l'auto-stop à travers des paysages fous." },
+              { rank: "#4", title: "Top Chef", tag: "Gastronomie / M6", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Top+Chef", comment: "La haute cuisine, les trompe-l'œil et les épreuves de chefs étoilés." },
+              { rank: "#5", title: "Ninja Warrior", tag: "Parcours / TF1", rating: "8.5/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Ninja+Warrior", comment: "Le mur géant et la Tour des Héros." },
+              { rank: "#6", title: "Burger Quiz", tag: "Humour / Alain Chabat", rating: "9/10", image: "https://placehold.co/400x600/0b1611/fbbf24?text=Burger+Quiz", comment: "Mayo vs Ketchup et les répliques d'Alain Chabat." }
+            ]
+          }
+        ]
+      }
+    };
+
+    let activeSelectedCategory = null;
+    let activeSelectedSubCategory = null;
+
+    function openPalmaresCategory(catKey) {
+      activeSelectedCategory = catKey;
+      const cat = palmaresCatalog[catKey];
+      if (cat.hasSub && cat.subcategories.length > 0) {
+        activeSelectedSubCategory = cat.subcategories[0].id;
+      } else {
+        activeSelectedSubCategory = null;
+      }
+
+      document.getElementById('palmares-hub-screen').classList.add('hidden');
+      document.getElementById('palmares-detail-screen').classList.remove('hidden');
+
+      document.getElementById('palmares-breadcrumb-cat').innerText = cat.name;
+      document.getElementById('palmares-detail-title').innerText = cat.name;
+
+      renderPalmaresDetailView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function backToPalmaresHub() {
+      document.getElementById('palmares-detail-screen').classList.add('hidden');
+      document.getElementById('palmares-hub-screen').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function renderPalmaresDetailView() {
+      const cat = palmaresCatalog[activeSelectedCategory];
+      const subContainer = document.getElementById('palmares-detail-subcats');
+
+      if (cat.hasSub) {
+        subContainer.classList.remove('hidden');
+        subContainer.innerHTML = '';
+        cat.subcategories.forEach(sub => {
+          const isSelected = sub.id === activeSelectedSubCategory;
+          const subBtn = document.createElement('button');
+          subBtn.className = `px-4 py-2 rounded-full text-xs font-bold transition ${
+            isSelected 
+              ? 'bg-amber-500 text-zinc-950 font-extrabold shadow-md shadow-amber-500/20'
+              : 'bg-black/40 text-zinc-400 border border-white/5 hover:text-white'
+          }`;
+          subBtn.textContent = sub.name;
+          subBtn.onclick = () => {
+            activeSelectedSubCategory = sub.id;
+            renderPalmaresDetailView();
+          };
+          subContainer.appendChild(subBtn);
+        });
+      } else {
+        subContainer.classList.add('hidden');
+      }
+
+      const grid = document.getElementById('palmares-detail-grid');
+      grid.innerHTML = '';
+
+      let items = [];
+      if (cat.hasSub) {
+        const found = cat.subcategories.find(s => s.id === activeSelectedSubCategory);
+        items = found ? found.items : [];
+      } else {
+        items = cat.items;
+      }
+
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "palmares-category-hub-card glass-card flex flex-col group";
+
+        card.innerHTML = `
+          <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
+            
+            <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+              ${item.rank}
+            </span>
+
+            ${item.tag ? `
+              <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
+                ${item.tag}
+              </span>
+            ` : ''}
+
+            <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
+              <span class="text-amber-400">★</span>
+              <span>${item.rating}</span>
+            </div>
+          </div>
+
+          <div class="p-5 flex flex-col justify-between">
+            <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors line-clamp-1">
+              ${item.title}
+            </h3>
+            ${item.comment ? `
+              <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+                "${item.comment}"
+              </p>
+            ` : ''}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    // =======================================================
+    // 2. GOOGLE CALENDAR ENGINE
     // =======================================================
     let currentCalDate = new Date(2026, 7, 24);
 
@@ -1182,7 +1484,7 @@
     }
 
     // =======================================================
-    // 2. ROUTEUR SPA & STATS GAMING
+    // 3. ROUTEUR SPA & STATS GAMING
     // =======================================================
     let rlStatsCache = {
       '1v1': 'Platinum I (Division III)',
@@ -1213,6 +1515,10 @@
 
       if (tabName === 'planning') {
         renderGCal();
+      }
+
+      if (tabName === 'palmares') {
+        backToPalmaresHub();
       }
 
       if (tabName === 'gaming') {
