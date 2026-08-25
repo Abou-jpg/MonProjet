@@ -191,8 +191,8 @@
         <button onclick="navigateTab('accueil')" id="nav-btn-accueil" class="nav-tab text-emerald-700 dark:text-emerald-400 font-semibold border-b-2 border-emerald-600 dark:border-emerald-400 pb-0.5">Accueil</button>
         <button onclick="navigateTab('planning')" id="nav-btn-planning" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Planning</button>
         <button onclick="navigateTab('gaming')" id="nav-btn-gaming" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Gaming</button>
+        <button onclick="navigateTab('palmares')" id="nav-btn-palmares" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Palmarès</button>
         <button onclick="navigateTab('sport')" id="nav-btn-sport" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Sport Data</button>
-        <button onclick="navigateTab('watchlist')" id="nav-btn-watchlist" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Watchlist</button>
         <button onclick="navigateTab('volley')" id="nav-btn-volley" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Volley Nanterre</button>
         <button onclick="navigateTab('perso')" id="nav-btn-perso" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Personnel</button>
       </nav>
@@ -241,7 +241,7 @@
       <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-3">
         <span>— navigation rapide</span>
       </div>
-      <h2 class="text-2xl font-serif-title text-zinc-950 dark:text-white mb-6">Les 6 Pôles d'Activité</h2>
+      <h2 class="text-2xl font-serif-title text-zinc-950 dark:text-white mb-6">Les Pôles d'Activité</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <div onclick="navigateTab('planning')" class="glass-card p-6 rounded-2xl group block cursor-pointer border border-blue-500/40">
@@ -266,6 +266,17 @@
           <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Rocket League, LoL, Valorant auto-synchronisés.</p>
         </div>
 
+        <div onclick="navigateTab('palmares')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/20 flex items-center justify-center text-amber-500 group-hover:scale-110 transition">
+              <i data-lucide="trophy" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-amber-500 transition"></i>
+          </div>
+          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-amber-500 transition">Palmarès & Masterclass</h3>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Dessins animés, Animes, Films, Séries, Jeux et Émissions.</p>
+        </div>
+
         <div onclick="navigateTab('sport')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
           <div class="flex items-center justify-between mb-4">
             <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition">
@@ -275,17 +286,6 @@
           </div>
           <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">Sport Pro Data</h3>
           <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Real Madrid, OL, Benaïssa, Spurs/Wemby, Alcaraz.</p>
-        </div>
-
-        <div onclick="navigateTab('watchlist')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition">
-              <i data-lucide="clapperboard" class="w-5 h-5"></i>
-            </div>
-            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition"></i>
-          </div>
-          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition">Watchlist & Clips</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Montage Premiere Pro clips MCU et séries.</p>
         </div>
 
         <div onclick="navigateTab('volley')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
@@ -315,8 +315,6 @@
 
   <!-- NIVEAU 2 : ESPACE PLANNING GOOGLE CALENDAR XXL -->
   <div id="view-planning" class="view-section hidden max-w-[1600px] mx-auto px-2 sm:px-6 pt-6 pb-20">
-    
-    <!-- En-tête Google Calendar -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
       <div class="flex items-center gap-4">
         <button onclick="gcalToday()" class="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold text-white transition shadow">
@@ -344,9 +342,7 @@
     <!-- Interface Calendrier Google XXL avec Fond Kame House DBZ -->
     <div class="gcal-container">
       <div class="gcal-bg"></div>
-
       <div class="gcal-content">
-        <!-- 1. En-tête des 7 jours (Lundi à Dimanche) -->
         <div class="grid grid-cols-[70px_repeat(7,1fr)] sm:grid-cols-[80px_repeat(7,1fr)] border-b border-white/20 bg-black/70 sticky top-0 z-20 backdrop-blur-md">
           <div class="p-3.5 text-[11px] font-bold text-zinc-400 flex items-center justify-center border-r border-white/15">
             GMT+02
@@ -354,7 +350,6 @@
           <div id="gcal-day-headers" class="contents"></div>
         </div>
 
-        <!-- 2. Grille horaire 08:00 -> 23:00 agrandie -->
         <div class="gcal-scroll-area relative overflow-y-auto max-h-[820px]">
           <div id="gcal-time-grid" class="grid grid-cols-[70px_repeat(7,1fr)] sm:grid-cols-[80px_repeat(7,1fr)]"></div>
         </div>
@@ -362,61 +357,54 @@
     </div>
   </div>
 
-  <!-- MODALE : CRÉATION D'ÉVÉNEMENT -->
-  <div id="modal-add-event" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="glass-card bg-[#0e171b]/95 border border-blue-500/40 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl">
-      <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-        <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <i data-lucide="calendar-plus" class="w-5 h-5 text-blue-400"></i>
-          Ajouter une activité
-        </h3>
-        <button onclick="closeAddEventModal()" class="text-zinc-400 hover:text-white">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
+  <!-- NIVEAU 2 : ESPACE PALMARÈS & HALL OF FAME -->
+  <div id="view-palmares" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
+    <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+      <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
+      <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+      <span class="text-amber-400 font-bold">Palmarès</span>
+    </div>
+
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">
+          <i data-lucide="trophy" class="w-3.5 h-3.5"></i>
+          Hall of Fame & Œuvres Cultes
+        </div>
+        <h2 class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">Mon Palmarès</h2>
       </div>
+    </div>
 
-      <form id="form-add-event" onsubmit="saveNewEvent(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Titre</label>
-          <input type="text" id="event-title" required placeholder="Ex: Entraînement Volley, Montage MCU, Révisions Éco" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-400">
-        </div>
+    <!-- Onglets des 6 Catégories Principales -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 border-b border-white/10 scrollbar-none" id="palmares-cats-container">
+      <button onclick="selectPalmaresCat('dessins-animes')" id="pcat-dessins-animes" class="pal-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
+        <i data-lucide="sparkles" class="w-4 h-4"></i> Dessins animés
+      </button>
+      <button onclick="selectPalmaresCat('animes')" id="pcat-animes" class="pal-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
+        <i data-lucide="flame" class="w-4 h-4"></i> Animes
+      </button>
+      <button onclick="selectPalmaresCat('films')" id="pcat-films" class="pal-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
+        <i data-lucide="film" class="w-4 h-4"></i> Films
+      </button>
+      <button onclick="selectPalmaresCat('series')" id="pcat-series" class="pal-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
+        <i data-lucide="tv" class="w-4 h-4"></i> Séries
+      </button>
+      <button onclick="selectPalmaresCat('jeux')" id="pcat-jeux" class="pal-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
+        <i data-lucide="gamepad-2" class="w-4 h-4"></i> Jeux
+      </button>
+      <button onclick="selectPalmaresCat('emissions')" id="pcat-emissions" class="pal-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2">
+        <i data-lucide="mic" class="w-4 h-4"></i> Émissions
+      </button>
+    </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Date</label>
-            <input type="date" id="event-date" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Début</label>
-            <input type="time" id="event-start-time" value="14:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Fin</label>
-            <input type="time" id="event-end-time" value="16:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-          </div>
-        </div>
+    <!-- Sous-Catégories (Pilules masquées quand non applicable) -->
+    <div id="palmares-subcats-container" class="flex flex-wrap items-center gap-2 mb-8 hidden">
+      <!-- Rempli en JS -->
+    </div>
 
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Couleur & Catégorie</label>
-          <select id="event-category" class="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-blue-400">
-            <option value="blue">🔵 Bleu Google (Général / Cours)</option>
-            <option value="orange">🟠 Orange (Volley-ball Nanterre)</option>
-            <option value="purple">🟣 Violet (Montage MCU TikTok)</option>
-            <option value="emerald">🟢 Vert (Gaming & Ranked)</option>
-            <option value="rose">🔴 Rouge / Rose (Personnel)</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Lieu / Note (optionnel)</label>
-          <input type="text" id="event-desc" placeholder="Ex: Gymnase Voltaire / PC Bureau" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-        </div>
-
-        <div class="pt-4 flex justify-end gap-3">
-          <button type="button" onclick="closeAddEventModal()" class="px-4 py-2 rounded-xl bg-white/10 text-white text-xs font-bold hover:bg-white/20 transition">Annuler</button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition">Enregistrer</button>
-        </div>
-      </form>
+    <!-- Grille des Cartes -->
+    <div id="palmares-items-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- Injecté dynamiquement -->
     </div>
   </div>
 
@@ -783,12 +771,257 @@
     </div>
   </div>
 
-  <!-- SCRIPT DU GOOGLE CALENDAR DBZ & GESTION DES JEUX -->
+  <!-- MODALE : CRÉATION D'ÉVÉNEMENT -->
+  <div id="modal-add-event" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="glass-card bg-[#0e171b]/95 border border-blue-500/40 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <i data-lucide="calendar-plus" class="w-5 h-5 text-blue-400"></i>
+          Ajouter une activité
+        </h3>
+        <button onclick="closeAddEventModal()" class="text-zinc-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="form-add-event" onsubmit="saveNewEvent(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Titre</label>
+          <input type="text" id="event-title" required placeholder="Ex: Entraînement Volley, Montage MCU, Révisions Éco" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-400">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Date</label>
+            <input type="date" id="event-date" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Début</label>
+            <input type="time" id="event-start-time" value="14:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Fin</label>
+            <input type="time" id="event-end-time" value="16:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Couleur & Catégorie</label>
+          <select id="event-category" class="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-blue-400">
+            <option value="blue">🔵 Bleu Google (Général / Cours)</option>
+            <option value="orange">🟠 Orange (Volley-ball Nanterre)</option>
+            <option value="purple">🟣 Violet (Montage MCU TikTok)</option>
+            <option value="emerald">🟢 Vert (Gaming & Ranked)</option>
+            <option value="rose">🔴 Rouge / Rose (Personnel)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Lieu / Note (optionnel)</label>
+          <input type="text" id="event-desc" placeholder="Ex: Gymnase Voltaire / PC Bureau" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
+        </div>
+
+        <div class="pt-4 flex justify-end gap-3">
+          <button type="button" onclick="closeAddEventModal()" class="px-4 py-2 rounded-xl bg-white/10 text-white text-xs font-bold hover:bg-white/20 transition">Annuler</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT GLOBAL -->
   <script>
     lucide.createIcons();
 
     // =======================================================
-    // 1. GOOGLE CALENDAR ENGINE (Semaine Lun -> Dim, 08:00 -> 23:00)
+    // 1. DONNÉES DU PALMARÈS (INTÉGRÉES DIRECTEMENT DANS LE JS)
+    // =======================================================
+    const palmaresData = {
+      'dessins-animes': {
+        hasSub: false,
+        items: [
+          { title: "Avatar : Le Dernier Maître de l'Air", tag: "Nickelodeon", rank: "#1", rating: "10/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Avatar", comment: "Une référence absolue en termes d'écriture et de développement de personnages." },
+          { title: "Star Wars: The Clone Wars", tag: "Lucasfilm", rank: "#2", rating: "9.5/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Clone+Wars", comment: "L'arc Mandalore et le final de la saison 7 sont légendaires." },
+          { title: "Teen Titans", tag: "DC Animated", rank: "#3", rating: "9/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Teen+Titans", comment: "Robin, Slade et une dynamique d'équipe inoubliable." }
+        ]
+      },
+      'animes': {
+        hasSub: false,
+        items: [
+          { title: "Re:Zero", tag: "Isekai", rank: "#1", rating: "10/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Re:Zero", comment: "Tension dramatique folle et boucles temporelles magistralement maîtrisées." },
+          { title: "Naruto Shippuden", tag: "Shōnen", rank: "#2", rating: "9.5/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Naruto", comment: "L'arc Pain, l'histoire d'Itachi et les antagonistes restent légendaires." },
+          { title: "Chainsaw Man", tag: "Dark Fantasy", rank: "#3", rating: "9/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Chainsaw+Man", comment: "Animation MAPPA sensationnelle et ambiance ultra nerveuse." },
+          { title: "Violet Evergarden", tag: "Drama", rank: "#4", rating: "9.5/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Violet+Evergarden", comment: "Visuellement sublime et d'une puissance émotionnelle rare." }
+        ]
+      },
+      'films': {
+        hasSub: true,
+        subcategories: [
+          { id: 'films-solos', name: 'Films solos', items: [
+            { title: "Spider-Man: No Way Home", tag: "MCU", rank: "#1", rating: "9.5/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=No+Way+Home", comment: "La réunion multivers au sommet du cinéma de super-héros." },
+            { title: "The Dark Knight", tag: "DC", rank: "#2", rating: "10/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=The+Dark+Knight", comment: "Le Joker de Heath Ledger et une tension magistrale de Christopher Nolan." }
+          ]},
+          { id: 'sagas', name: 'Sagas', items: [
+            { title: "The Infinity Saga", tag: "Marvel Studios", rank: "#1", rating: "10/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Infinity+Saga", comment: "23 films pour une conclusion historique avec Infinity War et Endgame." },
+            { title: "Trilogie Spider-Man (Tobey)", tag: "Sam Raimi", rank: "#2", rating: "9/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Spider-Man+Trilogy", comment: "Les bases du genre de super-héros au cinéma." }
+          ]},
+          { id: 'animation', name: "Films d'animation", items: [
+            { title: "Spider-Man: Across the Spider-Verse", tag: "Sony", rank: "#1", rating: "10/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Spider-Verse", comment: "Une révolution visuelle et sonore totale." },
+            { title: "Le Roi Lion", tag: "Disney", rank: "#2", rating: "9.5/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Le+Roi+Lion", comment: "Le classique d'animation par excellence." }
+          ]}
+        ]
+      },
+      'series': {
+        hasSub: false,
+        items: [
+          { title: "Alice in Borderland", tag: "Survie / Thriller", rank: "#1", rating: "9.5/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Alice+Borderland", comment: "Des épreuves de survie à suspense haletant du début à la fin." },
+          { title: "Squid Game", tag: "Dystopie", rank: "#2", rating: "9/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Squid+Game", comment: "Direction artistique marquante et scénario choc." }
+        ]
+      },
+      'jeux': {
+        hasSub: true,
+        subcategories: [
+          { id: 'jeux-anime', name: "Jeux d'anime", items: [
+            { title: "Naruto Shippuden: UNS 4", tag: "CyberConnect2", rank: "#1", rating: "9.5/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Storm+4", comment: "La référence du combat 3D et des cinématiques interactives." },
+            { title: "Dragon Ball Xenoverse 2", tag: "Bandai", rank: "#2", rating: "8.5/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Xenoverse+2", comment: "Un contenu titanesque et un plaisir de jeu intact." }
+          ]},
+          { id: 'jeux-tout-court', name: "Jeux", items: [
+            { title: "Marvel's Spider-Man Remastered", tag: "PlayStation", rank: "#1", rating: "10/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Spider-Man+PS5", comment: "Un gameplay de balancement parfait et une histoire touchante." },
+            { title: "Rocket League", tag: "Epic / Psyonix", rank: "#2", rating: "9.5/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Rocket+League", comment: "Le summum du gameplay compétitif physics-based." }
+          ]}
+        ]
+      },
+      'emissions': {
+        hasSub: true,
+        subcategories: [
+          { id: 'podcasts', name: "Podcasts", items: [
+            { title: "Popcorn", tag: "Twitch / Talk", rank: "#1", rating: "9/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Popcorn", comment: "Le talk-show internet le plus complet et divertissant." }
+          ]},
+          { id: 'reportages', name: "Reportages", items: [
+            { title: "Secrets d'Histoire", tag: "Culture / Histoire", rank: "#1", rating: "9/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Secrets+Histoire", comment: "Récits historiques passionnants et immersifs." }
+          ]},
+          { id: 'emissions-tv', name: "Émissions", items: [
+            { title: "Koh-Lanta", tag: "Aventure / TF1", rank: "#1", rating: "9/10", image: "https://placehold.co/400x600/0e1a14/10b981?text=Koh-Lanta", comment: "Les poteaux, l'orientation et les stratégies d'élimination cultes." }
+          ]}
+        ]
+      }
+    };
+
+    let activePalCat = 'dessins-animes';
+    let activePalSub = null;
+
+    function selectPalmaresCat(catId) {
+      activePalCat = catId;
+      const cat = palmaresData[catId];
+      if (cat.hasSub && cat.subcategories.length > 0) {
+        activePalSub = cat.subcategories[0].id;
+      } else {
+        activePalSub = null;
+      }
+      renderPalmaresUI();
+    }
+
+    function selectPalmaresSub(subId) {
+      activePalSub = subId;
+      renderPalmaresUI();
+    }
+
+    function renderPalmaresUI() {
+      // 1. Boutons Catégories
+      document.querySelectorAll('.pal-cat-btn').forEach(btn => {
+        btn.className = 'pal-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 bg-black/40 text-zinc-400 hover:text-white border border-white/5';
+      });
+      const activeCatBtn = document.getElementById(`pcat-${activePalCat}`);
+      if (activeCatBtn) {
+        activeCatBtn.className = 'pal-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 bg-amber-500 text-black shadow-lg shadow-amber-500/20 scale-105 border border-amber-400';
+      }
+
+      // 2. Sous-catégories
+      const subContainer = document.getElementById('palmares-subcats-container');
+      const cat = palmaresData[activePalCat];
+
+      if (cat.hasSub) {
+        subContainer.classList.remove('hidden');
+        subContainer.innerHTML = '';
+        cat.subcategories.forEach(sub => {
+          const isSelected = sub.id === activePalSub;
+          const subBtn = document.createElement('button');
+          subBtn.className = `px-3.5 py-1.5 rounded-full text-xs font-bold transition ${
+            isSelected 
+              ? 'bg-amber-500/20 text-amber-400 border border-amber-500/50 shadow-sm'
+              : 'bg-black/30 text-zinc-400 border border-white/5 hover:text-white'
+          }`;
+          subBtn.textContent = sub.name;
+          subBtn.onclick = () => selectPalmaresSub(sub.id);
+          subContainer.appendChild(subBtn);
+        });
+      } else {
+        subContainer.classList.add('hidden');
+      }
+
+      // 3. Cartes
+      const grid = document.getElementById('palmares-items-grid');
+      grid.innerHTML = '';
+
+      let items = [];
+      if (cat.hasSub) {
+        const found = cat.subcategories.find(s => s.id === activePalSub);
+        items = found ? found.items : [];
+      } else {
+        items = cat.items;
+      }
+
+      if (items.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-zinc-500 text-sm">Aucune œuvre enregistrée pour l'instant.</div>`;
+        return;
+      }
+
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-amber-500/50 flex flex-col group transition-all duration-300 hover:-translate-y-1.5 shadow-xl";
+
+        card.innerHTML = `
+          <div class="relative w-full aspect-[2/3] overflow-hidden bg-black/60">
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
+            
+            <span class="absolute top-3 left-3 bg-amber-500 text-black text-xs font-black px-2.5 py-0.5 rounded-md shadow-md uppercase">
+              ${item.rank || '★'}
+            </span>
+
+            ${item.tag ? `
+              <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md border border-white/10 text-amber-400 text-[11px] font-bold px-2 py-0.5 rounded-md">
+                ${item.tag}
+              </span>
+            ` : ''}
+
+            <div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-lg border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white">
+              <span class="text-amber-400">★</span>
+              <span>${item.rating || '-'}</span>
+            </div>
+          </div>
+
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-base font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-1">
+                ${item.title}
+              </h3>
+              ${item.comment ? `
+                <p class="text-xs text-zinc-400 mt-2 line-clamp-3 leading-relaxed">
+                  "${item.comment}"
+                </p>
+              ` : ''}
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    // =======================================================
+    // 2. GOOGLE CALENDAR ENGINE
     // =======================================================
     let currentCalDate = new Date(2026, 7, 24); // Lundi 24 Août 2026
 
@@ -809,9 +1042,8 @@
 
     function renderGCal() {
       const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-      
       const curr = new Date(currentCalDate);
-      const dayOfWeek = (curr.getDay() + 6) % 7; // Lundi = 0, Dimanche = 6
+      const dayOfWeek = (curr.getDay() + 6) % 7;
       const monday = new Date(curr);
       monday.setDate(curr.getDate() - dayOfWeek);
 
@@ -895,7 +1127,6 @@
           if (startH >= 8) {
             const topMinutes = (startH - 8) * 60 + startM;
             const durationMinutes = Math.max(((endH - 8) * 60 + endM) - topMinutes, 30);
-
             const topPx = (topMinutes / 60) * 68;
             const heightPx = (durationMinutes / 60) * 68;
 
@@ -999,12 +1230,12 @@
     }
 
     // =======================================================
-    // 2. ROUTEUR SPA & STATS JEUX (RL, VALORANT, LOL)
+    // 3. ROUTEUR SPA & STATS GAMING
     // =======================================================
     let rlStatsCache = {
-      '1v1': 'Gold III (Division III)',
-      '2v2': 'Platinum II (Division I)',
-      '3v3': 'Platinum II (Division III)'
+      '1v1': 'Platinum I (Division III)',
+      '2v2': 'Platinum II (Division III)',
+      '3v3': 'Platinum II (Division II)'
     };
 
     const themeToggleBtn = document.getElementById('themeToggle');
@@ -1030,6 +1261,10 @@
 
       if (tabName === 'planning') {
         renderGCal();
+      }
+
+      if (tabName === 'palmares') {
+        renderPalmaresUI();
       }
 
       if (tabName === 'gaming') {
@@ -1215,9 +1450,10 @@
       return makeList('valo-bronze-3.svg', 8);
     }
 
-    // Initialisation
+    // INITIALISATION GLOBALE
     window.addEventListener('DOMContentLoaded', () => {
       renderGCal();
+      renderPalmaresUI();
 
       fetch('./stats.json?t=' + Date.now())
         .then(response => {
@@ -1241,7 +1477,7 @@
             const rankVal = v.rang || v.rank || 'Bronze 3';
 
             if (r) r.innerText = rankVal;
-            if (rr && v.rr) rr.innerText = `Score : ${v.rr} • Peak Silver 3`;
+            if (rr && v.rr) rr.innerText = `Score : ${v.rr} RR • Peak Silver 3`;
             if (kd && v.kd) kd.innerText = v.kd;
             if (hs && v.hs) hs.innerText = v.hs;
 
