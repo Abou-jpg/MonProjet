@@ -224,6 +224,7 @@
 </head>
 <body class="text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors duration-300">
 
+  <!-- NAVBAR -->
   <header class="w-full border-b border-amber-900/10 dark:border-white/5 bg-[#fcfbf4]/80 dark:bg-[#070d0a]/80 backdrop-blur-md sticky top-0 z-50 transition-colors">
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
       <nav class="flex items-center gap-6 text-sm font-medium overflow-x-auto" id="main-nav">
@@ -249,6 +250,7 @@
     </div>
   </header>
 
+  <!-- NIVEAU 1 : ACCUEIL -->
   <div id="view-accueil" class="view-section max-w-7xl mx-auto px-6 pt-16 pb-20">
     <div class="max-w-3xl">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/25 text-emerald-800 dark:text-emerald-300 text-xs font-semibold mb-6">
@@ -274,6 +276,7 @@
       </div>
     </div>
 
+    <!-- GRILLE DES PÔLES -->
     <div class="pt-6 border-t border-amber-900/10 dark:border-white/5">
       <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-3">
         <span>— navigation rapide</span>
@@ -350,6 +353,7 @@
     </div>
   </div>
 
+  <!-- NIVEAU 2 : ESPACE PLANNING GOOGLE CALENDAR XXL -->
   <div id="view-planning" class="view-section hidden max-w-[1600px] mx-auto px-2 sm:px-6 pt-6 pb-20">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
       <div class="flex items-center gap-4">
@@ -375,6 +379,7 @@
       </button>
     </div>
 
+    <!-- Interface Calendrier Google XXL avec Fond Kame House DBZ -->
     <div class="gcal-container">
       <div class="gcal-bg"></div>
       <div class="gcal-content">
@@ -392,28 +397,26 @@
     </div>
   </div>
 
+  <!-- ======================================================= -->
+  <!-- NIVEAU 2 : ESPACE PALMARÈS                                -->
+  <!-- ======================================================= -->
   <div id="view-palmares" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
     
+    <!-- 1. HUB PRINCIPAL DES 6 CATÉGORIES (GRILLE 3x2) -->
     <div id="palmares-hub-screen">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-400 text-[11px] font-extrabold uppercase tracking-wider mb-3 shadow-sm">
-            <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-400"></i>
-            <span>HALL OF FAME &amp; ŒUVRES CULTES</span>
-          </div>
-          <h2 class="text-4xl md:text-6xl font-serif-title text-zinc-950 dark:text-white font-normal tracking-tight">
-            Mon Palmarès
-          </h2>
+      <div class="mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-400 text-[11px] font-extrabold uppercase tracking-wider mb-3 shadow-sm">
+          <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span>HALL OF FAME &amp; ŒUVRES CULTES</span>
         </div>
-
-        <button onclick="openAddItemModal()" class="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xs flex items-center gap-2 transition shadow-lg shadow-amber-500/20 w-fit">
-          <i data-lucide="plus-circle" class="w-4 h-4"></i>
-          <span>Ajouter une œuvre</span>
-        </button>
+        <h2 class="text-4xl md:text-6xl font-serif-title text-zinc-950 dark:text-white font-normal tracking-tight">
+          Mon Palmarès
+        </h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
+        <!-- 1. DESSINS ANIMÉS -->
         <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('dessins-animes')">
           <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
             <img src="martine.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Dessins+Animés'" alt="Dessins animés" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -440,6 +443,7 @@
           </div>
         </div>
 
+        <!-- 2. ANIMES -->
         <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('animes')">
           <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
             <img src="hunter.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Animes'" alt="Animes" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -466,6 +470,7 @@
           </div>
         </div>
 
+        <!-- 3. FILMS -->
         <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('films')">
           <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
             <img src="films.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Films'" alt="Films" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -492,6 +497,7 @@
           </div>
         </div>
 
+        <!-- 4. SÉRIES -->
         <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('series')">
           <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
             <img src="series.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Séries'" alt="Séries" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -518,6 +524,7 @@
           </div>
         </div>
 
+        <!-- 5. JEUX -->
         <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('jeux')">
           <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
             <img src="jeux.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Jeux'" alt="Jeux" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -544,6 +551,7 @@
           </div>
         </div>
 
+        <!-- 6. ÉMISSIONS -->
         <div class="palmares-category-hub-card glass-card group" onclick="openPalmaresCategory('emissions')">
           <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
             <img src="emissions.jpg" onerror="this.src='https://placehold.co/600x600/0b1611/fbbf24?text=Émissions'" alt="Émissions" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -573,6 +581,7 @@
       </div>
     </div>
 
+    <!-- 2. PAGE DÉTAILLÉE D'UNE CATÉGORIE -->
     <div id="palmares-detail-screen" class="hidden">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
@@ -594,20 +603,20 @@
             </h2>
           </div>
         </div>
-
-        <button onclick="openAddItemModal(activeSelectedCategory)" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xs flex items-center gap-2 transition shadow-lg shadow-amber-500/20 w-fit">
-          <i data-lucide="plus" class="w-4 h-4"></i>
-          <span>Ajouter dans cette catégorie</span>
-        </button>
       </div>
 
+      <!-- Sous-Catégories en pilules (si existantes) -->
       <div id="palmares-detail-subcats" class="flex flex-wrap items-center gap-2 mb-8 hidden">
-        </div>
+        <!-- Rempli par JavaScript -->
+      </div>
 
+      <!-- Grille des Cartes (#1, #2, #3...) -->
       <div id="palmares-detail-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        </div>
+        <!-- Rempli par JavaScript -->
+      </div>
     </div>
 
+    <!-- 3. PAGE DES SAISONS D'UNE SÉRIE (MARTINE, HUNTER X HUNTER...) -->
     <div id="palmares-seasons-screen" class="hidden">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
@@ -632,17 +641,15 @@
             <p class="text-xs text-zinc-400 mt-1">Sélectionne une saison pour accéder aux épisodes</p>
           </div>
         </div>
-
-        <button onclick="openAddSeasonModal()" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xs flex items-center gap-2 transition shadow-lg shadow-amber-500/20 w-fit">
-          <i data-lucide="plus-circle" class="w-4 h-4"></i>
-          <span>Ajouter une saison</span>
-        </button>
       </div>
 
+      <!-- Grille Dynamique des Saisons (3 par ligne pour 6 saisons) -->
       <div id="seasons-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto pt-4">
-        </div>
+        <!-- Rempli dynamiquement en JS -->
+      </div>
     </div>
 
+    <!-- 4. PAGE DE LA GRILLE DES ÉPISODES (AVEC SUIVI & AVIS) -->
     <div id="palmares-episodes-screen" class="hidden">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
@@ -671,151 +678,19 @@
         </div>
       </div>
 
+      <!-- Grille des carrés épisodes -->
       <div id="episodes-grid-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        </div>
-    </div>
-
-  </div>
-
-  <div id="modal-add-item" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
-    <div class="glass-card bg-[#0b1611]/95 border border-amber-500/40 w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between mb-5 pb-3 border-b border-white/10">
-        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-          <i data-lucide="plus-circle" class="w-5 h-5 text-amber-400"></i>
-          Ajouter une œuvre
-        </h3>
-        <button onclick="closeAddItemModal()" class="text-zinc-400 hover:text-white p-1">
-          <i data-lucide="x" class="w-6 h-6"></i>
-        </button>
+        <!-- Carrés injectés dynamiquement en JS -->
       </div>
-
-      <form id="form-add-item" onsubmit="saveNewPalmaresItem(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Titre de l'œuvre</label>
-          <input type="text" id="new-item-title" required placeholder="Ex: Dragon Ball Z, Breaking Bad, Inception..." class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Catégorie</label>
-            <select id="new-item-category" onchange="updateSubcatOptions(this.value)" class="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400">
-              <option value="dessins-animes">Dessins animés</option>
-              <option value="animes">Animes</option>
-              <option value="films">Films</option>
-              <option value="series">Séries</option>
-              <option value="jeux">Jeux</option>
-              <option value="emissions">Émissions</option>
-            </select>
-          </div>
-
-          <div id="new-item-subcat-wrapper" class="hidden">
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Sous-catégorie</label>
-            <select id="new-item-subcategory" class="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400">
-              </select>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Format</label>
-            <select id="new-item-has-seasons" onchange="toggleSeasonInputs(this.value)" class="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400">
-              <option value="true">Série (avec saisons & épisodes)</option>
-              <option value="false">Œuvre unique / Film / Jeu solo</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Tag / Badge Univers</label>
-            <input type="text" id="new-item-tag" placeholder="Ex: Shōnen, MCU, Insomniac..." class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400">
-          </div>
-        </div>
-
-        <div id="new-item-seasons-config" class="p-4 rounded-2xl bg-black/40 border border-white/10 space-y-3">
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="block text-[11px] font-bold text-amber-400 uppercase tracking-wider mb-1">Nombre de saisons</label>
-              <input type="number" id="new-item-season-count" min="1" max="50" value="1" class="w-full bg-zinc-900 border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-amber-400 uppercase tracking-wider mb-1">Épisodes par saison</label>
-              <input type="number" id="new-item-ep-count" min="1" max="200" value="24" class="w-full bg-zinc-900 border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Image (Fichier ou URL)</label>
-          <input type="text" id="new-item-image" placeholder="Ex: dbz.jpg, https://mon-image.png..." class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400">
-          <span class="text-[10px] text-zinc-400 mt-1 block">Tu peux mettre le nom d'un fichier déposé sur GitHub ou une URL.</span>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Rang (#1, #2...)</label>
-            <input type="text" id="new-item-rank" placeholder="#1" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Note globale</label>
-            <input type="text" id="new-item-rating" placeholder="10/10" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400">
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Commentaire / Pourquoi c'est culte</label>
-          <textarea id="new-item-comment" rows="2" placeholder="Une phrase résumant l'œuvre..." class="w-full bg-black/60 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-amber-400 resize-none"></textarea>
-        </div>
-
-        <div class="pt-3 flex justify-end gap-3">
-          <button type="button" onclick="closeAddItemModal()" class="px-5 py-2.5 rounded-xl bg-white/10 text-white text-xs font-bold hover:bg-white/20 transition">Annuler</button>
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-black transition shadow-lg shadow-amber-500/20">Enregistrer</button>
-        </div>
-      </form>
     </div>
+
   </div>
 
-  <div id="modal-add-season" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
-    <div class="glass-card bg-[#0b1611]/95 border border-amber-500/40 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl relative">
-      <div class="flex items-center justify-between mb-5 pb-3 border-b border-white/10">
-        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-          <i data-lucide="plus" class="w-5 h-5 text-amber-400"></i>
-          Ajouter une saison
-        </h3>
-        <button onclick="closeAddSeasonModal()" class="text-zinc-400 hover:text-white p-1">
-          <i data-lucide="x" class="w-6 h-6"></i>
-        </button>
-      </div>
-
-      <form id="form-add-season" onsubmit="saveNewSeason(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Numéro de saison</label>
-          <input type="number" id="new-season-num" required min="1" max="100" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Nom / Sous-titre de la saison</label>
-          <input type="text" id="new-season-title" placeholder="Ex: Saison 3 • Arc York Shin City" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Nombre d'épisodes</label>
-          <input type="number" id="new-season-ep-count" required min="1" max="500" value="24" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Image spécifique de la saison (optionnel)</label>
-          <input type="text" id="new-season-image" placeholder="Ex: hunter-s3.jpg" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400">
-        </div>
-
-        <div class="pt-3 flex justify-end gap-3">
-          <button type="button" onclick="closeAddSeasonModal()" class="px-5 py-2.5 rounded-xl bg-white/10 text-white text-xs font-bold hover:bg-white/20 transition">Annuler</button>
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-black transition shadow-lg shadow-amber-500/20">Ajouter</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
+  <!-- MODALE STYLE LETTERBOXD : JOURNAL / AVIS ÉPISODE -->
   <div id="modal-episode-review" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
     <div class="glass-card bg-[#0b1611]/95 border border-amber-500/40 w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+      
+      <!-- En-tête -->
       <div class="flex items-center justify-between mb-5 pb-3 border-b border-white/10">
         <div>
           <span class="text-[11px] font-black uppercase tracking-widest text-amber-400 block mb-0.5">
@@ -835,6 +710,7 @@
         <input type="hidden" id="review-season-num">
         <input type="hidden" id="review-episode-num">
 
+        <!-- Checkbox Spécifier la date / Vu -->
         <div class="p-4 rounded-2xl bg-black/50 border border-white/10 space-y-3">
           <label class="flex items-center gap-3 cursor-pointer select-none">
             <input type="checkbox" id="review-watched-checkbox" onchange="toggleDateVisibility(this.checked)" class="w-5 h-5 rounded-lg text-amber-500 focus:ring-amber-400 focus:ring-offset-0 bg-zinc-900 border-white/20 accent-amber-500 cursor-pointer">
@@ -847,6 +723,7 @@
           </div>
         </div>
 
+        <!-- Note sur 10 -->
         <div>
           <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1.5">Note de l'épisode</label>
           <select id="review-rating-select" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
@@ -860,11 +737,13 @@
           </select>
         </div>
 
+        <!-- Zone de texte : Add a review... -->
         <div>
           <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1.5">Avis personnel</label>
           <textarea id="review-text" rows="4" placeholder="Ajouter un avis sur cet épisode..." class="w-full bg-black/60 border border-white/10 rounded-2xl p-4 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 resize-none"></textarea>
         </div>
 
+        <!-- Boutons d'action -->
         <div class="pt-3 flex items-center justify-between">
           <button type="button" onclick="deleteEpisodeReview()" id="btn-delete-review" class="text-xs font-bold text-rose-400 hover:text-rose-300 hidden">
             Supprimer l'avis
@@ -879,248 +758,1179 @@
           </div>
         </div>
       </form>
+
     </div>
   </div>
 
-  <div id="view-sport" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-      <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
-      <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-      <span class="text-amber-400 font-bold">Sport Pro Data</span>
-    </div>
-    <div class="mb-8">
-      <h2 class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">Sport Pro Data</h2>
-      <p class="text-xs text-zinc-400 mt-1">Suivi des équipes et athlètes favoris (Real Madrid, OL, Spurs, Wemby, Alcaraz)</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="glass-card p-6 rounded-3xl border border-white/10">
-        <h3 class="text-lg font-bold text-white mb-2">Football</h3>
-        <p class="text-xs text-zinc-400">Real Madrid • Olympique Lyonnais • Équipe de France • Algérie</p>
+  <!-- NIVEAU 2 : ESPACE GAMING -->
+  <div id="view-gaming" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
+    <div id="gaming-hub-screen">
+      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <span class="text-emerald-400 font-bold">Gaming</span>
       </div>
-      <div class="glass-card p-6 rounded-3xl border border-white/10">
-        <h3 class="text-lg font-bold text-white mb-2">Basketball</h3>
-        <p class="text-xs text-zinc-400">San Antonio Spurs • Victor Wembanyama • Gabby Williams</p>
+
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-1">
+            Hub Compétitif
+          </div>
+          <h2 class="text-3xl md:text-4xl font-serif-title text-zinc-950 dark:text-white">Mes Jeux & Rangs ELO</h2>
+        </div>
       </div>
-      <div class="glass-card p-6 rounded-3xl border border-white/10">
-        <h3 class="text-lg font-bold text-white mb-2">Tennis</h3>
-        <p class="text-xs text-zinc-400">Carlos Alcaraz • Emma Raducanu</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- 1. POSTER ROCKET LEAGUE -->
+        <div onclick="openRLDetails()" class="game-poster-card group border-emerald-500/40 hover:border-emerald-500">
+          <div class="game-poster-bg" style="background-image: url('rl.jpg'), url('rl.jpg.png');"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
+          
+          <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
+            <div class="flex justify-between items-start">
+              <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-[10px] font-bold uppercase tracking-widest text-emerald-400 backdrop-blur-md">
+                Epic Games
+              </span>
+              <span class="w-10 h-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </span>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-bold text-white mb-1 drop-shadow-md">Rocket League</h3>
+              <p class="text-xs text-emerald-300 font-medium mb-4 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                ID : abdel92jr
+              </p>
+              <div class="w-full py-3 px-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-emerald-500 group-hover:text-black transition">
+                <span>Choisir 1v1 • 2v2 • 3v3</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. POSTER LEAGUE OF LEGENDS -->
+        <div onclick="openLoLDetails()" class="game-poster-card group border-amber-500/40 hover:border-amber-500">
+          <div class="game-poster-bg" style="background-image: url('Neeko.jpg'), url('neeko.jpg'), url('lol.jpg');"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
+          
+          <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
+            <div class="flex justify-between items-start">
+              <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-[10px] font-bold uppercase tracking-widest text-amber-400 backdrop-blur-md">
+                Riot EUW
+              </span>
+              <span class="w-10 h-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-amber-400 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </span>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-bold text-white mb-1 drop-shadow-md">League of Legends</h3>
+              <p class="text-xs text-amber-300 font-medium mb-4 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                ID : HDKAbou
+              </p>
+              <div class="w-full py-3 px-4 rounded-xl bg-amber-500/20 border border-amber-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-amber-500 group-hover:text-black transition">
+                <span>Voir le profil & stats</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. POSTER VALORANT -->
+        <div onclick="openValoDetails()" class="game-poster-card group border-rose-500/40 hover:border-rose-500">
+          <div class="game-poster-bg" style="background-image: url('valo.jpg'), url('valo.jpg.png'), url('valo.png');"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
+          
+          <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
+            <div class="flex justify-between items-start">
+              <span class="px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/40 text-[10px] font-bold uppercase tracking-widest text-rose-400 backdrop-blur-md">
+                Riot EUW
+              </span>
+              <span class="w-10 h-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-rose-400 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </span>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-bold text-white mb-1 drop-shadow-md">Valorant</h3>
+              <p class="text-xs text-rose-300 font-medium mb-4 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+                ID : Abouu92jr#0213
+              </p>
+              <div class="w-full py-3 px-4 rounded-xl bg-rose-500/20 border border-rose-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-rose-500 group-hover:text-black transition">
+                <span>Voir le rang & K/D</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROCKET LEAGUE : LISTE DES MODES -->
+    <div id="gaming-rl-screen" class="hidden">
+      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="closeRLDetails()" class="hover:text-emerald-400 transition">Gaming</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <span class="text-emerald-400 font-bold">Rocket League</span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div class="flex items-center gap-4">
+          <button onclick="closeRLDetails()" class="px-4 py-2 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-emerald-500 hover:text-black dark:hover:bg-emerald-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            Tous les jeux
+          </button>
+          <div>
+            <h2 class="text-2xl md:text-3xl font-serif-title text-zinc-950 dark:text-white">Choisis ton mode Rocket League</h2>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400">ID Epic : <span class="text-emerald-600 dark:text-emerald-400 font-semibold">abdel92jr</span></p>
+          </div>
+        </div>
+
+        <a href="https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white text-xs font-semibold flex items-center gap-2 transition w-fit">
+          <span>Tracker Network</span>
+          <i data-lucide="external-link" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-5 max-w-4xl mx-auto">
+        <div onclick="openRLRankPage('1v1')" class="mode-vertical-card group">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+            <div class="sm:w-3/5 h-36 overflow-hidden">
+              <img id="banner-img-1v1" src="1vs1.jpg" alt="1 VS 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
+              <div>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Solo</span>
+                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Duel 1 VS 1</h3>
+                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div onclick="openRLRankPage('2v2')" class="mode-vertical-card group">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+            <div class="sm:w-3/5 h-36 overflow-hidden">
+              <img id="banner-img-2v2" src="2vs2.jpg" alt="2 VS 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
+              <div>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-400 block">Mode Principal</span>
+                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Double 2 VS 2</h3>
+                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div onclick="openRLRankPage('3v3')" class="mode-vertical-card group">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+            <div class="sm:w-3/5 h-36 overflow-hidden">
+              <img id="banner-img-3v3" src="3vs3.jpg" alt="3 VS 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
+              <div>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Équipe</span>
+                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Standard 3 VS 3</h3>
+                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROCKET LEAGUE : PAGE DU RANG SÉLECTIONNÉ -->
+    <div id="gaming-rl-rank-page" class="hidden max-w-4xl mx-auto">
+      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="closeRLDetails()" class="hover:text-emerald-400 transition">Gaming</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="backToRLModes()" class="hover:text-emerald-400 transition">Rocket League</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <span id="rankpage-breadcrumb-mode" class="text-emerald-400 font-bold">1 VS 1</span>
+      </div>
+
+      <div class="mb-6">
+        <button onclick="backToRLModes()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-emerald-500 hover:text-black dark:hover:bg-emerald-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          Choisir un autre mode
+        </button>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden border border-emerald-500/40 p-6 sm:p-10 bg-[#0b1611]/90 shadow-2xl">
+        <div class="w-full h-48 sm:h-64 rounded-2xl overflow-hidden mb-8 border border-white/10 shadow-lg">
+          <img id="rankpage-banner-img" src="1vs1.jpg" alt="Bannière Mode" class="w-full h-full object-cover">
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-white/10">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 block mb-1" id="rankpage-mode-subtitle">MODE SOLO</span>
+            <h2 class="text-3xl sm:text-4xl font-black text-white" id="rankpage-mode-title">Duel 1 VS 1</h2>
+          </div>
+          <span class="text-xs font-semibold px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 w-fit">
+            Synchronisation Active
+          </span>
+        </div>
+
+        <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div class="flex items-center gap-6">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
+              <img id="rankpage-badge-img" src="ou-3.jpg.png" alt="Badge de rang" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+            </div>
+            <div>
+              <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
+              <div class="text-3xl sm:text-4xl font-black text-white tracking-tight" id="rankpage-rank-text">Chargement...</div>
+              <span class="text-xs text-emerald-400 font-medium block mt-1">Epic ID : abdel92jr</span>
+            </div>
+          </div>
+
+          <div class="sm:text-right border-t sm:border-t-0 pt-4 sm:pt-0 border-white/5">
+            <a href="https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview" target="_blank" class="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold inline-flex items-center gap-2 transition shadow-lg shadow-emerald-500/20">
+              <span>Voir sur Tracker Network</span>
+              <i data-lucide="external-link" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEAGUE OF LEGENDS : PAGE DÉDIÉE -->
+    <div id="gaming-lol-screen" class="hidden max-w-4xl mx-auto">
+      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="closeOtherGames()" class="hover:text-emerald-400 transition">Gaming</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <span class="text-amber-400 font-bold">League of Legends</span>
+      </div>
+
+      <div class="mb-6">
+        <button onclick="closeOtherGames()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-amber-500 hover:text-black dark:hover:bg-amber-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          Tous les jeux
+        </button>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden border border-amber-500/40 p-6 sm:p-10 bg-[#141208]/90 shadow-2xl">
+        <div class="w-full h-56 sm:h-72 rounded-2xl overflow-hidden mb-8 border border-white/10 shadow-lg">
+          <img id="lol-banner-img" src="Neeko.jpg" alt="Neeko - League of Legends" class="w-full h-full object-cover">
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-white/10">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-amber-400 block mb-1">RIOT GAMES • SERVEUR EUW</span>
+            <h2 class="text-3xl sm:text-4xl font-black text-white">League of Legends</h2>
+          </div>
+          <span class="text-xs font-semibold px-4 py-1.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40 w-fit">
+            Profil Joueur Actif
+          </span>
+        </div>
+
+        <div class="pt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-6 rounded-2xl bg-black/40 border border-white/10">
+            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider block mb-2">Champion Préféré</span>
+            <div class="text-3xl font-black text-white mb-2">Neeko</div>
+            <p class="text-xs text-zinc-400">Spam Mid / Support • Contrôle & Teamfight</p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-black/40 border border-white/10">
+            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider block mb-2">Rang Compétitif</span>
+            <div class="text-3xl font-black text-white mb-2">Non Classé</div>
+            <p class="text-xs text-zinc-400">ID In-Game : <strong class="text-white">HDKAbou</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VALORANT : PAGE DÉDIÉE -->
+    <div id="gaming-valo-screen" class="hidden max-w-4xl mx-auto">
+      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <button onclick="closeOtherGames()" class="hover:text-emerald-400 transition">Gaming</button>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <span class="text-rose-400 font-bold">Valorant</span>
+      </div>
+
+      <div class="mb-6">
+        <button onclick="closeOtherGames()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-500 dark:hover:text-white transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          Tous les jeux
+        </button>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden border border-rose-500/40 p-6 sm:p-10 bg-[#140b0e]/90 shadow-2xl">
+        <div class="w-full h-48 sm:h-64 rounded-2xl overflow-hidden mb-8 border border-white/10 shadow-lg">
+          <img id="valo-banner-img" src="valo.jpg" alt="Valorant" class="w-full h-full object-cover">
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-white/10">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-rose-400 block mb-1">RIOT GAMES • SERVEUR EUW</span>
+            <h2 class="text-3xl sm:text-4xl font-black text-white">Valorant</h2>
+          </div>
+          <span class="text-xs font-semibold px-4 py-1.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/40 w-fit">
+            Synchronisé Tracker.gg
+          </span>
+        </div>
+
+        <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div class="flex items-center gap-6">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
+              <img id="valo-badge-img" src="" alt="Badge Valorant" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">
+            </div>
+            <div>
+              <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
+              <div class="text-3xl sm:text-4xl font-black text-rose-400 tracking-tight" id="valo-dedicated-rank">Bronze 3</div>
+              <span class="text-xs text-zinc-400 font-medium block mt-1" id="valo-dedicated-rr">Score : 38 RR • Peak Silver 3</span>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="p-4 rounded-xl bg-black/40 border border-white/10 text-center min-w-[90px]">
+              <span class="text-[10px] text-zinc-400 block mb-0.5">K/D Ratio</span>
+              <span id="valo-dedicated-kd" class="font-bold text-white text-lg">0.74</span>
+            </div>
+            <div class="p-4 rounded-xl bg-black/40 border border-white/10 text-center min-w-[90px]">
+              <span class="text-[10px] text-zinc-400 block mb-0.5">Headshot %</span>
+              <span id="valo-dedicated-hs" class="font-bold text-white text-lg">15.6%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-white/10 flex justify-end">
+          <a href="https://tracker.gg/valorant/profile/riot/Abouu92jr%230213/overview" target="_blank" class="px-5 py-3 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold inline-flex items-center gap-2 transition shadow-lg shadow-rose-500/20">
+            <span>Ouvrir la fiche Tracker.gg</span>
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
-  <div id="view-volley" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-      <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
-      <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-      <span class="text-emerald-400 font-bold">Volley Nanterre</span>
-    </div>
-    <div class="mb-8">
-      <h2 class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">Volley Nanterre</h2>
-      <p class="text-xs text-zinc-400 mt-1">Pôle Directeur Sportif, Tournois et Gala</p>
-    </div>
-    <div class="glass-card p-8 rounded-3xl border border-emerald-500/30">
-      <h3 class="text-xl font-bold text-white mb-3">Administration & Direction Sportive</h3>
-      <p class="text-xs text-zinc-400 leading-relaxed">Gestion des plannings d'entraînements, organisation des tournois internes/externes et du gala de fin de saison.</p>
+  <!-- MODALE : CRÉATION D'ÉVÉNEMENT PLANNING -->
+  <div id="modal-add-event" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="glass-card bg-[#0e171b]/95 border border-blue-500/40 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <i data-lucide="calendar-plus" class="w-5 h-5 text-blue-400"></i>
+          Ajouter une activité
+        </h3>
+        <button onclick="closeAddEventModal()" class="text-zinc-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="form-add-event" onsubmit="saveNewEvent(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Titre</label>
+          <input type="text" id="event-title" required placeholder="Ex: Entraînement Volley, Montage MCU, Révisions Éco" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-400">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Date</label>
+            <input type="date" id="event-date" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Début</label>
+            <input type="time" id="event-start-time" value="14:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Fin</label>
+            <input type="time" id="event-end-time" value="16:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Couleur & Catégorie</label>
+          <select id="event-category" class="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-blue-400">
+            <option value="blue">🔵 Bleu Google (Général / Cours)</option>
+            <option value="orange">🟠 Orange (Volley-ball Nanterre)</option>
+            <option value="purple">🟣 Violet (Montage MCU TikTok)</option>
+            <option value="emerald">🟢 Vert (Gaming & Ranked)</option>
+            <option value="rose">🔴 Rouge / Rose (Personnel)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Lieu / Note (optionnel)</label>
+          <input type="text" id="event-desc" placeholder="Ex: Gymnase Voltaire / PC Bureau" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
+        </div>
+
+        <div class="pt-4 flex justify-end gap-3">
+          <button type="button" onclick="closeAddEventModal()" class="px-4 py-2 rounded-xl bg-white/10 text-white text-xs font-bold hover:bg-white/20 transition">Annuler</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition">Enregistrer</button>
+        </div>
+      </form>
     </div>
   </div>
 
-  <div id="view-perso" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-      <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
-      <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-      <span class="text-amber-400 font-bold">Personnel</span>
-    </div>
-    <div class="mb-8">
-      <h2 class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">Personnel & Pro</h2>
-      <p class="text-xs text-zinc-400 mt-1">L2 Éco-Gestion • Permis de conduire • Montage vidéo</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="glass-card p-6 rounded-3xl border border-white/10">
-        <h3 class="text-lg font-bold text-white mb-2">Universitaire</h3>
-        <p class="text-xs text-zinc-400">Licence 2 Éco-Gestion</p>
-      </div>
-      <div class="glass-card p-6 rounded-3xl border border-white/10">
-        <h3 class="text-lg font-bold text-white mb-2">Objectifs 2026</h3>
-        <p class="text-xs text-zinc-400">Code de la route & Permis B • Montage TikTok MCU</p>
-      </div>
-    </div>
-  </div>
-
+  <!-- JAVASCRIPT GLOBAL -->
   <script>
     lucide.createIcons();
 
-    // 1. Initialisation / Récupération du catalogue Palmarès depuis localStorage
-    function getStoredCatalog() {
-      const stored = localStorage.getItem('hq_palmares_catalog');
-      if (stored) {
-        try { return JSON.parse(stored); } catch(e) {}
+    // =======================================================
+    // 1. PALMARÈS & DONNÉES (MARTINE & HUNTER X HUNTER 6 SAISONS)
+    // =======================================================
+    const palmaresCatalog = {
+      'dessins-animes': {
+        name: "Dessins animés",
+        hasSub: false,
+        items: [
+          { 
+            id: 'martine',
+            hasSeasons: true,
+            rank: "#1", 
+            title: "Martine", 
+            tag: "Animation 3D", 
+            rating: "10/10", 
+            image: "martine.jpg", 
+            comment: "Les aventures cultes de Martine, Patapouf et ses amis (Saisons 1 & 2).",
+            seasons: [
+              { num: 1, title: "Saison 1", episodesCount: 52, image: "martine-s1.jpg", desc: "52 Épisodes" },
+              { num: 2, title: "Saison 2", episodesCount: 52, image: "martine-s2.jpg", desc: "52 Épisodes" }
+            ]
+          }
+        ]
+      },
+      'animes': {
+        name: "Animes",
+        hasSub: false,
+        items: [
+          { 
+            id: 'hunter',
+            hasSeasons: true,
+            rank: "#1", 
+            title: "Hunter x Hunter", 
+            tag: "Shōnen / Aventure", 
+            rating: "10/10", 
+            image: "hunter.jpg", 
+            comment: "L'arc Kimera Ants, l'examen Hunter et le système de Nen magistral.",
+            seasons: [
+              { num: 1, title: "Saison 1 (Examen Hunter)", episodesCount: 26, image: "hunter-s1.jpg", desc: "26 Épisodes" },
+              { num: 2, title: "Saison 2 (Tour Céleste)", episodesCount: 12, image: "hunter-s2.jpg", desc: "12 Épisodes" },
+              { num: 3, title: "Saison 3 (York Shin City)", episodesCount: 20, image: "hunter-s3.jpg", desc: "20 Épisodes" },
+              { num: 4, title: "Saison 4 (Greed Island)", episodesCount: 17, image: "hunter-s4.jpg", desc: "17 Épisodes" },
+              { num: 5, title: "Saison 5 (Chimera Ants)", episodesCount: 61, image: "hunter-s5.jpg", desc: "61 Épisodes" },
+              { num: 6, title: "Saison 6 (Élection)", episodesCount: 12, image: "hunter-s6.jpg", desc: "12 Épisodes" }
+            ]
+          }
+        ]
+      },
+      'films': {
+        name: "Films",
+        hasSub: true,
+        subcategories: [
+          {
+            id: 'films-solos',
+            name: 'Films solos',
+            items: [
+              { id: 'spiderman', hasSeasons: false, rank: "#1", title: "Spider-Man: No Way Home", tag: "MCU", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=No+Way+Home", comment: "La réunion multivers au sommet du cinéma de super-héros." }
+            ]
+          },
+          {
+            id: 'sagas',
+            name: 'Sagas',
+            items: [
+              { id: 'infinity', hasSeasons: false, rank: "#1", title: "The Infinity Saga", tag: "Marvel Studios", rating: "10/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Infinity+Saga", comment: "23 films pour une conclusion historique avec Infinity War et Endgame." }
+            ]
+          },
+          {
+            id: 'films-animation',
+            name: "Films d'animation",
+            items: [
+              { id: 'spiderverse', hasSeasons: false, rank: "#1", title: "Spider-Man: Across the Spider-Verse", tag: "Sony Animation", rating: "10/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Spider-Verse", comment: "Une révolution visuelle, graphique et sonore totale." }
+            ]
+          }
+        ]
+      },
+      'series': {
+        name: "Séries",
+        hasSub: false,
+        items: [
+          { id: 'borderland', hasSeasons: false, rank: "#1", title: "Alice in Borderland", tag: "Survie / Thriller", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Borderland", comment: "Des épreuves de survie à suspense haletant du début à la fin." }
+        ]
+      },
+      'jeux': {
+        name: "Jeux",
+        hasSub: true,
+        subcategories: [
+          {
+            id: 'jeux-anime',
+            name: "Jeux d'anime",
+            items: [
+              { id: 'storm4', hasSeasons: false, rank: "#1", title: "Naruto Shippuden: UNS 4", tag: "CyberConnect2", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Storm+4", comment: "La référence du combat 3D et des cinématiques interactives." }
+            ]
+          },
+          {
+            id: 'jeux-tout-court',
+            name: "Jeux",
+            items: [
+              { id: 'spiderman-ps5', hasSeasons: false, rank: "#1", title: "Marvel's Spider-Man Remastered", tag: "PlayStation / Insomniac", rating: "10/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Spider-Man+PS5", comment: "Gameplay de balancement fluide et histoire touchante." }
+            ]
+          }
+        ]
+      },
+      'emissions': {
+        name: "Émissions",
+        hasSub: true,
+        subcategories: [
+          {
+            id: 'podcasts',
+            name: "Podcasts",
+            items: [
+              { id: 'popcorn', hasSeasons: false, rank: "#1", title: "Popcorn", tag: "Twitch / Domingo", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Popcorn", comment: "Le talk-show internet le plus complet et divertissant." }
+            ]
+          },
+          {
+            id: 'reportages',
+            name: "Reportages",
+            items: [
+              { id: 'secrets-histoire', hasSeasons: false, rank: "#1", title: "Secrets d'Histoire", tag: "Culture / France TV", rating: "9/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Secrets+Histoire", comment: "Récits historiques passionnants et immersifs." }
+            ]
+          },
+          {
+            id: 'emissions-tv',
+            name: "Émissions",
+            items: [
+              { id: 'kohlanta', hasSeasons: false, rank: "#1", title: "Koh-Lanta", tag: "Survie / Denis Brogniart", rating: "9.5/10", image: "https://placehold.co/600x600/0b1611/fbbf24?text=Koh-Lanta", comment: "Les poteaux, l'orientation et les stratégies de conseils cultes." }
+            ]
+          }
+        ]
       }
-      return palmaresCatalog;
+    };
+
+    let activeSelectedCategory = null;
+    let activeSelectedSubCategory = null;
+    let currentShowItem = null;
+    let currentSeasonNumber = 1;
+    let currentSeasonEpisodeCount = 52;
+
+    // Stockage local des avis (Letterboxd style)
+    function getEpisodeReviewKey(showId, s, ep) {
+      return `review_${showId}_s${s}_ep${ep}`;
     }
 
-    function saveCatalogToStorage(catData) {
-      localStorage.setItem('hq_palmares_catalog', JSON.stringify(catData));
+    function getEpisodeReviewData(showId, s, ep) {
+      return JSON.parse(localStorage.getItem(getEpisodeReviewKey(showId, s, ep))) || null;
     }
 
-    // Gestion de l'ajout d'une nouvelle œuvre
-    function openAddItemModal(preselectedCat) {
-      const catSelect = document.getElementById('new-item-category');
-      if (preselectedCat) {
-        catSelect.value = preselectedCat;
+    function setEpisodeReviewData(showId, s, ep, data) {
+      localStorage.setItem(getEpisodeReviewKey(showId, s, ep), JSON.stringify(data));
+    }
+
+    // 1. Ouvrir une Catégorie
+    function openPalmaresCategory(catKey) {
+      activeSelectedCategory = catKey;
+      const cat = palmaresCatalog[catKey];
+      if (cat.hasSub && cat.subcategories.length > 0) {
+        activeSelectedSubCategory = cat.subcategories[0].id;
+      } else {
+        activeSelectedSubCategory = null;
       }
-      updateSubcatOptions(catSelect.value);
-      document.getElementById('modal-add-item').classList.remove('hidden');
+
+      hideAllPalmaresScreens();
+      document.getElementById('palmares-detail-screen').classList.remove('hidden');
+
+      document.getElementById('palmares-breadcrumb-cat').innerText = cat.name;
+      document.getElementById('palmares-detail-title').innerText = cat.name;
+
+      renderPalmaresDetailView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function backToPalmaresHub() {
+      hideAllPalmaresScreens();
+      document.getElementById('palmares-hub-screen').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
     }
 
-    function closeAddItemModal() {
-      document.getElementById('modal-add-item').classList.add('hidden');
-      document.getElementById('form-add-item').reset();
+    function backToCurrentCategory() {
+      if (activeSelectedCategory) {
+        openPalmaresCategory(activeSelectedCategory);
+      } else {
+        backToPalmaresHub();
+      }
     }
 
-    function updateSubcatOptions(catVal) {
-      const wrapper = document.getElementById('new-item-subcat-wrapper');
-      const select = document.getElementById('new-item-subcategory');
-      const catalog = getStoredCatalog();
-      const current = catalog[catVal];
+    function renderPalmaresDetailView() {
+      const cat = palmaresCatalog[activeSelectedCategory];
+      const subContainer = document.getElementById('palmares-detail-subcats');
 
-      if (current && current.hasSub && current.subcategories) {
-        wrapper.classList.remove('hidden');
-        select.innerHTML = '';
-        current.subcategories.forEach(sub => {
-          const opt = document.createElement('option');
-          opt.value = sub.id;
-          opt.textContent = sub.name;
-          select.appendChild(opt);
+      if (cat.hasSub) {
+        subContainer.classList.remove('hidden');
+        subContainer.innerHTML = '';
+        cat.subcategories.forEach(sub => {
+          const isSelected = sub.id === activeSelectedSubCategory;
+          const subBtn = document.createElement('button');
+          subBtn.className = `px-4 py-2 rounded-full text-xs font-bold transition ${
+            isSelected 
+              ? 'bg-amber-500 text-zinc-950 font-extrabold shadow-md shadow-amber-500/20'
+              : 'bg-black/40 text-zinc-400 border border-white/5 hover:text-white'
+          }`;
+          subBtn.textContent = sub.name;
+          subBtn.onclick = () => {
+            activeSelectedSubCategory = sub.id;
+            renderPalmaresDetailView();
+          };
+          subContainer.appendChild(subBtn);
         });
       } else {
-        wrapper.classList.add('hidden');
+        subContainer.classList.add('hidden');
       }
-    }
 
-    function toggleSeasonInputs(hasSeasonsVal) {
-      const cfg = document.getElementById('new-item-seasons-config');
-      if (hasSeasonsVal === 'true') {
-        cfg.classList.remove('hidden');
+      const grid = document.getElementById('palmares-detail-grid');
+      grid.innerHTML = '';
+
+      let items = [];
+      if (cat.hasSub) {
+        const found = cat.subcategories.find(s => s.id === activeSelectedSubCategory);
+        items = found ? found.items : [];
       } else {
-        cfg.classList.add('hidden');
-      }
-    }
-
-    function saveNewPalmaresItem(e) {
-      e.preventDefault();
-      const catalog = getStoredCatalog();
-
-      const catKey = document.getElementById('new-item-category').value;
-      const title = document.getElementById('new-item-title').value.trim();
-      const tag = document.getElementById('new-item-tag').value.trim() || 'Culte';
-      const rank = document.getElementById('new-item-rank').value.trim() || '#1';
-      const rating = document.getElementById('new-item-rating').value.trim() || '10/10';
-      const image = document.getElementById('new-item-image').value.trim() || 'https://placehold.co/600x600/0b1611/fbbf24?text=' + encodeURIComponent(title);
-      const comment = document.getElementById('new-item-comment').value.trim() || '';
-      const hasSeasons = document.getElementById('new-item-has-seasons').value === 'true';
-
-      const itemId = 'item_' + Date.now();
-      const newItem = {
-        id: itemId,
-        title: title,
-        tag: tag,
-        rank: rank,
-        rating: rating,
-        image: image,
-        comment: comment,
-        hasSeasons: hasSeasons
-      };
-
-      if (hasSeasons) {
-        const sCount = parseInt(document.getElementById('new-item-season-count').value, 10) || 1;
-        const epCount = parseInt(document.getElementById('new-item-ep-count').value, 10) || 24;
-        newItem.seasons = [];
-        for (let i = 1; i <= sCount; i++) {
-          newItem.seasons.push({
-            num: i,
-            title: `Saison ${i}`,
-            episodesCount: epCount,
-            image: image,
-            desc: `${epCount} Épisodes`
-          });
-        }
+        items = cat.items;
       }
 
-      const catObj = catalog[catKey];
-      if (catObj.hasSub) {
-        const subId = document.getElementById('new-item-subcategory').value;
-        const sub = catObj.subcategories.find(s => s.id === subId);
-        if (sub) {
-          sub.items.unshift(newItem);
-        }
-      } else {
-        catObj.items.unshift(newItem);
-      }
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "palmares-category-hub-card glass-card flex flex-col group";
+        
+        card.onclick = () => {
+          if (item.hasSeasons) {
+            openShowSeasons(item);
+          } else {
+            alert(`Fiche : ${item.title}`);
+          }
+        };
 
-      saveCatalogToStorage(catalog);
-      closeAddItemModal();
-      openPalmaresCategory(catKey);
-    }
+        card.innerHTML = `
+          <div class="relative w-full h-[300px] overflow-hidden bg-black/60">
+            <img src="${item.image}" onerror="this.onerror=null; this.src='https://placehold.co/600x600/0b1611/fbbf24?text=${encodeURIComponent(item.title)}';" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/20 to-transparent"></div>
+            
+            <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+              ${item.rank}
+            </span>
 
-    // Gestion de l'ajout d'une saison
-    function openAddSeasonModal() {
-      if (!currentShowItem) return;
-      const nextNum = (currentShowItem.seasons ? currentShowItem.seasons.length : 0) + 1;
-      document.getElementById('new-season-num').value = nextNum;
-      document.getElementById('new-season-title').value = `Saison ${nextNum}`;
-      document.getElementById('modal-add-season').classList.remove('hidden');
+            ${item.tag ? `
+              <span class="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md border border-white/15 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg shadow">
+                ${item.tag}
+              </span>
+            ` : ''}
+
+            <div class="absolute bottom-3 right-3.5 bg-black/85 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 flex items-center gap-1.5 text-xs font-bold text-white shadow-lg">
+              <span class="text-amber-400">★</span>
+              <span>${item.rating}</span>
+            </div>
+          </div>
+
+          <div class="p-5 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors line-clamp-1">
+                ${item.title}
+              </h3>
+              ${item.comment ? `
+                <p class="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+                  "${item.comment}"
+                </p>
+              ` : ''}
+            </div>
+            ${item.hasSeasons ? `
+              <span class="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-amber-400">
+                <span>Voir les Saisons (${item.seasons ? item.seasons.length : 'Plusieurs'})</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </span>
+            ` : ''}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
       lucide.createIcons();
     }
 
-    function closeAddSeasonModal() {
-      document.getElementById('modal-add-season').classList.add('hidden');
-      document.getElementById('form-add-season').reset();
+    // 2. Ouvrir le Hub des Saisons (3 par ligne pour 6 saisons)
+    function openShowSeasons(item) {
+      currentShowItem = item;
+      hideAllPalmaresScreens();
+      document.getElementById('palmares-seasons-screen').classList.remove('hidden');
+
+      const catName = palmaresCatalog[activeSelectedCategory]?.name || 'Catégorie';
+      document.getElementById('seasons-breadcrumb-cat').innerText = catName;
+      document.getElementById('seasons-breadcrumb-title').innerText = item.title;
+      document.getElementById('seasons-show-title').innerText = item.title;
+
+      const container = document.getElementById('seasons-cards-container');
+      container.innerHTML = '';
+
+      if (item.seasons && item.seasons.length > 0) {
+        item.seasons.forEach(s => {
+          const seasonCard = document.createElement('div');
+          seasonCard.className = "season-hub-card glass-card group border-amber-500/20 hover:border-amber-400";
+          seasonCard.onclick = () => openSeasonEpisodes(item, s.num, s.episodesCount);
+
+          seasonCard.innerHTML = `
+            <div class="relative w-full h-[220px] overflow-hidden bg-black/60">
+              <img src="${s.image}" onerror="this.onerror=null; this.src='${item.image}';" alt="${s.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
+              <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+                Saison ${s.num}
+              </span>
+              <span class="absolute top-3.5 right-3.5 bg-black/80 backdrop-blur-md border border-white/10 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg">
+                ${s.episodesCount} Épisodes
+              </span>
+            </div>
+            <div class="p-5 flex items-center justify-between">
+              <div>
+                <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
+                  Saison ${s.num}
+                </h3>
+                <p class="text-xs text-zinc-400 mt-1">${s.desc || s.episodesCount + ' Épisodes'}</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </div>
+            </div>
+          `;
+          container.appendChild(seasonCard);
+        });
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
     }
 
-    function saveNewSeason(e) {
+    function backToSeasonsList() {
+      if (currentShowItem) {
+        openShowSeasons(currentShowItem);
+      } else {
+        backToCurrentCategory();
+      }
+    }
+
+    // 3. Ouvrir la grille des épisodes de la saison sélectionnée
+    function openSeasonEpisodes(item, seasonNum, epCount) {
+      currentShowItem = item;
+      currentSeasonNumber = seasonNum;
+      currentSeasonEpisodeCount = epCount || 26;
+
+      hideAllPalmaresScreens();
+      document.getElementById('palmares-episodes-screen').classList.remove('hidden');
+
+      const catName = palmaresCatalog[activeSelectedCategory]?.name || 'Catégorie';
+      document.getElementById('episodes-breadcrumb-cat').innerText = catName;
+      document.getElementById('episodes-breadcrumb-title').innerText = item.title;
+      document.getElementById('episodes-breadcrumb-season').innerText = `Saison ${seasonNum}`;
+      document.getElementById('episodes-header-title').innerText = `${item.title} • Saison ${seasonNum}`;
+
+      renderEpisodesGrid();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderEpisodesGrid() {
+      const grid = document.getElementById('episodes-grid-container');
+      grid.innerHTML = '';
+
+      const showId = currentShowItem.id;
+      const seasonNum = currentSeasonNumber;
+      const count = currentSeasonEpisodeCount;
+      const specificBg = `${showId}-s${seasonNum}.jpg`;
+
+      for (let ep = 1; ep <= count; ep++) {
+        const rev = getEpisodeReviewData(showId, seasonNum, ep);
+        const isWatched = rev && rev.watched;
+        const rating = rev && rev.rating && rev.rating !== 'Sans note' ? rev.rating : null;
+        const reviewSnippet = rev && rev.review ? rev.review : null;
+
+        const card = document.createElement('div');
+        card.className = `episode-card glass-card p-5 flex flex-col justify-between relative overflow-hidden group ${
+          isWatched ? 'border-emerald-500/50' : 'border-white/10'
+        }`;
+        
+        card.style.backgroundImage = `linear-gradient(rgba(7, 13, 10, 0.60), rgba(7, 13, 10, 0.94)), url('${specificBg}'), url('${currentShowItem.image}')`;
+
+        card.onclick = (e) => {
+          if (e.target.tagName.toLowerCase() !== 'input') {
+            openEpisodeModal(showId, seasonNum, ep);
+          }
+        };
+
+        card.innerHTML = `
+          <!-- Ligne Supérieure : Numéro + Checkbox Rapide Vu -->
+          <div class="flex items-center justify-between z-10">
+            <span class="bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md">
+              #${ep}
+            </span>
+
+            <label class="flex items-center gap-2 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border ${isWatched ? 'border-emerald-500/50 text-emerald-400' : 'border-white/10 text-zinc-400'} cursor-pointer select-none" onclick="event.stopPropagation()">
+              <input type="checkbox" onchange="quickToggleWatched('${showId}', ${seasonNum}, ${ep}, this.checked)" ${isWatched ? 'checked' : ''} class="w-4 h-4 rounded text-amber-500 accent-amber-500 cursor-pointer">
+              <span class="text-[11px] font-bold">${isWatched ? 'Vu' : 'À voir'}</span>
+            </label>
+          </div>
+
+          <!-- Ligne Inférieure : Titre + Note & Avis -->
+          <div class="z-10 mt-auto pt-4">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <h3 class="text-base font-black text-white group-hover:text-amber-400 transition-colors truncate">
+                Épisode ${ep}
+              </h3>
+              ${rating ? `
+                <span class="text-xs font-extrabold text-amber-400 bg-black/80 px-2 py-0.5 rounded-md border border-white/10">
+                  ${rating}
+                </span>
+              ` : ''}
+            </div>
+
+            ${reviewSnippet ? `
+              <p class="text-xs text-zinc-300 italic line-clamp-2 mt-1 bg-black/40 p-2 rounded-lg border border-white/5">
+                "${reviewSnippet}"
+              </p>
+            ` : `
+              <span class="text-[11px] text-zinc-400 flex items-center gap-1 mt-1 group-hover:text-amber-300 transition-colors">
+                <i data-lucide="edit-3" class="w-3 h-3"></i> Cliquer pour noter ou donner un avis
+              </span>
+            `}
+          </div>
+        `;
+
+        grid.appendChild(card);
+      }
+
+      lucide.createIcons();
+    }
+
+    function quickToggleWatched(showId, s, ep, checked) {
+      let data = getEpisodeReviewData(showId, s, ep) || {};
+      data.watched = checked;
+      if (checked && !data.watchDate) {
+        data.watchDate = new Date().toISOString().split('T')[0];
+      }
+      setEpisodeReviewData(showId, s, ep, data);
+      renderEpisodesGrid();
+    }
+
+    function openEpisodeModal(showId, s, ep) {
+      const data = getEpisodeReviewData(showId, s, ep) || {};
+      
+      document.getElementById('review-show-id').value = showId;
+      document.getElementById('review-season-num').value = s;
+      document.getElementById('review-episode-num').value = ep;
+
+      document.getElementById('modal-review-episode-title').innerText = `${currentShowItem.title} • Saison ${s} • Épisode ${ep}`;
+
+      const watchedCheckbox = document.getElementById('review-watched-checkbox');
+      const watchDateInput = document.getElementById('review-watch-date');
+      const ratingSelect = document.getElementById('review-rating-select');
+      const reviewTextArea = document.getElementById('review-text');
+      const deleteBtn = document.getElementById('btn-delete-review');
+
+      watchedCheckbox.checked = !!data.watched;
+      watchDateInput.value = data.watchDate || new Date().toISOString().split('T')[0];
+      ratingSelect.value = data.rating || '10/10';
+      reviewTextArea.value = data.review || '';
+
+      toggleDateVisibility(watchedCheckbox.checked);
+
+      if (data.watched || data.review) {
+        deleteBtn.classList.remove('hidden');
+      } else {
+        deleteBtn.classList.add('hidden');
+      }
+
+      document.getElementById('modal-episode-review').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeEpisodeModal() {
+      document.getElementById('modal-episode-review').classList.add('hidden');
+    }
+
+    function toggleDateVisibility(isChecked) {
+      const dateBox = document.getElementById('review-date-container');
+      if (isChecked) {
+        dateBox.classList.remove('opacity-40', 'pointer-events-none');
+      } else {
+        dateBox.classList.add('opacity-40', 'pointer-events-none');
+      }
+    }
+
+    function saveEpisodeReview(e) {
       e.preventDefault();
-      if (!currentShowItem) return;
+      const showId = document.getElementById('review-show-id').value;
+      const s = document.getElementById('review-season-num').value;
+      const ep = document.getElementById('review-episode-num').value;
 
-      const num = parseInt(document.getElementById('new-season-num').value, 10);
-      const title = document.getElementById('new-season-title').value.trim() || `Saison ${num}`;
-      const epCount = parseInt(document.getElementById('new-season-ep-count').value, 10) || 24;
-      const customImg = document.getElementById('new-season-image').value.trim() || currentShowItem.image;
+      const reviewData = {
+        watched: document.getElementById('review-watched-checkbox').checked,
+        watchDate: document.getElementById('review-watch-date').value,
+        rating: document.getElementById('review-rating-select').value,
+        review: document.getElementById('review-text').value.trim()
+      };
 
-      if (!currentShowItem.seasons) currentShowItem.seasons = [];
-
-      currentShowItem.seasons.push({
-        num: num,
-        title: title,
-        episodesCount: epCount,
-        image: customImg,
-        desc: `${epCount} Épisodes`
-      });
-
-      const catalog = getStoredCatalog();
-      updateItemInCatalog(catalog, currentShowItem);
-      saveCatalogToStorage(catalog);
-
-      closeAddSeasonModal();
-      openShowSeasons(currentShowItem);
+      setEpisodeReviewData(showId, s, ep, reviewData);
+      closeEpisodeModal();
+      renderEpisodesGrid();
     }
 
-    function updateItemInCatalog(catalog, targetItem) {
-      Object.keys(catalog).forEach(k => {
-        const cat = catalog[k];
-        if (cat.hasSub) {
-          cat.subcategories.forEach(sub => {
-            const idx = sub.items.findIndex(i => i.id === targetItem.id);
-            if (idx !== -1) sub.items[idx] = targetItem;
-          });
+    function deleteEpisodeReview() {
+      const showId = document.getElementById('review-show-id').value;
+      const s = document.getElementById('review-season-num').value;
+      const ep = document.getElementById('review-episode-num').value;
+
+      localStorage.removeItem(getEpisodeReviewKey(showId, s, ep));
+      closeEpisodeModal();
+      renderEpisodesGrid();
+    }
+
+    function hideAllPalmaresScreens() {
+      document.getElementById('palmares-hub-screen').classList.add('hidden');
+      document.getElementById('palmares-detail-screen').classList.add('hidden');
+      document.getElementById('palmares-seasons-screen').classList.add('hidden');
+      document.getElementById('palmares-episodes-screen').classList.add('hidden');
+    }
+
+    // =======================================================
+    // 2. GOOGLE CALENDAR ENGINE
+    // =======================================================
+    let currentCalDate = new Date(2026, 7, 24);
+
+    const gcalColors = {
+      blue: { bg: 'bg-blue-600/90 border-blue-400 text-white', dot: 'bg-blue-300' },
+      orange: { bg: 'bg-amber-600/90 border-amber-400 text-white', dot: 'bg-amber-300' },
+      purple: { bg: 'bg-purple-600/90 border-purple-400 text-white', dot: 'bg-purple-300' },
+      emerald: { bg: 'bg-emerald-600/90 border-emerald-400 text-white', dot: 'bg-emerald-300' },
+      rose: { bg: 'bg-rose-600/90 border-rose-400 text-white', dot: 'bg-rose-300' }
+    };
+
+    let userEvents = JSON.parse(localStorage.getItem('hq_gcal_events')) || [
+      { id: '1', title: 'Entraînement Volley Nanterre', date: '2026-08-25', start: '19:00', end: '21:00', category: 'orange', desc: 'Gymnase Voltaire' },
+      { id: '2', title: 'Montage Vidéo MCU TikTok', date: '2026-08-26', start: '14:00', end: '17:00', category: 'purple', desc: 'Premiere Pro' },
+      { id: '3', title: 'Session Ranked Valorant / RL', date: '2026-08-24', start: '21:00', end: '23:00', category: 'emerald', desc: 'Duo Q' },
+      { id: '4', title: 'Rentrée Universitaire L2 Éco', date: '2026-09-15', start: '09:00', end: '12:00', category: 'blue', desc: 'Amphi Principal' }
+    ];
+
+    function renderGCal() {
+      const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+      const curr = new Date(currentCalDate);
+      const dayOfWeek = (curr.getDay() + 6) % 7;
+      const monday = new Date(curr);
+      monday.setDate(curr.getDate() - dayOfWeek);
+
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
+
+      const titleEl = document.getElementById('gcal-month-title');
+      if (titleEl) {
+        if (monday.getMonth() === sunday.getMonth()) {
+          titleEl.innerText = `${monthNames[monday.getMonth()]} ${monday.getFullYear()}`;
         } else {
-          const idx = cat.items.findIndex(i => i.id === targetItem.id);
-          if (idx !== -1) cat.items[idx] = targetItem;
+          titleEl.innerText = `${monthNames[monday.getMonth()]} - ${monthNames[sunday.getMonth()]} ${sunday.getFullYear()}`;
+        }
+      }
+
+      const dayHeadersContainer = document.getElementById('gcal-day-headers');
+      dayHeadersContainer.innerHTML = '';
+
+      const dayLabels = ['LUN.', 'MAR.', 'MER.', 'JEU.', 'VEN.', 'SAM.', 'DIM.'];
+      const weekDates = [];
+      const todayStr = '2026-08-24';
+
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        weekDates.push(dStr);
+
+        const isToday = (dStr === todayStr);
+
+        dayHeadersContainer.innerHTML += `
+          <div class="py-3.5 flex flex-col items-center justify-center border-r border-white/15 last:border-r-0">
+            <span class="text-[11px] font-bold ${isToday ? 'text-blue-400' : 'text-zinc-300'} tracking-wider">${dayLabels[i]}</span>
+            <div class="w-10 h-10 mt-1 flex items-center justify-center rounded-full text-base font-black ${isToday ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/50' : 'text-white'}">
+              ${d.getDate()}
+            </div>
+          </div>
+        `;
+      }
+
+      const timeGridContainer = document.getElementById('gcal-time-grid');
+      timeGridContainer.innerHTML = '';
+
+      const hours = [
+        { label: '08:00', h: 8 }, { label: '09:00', h: 9 }, { label: '10:00', h: 10 },
+        { label: '11:00', h: 11 }, { label: '12:00', h: 12 }, { label: '13:00', h: 13 },
+        { label: '14:00', h: 14 }, { label: '15:00', h: 15 }, { label: '16:00', h: 16 },
+        { label: '17:00', h: 17 }, { label: '18:00', h: 18 }, { label: '19:00', h: 19 },
+        { label: '20:00', h: 20 }, { label: '21:00', h: 21 }, { label: '22:00', h: 22 },
+        { label: '23:00', h: 23 }
+      ];
+
+      hours.forEach(hr => {
+        timeGridContainer.innerHTML += `
+          <div class="h-[68px] border-b border-r border-white/15 flex items-start justify-center pt-1.5 text-[11px] font-bold text-zinc-300 bg-black/40">
+            ${hr.label}
+          </div>
+        `;
+
+        for (let col = 0; col < 7; col++) {
+          const dateStr = weekDates[col];
+          timeGridContainer.innerHTML += `
+            <div onclick="quickCreateSlot('${dateStr}', ${hr.h})" class="time-slot-cell relative" data-date="${dateStr}" data-hour="${hr.h}"></div>
+          `;
         }
       });
+
+      renderEventsOnGrid(weekDates);
+      renderLiveCurrentTime(weekDates);
+      lucide.createIcons();
     }
 
-    // ROUTEUR SPA
+    function renderEventsOnGrid(weekDates) {
+      weekDates.forEach((dStr) => {
+        const eventsForDay = userEvents.filter(ev => ev.date === dStr);
+
+        eventsForDay.forEach(ev => {
+          const [startH, startM] = ev.start.split(':').map(Number);
+          const [endH, endM] = ev.end.split(':').map(Number);
+
+          if (startH >= 8) {
+            const topMinutes = (startH - 8) * 60 + startM;
+            const durationMinutes = Math.max(((endH - 8) * 60 + endM) - topMinutes, 30);
+            const topPx = (topMinutes / 60) * 68;
+            const heightPx = (durationMinutes / 60) * 68;
+
+            const startCell = document.querySelector(`.time-slot-cell[data-date="${dStr}"][data-hour="8"]`);
+            if (startCell) {
+              const c = gcalColors[ev.category] || gcalColors.blue;
+              const chip = document.createElement('div');
+              chip.className = `gcal-event-chip border ${c.bg}`;
+              chip.style.top = `${topPx}px`;
+              chip.style.height = `${heightPx - 5}px`;
+              chip.innerHTML = `
+                <div class="flex items-center justify-between font-bold leading-tight">
+                  <span class="truncate">${ev.title}</span>
+                  <button onclick="deleteGCalEvent('${ev.id}', event)" class="hover:text-red-300 ml-1 font-black">&times;</button>
+                </div>
+                <div class="text-[10px] opacity-90 truncate mt-0.5">${ev.start} - ${ev.end} ${ev.desc ? '• ' + ev.desc : ''}</div>
+              `;
+              startCell.appendChild(chip);
+            }
+          }
+        });
+      });
+    }
+
+    function renderLiveCurrentTime(weekDates) {
+      const todayStr = '2026-08-24';
+      const colIndex = weekDates.indexOf(todayStr);
+
+      if (colIndex !== -1) {
+        const curH = 21;
+        const curM = 45;
+
+        if (curH >= 8) {
+          const topPx = (((curH - 8) * 60 + curM) / 60) * 68;
+          const cell = document.querySelector(`.time-slot-cell[data-date="${todayStr}"][data-hour="8"]`);
+          if (cell) {
+            const line = document.createElement('div');
+            line.className = 'current-time-line';
+            line.style.top = `${topPx}px`;
+            line.innerHTML = `<span class="current-time-dot"></span>`;
+            cell.appendChild(line);
+          }
+        }
+      }
+    }
+
+    function gcalToday() {
+      currentCalDate = new Date(2026, 7, 24);
+      renderGCal();
+    }
+
+    function gcalPrevWeek() {
+      currentCalDate.setDate(currentCalDate.getDate() - 7);
+      renderGCal();
+    }
+
+    function gcalNextWeek() {
+      currentCalDate.setDate(currentCalDate.getDate() + 7);
+      renderGCal();
+    }
+
+    function quickCreateSlot(dateStr, hour) {
+      document.getElementById('event-date').value = dateStr;
+      document.getElementById('event-start-time').value = `${String(hour).padStart(2, '0')}:00`;
+      document.getElementById('event-end-time').value = `${String(hour + 1).padStart(2, '0')}:00`;
+      openAddEventModal();
+    }
+
+    function openAddEventModal() {
+      document.getElementById('modal-add-event').classList.remove('hidden');
+    }
+
+    function closeAddEventModal() {
+      document.getElementById('modal-add-event').classList.add('hidden');
+    }
+
+    function saveNewEvent(e) {
+      e.preventDefault();
+      const newEv = {
+        id: Date.now().toString(),
+        title: document.getElementById('event-title').value,
+        date: document.getElementById('event-date').value,
+        start: document.getElementById('event-start-time').value,
+        end: document.getElementById('event-end-time').value,
+        category: document.getElementById('event-category').value,
+        desc: document.getElementById('event-desc').value
+      };
+
+      userEvents.push(newEv);
+      localStorage.setItem('hq_gcal_events', JSON.stringify(userEvents));
+      closeAddEventModal();
+      document.getElementById('form-add-event').reset();
+      renderGCal();
+    }
+
+    function deleteGCalEvent(id, e) {
+      if (e) e.stopPropagation();
+      userEvents = userEvents.filter(ev => ev.id !== id);
+      localStorage.setItem('hq_gcal_events', JSON.stringify(userEvents));
+      renderGCal();
+    }
+
+    // =======================================================
+    // 3. ROUTEUR SPA & STATS GAMING
+    // =======================================================
+    let rlStatsCache = {
+      '1v1': 'Platinum I (Division III)',
+      '2v2': 'Platinum II (Division III)',
+      '3v3': 'Platinum II (Division II)'
+    };
+
+    const themeToggleBtn = document.getElementById('themeToggle');
+    themeToggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      lucide.createIcons();
+    });
+
     function navigateTab(tabName) {
       document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
 
@@ -1152,19 +1962,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
     }
-
-    // ROUTEUR GAMING
-    let rlStatsCache = {
-      '1v1': 'Platinum I (Division III)',
-      '2v2': 'Platinum II (Division III)',
-      '3v3': 'Platinum II (Division II)'
-    };
-
-    const themeToggleBtn = document.getElementById('themeToggle');
-    themeToggleBtn.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      lucide.createIcons();
-    });
 
     function openRLDetails() {
       document.getElementById('gaming-hub-screen').classList.add('hidden');
