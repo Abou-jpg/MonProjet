@@ -1,1258 +1,533 @@
 <!DOCTYPE html>
-<html lang="fr" class="dark scroll-smooth">
+<html lang="fr" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HQ Personnel • Aboubaker</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HQ Dashboard & Palmarès</title>
+  
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            dbz: {
+              orange: '#ff6b00',
+              yellow: '#fbbf24',
+              blue: '#1e3a8a',
+              dark: '#0b0f19'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400;1,600&display=swap');
-    
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .font-serif-title { font-family: 'Playfair Display', serif; }
-
-    /* Thème Global */
-    html.dark body {
-      background-color: #070d0a;
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.22) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.15) 0px, transparent 45%),
-        radial-gradient(at 50% 100%, rgba(5, 150, 105, 0.18) 0px, transparent 50%);
-      background-attachment: fixed;
-    }
-
-    html:not(.dark) body {
-      background-color: #fcfbf4;
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(254, 240, 138, 0.45) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(187, 247, 208, 0.35) 0px, transparent 45%),
-        radial-gradient(at 50% 100%, rgba(253, 224, 71, 0.2) 0px, transparent 50%);
-      background-attachment: fixed;
-    }
-
-    /* Glassmorphism */
-    html.dark .glass-card {
-      background: rgba(14, 26, 20, 0.55);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    html.dark .glass-card:hover {
-      background: rgba(20, 38, 29, 0.75);
-      border-color: rgba(52, 211, 153, 0.4);
-      box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.2);
-    }
-
-    html:not(.dark) .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(217, 119, 6, 0.12);
-      box-shadow: 0 4px 20px -2px rgba(180, 83, 9, 0.04);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* Gaming Posters */
-    .game-poster-card {
-      position: relative;
-      height: 420px;
-      border-radius: 1.5rem;
-      overflow: hidden;
-      cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
-    }
-    .game-poster-bg {
-      position: absolute;
-      inset: 0;
+    body {
+      background: linear-gradient(rgba(11, 15, 25, 0.88), rgba(11, 15, 25, 0.95)), 
+                  url('dragon ball z arriere plan.jpg') no-fit center center fixed;
       background-size: cover;
-      background-position: center;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .game-poster-card:hover .game-poster-bg { transform: scale(1.08); }
-    .game-poster-card:hover { transform: translateY(-8px); }
-
-    .mode-vertical-card {
-      position: relative;
-      border-radius: 1.25rem;
-      overflow: hidden;
-      cursor: pointer;
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      background: rgba(14, 26, 20, 0.6);
-      backdrop-filter: blur(10px);
     }
-    .mode-vertical-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(52, 211, 153, 0.7);
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
     }
-
-    /* CALENDRIER XXL AVEC FOND KAME HOUSE DBZ */
-    .gcal-container {
-      position: relative;
-      border-radius: 1.75rem;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
-      background: #090e13;
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.5);
     }
-
-    .gcal-bg {
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(rgba(11, 18, 24, 0.45), rgba(11, 18, 24, 0.65)), url('dragon%20ball%20z%20arriere%20plan.jpg'), url('dragon ball z arriere plan.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      pointer-events: none;
-      z-index: 0;
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(251, 191, 36, 0.3);
+      border-radius: 9999px;
     }
-
-    .gcal-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .time-slot-cell {
-      height: 68px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      border-right: 1px solid rgba(255, 255, 255, 0.12);
-      cursor: pointer;
-      background: rgba(8, 14, 20, 0.15);
-      transition: background-color 0.15s ease;
-    }
-    .time-slot-cell:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .gcal-event-chip {
-      position: absolute;
-      left: 3px;
-      right: 3px;
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-size: 11px;
-      overflow: hidden;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
-      cursor: pointer;
-      z-index: 10;
-      backdrop-filter: blur(8px);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .gcal-event-chip:hover {
-      transform: scale(1.02);
-      z-index: 20;
-    }
-
-    .current-time-line {
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background-color: #ef4444;
-      z-index: 15;
-      pointer-events: none;
-      box-shadow: 0 0 8px #ef4444;
-    }
-    .current-time-dot {
-      position: absolute;
-      left: -6px;
-      top: -4px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: #ef4444;
-    }
-
-    .gcal-scroll-area::-webkit-scrollbar {
-      width: 10px;
-    }
-    .gcal-scroll-area::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.4);
-    }
-    .gcal-scroll-area::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.25);
-      border-radius: 8px;
-      border: 2px solid transparent;
-      background-clip: content-box;
-    }
-    .gcal-scroll-area::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.45);
-      background-clip: content-box;
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(251, 191, 36, 0.6);
     }
   </style>
 </head>
-<body class="text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors duration-300">
+<body class="text-slate-100 min-h-screen font-sans antialiased custom-scrollbar">
 
-  <!-- NAVBAR -->
-  <header class="w-full border-b border-amber-900/10 dark:border-white/5 bg-[#fcfbf4]/80 dark:bg-[#070d0a]/80 backdrop-blur-md sticky top-0 z-50 transition-colors">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <nav class="flex items-center gap-6 text-sm font-medium overflow-x-auto" id="main-nav">
-        <button onclick="navigateTab('accueil')" id="nav-btn-accueil" class="nav-tab text-emerald-700 dark:text-emerald-400 font-semibold border-b-2 border-emerald-600 dark:border-emerald-400 pb-0.5">Accueil</button>
-        <button onclick="navigateTab('planning')" id="nav-btn-planning" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Planning</button>
-        <button onclick="navigateTab('gaming')" id="nav-btn-gaming" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Gaming</button>
-        <button onclick="navigateTab('sport')" id="nav-btn-sport" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Sport Data</button>
-        <button onclick="navigateTab('watchlist')" id="nav-btn-watchlist" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Watchlist</button>
-        <button onclick="navigateTab('volley')" id="nav-btn-volley" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Volley Nanterre</button>
-        <button onclick="navigateTab('perso')" id="nav-btn-perso" class="nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5">Personnel</button>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <button id="themeToggle" class="p-2 rounded-xl bg-amber-100/60 dark:bg-white/5 border border-amber-300/40 dark:border-white/10 text-amber-900 dark:text-amber-300 hover:scale-105 transition" title="Basculer le thème">
-          <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
-          <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-zinc-700"></i>
-        </button>
-        <div class="hidden sm:flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full text-xs font-semibold text-emerald-700 dark:text-emerald-400">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          EN LIGNE
+  <!-- ========================================================== -->
+  <!-- BARRE DE NAVIGATION SUPÉRIEURE (GLASSMORPHISM)              -->
+  <!-- ========================================================== -->
+  <nav class="sticky top-0 z-50 glass-panel border-b border-white/10 px-6 py-4 mb-8">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/30">
+          <i class="fa-solid fa-dragon text-slate-950 text-xl"></i>
         </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- NIVEAU 1 : ACCUEIL -->
-  <div id="view-accueil" class="view-section max-w-7xl mx-auto px-6 pt-16 pb-20">
-    <div class="max-w-3xl">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/25 text-emerald-800 dark:text-emerald-300 text-xs font-semibold mb-6">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-        Saison 2026-2027 • QG Stratégique
-      </div>
-      <h1 class="text-4xl md:text-6xl font-normal tracking-tight text-zinc-950 dark:text-white font-serif-title leading-tight mb-6">
-        Tous mes projets, <br><span class="italic text-emerald-700 dark:text-emerald-400">au même endroit.</span>
-      </h1>
-      <p class="text-zinc-600 dark:text-zinc-400 text-base md:text-lg leading-relaxed mb-8">
-        Le tableau de bord centralisé pour le planning hebdomadaire, le gaming, le sport, les vidéos et les études.
-      </p>
-
-      <div class="flex flex-wrap items-center gap-4 mb-16">
-        <button onclick="navigateTab('planning')" class="bg-emerald-700 dark:bg-emerald-600 hover:bg-emerald-800 text-white px-6 py-3 rounded-full text-sm font-semibold transition flex items-center gap-2 shadow-lg shadow-emerald-700/20">
-          <i data-lucide="calendar" class="w-4 h-4"></i>
-          Ouvrir mon agenda
-        </button>
-        <button onclick="navigateTab('gaming')" class="glass-card text-zinc-900 dark:text-white px-6 py-3 rounded-full text-sm font-medium transition flex items-center gap-2">
-          <i data-lucide="gamepad-2" class="w-4 h-4 text-emerald-500"></i>
-          Mes Rangs Gaming
-        </button>
-      </div>
-    </div>
-
-    <!-- GRILLE DES 6 POLES -->
-    <div class="pt-6 border-t border-amber-900/10 dark:border-white/5">
-      <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-3">
-        <span>— navigation rapide</span>
-      </div>
-      <h2 class="text-2xl font-serif-title text-zinc-950 dark:text-white mb-6">Les 6 Pôles d'Activité</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div onclick="navigateTab('planning')" class="glass-card p-6 rounded-2xl group block cursor-pointer border border-blue-500/40">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 rounded-xl bg-blue-500/10 dark:bg-blue-500/20 border border-blue-500/20 flex items-center justify-center text-blue-500 group-hover:scale-110 transition">
-              <i data-lucide="calendar" class="w-5 h-5"></i>
-            </div>
-            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-blue-500 transition"></i>
-          </div>
-          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-blue-400 transition">Planning Hebdo DBZ</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Google Calendar Lun-Dim avec vue horaire 24h et Kame House.</p>
-        </div>
-
-        <div onclick="navigateTab('gaming')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition">
-              <i data-lucide="gamepad-2" class="w-5 h-5"></i>
-            </div>
-            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition"></i>
-          </div>
-          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition">Gaming & ELO</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Rocket League, LoL, Valorant auto-synchronisés.</p>
-        </div>
-
-        <div onclick="navigateTab('sport')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition">
-              <i data-lucide="activity" class="w-5 h-5"></i>
-            </div>
-            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition"></i>
-          </div>
-          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">Sport Pro Data</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Real Madrid, OL, Benaïssa, Spurs/Wemby, Alcaraz.</p>
-        </div>
-
-        <div onclick="navigateTab('watchlist')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition">
-              <i data-lucide="clapperboard" class="w-5 h-5"></i>
-            </div>
-            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition"></i>
-          </div>
-          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition">Watchlist & Clips</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Montage Premiere Pro clips MCU et séries.</p>
-        </div>
-
-        <div onclick="navigateTab('volley')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition">
-              <i data-lucide="shield" class="w-5 h-5"></i>
-            </div>
-            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition"></i>
-          </div>
-          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition">Volley Nanterre</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Pôle Directeur Sportif, Seniors et Jeunes.</p>
-        </div>
-
-        <div onclick="navigateTab('perso')" class="glass-card p-6 rounded-2xl group block cursor-pointer">
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition">
-              <i data-lucide="user" class="w-5 h-5"></i>
-            </div>
-            <i data-lucide="arrow-right" class="w-4 h-4 text-zinc-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition"></i>
-          </div>
-          <h3 class="text-base font-semibold text-zinc-950 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">Personnel & Pro</h3>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">L2 Éco-Gestion, Permis auto et Compétences.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- NIVEAU 2 : ESPACE PLANNING GOOGLE CALENDAR XXL -->
-  <div id="view-planning" class="view-section hidden max-w-[1600px] mx-auto px-2 sm:px-6 pt-6 pb-20">
-    
-    <!-- En-tête Google Calendar -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-      <div class="flex items-center gap-4">
-        <button onclick="gcalToday()" class="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold text-white transition shadow">
-          Aujourd'hui
-        </button>
-        <div class="flex items-center bg-black/50 border border-white/10 rounded-xl p-1">
-          <button onclick="gcalPrevWeek()" class="p-2 hover:bg-white/10 rounded-lg text-white transition">
-            <i data-lucide="chevron-left" class="w-5 h-5"></i>
-          </button>
-          <button onclick="gcalNextWeek()" class="p-2 hover:bg-white/10 rounded-lg text-white transition">
-            <i data-lucide="chevron-right" class="w-5 h-5"></i>
-          </button>
-        </div>
-        <h2 id="gcal-month-title" class="text-2xl sm:text-3xl font-black text-white capitalize tracking-wide drop-shadow-lg">
-          Août 2026
-        </h2>
-      </div>
-
-      <button onclick="openAddEventModal()" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-2 transition shadow-lg shadow-blue-600/30 w-fit">
-        <i data-lucide="plus" class="w-4 h-4"></i>
-        <span>Créer un événement</span>
-      </button>
-    </div>
-
-    <!-- Interface Calendrier Google XXL avec Fond Kame House DBZ -->
-    <div class="gcal-container">
-      <div class="gcal-bg"></div>
-
-      <div class="gcal-content">
-        <!-- 1. En-tête des 7 jours (Lundi à Dimanche) -->
-        <div class="grid grid-cols-[70px_repeat(7,1fr)] sm:grid-cols-[80px_repeat(7,1fr)] border-b border-white/20 bg-black/70 sticky top-0 z-20 backdrop-blur-md">
-          <div class="p-3.5 text-[11px] font-bold text-zinc-400 flex items-center justify-center border-r border-white/15">
-            GMT+02
-          </div>
-          <div id="gcal-day-headers" class="contents"></div>
-        </div>
-
-        <!-- 2. Grille horaire 08:00 -> 23:00 agrandie -->
-        <div class="gcal-scroll-area relative overflow-y-auto max-h-[820px]">
-          <div id="gcal-time-grid" class="grid grid-cols-[70px_repeat(7,1fr)] sm:grid-cols-[80px_repeat(7,1fr)]"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODALE : CRÉATION D'ÉVÉNEMENT -->
-  <div id="modal-add-event" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="glass-card bg-[#0e171b]/95 border border-blue-500/40 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl">
-      <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-        <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <i data-lucide="calendar-plus" class="w-5 h-5 text-blue-400"></i>
-          Ajouter une activité
-        </h3>
-        <button onclick="closeAddEventModal()" class="text-zinc-400 hover:text-white">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <form id="form-add-event" onsubmit="saveNewEvent(event)" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Titre</label>
-          <input type="text" id="event-title" required placeholder="Ex: Entraînement Volley, Montage MCU, Révisions Éco" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-400">
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Date</label>
-            <input type="date" id="event-date" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Début</label>
-            <input type="time" id="event-start-time" value="14:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Fin</label>
-            <input type="time" id="event-end-time" value="16:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Couleur & Catégorie</label>
-          <select id="event-category" class="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-blue-400">
-            <option value="blue">🔵 Bleu Google (Général / Cours)</option>
-            <option value="orange">🟠 Orange (Volley-ball Nanterre)</option>
-            <option value="purple">🟣 Violet (Montage MCU TikTok)</option>
-            <option value="emerald">🟢 Vert (Gaming & Ranked)</option>
-            <option value="rose">🔴 Rouge / Rose (Personnel)</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Lieu / Note (optionnel)</label>
-          <input type="text" id="event-desc" placeholder="Ex: Gymnase Voltaire / PC Bureau" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-        </div>
-
-        <div class="pt-4 flex justify-end gap-3">
-          <button type="button" onclick="closeAddEventModal()" class="px-4 py-2 rounded-xl bg-white/10 text-white text-xs font-bold hover:bg-white/20 transition">Annuler</button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition">Enregistrer</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- NIVEAU 2 : ESPACE GAMING -->
-  <div id="view-gaming" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div id="gaming-hub-screen">
-      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span class="text-emerald-400 font-bold">Gaming</span>
-      </div>
-
-      <div class="flex items-center justify-between mb-8">
-        <div>
-          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-1">
-            Hub Compétitif
-          </div>
-          <h2 class="text-3xl md:text-4xl font-serif-title text-zinc-950 dark:text-white">Mes Jeux & Rangs ELO</h2>
+          <h1 class="text-xl font-black tracking-wider uppercase bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-500">
+            HQ Dashboard
+          </h1>
+          <p class="text-xs text-slate-400 font-medium tracking-wide">Interface Centrale & Statistiques</p>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- 1. POSTER ROCKET LEAGUE -->
-        <div onclick="openRLDetails()" class="game-poster-card group border-emerald-500/40 hover:border-emerald-500">
-          <div class="game-poster-bg" style="background-image: url('rl.jpg'), url('rl.jpg.png');"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
-          
-          <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
-            <div class="flex justify-between items-start">
-              <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-[10px] font-bold uppercase tracking-widest text-emerald-400 backdrop-blur-md">
-                Epic Games
-              </span>
-              <span class="w-10 h-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </span>
-            </div>
-
-            <div>
-              <h3 class="text-2xl font-bold text-white mb-1 drop-shadow-md">Rocket League</h3>
-              <p class="text-xs text-emerald-300 font-medium mb-4 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                ID : abdel92jr
-              </p>
-              <div class="w-full py-3 px-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-emerald-500 group-hover:text-black transition">
-                <span>Choisir 1v1 • 2v2 • 3v3</span>
-                <i data-lucide="chevron-right" class="w-4 h-4"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. POSTER LEAGUE OF LEGENDS -->
-        <div onclick="openLoLDetails()" class="game-poster-card group border-amber-500/40 hover:border-amber-500">
-          <div class="game-poster-bg" style="background-image: url('Neeko.jpg'), url('neeko.jpg'), url('lol.jpg');"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
-          
-          <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
-            <div class="flex justify-between items-start">
-              <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-[10px] font-bold uppercase tracking-widest text-amber-400 backdrop-blur-md">
-                Riot EUW
-              </span>
-              <span class="w-10 h-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-amber-400 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </span>
-            </div>
-
-            <div>
-              <h3 class="text-2xl font-bold text-white mb-1 drop-shadow-md">League of Legends</h3>
-              <p class="text-xs text-amber-300 font-medium mb-4 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-                ID : HDKAbou
-              </p>
-              <div class="w-full py-3 px-4 rounded-xl bg-amber-500/20 border border-amber-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-amber-500 group-hover:text-black transition">
-                <span>Voir le profil & stats</span>
-                <i data-lucide="chevron-right" class="w-4 h-4"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. POSTER VALORANT -->
-        <div onclick="openValoDetails()" class="game-poster-card group border-rose-500/40 hover:border-rose-500">
-          <div class="game-poster-bg" style="background-image: url('valo.jpg'), url('valo.jpg.png'), url('valo.png');"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
-          
-          <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
-            <div class="flex justify-between items-start">
-              <span class="px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/40 text-[10px] font-bold uppercase tracking-widest text-rose-400 backdrop-blur-md">
-                Riot EUW
-              </span>
-              <span class="w-10 h-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-rose-400 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </span>
-            </div>
-
-            <div>
-              <h3 class="text-2xl font-bold text-white mb-1 drop-shadow-md">Valorant</h3>
-              <p class="text-xs text-rose-300 font-medium mb-4 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
-                ID : Abouu92jr#0213
-              </p>
-              <div class="w-full py-3 px-4 rounded-xl bg-rose-500/20 border border-rose-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-rose-500 group-hover:text-black transition">
-                <span>Voir le rang & K/D</span>
-                <i data-lucide="chevron-right" class="w-4 h-4"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ROCKET LEAGUE : LISTE DES MODES -->
-    <div id="gaming-rl-screen" class="hidden">
-      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="closeRLDetails()" class="hover:text-emerald-400 transition">Gaming</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span class="text-emerald-400 font-bold">Rocket League</span>
-      </div>
-
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-        <div class="flex items-center gap-4">
-          <button onclick="closeRLDetails()" class="px-4 py-2 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-emerald-500 hover:text-black dark:hover:bg-emerald-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            Tous les jeux
-          </button>
-          <div>
-            <h2 class="text-2xl md:text-3xl font-serif-title text-zinc-950 dark:text-white">Choisis ton mode Rocket League</h2>
-            <p class="text-xs text-zinc-500 dark:text-zinc-400">ID Epic : <span class="text-emerald-600 dark:text-emerald-400 font-semibold">abdel92jr</span></p>
-          </div>
-        </div>
-
-        <a href="https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white text-xs font-semibold flex items-center gap-2 transition w-fit">
-          <span>Tracker Network</span>
-          <i data-lucide="external-link" class="w-4 h-4"></i>
+      <!-- Liens rapides -->
+      <div class="flex items-center gap-2 sm:gap-4 text-sm font-bold">
+        <a href="#gaming-stats" class="px-3.5 py-1.5 rounded-lg hover:bg-white/10 transition-colors text-slate-300 hover:text-amber-400">
+          <i class="fa-solid fa-gamepad mr-1.5"></i>Stats
+        </a>
+        <a href="#planning-section" class="px-3.5 py-1.5 rounded-lg hover:bg-white/10 transition-colors text-slate-300 hover:text-amber-400">
+          <i class="fa-solid fa-calendar-week mr-1.5"></i>Planning
+        </a>
+        <a href="#palmares-section" class="px-3.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-400/30 text-amber-400 hover:bg-amber-500/20 transition-all">
+          <i class="fa-solid fa-trophy mr-1.5"></i>Palmarès
         </a>
       </div>
 
-      <div class="flex flex-col gap-5 max-w-4xl mx-auto">
-        <div onclick="openRLRankPage('1v1')" class="mode-vertical-card group">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
-            <div class="sm:w-3/5 h-36 overflow-hidden">
-              <img id="banner-img-1v1" src="1vs1.jpg" alt="1 VS 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            </div>
-            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
+      <!-- Horloge temps réel (Format 24h FR) -->
+      <div class="hidden md:flex items-center gap-3 bg-slate-900/80 border border-white/10 px-4 py-2 rounded-xl">
+        <i class="fa-regular fa-clock text-amber-400"></i>
+        <span id="live-clock" class="text-sm font-bold tracking-wider text-slate-200">--:--:--</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-24 space-y-12">
+
+    <!-- ========================================================== -->
+    <!-- SECTION 1 : STATS GAMING (VALORANT & ROCKET LEAGUE)        -->
+    <!-- ========================================================== -->
+    <section id="gaming-stats">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-2.5 h-8 bg-amber-500 rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-wide">
+            Statistiques Compétitives
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 flex items-center gap-2 bg-slate-900/60 border border-white/10 px-3 py-1.5 rounded-full">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Auto-Sync GitHub
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- CARTE VALORANT -->
+        <div class="glass-panel rounded-3xl p-6 relative overflow-hidden border border-red-500/20 hover:border-red-500/40 transition-all">
+          <div class="absolute -right-8 -top-8 w-40 h-40 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-500">
+                <i class="fa-solid fa-crosshairs text-2xl"></i>
+              </div>
               <div>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Solo</span>
-                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Duel 1 VS 1</h3>
-                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
+                <h3 class="text-lg font-black text-white">Valorant</h3>
+                <p class="text-xs text-slate-400">Abouu92jr #0213 (EU)</p>
               </div>
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </div>
+            </div>
+            <span id="valo-rank-badge" class="px-3.5 py-1 rounded-xl text-xs font-black bg-red-500/20 border border-red-500/40 text-red-400">
+              Chargement...
+            </span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Rang</span>
+              <span id="valo-rank" class="text-base sm:text-lg font-black text-slate-100">--</span>
+            </div>
+            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Score RR</span>
+              <span id="valo-rr" class="text-base sm:text-lg font-black text-amber-400">--</span>
+            </div>
+            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">K/D | HS%</span>
+              <span id="valo-kd" class="text-base sm:text-lg font-black text-slate-200">0.74 | 15.6%</span>
             </div>
           </div>
         </div>
 
-        <div onclick="openRLRankPage('2v2')" class="mode-vertical-card group">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
-            <div class="sm:w-3/5 h-36 overflow-hidden">
-              <img id="banner-img-2v2" src="2vs2.jpg" alt="2 VS 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            </div>
-            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
+        <!-- CARTE ROCKET LEAGUE -->
+        <div class="glass-panel rounded-3xl p-6 relative overflow-hidden border border-blue-500/20 hover:border-blue-500/40 transition-all">
+          <div class="absolute -right-8 -top-8 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                <i class="fa-solid fa-car-side text-2xl"></i>
+              </div>
               <div>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-400 block">Mode Principal</span>
-                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Double 2 VS 2</h3>
-                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
-              </div>
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                <h3 class="text-lg font-black text-white">Rocket League</h3>
+                <p class="text-xs text-slate-400">Epic: abdel92jr</p>
               </div>
             </div>
+            <span class="px-3.5 py-1 rounded-xl text-xs font-black bg-blue-500/20 border border-blue-500/40 text-blue-400">
+              Saison Active
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Duel 1v1</span>
+              <span id="rl-1v1" class="text-xs sm:text-sm font-black text-slate-100">--</span>
+            </div>
+            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Doubles 2v2</span>
+              <span id="rl-2v2" class="text-xs sm:text-sm font-black text-amber-400">--</span>
+            </div>
+            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+              <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Standard 3v3</span>
+              <span id="rl-3v3" class="text-xs sm:text-sm font-black text-slate-100">--</span>
+            </div>
           </div>
         </div>
 
-        <div onclick="openRLRankPage('3v3')" class="mode-vertical-card group">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
-            <div class="sm:w-3/5 h-36 overflow-hidden">
-              <img id="banner-img-3v3" src="3vs3.jpg" alt="3 VS 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!-- SECTION 2 : PLANNING HEBDOMADAIRE (LUNDI - DIMANCHE 24H)   -->
+    <!-- ========================================================== -->
+    <section id="planning-section">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-2.5 h-8 bg-amber-500 rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-wide">
+            Planning Hebdomadaire
+          </h2>
+        </div>
+        <span class="text-xs text-slate-400 bg-slate-900/60 border border-white/10 px-3.5 py-1.5 rounded-full font-bold">
+          Format 24h
+        </span>
+      </div>
+
+      <div class="glass-panel rounded-3xl p-6 overflow-x-auto custom-scrollbar">
+        <div class="grid grid-cols-7 gap-4 min-w-[850px]">
+          
+          <!-- Lundi -->
+          <div class="flex flex-col gap-3">
+            <div class="text-center pb-3 border-b border-white/10">
+              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Lundi</span>
             </div>
-            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
-              <div>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Équipe</span>
-                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Standard 3 VS 3</h3>
-                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
+            <div class="space-y-2">
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+                <span class="text-[10px] text-amber-400 font-bold block">14:00 - 16:30</span>
+                <p class="font-semibold text-slate-200 mt-0.5">Montage & Vidéos</p>
               </div>
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <!-- Mardi -->
+          <div class="flex flex-col gap-3">
+            <div class="text-center pb-3 border-b border-white/10">
+              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Mardi</span>
+            </div>
+            <div class="space-y-2">
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+                <span class="text-[10px] text-amber-400 font-bold block">18:00 - 20:00</span>
+                <p class="font-semibold text-slate-200 mt-0.5">Session Ranked</p>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- ROCKET LEAGUE : PAGE DU RANG SÉLECTIONNÉ -->
-    <div id="gaming-rl-rank-page" class="hidden max-w-4xl mx-auto">
-      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="closeRLDetails()" class="hover:text-emerald-400 transition">Gaming</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="backToRLModes()" class="hover:text-emerald-400 transition">Rocket League</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span id="rankpage-breadcrumb-mode" class="text-emerald-400 font-bold">1 VS 1</span>
-      </div>
-
-      <div class="mb-6">
-        <button onclick="backToRLModes()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-emerald-500 hover:text-black dark:hover:bg-emerald-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-          <i data-lucide="arrow-left" class="w-4 h-4"></i>
-          Choisir un autre mode
-        </button>
-      </div>
-
-      <div class="glass-card rounded-3xl overflow-hidden border border-emerald-500/40 p-6 sm:p-10 bg-[#0b1611]/90 shadow-2xl">
-        <div class="w-full h-48 sm:h-64 rounded-2xl overflow-hidden mb-8 border border-white/10 shadow-lg">
-          <img id="rankpage-banner-img" src="1vs1.jpg" alt="Bannière Mode" class="w-full h-full object-cover">
-        </div>
-
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-white/10">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 block mb-1" id="rankpage-mode-subtitle">MODE SOLO</span>
-            <h2 class="text-3xl sm:text-4xl font-black text-white" id="rankpage-mode-title">Duel 1 VS 1</h2>
-          </div>
-          <span class="text-xs font-semibold px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 w-fit">
-            Synchronisation Active
-          </span>
-        </div>
-
-        <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <div class="flex items-center gap-6">
-            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
-              <img id="rankpage-badge-img" src="ou-3.jpg.png" alt="Badge de rang" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+          <!-- Mercredi -->
+          <div class="flex flex-col gap-3">
+            <div class="text-center pb-3 border-b border-white/10">
+              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Mercredi</span>
             </div>
-            <div>
-              <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
-              <div class="text-3xl sm:text-4xl font-black text-white tracking-tight" id="rankpage-rank-text">Chargement...</div>
-              <span class="text-xs text-emerald-400 font-medium block mt-1">Epic ID : abdel92jr</span>
+            <div class="space-y-2">
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+                <span class="text-[10px] text-amber-400 font-bold block">15:00 - 18:00</span>
+                <p class="font-semibold text-slate-200 mt-0.5">Projets HQ / Création</p>
+              </div>
             </div>
           </div>
 
-          <div class="sm:text-right border-t sm:border-t-0 pt-4 sm:pt-0 border-white/5">
-            <a href="https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview" target="_blank" class="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold inline-flex items-center gap-2 transition shadow-lg shadow-emerald-500/20">
-              <span>Voir sur Tracker Network</span>
-              <i data-lucide="external-link" class="w-4 h-4"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- LEAGUE OF LEGENDS : PAGE DÉDIÉE -->
-    <div id="gaming-lol-screen" class="hidden max-w-4xl mx-auto">
-      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="closeOtherGames()" class="hover:text-emerald-400 transition">Gaming</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span class="text-amber-400 font-bold">League of Legends</span>
-      </div>
-
-      <div class="mb-6">
-        <button onclick="closeOtherGames()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-amber-500 hover:text-black dark:hover:bg-amber-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-          <i data-lucide="arrow-left" class="w-4 h-4"></i>
-          Tous les jeux
-        </button>
-      </div>
-
-      <div class="glass-card rounded-3xl overflow-hidden border border-amber-500/40 p-6 sm:p-10 bg-[#141208]/90 shadow-2xl">
-        <div class="w-full h-56 sm:h-72 rounded-2xl overflow-hidden mb-8 border border-white/10 shadow-lg">
-          <img id="lol-banner-img" src="Neeko.jpg" alt="Neeko - League of Legends" class="w-full h-full object-cover">
-        </div>
-
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-white/10">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-widest text-amber-400 block mb-1">RIOT GAMES • SERVEUR EUW</span>
-            <h2 class="text-3xl sm:text-4xl font-black text-white">League of Legends</h2>
-          </div>
-          <span class="text-xs font-semibold px-4 py-1.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40 w-fit">
-            Profil Joueur Actif
-          </span>
-        </div>
-
-        <div class="pt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="p-6 rounded-2xl bg-black/40 border border-white/10">
-            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider block mb-2">Champion Préféré</span>
-            <div class="text-3xl font-black text-white mb-2">Neeko</div>
-            <p class="text-xs text-zinc-400">Spam Mid / Support • Contrôle & Teamfight</p>
-          </div>
-
-          <div class="p-6 rounded-2xl bg-black/40 border border-white/10">
-            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider block mb-2">Rang Compétitif</span>
-            <div class="text-3xl font-black text-white mb-2">Non Classé</div>
-            <p class="text-xs text-zinc-400">ID In-Game : <strong class="text-white">HDKAbou</strong></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- VALORANT : PAGE DÉDIÉE -->
-    <div id="gaming-valo-screen" class="hidden max-w-4xl mx-auto">
-      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="closeOtherGames()" class="hover:text-emerald-400 transition">Gaming</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span class="text-rose-400 font-bold">Valorant</span>
-      </div>
-
-      <div class="mb-6">
-        <button onclick="closeOtherGames()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-500 dark:hover:text-white transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-          <i data-lucide="arrow-left" class="w-4 h-4"></i>
-          Tous les jeux
-        </button>
-      </div>
-
-      <div class="glass-card rounded-3xl overflow-hidden border border-rose-500/40 p-6 sm:p-10 bg-[#140b0e]/90 shadow-2xl">
-        <div class="w-full h-48 sm:h-64 rounded-2xl overflow-hidden mb-8 border border-white/10 shadow-lg">
-          <img id="valo-banner-img" src="valo.jpg" alt="Valorant" class="w-full h-full object-cover">
-        </div>
-
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-white/10">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-widest text-rose-400 block mb-1">RIOT GAMES • SERVEUR EUW</span>
-            <h2 class="text-3xl sm:text-4xl font-black text-white">Valorant</h2>
-          </div>
-          <span class="text-xs font-semibold px-4 py-1.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/40 w-fit">
-            Synchronisé Tracker.gg
-          </span>
-        </div>
-
-        <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <div class="flex items-center gap-6">
-            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
-              <img id="valo-badge-img" src="" alt="Badge Valorant" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">
+          <!-- Jeudi -->
+          <div class="flex flex-col gap-3">
+            <div class="text-center pb-3 border-b border-white/10">
+              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Jeudi</span>
             </div>
-            <div>
-              <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
-              <div class="text-3xl sm:text-4xl font-black text-rose-400 tracking-tight" id="valo-dedicated-rank">Bronze 3</div>
-              <span class="text-xs text-zinc-400 font-medium block mt-1" id="valo-dedicated-rr">Score : 38 RR • Peak Silver 3</span>
+            <div class="space-y-2">
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+                <span class="text-[10px] text-amber-400 font-bold block">19:00 - 21:00</span>
+                <p class="font-semibold text-slate-200 mt-0.5">Entraînement Volley</p>
+              </div>
             </div>
           </div>
 
-          <div class="flex gap-4">
-            <div class="p-4 rounded-xl bg-black/40 border border-white/10 text-center min-w-[90px]">
-              <span class="text-[10px] text-zinc-400 block mb-0.5">K/D Ratio</span>
-              <span id="valo-dedicated-kd" class="font-bold text-white text-lg">0.74</span>
+          <!-- Vendredi -->
+          <div class="flex flex-col gap-3">
+            <div class="text-center pb-3 border-b border-white/10">
+              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Vendredi</span>
             </div>
-            <div class="p-4 rounded-xl bg-black/40 border border-white/10 text-center min-w-[90px]">
-              <span class="text-[10px] text-zinc-400 block mb-0.5">Headshot %</span>
-              <span id="valo-dedicated-hs" class="font-bold text-white text-lg">15.6%</span>
+            <div class="space-y-2">
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+                <span class="text-[10px] text-amber-400 font-bold block">21:00 - 23:30</span>
+                <p class="font-semibold text-slate-200 mt-0.5">Soirée Tournoi / Squad</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="mt-8 pt-6 border-t border-white/10 flex justify-end">
-          <a href="https://tracker.gg/valorant/profile/riot/Abouu92jr%230213/overview" target="_blank" class="px-5 py-3 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold inline-flex items-center gap-2 transition shadow-lg shadow-rose-500/20">
-            <span>Ouvrir la fiche Tracker.gg</span>
-            <i data-lucide="external-link" class="w-4 h-4"></i>
-          </a>
+          <!-- Samedi -->
+          <div class="flex flex-col gap-3">
+            <div class="text-center pb-3 border-b border-white/10">
+              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Samedi</span>
+            </div>
+            <div class="space-y-2">
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+                <span class="text-[10px] text-amber-400 font-bold block">14:00 - 18:00</span>
+                <p class="font-semibold text-slate-200 mt-0.5">Matchs & Sport</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dimanche -->
+          <div class="flex flex-col gap-3">
+            <div class="text-center pb-3 border-b border-white/10">
+              <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Dimanche</span>
+            </div>
+            <div class="space-y-2">
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+                <span class="text-[10px] text-amber-400 font-bold block">20:30 - 23:00</span>
+                <p class="font-semibold text-slate-200 mt-0.5">Watchlist & Détente</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- SCRIPT DU GOOGLE CALENDAR DBZ & GESTION DES JEUX -->
+    <!-- ========================================================== -->
+    <!-- SECTION 3 : PALMARÈS & HALL OF FAME (DYNAMIQUE)            -->
+    <!-- ========================================================== -->
+    <section id="palmares-section">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-2.5 h-8 bg-amber-500 rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500">
+            Palmarès
+          </h2>
+        </div>
+      </div>
+
+      <!-- Navigation Catégories Principales -->
+      <div class="flex flex-wrap gap-2.5 mb-6 border-b border-white/10 pb-4" id="palmares-categories-nav">
+        <!-- Rempli par JavaScript -->
+      </div>
+
+      <!-- Sous-Catégories (Pilules masquées si aucune sous-catégorie) -->
+      <div class="flex flex-wrap gap-2 mb-8 hidden" id="palmares-subcategories-nav">
+        <!-- Rempli par JavaScript -->
+      </div>
+
+      <!-- Grille d'affichage des fiches -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="palmares-grid">
+        <!-- Injecté dynamiquement par loadPalmares() -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================== -->
+  <!-- SCRIPTS D'EXÉCUTION & SYNCHRONISATION                      -->
+  <!-- ========================================================== -->
   <script>
-    lucide.createIcons();
+    // 1. HORLOGE EN TEMPS RÉEL (FORMAT 24H)
+    function updateClock() {
+      const now = new Date();
+      const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Europe/Paris' };
+      const clockEl = document.getElementById('live-clock');
+      if (clockEl) {
+        clockEl.textContent = now.toLocaleTimeString('fr-FR', options);
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    // =======================================================
-    // 1. GOOGLE CALENDAR ENGINE (Semaine Lun -> Dim, 08:00 -> 23:00)
-    // =======================================================
-    let currentCalDate = new Date(2026, 7, 24); // Lundi 24 Août 2026
+    // 2. CHARGEMENT STATS GAMING (VALORANT & RL)
+    async function loadStats() {
+      try {
+        const response = await fetch(`stats.json?t=${Date.now()}`);
+        if (!response.ok) return;
+        const data = await response.json();
 
-    const gcalColors = {
-      blue: { bg: 'bg-blue-600/90 border-blue-400 text-white', dot: 'bg-blue-300' },
-      orange: { bg: 'bg-amber-600/90 border-amber-400 text-white', dot: 'bg-amber-300' },
-      purple: { bg: 'bg-purple-600/90 border-purple-400 text-white', dot: 'bg-purple-300' },
-      emerald: { bg: 'bg-emerald-600/90 border-emerald-400 text-white', dot: 'bg-emerald-300' },
-      rose: { bg: 'bg-rose-600/90 border-rose-400 text-white', dot: 'bg-rose-300' }
-    };
-
-    let userEvents = JSON.parse(localStorage.getItem('hq_gcal_events')) || [
-      { id: '1', title: 'Entraînement Volley Nanterre', date: '2026-08-25', start: '19:00', end: '21:00', category: 'orange', desc: 'Gymnase Voltaire' },
-      { id: '2', title: 'Montage Vidéo MCU TikTok', date: '2026-08-26', start: '14:00', end: '17:00', category: 'purple', desc: 'Premiere Pro' },
-      { id: '3', title: 'Session Ranked Valorant / RL', date: '2026-08-24', start: '21:00', end: '23:00', category: 'emerald', desc: 'Duo Q' },
-      { id: '4', title: 'Rentrée Universitaire L2 Éco', date: '2026-09-15', start: '09:00', end: '12:00', category: 'blue', desc: 'Amphi Principal' }
-    ];
-
-    function renderGCal() {
-      const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-      
-      const curr = new Date(currentCalDate);
-      const dayOfWeek = (curr.getDay() + 6) % 7; // Lundi = 0, Dimanche = 6
-      const monday = new Date(curr);
-      monday.setDate(curr.getDate() - dayOfWeek);
-
-      const sunday = new Date(monday);
-      sunday.setDate(monday.getDate() + 6);
-
-      const titleEl = document.getElementById('gcal-month-title');
-      if (titleEl) {
-        if (monday.getMonth() === sunday.getMonth()) {
-          titleEl.innerText = `${monthNames[monday.getMonth()]} ${monday.getFullYear()}`;
-        } else {
-          titleEl.innerText = `${monthNames[monday.getMonth()]} - ${monthNames[sunday.getMonth()]} ${sunday.getFullYear()}`;
+        // Valorant
+        if (data.valorant) {
+          document.getElementById('valo-rank').textContent = data.valorant.rang || '--';
+          document.getElementById('valo-rank-badge').textContent = data.valorant.rang || 'Classé';
+          document.getElementById('valo-rr').textContent = `${data.valorant.rr || '0'} RR`;
+          if (data.valorant.kd && data.valorant.hs) {
+            document.getElementById('valo-kd').textContent = `${data.valorant.kd} | ${data.valorant.hs}`;
+          }
         }
+
+        // Rocket League
+        if (data.rocketLeague) {
+          document.getElementById('rl-1v1').textContent = data.rocketLeague.duel1v1 || 'Non Classé';
+          document.getElementById('rl-2v2').textContent = data.rocketLeague.doubles2v2 || 'Non Classé';
+          document.getElementById('rl-3v3').textContent = data.rocketLeague.standard3v3 || 'Non Classé';
+        }
+      } catch (e) {
+        console.warn("Impossible de charger stats.json :", e);
+      }
+    }
+
+    // 3. GESTION DU PALMARÈS
+    let palmaresData = null;
+    let activeCatIndex = 0;
+    let activeSubCatIndex = 0;
+
+    async function loadPalmares() {
+      try {
+        const res = await fetch(`palmares.json?t=${Date.now()}`);
+        if (!res.ok) throw new Error("Fichier introuvable");
+        palmaresData = await res.json();
+        renderCategoryNav();
+        renderPalmares();
+      } catch (err) {
+        console.error("Erreur de chargement de palmares.json :", err);
+        document.getElementById('palmares-grid').innerHTML = `
+          <div class="col-span-full py-12 text-center text-slate-500 font-medium">
+            Le fichier <code class="text-amber-400 font-mono">palmares.json</code> est en cours d'initialisation...
+          </div>
+        `;
+      }
+    }
+
+    function renderCategoryNav() {
+      const nav = document.getElementById('palmares-categories-nav');
+      if (!nav || !palmaresData?.categories) return;
+      nav.innerHTML = '';
+
+      palmaresData.categories.forEach((cat, idx) => {
+        const btn = document.createElement('button');
+        const isActive = idx === activeCatIndex;
+        btn.className = `px-5 py-2.5 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 backdrop-blur-md border ${
+          isActive
+            ? 'bg-amber-500 text-slate-950 border-amber-400 shadow-lg shadow-amber-500/20 scale-105'
+            : 'bg-slate-900/60 text-slate-300 border-white/10 hover:bg-slate-800/80 hover:text-white'
+        }`;
+        btn.textContent = cat.name;
+        btn.onclick = () => {
+          activeCatIndex = idx;
+          activeSubCatIndex = 0;
+          renderCategoryNav();
+          renderPalmares();
+        };
+        nav.appendChild(btn);
+      });
+    }
+
+    function renderSubCategoryNav(category) {
+      const subNav = document.getElementById('palmares-subcategories-nav');
+      if (!category.hasSubcategories || !category.subcategories) {
+        subNav.classList.add('hidden');
+        return;
       }
 
-      const dayHeadersContainer = document.getElementById('gcal-day-headers');
-      dayHeadersContainer.innerHTML = '';
+      subNav.classList.remove('hidden');
+      subNav.innerHTML = '';
 
-      const dayLabels = ['LUN.', 'MAR.', 'MER.', 'JEU.', 'VEN.', 'SAM.', 'DIM.'];
-      const weekDates = [];
-      const todayStr = '2026-08-24';
+      category.subcategories.forEach((sub, idx) => {
+        const btn = document.createElement('button');
+        const isActive = idx === activeSubCatIndex;
+        btn.className = `px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all border ${
+          isActive
+            ? 'bg-amber-400/20 text-amber-300 border-amber-400/50 shadow-sm'
+            : 'bg-slate-800/40 text-slate-400 border-white/5 hover:text-slate-200'
+        }`;
+        btn.textContent = sub.name;
+        btn.onclick = () => {
+          activeSubCatIndex = idx;
+          renderSubCategoryNav(category);
+          renderPalmares();
+        };
+        subNav.appendChild(btn);
+      });
+    }
 
-      for (let i = 0; i < 7; i++) {
-        const d = new Date(monday);
-        d.setDate(monday.getDate() + i);
-        const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-        weekDates.push(dStr);
+    function renderPalmares() {
+      if (!palmaresData?.categories) return;
+      const currentCat = palmaresData.categories[activeCatIndex];
+      renderSubCategoryNav(currentCat);
 
-        const isToday = (dStr === todayStr);
+      const grid = document.getElementById('palmares-grid');
+      grid.innerHTML = '';
 
-        dayHeadersContainer.innerHTML += `
-          <div class="py-3.5 flex flex-col items-center justify-center border-r border-white/15 last:border-r-0">
-            <span class="text-[11px] font-bold ${isToday ? 'text-blue-400' : 'text-zinc-300'} tracking-wider">${dayLabels[i]}</span>
-            <div class="w-10 h-10 mt-1 flex items-center justify-center rounded-full text-base font-black ${isToday ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/50' : 'text-white'}">
-              ${d.getDate()}
+      let itemsToDisplay = [];
+      if (currentCat.hasSubcategories && currentCat.subcategories) {
+        itemsToDisplay = currentCat.subcategories[activeSubCatIndex]?.items || [];
+      } else {
+        itemsToDisplay = currentCat.items || [];
+      }
+
+      if (itemsToDisplay.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center text-slate-500 font-medium">
+            Aucune œuvre enregistrée dans cette catégorie pour le moment.
+          </div>
+        `;
+        return;
+      }
+
+      itemsToDisplay.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "group relative rounded-2xl overflow-hidden bg-slate-900/70 border border-white/10 hover:border-amber-400/50 transition-all duration-300 hover:-translate-y-1.5 shadow-xl flex flex-col";
+
+        card.innerHTML = `
+          <div class="relative w-full aspect-[2/3] overflow-hidden bg-slate-950">
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+            
+            <span class="absolute top-3 left-3 bg-amber-500/90 text-slate-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+              ${item.rank || '★'}
+            </span>
+
+            ${item.tag ? `
+              <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-amber-300 border border-amber-400/30 text-[11px] font-bold px-2 py-0.5 rounded-md">
+                ${item.tag}
+              </span>
+            ` : ''}
+
+            <div class="absolute bottom-3 right-3 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 flex items-center gap-1.5">
+              <span class="text-amber-400 text-xs">★</span>
+              <span class="text-white text-xs font-bold">${item.rating || '-'}</span>
+            </div>
+          </div>
+
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-slate-100 group-hover:text-amber-300 transition-colors line-clamp-1">
+                ${item.title}
+              </h3>
+              ${item.comment ? `
+                <p class="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                  "${item.comment}"
+                </p>
+              ` : ''}
             </div>
           </div>
         `;
-      }
-
-      const timeGridContainer = document.getElementById('gcal-time-grid');
-      timeGridContainer.innerHTML = '';
-
-      const hours = [
-        { label: '08:00', h: 8 }, { label: '09:00', h: 9 }, { label: '10:00', h: 10 },
-        { label: '11:00', h: 11 }, { label: '12:00', h: 12 }, { label: '13:00', h: 13 },
-        { label: '14:00', h: 14 }, { label: '15:00', h: 15 }, { label: '16:00', h: 16 },
-        { label: '17:00', h: 17 }, { label: '18:00', h: 18 }, { label: '19:00', h: 19 },
-        { label: '20:00', h: 20 }, { label: '21:00', h: 21 }, { label: '22:00', h: 22 },
-        { label: '23:00', h: 23 }
-      ];
-
-      hours.forEach(hr => {
-        timeGridContainer.innerHTML += `
-          <div class="h-[68px] border-b border-r border-white/15 flex items-start justify-center pt-1.5 text-[11px] font-bold text-zinc-300 bg-black/40">
-            ${hr.label}
-          </div>
-        `;
-
-        for (let col = 0; col < 7; col++) {
-          const dateStr = weekDates[col];
-          timeGridContainer.innerHTML += `
-            <div onclick="quickCreateSlot('${dateStr}', ${hr.h})" class="time-slot-cell relative" data-date="${dateStr}" data-hour="${hr.h}"></div>
-          `;
-        }
-      });
-
-      renderEventsOnGrid(weekDates);
-      renderLiveCurrentTime(weekDates);
-      lucide.createIcons();
-    }
-
-    function renderEventsOnGrid(weekDates) {
-      weekDates.forEach((dStr) => {
-        const eventsForDay = userEvents.filter(ev => ev.date === dStr);
-
-        eventsForDay.forEach(ev => {
-          const [startH, startM] = ev.start.split(':').map(Number);
-          const [endH, endM] = ev.end.split(':').map(Number);
-
-          if (startH >= 8) {
-            const topMinutes = (startH - 8) * 60 + startM;
-            const durationMinutes = Math.max(((endH - 8) * 60 + endM) - topMinutes, 30);
-
-            const topPx = (topMinutes / 60) * 68;
-            const heightPx = (durationMinutes / 60) * 68;
-
-            const startCell = document.querySelector(`.time-slot-cell[data-date="${dStr}"][data-hour="8"]`);
-            if (startCell) {
-              const c = gcalColors[ev.category] || gcalColors.blue;
-              const chip = document.createElement('div');
-              chip.className = `gcal-event-chip border ${c.bg}`;
-              chip.style.top = `${topPx}px`;
-              chip.style.height = `${heightPx - 5}px`;
-              chip.innerHTML = `
-                <div class="flex items-center justify-between font-bold leading-tight">
-                  <span class="truncate">${ev.title}</span>
-                  <button onclick="deleteGCalEvent('${ev.id}', event)" class="hover:text-red-300 ml-1 font-black">&times;</button>
-                </div>
-                <div class="text-[10px] opacity-90 truncate mt-0.5">${ev.start} - ${ev.end} ${ev.desc ? '• ' + ev.desc : ''}</div>
-              `;
-              startCell.appendChild(chip);
-            }
-          }
-        });
+        grid.appendChild(card);
       });
     }
 
-    function renderLiveCurrentTime(weekDates) {
-      const todayStr = '2026-08-24';
-      const colIndex = weekDates.indexOf(todayStr);
-
-      if (colIndex !== -1) {
-        const curH = 21;
-        const curM = 45;
-
-        if (curH >= 8) {
-          const topPx = (((curH - 8) * 60 + curM) / 60) * 68;
-          const cell = document.querySelector(`.time-slot-cell[data-date="${todayStr}"][data-hour="8"]`);
-          if (cell) {
-            const line = document.createElement('div');
-            line.className = 'current-time-line';
-            line.style.top = `${topPx}px`;
-            line.innerHTML = `<span class="current-time-dot"></span>`;
-            cell.appendChild(line);
-          }
-        }
-      }
-    }
-
-    function gcalToday() {
-      currentCalDate = new Date(2026, 7, 24);
-      renderGCal();
-    }
-
-    function gcalPrevWeek() {
-      currentCalDate.setDate(currentCalDate.getDate() - 7);
-      renderGCal();
-    }
-
-    function gcalNextWeek() {
-      currentCalDate.setDate(currentCalDate.getDate() + 7);
-      renderGCal();
-    }
-
-    function quickCreateSlot(dateStr, hour) {
-      document.getElementById('event-date').value = dateStr;
-      document.getElementById('event-start-time').value = `${String(hour).padStart(2, '0')}:00`;
-      document.getElementById('event-end-time').value = `${String(hour + 1).padStart(2, '0')}:00`;
-      openAddEventModal();
-    }
-
-    function openAddEventModal() {
-      document.getElementById('modal-add-event').classList.remove('hidden');
-    }
-
-    function closeAddEventModal() {
-      document.getElementById('modal-add-event').classList.add('hidden');
-    }
-
-    function saveNewEvent(e) {
-      e.preventDefault();
-      const newEv = {
-        id: Date.now().toString(),
-        title: document.getElementById('event-title').value,
-        date: document.getElementById('event-date').value,
-        start: document.getElementById('event-start-time').value,
-        end: document.getElementById('event-end-time').value,
-        category: document.getElementById('event-category').value,
-        desc: document.getElementById('event-desc').value
-      };
-
-      userEvents.push(newEv);
-      localStorage.setItem('hq_gcal_events', JSON.stringify(userEvents));
-      closeAddEventModal();
-      document.getElementById('form-add-event').reset();
-      renderGCal();
-    }
-
-    function deleteGCalEvent(id, e) {
-      if (e) e.stopPropagation();
-      userEvents = userEvents.filter(ev => ev.id !== id);
-      localStorage.setItem('hq_gcal_events', JSON.stringify(userEvents));
-      renderGCal();
-    }
-
-    // =======================================================
-    // 2. ROUTEUR SPA & STATS JEUX (RL, VALORANT, LOL)
-    // =======================================================
-    let rlStatsCache = {
-      '1v1': 'Gold III (Division III)',
-      '2v2': 'Platinum II (Division I)',
-      '3v3': 'Platinum II (Division III)'
-    };
-
-    const themeToggleBtn = document.getElementById('themeToggle');
-    themeToggleBtn.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      lucide.createIcons();
-    });
-
-    function navigateTab(tabName) {
-      document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
-
-      document.querySelectorAll('.nav-tab').forEach(btn => {
-        btn.className = 'nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5';
-      });
-
-      const targetView = document.getElementById(`view-${tabName}`);
-      if (targetView) targetView.classList.remove('hidden');
-
-      const activeBtn = document.getElementById(`nav-btn-${tabName}`);
-      if (activeBtn) {
-        activeBtn.className = 'nav-tab text-emerald-700 dark:text-emerald-400 font-semibold border-b-2 border-emerald-600 dark:border-emerald-400 pb-0.5';
-      }
-
-      if (tabName === 'planning') {
-        renderGCal();
-      }
-
-      if (tabName === 'gaming') {
-        closeRLDetails();
-        closeOtherGames();
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      lucide.createIcons();
-    }
-
-    function openRLDetails() {
-      document.getElementById('gaming-hub-screen').classList.add('hidden');
-      document.getElementById('gaming-rl-screen').classList.remove('hidden');
-      document.getElementById('gaming-rl-rank-page').classList.add('hidden');
-      document.getElementById('gaming-lol-screen').classList.add('hidden');
-      document.getElementById('gaming-valo-screen').classList.add('hidden');
-      
-      setupImageWithFallbacks('banner-img-1v1', ['1vs1.jpg', '1vs1.jpg.png', '1vs1.png']);
-      setupImageWithFallbacks('banner-img-2v2', ['2vs2.jpg', '2vs2.jpg.png', '2vs2.png']);
-      setupImageWithFallbacks('banner-img-3v3', ['3vs3.jpg', '3vs3.jpg.png', '3vs3.png']);
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      lucide.createIcons();
-    }
-
-    function closeRLDetails() {
-      document.getElementById('gaming-rl-screen').classList.add('hidden');
-      document.getElementById('gaming-rl-rank-page').classList.add('hidden');
-      document.getElementById('gaming-hub-screen').classList.remove('hidden');
-      lucide.createIcons();
-    }
-
-    function backToRLModes() {
-      document.getElementById('gaming-rl-rank-page').classList.add('hidden');
-      document.getElementById('gaming-rl-screen').classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      lucide.createIcons();
-    }
-
-    function openRLRankPage(mode) {
-      document.getElementById('gaming-rl-screen').classList.add('hidden');
-      document.getElementById('gaming-rl-rank-page').classList.remove('hidden');
-
-      const meta = {
-        '1v1': { title: 'Duel 1 VS 1', subtitle: 'MODE SOLO', banner: ['1vs1.jpg', '1vs1.jpg.png', '1vs1.png'] },
-        '2v2': { title: 'Double 2 VS 2', subtitle: 'MODE PRINCIPAL', banner: ['2vs2.jpg', '2vs2.jpg.png', '2vs2.png'] },
-        '3v3': { title: 'Standard 3 VS 3', subtitle: 'MODE ÉQUIPE', banner: ['3vs3.jpg', '3vs3.jpg.png', '3vs3.png'] }
-      };
-
-      const info = meta[mode];
-      document.getElementById('rankpage-breadcrumb-mode').innerText = info.title;
-      document.getElementById('rankpage-mode-title').innerText = info.title;
-      document.getElementById('rankpage-mode-subtitle').innerText = info.subtitle;
-
-      setupImageWithFallbacks('rankpage-banner-img', info.banner);
-
-      const rankText = rlStatsCache[mode] || 'Non Classé';
-      document.getElementById('rankpage-rank-text').innerText = rankText;
-
-      const badgeList = getRLRankBadgeFallbacks(rankText);
-      setupImageWithFallbacks('rankpage-badge-img', badgeList);
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      lucide.createIcons();
-    }
-
-    function openLoLDetails() {
-      document.getElementById('gaming-hub-screen').classList.add('hidden');
-      document.getElementById('gaming-lol-screen').classList.remove('hidden');
-      setupImageWithFallbacks('lol-banner-img', ['Neeko.jpg', 'neeko.jpg', 'Neeko.jpg.png', 'neeko.jpg.png']);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      lucide.createIcons();
-    }
-
-    function openValoDetails() {
-      document.getElementById('gaming-hub-screen').classList.add('hidden');
-      document.getElementById('gaming-valo-screen').classList.remove('hidden');
-      setupImageWithFallbacks('valo-banner-img', ['valo.jpg', 'valo.jpg.png', 'valo.png']);
-      
-      const currentValoRank = document.getElementById('valo-dedicated-rank').innerText;
-      const valoBadges = getValoRankBadgeFallbacks(currentValoRank);
-      setupImageWithFallbacks('valo-badge-img', valoBadges);
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      lucide.createIcons();
-    }
-
-    function closeOtherGames() {
-      document.getElementById('gaming-lol-screen').classList.add('hidden');
-      document.getElementById('gaming-valo-screen').classList.add('hidden');
-      document.getElementById('gaming-hub-screen').classList.remove('hidden');
-      lucide.createIcons();
-    }
-
-    function setupImageWithFallbacks(elementId, candidates) {
-      const el = document.getElementById(elementId);
-      if (!el || !candidates || candidates.length === 0) return;
-
-      let idx = 0;
-      el.onerror = function() {
-        idx++;
-        if (idx < candidates.length) {
-          this.src = candidates[idx];
-        } else {
-          this.onerror = null;
-        }
-      };
-      el.src = '';
-      el.src = candidates[0];
-    }
-
-    function getRLRankBadgeFallbacks(rankStr) {
-      if (!rankStr) return ['ou-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-9.png'];
-      const r = rankStr.toLowerCase();
-
-      if (r.includes('supersonic') || r.includes('ssl')) return ['ssl.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-22.png'];
-      if (r.includes('grand champion iii') || r.includes('gc3')) return ['gc-3.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-21.png'];
-      if (r.includes('grand champion ii') || r.includes('gc2')) return ['gc-2.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-20.png'];
-      if (r.includes('grand champion') || r.includes('gc1')) return ['gc-1.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-19.png'];
-      
-      if (r.includes('champion iii') || r.includes('c3') || r.includes('champion 3')) return ['champion-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-18.png'];
-      if (r.includes('champion ii') || r.includes('c2') || r.includes('champion 2')) return ['champion-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-17.png'];
-      if (r.includes('champion i') || r.includes('c1') || r.includes('champion 1')) return ['champion-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-16.png'];
-
-      if (r.includes('diamond iii') || r.includes('diamant iii') || r.includes('diamond 3')) return ['diamant-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-15.png'];
-      if (r.includes('diamond ii') || r.includes('diamant ii') || r.includes('diamond 2')) return ['diamant-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-14.png'];
-      if (r.includes('diamond i') || r.includes('diamant i') || r.includes('diamond 1')) return ['diamant-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-13.png'];
-
-      if (r.includes('platinum iii') || r.includes('platine iii') || r.includes('platinum 3')) return ['platine-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-12.png'];
-      if (r.includes('platinum ii') || r.includes('platine ii') || r.includes('platinum 2')) return ['platine-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-11.png'];
-      if (r.includes('platinum i') || r.includes('platine i') || r.includes('platinum 1')) return ['platine-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-10.png'];
-
-      if (r.includes('gold iii') || r.includes('or iii') || r.includes('gold 3')) return ['ou-3.jpg.png', 'or-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-9.png'];
-      if (r.includes('gold ii') || r.includes('or ii') || r.includes('gold 2')) return ['ou-2.jpg.png', 'or-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-8.png'];
-      if (r.includes('gold i') || r.includes('or i') || r.includes('gold 1')) return ['ou-1.jpg.png', 'or-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-7.png'];
-
-      return ['https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-11.png'];
-    }
-
-    function getValoRankBadgeFallbacks(rankStr) {
-      const r = (rankStr || '').toLowerCase();
-      const api = 'https://media.valorant-api.com/competitivetiers/03621f52-342b-77e7-4f49-ed82dc47a6d4';
-
-      function makeList(fileName, apiTier) {
-        return [
-          `Rank valo/${fileName}`,
-          `./Rank valo/${fileName}`,
-          `Rank%20valo/${fileName}`,
-          `./Rank%20valo/${fileName}`,
-          `rank valo/${fileName}`,
-          fileName,
-          `${api}/${apiTier}/largeicon.png`
-        ];
-      }
-
-      if (r.includes('radiant')) return makeList('valo-radiant.svg', 27);
-      if (r.includes('immortal 3') || r.includes('immortel 3')) return makeList('valo-immortel-3.svg', 26);
-      if (r.includes('immortal 2') || r.includes('immortel 2')) return makeList('valo-immortel-2.svg', 25);
-      if (r.includes('immortal') || r.includes('immortel')) return makeList('valo-immortel-1.svg', 24);
-      if (r.includes('ascendant 3')) return makeList('valo-ascendant-3.svg', 23);
-      if (r.includes('ascendant 2')) return makeList('valo-ascendant-2.svg', 22);
-      if (r.includes('ascendant')) return makeList('valo-ascendant-1.svg', 21);
-      if (r.includes('diamond 3') || r.includes('diamant 3')) return makeList('valo-diamond-3.svg', 20);
-      if (r.includes('diamond 2') || r.includes('diamant 2')) return makeList('valo-diamond-2.svg', 19);
-      if (r.includes('diamond') || r.includes('diamant')) return makeList('valo-diamond-1.svg', 18);
-      if (r.includes('platinum 3') || r.includes('platine 3')) return makeList('valo-platinum-3.svg', 17);
-      if (r.includes('platinum 2') || r.includes('platine 2')) return makeList('valo-platinum-2.svg', 16);
-      if (r.includes('platinum') || r.includes('platine')) return makeList('valo-platinum-1.svg', 15);
-      if (r.includes('gold 3') || r.includes('or 3')) return makeList('valo-gold-3.svg', 14);
-      if (r.includes('gold 2') || r.includes('or 2')) return makeList('valo-gold-2.svg', 13);
-      if (r.includes('gold') || r.includes('or')) return makeList('valo-gold-1.svg', 12);
-      if (r.includes('silver 3') || r.includes('argent 3')) return makeList('valo-silver-3.svg', 11);
-      if (r.includes('silver 2') || r.includes('argent 2')) return makeList('valo-silver-2.svg', 10);
-      if (r.includes('silver') || r.includes('argent')) return makeList('valo-silver-1.svg', 9);
-      if (r.includes('bronze 3')) return makeList('valo-bronze-3.svg', 8);
-      if (r.includes('bronze 2')) return makeList('valo-bronze-2.svg', 7);
-      if (r.includes('bronze')) return makeList('valo-bronze-1.svg', 6);
-      if (r.includes('iron 3') || r.includes('fer 3')) return makeList('valo-iron-3.svg', 5);
-      if (r.includes('iron 2') || r.includes('fer 2')) return makeList('valo-iron-2.svg', 4);
-      if (r.includes('iron') || r.includes('fer')) return makeList('valo-iron-1.svg', 3);
-
-      return makeList('valo-bronze-3.svg', 8);
-    }
-
-    // Initialisation
-    window.addEventListener('DOMContentLoaded', () => {
-      renderGCal();
-
-      fetch('./stats.json?t=' + Date.now())
-        .then(response => {
-          if (!response.ok) throw new Error("stats.json introuvable");
-          return response.json();
-        })
-        .then(data => {
-          if (data.rocketLeague) {
-            const rl = data.rocketLeague;
-            if (rl.duel1v1) rlStatsCache['1v1'] = rl.duel1v1;
-            if (rl.doubles2v2) rlStatsCache['2v2'] = rl.doubles2v2;
-            if (rl.standard3v3) rlStatsCache['3v3'] = rl.standard3v3;
-          }
-
-          if (data.valorant) {
-            const v = data.valorant;
-            const r = document.getElementById('valo-dedicated-rank');
-            const rr = document.getElementById('valo-dedicated-rr');
-            const kd = document.getElementById('valo-dedicated-kd');
-            const hs = document.getElementById('valo-dedicated-hs');
-            const rankVal = v.rang || v.rank || 'Bronze 3';
-
-            if (r) r.innerText = rankVal;
-            if (rr && v.rr) rr.innerText = `Score : ${v.rr} • Peak Silver 3`;
-            if (kd && v.kd) kd.innerText = v.kd;
-            if (hs && v.hs) hs.innerText = v.hs;
-
-            const valoBadges = getValoRankBadgeFallbacks(rankVal);
-            setupImageWithFallbacks('valo-badge-img', valoBadges);
-          }
-        })
-        .catch(err => {
-          console.error("Erreur stats :", err);
-          setupImageWithFallbacks('valo-badge-img', getValoRankBadgeFallbacks('Bronze 3'));
-        });
+    // INITIALISATION GLOBALE
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStats();
+      loadPalmares();
     });
   </script>
 </body>
