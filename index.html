@@ -68,6 +68,22 @@
       box-shadow: 0 16px 36px -8px rgba(245, 158, 11, 0.3);
     }
 
+    /* Cartes Saisons */
+    .season-hub-card {
+      position: relative;
+      height: 340px;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .season-hub-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(245, 158, 11, 0.8);
+      box-shadow: 0 16px 36px -8px rgba(245, 158, 11, 0.3);
+    }
+
     /* Cartes Épisodes */
     .episode-card {
       position: relative;
@@ -600,16 +616,16 @@
       </div>
     </div>
 
-    <!-- 3. PAGE DES SAISONS D'UNE SÉRIE (EX: MARTINE) -->
+    <!-- 3. PAGE DES SAISONS D'UNE SÉRIE (MARTINE, HUNTER X HUNTER...) -->
     <div id="palmares-seasons-screen" class="hidden">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
         <button onclick="backToPalmaresHub()" class="hover:text-amber-400 transition">Palmarès</button>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="backToCurrentCategory()" class="hover:text-amber-400 transition" id="seasons-breadcrumb-cat">Dessins animés</button>
+        <button onclick="backToCurrentCategory()" class="hover:text-amber-400 transition" id="seasons-breadcrumb-cat">Catégorie</button>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span id="seasons-breadcrumb-title" class="text-amber-400 font-bold">Martine</span>
+        <span id="seasons-breadcrumb-title" class="text-amber-400 font-bold">Titre</span>
       </div>
 
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
@@ -620,77 +636,29 @@
           </button>
           <div>
             <h2 id="seasons-show-title" class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">
-              Martine
+              Titre de la série
             </h2>
-            <p class="text-xs text-zinc-400 mt-1">Sélectionne une saison pour accéder aux 52 épisodes</p>
+            <p class="text-xs text-zinc-400 mt-1">Sélectionne une saison pour accéder aux épisodes</p>
           </div>
         </div>
       </div>
 
-      <!-- Les 2 Grosses Cartes Saisons -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto pt-4">
-        <!-- SAISON 1 -->
-        <div onclick="openSeasonEpisodes('martine', 1)" class="palmares-category-hub-card glass-card group border-amber-500/30 hover:border-amber-400">
-          <div class="relative w-full h-[280px] overflow-hidden bg-black/60">
-            <img src="martine-s1.jpg" onerror="this.onerror=null; this.src='martine.jpg';" alt="Martine Saison 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
-            <span class="absolute top-4 left-4 bg-amber-500 text-zinc-950 text-xs font-black px-3 py-1 rounded-lg shadow-md uppercase">
-              Saison 1
-            </span>
-            <span class="absolute top-4 right-4 bg-black/80 backdrop-blur-md border border-white/10 text-amber-400 text-xs font-bold px-3 py-1 rounded-lg">
-              52 Épisodes
-            </span>
-          </div>
-          <div class="p-6 flex items-center justify-between">
-            <div>
-              <h3 class="text-2xl font-black text-white group-hover:text-amber-400 transition-colors">
-                Saison 1
-              </h3>
-              <p class="text-xs text-zinc-400 mt-1">Accéder aux épisodes #1 à #52</p>
-            </div>
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-black transition">
-              <i data-lucide="arrow-right" class="w-6 h-6"></i>
-            </div>
-          </div>
-        </div>
-
-        <!-- SAISON 2 -->
-        <div onclick="openSeasonEpisodes('martine', 2)" class="palmares-category-hub-card glass-card group border-amber-500/30 hover:border-amber-400">
-          <div class="relative w-full h-[280px] overflow-hidden bg-black/60">
-            <img src="martine-s2.jpg" onerror="this.onerror=null; this.src='martine.jpg';" alt="Martine Saison 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
-            <span class="absolute top-4 left-4 bg-amber-500 text-zinc-950 text-xs font-black px-3 py-1 rounded-lg shadow-md uppercase">
-              Saison 2
-            </span>
-            <span class="absolute top-4 right-4 bg-black/80 backdrop-blur-md border border-white/10 text-amber-400 text-xs font-bold px-3 py-1 rounded-lg">
-              52 Épisodes
-            </span>
-          </div>
-          <div class="p-6 flex items-center justify-between">
-            <div>
-              <h3 class="text-2xl font-black text-white group-hover:text-amber-400 transition-colors">
-                Saison 2
-              </h3>
-              <p class="text-xs text-zinc-400 mt-1">Accéder aux épisodes #1 à #52</p>
-            </div>
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-black transition">
-              <i data-lucide="arrow-right" class="w-6 h-6"></i>
-            </div>
-          </div>
-        </div>
+      <!-- Grille Dynamique des Saisons (3 par ligne pour 6 saisons) -->
+      <div id="seasons-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto pt-4">
+        <!-- Rempli dynamiquement en JS -->
       </div>
     </div>
 
-    <!-- 4. PAGE DE LA GRILLE DES 52 ÉPISODES (AVEC LOG & AVIS LETTERBOXD STYLE) -->
+    <!-- 4. PAGE DE LA GRILLE DES ÉPISODES (AVEC SUIVI & AVIS) -->
     <div id="palmares-episodes-screen" class="hidden">
       <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
         <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
         <button onclick="backToPalmaresHub()" class="hover:text-amber-400 transition">Palmarès</button>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="backToCurrentCategory()" class="hover:text-amber-400 transition" id="episodes-breadcrumb-cat">Dessins animés</button>
+        <button onclick="backToCurrentCategory()" class="hover:text-amber-400 transition" id="episodes-breadcrumb-cat">Catégorie</button>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="backToSeasonsList()" class="hover:text-amber-400 transition" id="episodes-breadcrumb-title">Martine</button>
+        <button onclick="backToSeasonsList()" class="hover:text-amber-400 transition" id="episodes-breadcrumb-title">Titre</button>
         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
         <span id="episodes-breadcrumb-season" class="text-amber-400 font-bold">Saison 1</span>
       </div>
@@ -703,16 +671,16 @@
           </button>
           <div>
             <h2 id="episodes-header-title" class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">
-              Martine • Saison 1
+              Titre • Saison 1
             </h2>
             <p class="text-xs text-zinc-400 mt-1">Coche un épisode pour marquer comme vu et clique dessus pour ajouter un avis</p>
           </div>
         </div>
       </div>
 
-      <!-- Grille des 52 carrés -->
+      <!-- Grille des carrés épisodes -->
       <div id="episodes-grid-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        <!-- 52 carrés injectés dynamiquement en JS -->
+        <!-- Carrés injectés dynamiquement en JS -->
       </div>
     </div>
 
@@ -729,7 +697,7 @@
             I WATCHED... / JOURNAL DE VISIONNAGE
           </span>
           <h3 class="text-xl font-bold text-white" id="modal-review-episode-title">
-            Martine • Saison 1 • Épisode 1
+            Épisode 1
           </h3>
         </div>
         <button onclick="closeEpisodeModal()" class="text-zinc-400 hover:text-white p-1">
@@ -1220,7 +1188,7 @@
     lucide.createIcons();
 
     // =======================================================
-    // 1. PALMARÈS & SYSTÈME DE SUIVI / AVIS (LETTERBOXD STYLE)
+    // 1. PALMARÈS & DONNÉES (MARTINE & HUNTER X HUNTER 6 SAISONS)
     // =======================================================
     const palmaresCatalog = {
       'dessins-animes': {
@@ -1235,7 +1203,11 @@
             tag: "Animation 3D", 
             rating: "10/10", 
             image: "martine.jpg", 
-            comment: "Les aventures cultes de Martine, Patapouf et ses amis (Saisons 1 & 2)." 
+            comment: "Les aventures cultes de Martine, Patapouf et ses amis (Saisons 1 & 2).",
+            seasons: [
+              { num: 1, title: "Saison 1", episodesCount: 52, image: "martine-s1.jpg", desc: "52 Épisodes" },
+              { num: 2, title: "Saison 2", episodesCount: 52, image: "martine-s2.jpg", desc: "52 Épisodes" }
+            ]
           }
         ]
       },
@@ -1245,13 +1217,21 @@
         items: [
           { 
             id: 'hunter',
-            hasSeasons: false,
+            hasSeasons: true,
             rank: "#1", 
             title: "Hunter x Hunter", 
             tag: "Shōnen / Aventure", 
             rating: "10/10", 
             image: "hunter.jpg", 
-            comment: "L'arc Kimera Ants, l'examen Hunter et le système de Nen magistral." 
+            comment: "L'arc Kimera Ants, l'examen Hunter et le système de Nen magistral.",
+            seasons: [
+              { num: 1, title: "Saison 1 (Examen Hunter)", episodesCount: 26, image: "hunter-s1.jpg", desc: "26 Épisodes" },
+              { num: 2, title: "Saison 2 (Tour Céleste)", episodesCount: 12, image: "hunter-s2.jpg", desc: "12 Épisodes" },
+              { num: 3, title: "Saison 3 (York Shin City)", episodesCount: 20, image: "hunter-s3.jpg", desc: "20 Épisodes" },
+              { num: 4, title: "Saison 4 (Greed Island)", episodesCount: 17, image: "hunter-s4.jpg", desc: "17 Épisodes" },
+              { num: 5, title: "Saison 5 (Chimera Ants)", episodesCount: 61, image: "hunter-s5.jpg", desc: "61 Épisodes" },
+              { num: 6, title: "Saison 6 (Élection)", episodesCount: 12, image: "hunter-s6.jpg", desc: "12 Épisodes" }
+            ]
           }
         ]
       },
@@ -1340,10 +1320,11 @@
 
     let activeSelectedCategory = null;
     let activeSelectedSubCategory = null;
-    let currentShowId = null;
+    let currentShowItem = null;
     let currentSeasonNumber = 1;
+    let currentSeasonEpisodeCount = 52;
 
-    // Gestion du stockage des avis et statut d'épisodes (localStorage)
+    // Stockage local des avis (Letterboxd style)
     function getEpisodeReviewKey(showId, s, ep) {
       return `review_${showId}_s${s}_ep${ep}`;
     }
@@ -1434,7 +1415,7 @@
         
         card.onclick = () => {
           if (item.hasSeasons) {
-            openShowSeasons(item.id, item.title);
+            openShowSeasons(item);
           } else {
             alert(`Fiche : ${item.title}`);
           }
@@ -1474,7 +1455,7 @@
             </div>
             ${item.hasSeasons ? `
               <span class="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-amber-400">
-                <span>Voir les Saisons 1 & 2</span>
+                <span>Voir les Saisons (${item.seasons ? item.seasons.length : 'Plusieurs'})</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
               </span>
             ` : ''}
@@ -1486,42 +1467,79 @@
       lucide.createIcons();
     }
 
-    // 2. Ouvrir la sélection des saisons
-    function openShowSeasons(showId, showTitle) {
-      currentShowId = showId;
+    // 2. Ouvrir le Hub des Saisons (3 par ligne pour 6 saisons)
+    function openShowSeasons(item) {
+      currentShowItem = item;
       hideAllPalmaresScreens();
       document.getElementById('palmares-seasons-screen').classList.remove('hidden');
 
-      const catName = palmaresCatalog[activeSelectedCategory]?.name || 'Dessins animés';
+      const catName = palmaresCatalog[activeSelectedCategory]?.name || 'Catégorie';
       document.getElementById('seasons-breadcrumb-cat').innerText = catName;
-      document.getElementById('seasons-breadcrumb-title').innerText = showTitle;
-      document.getElementById('seasons-show-title').innerText = showTitle;
+      document.getElementById('seasons-breadcrumb-title').innerText = item.title;
+      document.getElementById('seasons-show-title').innerText = item.title;
+
+      const container = document.getElementById('seasons-cards-container');
+      container.innerHTML = '';
+
+      if (item.seasons && item.seasons.length > 0) {
+        item.seasons.forEach(s => {
+          const seasonCard = document.createElement('div');
+          seasonCard.className = "season-hub-card glass-card group border-amber-500/20 hover:border-amber-400";
+          seasonCard.onclick = () => openSeasonEpisodes(item, s.num, s.episodesCount);
+
+          seasonCard.innerHTML = `
+            <div class="relative w-full h-[220px] overflow-hidden bg-black/60">
+              <img src="${s.image}" onerror="this.onerror=null; this.src='${item.image}';" alt="${s.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/30 to-transparent"></div>
+              <span class="absolute top-3.5 left-3.5 bg-amber-500 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+                Saison ${s.num}
+              </span>
+              <span class="absolute top-3.5 right-3.5 bg-black/80 backdrop-blur-md border border-white/10 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-lg">
+                ${s.episodesCount} Épisodes
+              </span>
+            </div>
+            <div class="p-5 flex items-center justify-between">
+              <div>
+                <h3 class="text-xl font-black text-white group-hover:text-amber-400 transition-colors">
+                  Saison ${s.num}
+                </h3>
+                <p class="text-xs text-zinc-400 mt-1">${s.desc || s.episodesCount + ' Épisodes'}</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-black transition">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </div>
+            </div>
+          `;
+          container.appendChild(seasonCard);
+        });
+      }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
     }
 
     function backToSeasonsList() {
-      if (currentShowId) {
-        openShowSeasons(currentShowId, 'Martine');
+      if (currentShowItem) {
+        openShowSeasons(currentShowItem);
       } else {
         backToCurrentCategory();
       }
     }
 
-    // 3. Ouvrir la grille des 52 épisodes avec suivi & avis
-    function openSeasonEpisodes(showId, seasonNum) {
-      currentShowId = showId;
+    // 3. Ouvrir la grille des épisodes de la saison sélectionnée
+    function openSeasonEpisodes(item, seasonNum, epCount) {
+      currentShowItem = item;
       currentSeasonNumber = seasonNum;
+      currentSeasonEpisodeCount = epCount || 26;
 
       hideAllPalmaresScreens();
       document.getElementById('palmares-episodes-screen').classList.remove('hidden');
 
-      const catName = palmaresCatalog[activeSelectedCategory]?.name || 'Dessins animés';
+      const catName = palmaresCatalog[activeSelectedCategory]?.name || 'Catégorie';
       document.getElementById('episodes-breadcrumb-cat').innerText = catName;
-      document.getElementById('episodes-breadcrumb-title').innerText = 'Martine';
+      document.getElementById('episodes-breadcrumb-title').innerText = item.title;
       document.getElementById('episodes-breadcrumb-season').innerText = `Saison ${seasonNum}`;
-      document.getElementById('episodes-header-title').innerText = `Martine • Saison ${seasonNum}`;
+      document.getElementById('episodes-header-title').innerText = `${item.title} • Saison ${seasonNum}`;
 
       renderEpisodesGrid();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1531,10 +1549,13 @@
       const grid = document.getElementById('episodes-grid-container');
       grid.innerHTML = '';
 
-      const bgImgCandidate = currentSeasonNumber === 1 ? 'martine-s1.jpg' : 'martine-s2.jpg';
+      const showId = currentShowItem.id;
+      const seasonNum = currentSeasonNumber;
+      const count = currentSeasonEpisodeCount;
+      const specificBg = `${showId}-s${seasonNum}.jpg`;
 
-      for (let ep = 1; ep <= 52; ep++) {
-        const rev = getEpisodeReviewData(currentShowId, currentSeasonNumber, ep);
+      for (let ep = 1; ep <= count; ep++) {
+        const rev = getEpisodeReviewData(showId, seasonNum, ep);
         const isWatched = rev && rev.watched;
         const rating = rev && rev.rating && rev.rating !== 'Sans note' ? rev.rating : null;
         const reviewSnippet = rev && rev.review ? rev.review : null;
@@ -1544,12 +1565,11 @@
           isWatched ? 'border-emerald-500/50' : 'border-white/10'
         }`;
         
-        card.style.backgroundImage = `linear-gradient(rgba(7, 13, 10, 0.60), rgba(7, 13, 10, 0.94)), url('${bgImgCandidate}'), url('martine.jpg')`;
+        card.style.backgroundImage = `linear-gradient(rgba(7, 13, 10, 0.60), rgba(7, 13, 10, 0.94)), url('${specificBg}'), url('${currentShowItem.image}')`;
 
-        // Clic sur la carte pour ouvrir la modale d'avis
         card.onclick = (e) => {
           if (e.target.tagName.toLowerCase() !== 'input') {
-            openEpisodeModal(currentShowId, currentSeasonNumber, ep);
+            openEpisodeModal(showId, seasonNum, ep);
           }
         };
 
@@ -1560,14 +1580,13 @@
               #${ep}
             </span>
 
-            <!-- Case à cocher rapide Vu -->
             <label class="flex items-center gap-2 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border ${isWatched ? 'border-emerald-500/50 text-emerald-400' : 'border-white/10 text-zinc-400'} cursor-pointer select-none" onclick="event.stopPropagation()">
-              <input type="checkbox" onchange="quickToggleWatched('${currentShowId}', ${currentSeasonNumber}, ${ep}, this.checked)" ${isWatched ? 'checked' : ''} class="w-4 h-4 rounded text-amber-500 accent-amber-500 cursor-pointer">
+              <input type="checkbox" onchange="quickToggleWatched('${showId}', ${seasonNum}, ${ep}, this.checked)" ${isWatched ? 'checked' : ''} class="w-4 h-4 rounded text-amber-500 accent-amber-500 cursor-pointer">
               <span class="text-[11px] font-bold">${isWatched ? 'Vu' : 'À voir'}</span>
             </label>
           </div>
 
-          <!-- Ligne Inférieure : Titre + Note & Extrait d'avis -->
+          <!-- Ligne Inférieure : Titre + Note & Avis -->
           <div class="z-10 mt-auto pt-4">
             <div class="flex items-center justify-between gap-2 mb-1">
               <h3 class="text-base font-black text-white group-hover:text-amber-400 transition-colors truncate">
@@ -1598,7 +1617,6 @@
       lucide.createIcons();
     }
 
-    // Toggle rapide de la case à cocher sur la carte
     function quickToggleWatched(showId, s, ep, checked) {
       let data = getEpisodeReviewData(showId, s, ep) || {};
       data.watched = checked;
@@ -1609,7 +1627,6 @@
       renderEpisodesGrid();
     }
 
-    // Gestion de la modale de critique
     function openEpisodeModal(showId, s, ep) {
       const data = getEpisodeReviewData(showId, s, ep) || {};
       
@@ -1617,7 +1634,7 @@
       document.getElementById('review-season-num').value = s;
       document.getElementById('review-episode-num').value = ep;
 
-      document.getElementById('modal-review-episode-title').innerText = `Martine • Saison ${s} • Épisode ${ep}`;
+      document.getElementById('modal-review-episode-title').innerText = `${currentShowItem.title} • Saison ${s} • Épisode ${ep}`;
 
       const watchedCheckbox = document.getElementById('review-watched-checkbox');
       const watchDateInput = document.getElementById('review-watch-date');
