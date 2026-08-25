@@ -1,12 +1,12 @@
 {
   "rocketLeague": {
-    "duel1v1": "Platinum I (Division III)",
+    "duel1v1": "Platinum I (Division I)",
     "doubles2v2": "Diamond I (Division I)",
     "standard3v3": "Platinum II (Division II)"
   },
   "valorant": {
     "rang": "Silver 1",
-    "rr": "25",
+    "rr": "4",
     "kd": "0.74",
     "hs": "15.6%"
   }
