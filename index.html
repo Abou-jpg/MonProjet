@@ -21,14 +21,6 @@
         extend: {
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          },
-          colors: {
-            dbz: {
-              orange: '#ff6b00',
-              yellow: '#fbbf24',
-              blue: '#1e3a8a',
-              dark: '#0b0f19'
-            }
           }
         }
       }
@@ -36,10 +28,19 @@
   </script>
 
   <style>
+    html {
+      background-color: #0b0f19;
+    }
     body {
-      background: linear-gradient(rgba(11, 15, 25, 0.88), rgba(11, 15, 25, 0.95)), 
-                  url('dragon ball z arriere plan.jpg') no-fit center center fixed;
+      background-color: #0b0f19;
+      background-image: linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.92)), 
+                        url('dragon%20ball%20z%20arriere%20plan.jpg'),
+                        url('dragon ball z arriere plan.jpg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
       background-size: cover;
+      color: #f8fafc;
     }
     .glass-panel {
       background: rgba(15, 23, 42, 0.75);
@@ -55,18 +56,18 @@
       background: rgba(15, 23, 42, 0.5);
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(251, 191, 36, 0.3);
+      background: rgba(245, 158, 11, 0.3);
       border-radius: 9999px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: rgba(251, 191, 36, 0.6);
+      background: rgba(245, 158, 11, 0.6);
     }
   </style>
 </head>
-<body class="text-slate-100 min-h-screen font-sans antialiased custom-scrollbar">
+<body class="min-h-screen font-sans antialiased custom-scrollbar">
 
   <!-- ========================================================== -->
-  <!-- BARRE DE NAVIGATION SUPÉRIEURE (GLASSMORPHISM)              -->
+  <!-- BARRE DE NAVIGATION SUPÉRIEURE                              -->
   <!-- ========================================================== -->
   <nav class="sticky top-0 z-50 glass-panel border-b border-white/10 px-6 py-4 mb-8">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
@@ -82,7 +83,6 @@
         </div>
       </div>
 
-      <!-- Liens rapides -->
       <div class="flex items-center gap-2 sm:gap-4 text-sm font-bold">
         <a href="#gaming-stats" class="px-3.5 py-1.5 rounded-lg hover:bg-white/10 transition-colors text-slate-300 hover:text-amber-400">
           <i class="fa-solid fa-gamepad mr-1.5"></i>Stats
@@ -95,8 +95,7 @@
         </a>
       </div>
 
-      <!-- Horloge temps réel (Format 24h FR) -->
-      <div class="hidden md:flex items-center gap-3 bg-slate-900/80 border border-white/10 px-4 py-2 rounded-xl">
+      <div class="hidden md:flex items-center gap-3 bg-slate-900/80 border border-white/10 px-4 py-2 rounded-xl shadow-inner">
         <i class="fa-regular fa-clock text-amber-400"></i>
         <span id="live-clock" class="text-sm font-bold tracking-wider text-slate-200">--:--:--</span>
       </div>
@@ -106,18 +105,18 @@
   <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-24 space-y-12">
 
     <!-- ========================================================== -->
-    <!-- SECTION 1 : STATS GAMING (VALORANT & ROCKET LEAGUE)        -->
+    <!-- SECTION 1 : STATS GAMING                                   -->
     <!-- ========================================================== -->
     <section id="gaming-stats">
       <div class="flex items-center justify-between mb-6">
         <div class="flex items-center gap-3">
-          <div class="w-2.5 h-8 bg-amber-500 rounded-full"></div>
-          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-wide">
+          <div class="w-2.5 h-8 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"></div>
+          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-wide text-white">
             Statistiques Compétitives
           </h2>
         </div>
-        <span class="text-xs text-slate-400 flex items-center gap-2 bg-slate-900/60 border border-white/10 px-3 py-1.5 rounded-full">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-xs text-slate-300 flex items-center gap-2 bg-slate-900/80 border border-white/10 px-3.5 py-1.5 rounded-full font-bold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           Auto-Sync GitHub
         </span>
       </div>
@@ -125,11 +124,11 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         <!-- CARTE VALORANT -->
-        <div class="glass-panel rounded-3xl p-6 relative overflow-hidden border border-red-500/20 hover:border-red-500/40 transition-all">
+        <div class="glass-panel rounded-3xl p-6 relative overflow-hidden border border-red-500/20 hover:border-red-500/40 transition-all shadow-2xl">
           <div class="absolute -right-8 -top-8 w-40 h-40 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
           <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-2xl bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-500">
+              <div class="w-12 h-12 rounded-2xl bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-500 shadow-lg">
                 <i class="fa-solid fa-crosshairs text-2xl"></i>
               </div>
               <div>
@@ -137,21 +136,21 @@
                 <p class="text-xs text-slate-400">Abouu92jr #0213 (EU)</p>
               </div>
             </div>
-            <span id="valo-rank-badge" class="px-3.5 py-1 rounded-xl text-xs font-black bg-red-500/20 border border-red-500/40 text-red-400">
+            <span id="valo-rank-badge" class="px-3.5 py-1 rounded-xl text-xs font-black bg-red-500/20 border border-red-500/40 text-red-400 shadow-sm">
               Chargement...
             </span>
           </div>
 
           <div class="grid grid-cols-3 gap-3">
-            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
               <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Rang</span>
-              <span id="valo-rank" class="text-base sm:text-lg font-black text-slate-100">--</span>
+              <span id="valo-rank" class="text-base sm:text-lg font-black text-white">--</span>
             </div>
-            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
               <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Score RR</span>
               <span id="valo-rr" class="text-base sm:text-lg font-black text-amber-400">--</span>
             </div>
-            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
               <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">K/D | HS%</span>
               <span id="valo-kd" class="text-base sm:text-lg font-black text-slate-200">0.74 | 15.6%</span>
             </div>
@@ -159,11 +158,11 @@
         </div>
 
         <!-- CARTE ROCKET LEAGUE -->
-        <div class="glass-panel rounded-3xl p-6 relative overflow-hidden border border-blue-500/20 hover:border-blue-500/40 transition-all">
+        <div class="glass-panel rounded-3xl p-6 relative overflow-hidden border border-blue-500/20 hover:border-blue-500/40 transition-all shadow-2xl">
           <div class="absolute -right-8 -top-8 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
           <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+              <div class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shadow-lg">
                 <i class="fa-solid fa-car-side text-2xl"></i>
               </div>
               <div>
@@ -171,23 +170,23 @@
                 <p class="text-xs text-slate-400">Epic: abdel92jr</p>
               </div>
             </div>
-            <span class="px-3.5 py-1 rounded-xl text-xs font-black bg-blue-500/20 border border-blue-500/40 text-blue-400">
+            <span class="px-3.5 py-1 rounded-xl text-xs font-black bg-blue-500/20 border border-blue-500/40 text-blue-400 shadow-sm">
               Saison Active
             </span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
               <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Duel 1v1</span>
-              <span id="rl-1v1" class="text-xs sm:text-sm font-black text-slate-100">--</span>
+              <span id="rl-1v1" class="text-xs sm:text-sm font-black text-white">--</span>
             </div>
-            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
               <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Doubles 2v2</span>
               <span id="rl-2v2" class="text-xs sm:text-sm font-black text-amber-400">--</span>
             </div>
-            <div class="bg-slate-900/80 border border-white/5 p-4 rounded-2xl text-center">
+            <div class="bg-slate-900/90 border border-white/10 p-4 rounded-2xl text-center">
               <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-1">Standard 3v3</span>
-              <span id="rl-3v3" class="text-xs sm:text-sm font-black text-slate-100">--</span>
+              <span id="rl-3v3" class="text-xs sm:text-sm font-black text-white">--</span>
             </div>
           </div>
         </div>
@@ -196,22 +195,22 @@
     </section>
 
     <!-- ========================================================== -->
-    <!-- SECTION 2 : PLANNING HEBDOMADAIRE (LUNDI - DIMANCHE 24H)   -->
+    <!-- SECTION 2 : PLANNING HEBDOMADAIRE                          -->
     <!-- ========================================================== -->
     <section id="planning-section">
       <div class="flex items-center justify-between mb-6">
         <div class="flex items-center gap-3">
-          <div class="w-2.5 h-8 bg-amber-500 rounded-full"></div>
-          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-wide">
+          <div class="w-2.5 h-8 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"></div>
+          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-wide text-white">
             Planning Hebdomadaire
           </h2>
         </div>
-        <span class="text-xs text-slate-400 bg-slate-900/60 border border-white/10 px-3.5 py-1.5 rounded-full font-bold">
+        <span class="text-xs text-slate-300 bg-slate-900/80 border border-white/10 px-3.5 py-1.5 rounded-full font-bold">
           Format 24h
         </span>
       </div>
 
-      <div class="glass-panel rounded-3xl p-6 overflow-x-auto custom-scrollbar">
+      <div class="glass-panel rounded-3xl p-6 overflow-x-auto custom-scrollbar shadow-2xl">
         <div class="grid grid-cols-7 gap-4 min-w-[850px]">
           
           <!-- Lundi -->
@@ -220,7 +219,7 @@
               <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Lundi</span>
             </div>
             <div class="space-y-2">
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
                 <span class="text-[10px] text-amber-400 font-bold block">14:00 - 16:30</span>
                 <p class="font-semibold text-slate-200 mt-0.5">Montage & Vidéos</p>
               </div>
@@ -233,7 +232,7 @@
               <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Mardi</span>
             </div>
             <div class="space-y-2">
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
                 <span class="text-[10px] text-amber-400 font-bold block">18:00 - 20:00</span>
                 <p class="font-semibold text-slate-200 mt-0.5">Session Ranked</p>
               </div>
@@ -246,7 +245,7 @@
               <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Mercredi</span>
             </div>
             <div class="space-y-2">
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
                 <span class="text-[10px] text-amber-400 font-bold block">15:00 - 18:00</span>
                 <p class="font-semibold text-slate-200 mt-0.5">Projets HQ / Création</p>
               </div>
@@ -259,7 +258,7 @@
               <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Jeudi</span>
             </div>
             <div class="space-y-2">
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
                 <span class="text-[10px] text-amber-400 font-bold block">19:00 - 21:00</span>
                 <p class="font-semibold text-slate-200 mt-0.5">Entraînement Volley</p>
               </div>
@@ -272,7 +271,7 @@
               <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Vendredi</span>
             </div>
             <div class="space-y-2">
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
                 <span class="text-[10px] text-amber-400 font-bold block">21:00 - 23:30</span>
                 <p class="font-semibold text-slate-200 mt-0.5">Soirée Tournoi / Squad</p>
               </div>
@@ -285,7 +284,7 @@
               <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Samedi</span>
             </div>
             <div class="space-y-2">
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
                 <span class="text-[10px] text-amber-400 font-bold block">14:00 - 18:00</span>
                 <p class="font-semibold text-slate-200 mt-0.5">Matchs & Sport</p>
               </div>
@@ -298,7 +297,7 @@
               <span class="text-xs font-black text-amber-400 uppercase tracking-wider block">Dimanche</span>
             </div>
             <div class="space-y-2">
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 text-xs">
+              <div class="p-3 rounded-2xl bg-slate-900/90 border border-white/10 text-xs shadow-md">
                 <span class="text-[10px] text-amber-400 font-bold block">20:30 - 23:00</span>
                 <p class="font-semibold text-slate-200 mt-0.5">Watchlist & Détente</p>
               </div>
@@ -310,12 +309,12 @@
     </section>
 
     <!-- ========================================================== -->
-    <!-- SECTION 3 : PALMARÈS & HALL OF FAME (DYNAMIQUE)            -->
+    <!-- SECTION 3 : PALMARÈS                                       -->
     <!-- ========================================================== -->
     <section id="palmares-section">
       <div class="flex items-center justify-between mb-6">
         <div class="flex items-center gap-3">
-          <div class="w-2.5 h-8 bg-amber-500 rounded-full"></div>
+          <div class="w-2.5 h-8 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"></div>
           <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500">
             Palmarès
           </h2>
@@ -327,24 +326,24 @@
         <!-- Rempli par JavaScript -->
       </div>
 
-      <!-- Sous-Catégories (Pilules masquées si aucune sous-catégorie) -->
+      <!-- Sous-Catégories -->
       <div class="flex flex-wrap gap-2 mb-8 hidden" id="palmares-subcategories-nav">
         <!-- Rempli par JavaScript -->
       </div>
 
-      <!-- Grille d'affichage des fiches -->
+      <!-- Grille du Palmarès -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="palmares-grid">
-        <!-- Injecté dynamiquement par loadPalmares() -->
+        <!-- Injecté dynamiquement -->
       </div>
     </section>
 
   </main>
 
   <!-- ========================================================== -->
-  <!-- SCRIPTS D'EXÉCUTION & SYNCHRONISATION                      -->
+  <!-- SCRIPTS D'EXÉCUTION                                        -->
   <!-- ========================================================== -->
   <script>
-    // 1. HORLOGE EN TEMPS RÉEL (FORMAT 24H)
+    // 1. HORLOGE TEMPS RÉEL (24h)
     function updateClock() {
       const now = new Date();
       const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Europe/Paris' };
@@ -356,14 +355,13 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // 2. CHARGEMENT STATS GAMING (VALORANT & RL)
+    // 2. STATS COMPÉTITIVES
     async function loadStats() {
       try {
         const response = await fetch(`stats.json?t=${Date.now()}`);
         if (!response.ok) return;
         const data = await response.json();
 
-        // Valorant
         if (data.valorant) {
           document.getElementById('valo-rank').textContent = data.valorant.rang || '--';
           document.getElementById('valo-rank-badge').textContent = data.valorant.rang || 'Classé';
@@ -373,7 +371,6 @@
           }
         }
 
-        // Rocket League
         if (data.rocketLeague) {
           document.getElementById('rl-1v1').textContent = data.rocketLeague.duel1v1 || 'Non Classé';
           document.getElementById('rl-2v2').textContent = data.rocketLeague.doubles2v2 || 'Non Classé';
@@ -384,7 +381,7 @@
       }
     }
 
-    // 3. GESTION DU PALMARÈS
+    // 3. PALMARÈS DYNAMIQUE
     let palmaresData = null;
     let activeCatIndex = 0;
     let activeSubCatIndex = 0;
@@ -392,17 +389,12 @@
     async function loadPalmares() {
       try {
         const res = await fetch(`palmares.json?t=${Date.now()}`);
-        if (!res.ok) throw new Error("Fichier introuvable");
+        if (!res.ok) throw new Error("Fichier non trouvé");
         palmaresData = await res.json();
         renderCategoryNav();
         renderPalmares();
       } catch (err) {
         console.error("Erreur de chargement de palmares.json :", err);
-        document.getElementById('palmares-grid').innerHTML = `
-          <div class="col-span-full py-12 text-center text-slate-500 font-medium">
-            Le fichier <code class="text-amber-400 font-mono">palmares.json</code> est en cours d'initialisation...
-          </div>
-        `;
       }
     }
 
@@ -414,10 +406,10 @@
       palmaresData.categories.forEach((cat, idx) => {
         const btn = document.createElement('button');
         const isActive = idx === activeCatIndex;
-        btn.className = `px-5 py-2.5 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 backdrop-blur-md border ${
+        btn.className = `px-5 py-2.5 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 border ${
           isActive
-            ? 'bg-amber-500 text-slate-950 border-amber-400 shadow-lg shadow-amber-500/20 scale-105'
-            : 'bg-slate-900/60 text-slate-300 border-white/10 hover:bg-slate-800/80 hover:text-white'
+            ? 'bg-amber-500 text-slate-950 border-amber-400 shadow-lg shadow-amber-500/25 scale-105'
+            : 'bg-slate-900/80 text-slate-300 border-white/10 hover:bg-slate-800 hover:text-white'
         }`;
         btn.textContent = cat.name;
         btn.onclick = () => {
@@ -446,7 +438,7 @@
         btn.className = `px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all border ${
           isActive
             ? 'bg-amber-400/20 text-amber-300 border-amber-400/50 shadow-sm'
-            : 'bg-slate-800/40 text-slate-400 border-white/5 hover:text-slate-200'
+            : 'bg-slate-800/60 text-slate-400 border-white/5 hover:text-slate-200'
         }`;
         btn.textContent = sub.name;
         btn.onclick = () => {
@@ -484,14 +476,14 @@
 
       itemsToDisplay.forEach(item => {
         const card = document.createElement('div');
-        card.className = "group relative rounded-2xl overflow-hidden bg-slate-900/70 border border-white/10 hover:border-amber-400/50 transition-all duration-300 hover:-translate-y-1.5 shadow-xl flex flex-col";
+        card.className = "group relative rounded-3xl overflow-hidden bg-slate-900/85 border border-white/10 hover:border-amber-400/50 transition-all duration-300 hover:-translate-y-1.5 shadow-2xl flex flex-col";
 
         card.innerHTML = `
           <div class="relative w-full aspect-[2/3] overflow-hidden bg-slate-950">
             <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-transparent"></div>
             
-            <span class="absolute top-3 left-3 bg-amber-500/90 text-slate-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-md uppercase">
+            <span class="absolute top-3 left-3 bg-amber-500 text-slate-950 text-xs font-black px-2.5 py-1 rounded-xl shadow-md uppercase">
               ${item.rank || '★'}
             </span>
 
@@ -509,7 +501,7 @@
 
           <div class="p-4 flex-1 flex flex-col justify-between">
             <div>
-              <h3 class="font-bold text-base text-slate-100 group-hover:text-amber-300 transition-colors line-clamp-1">
+              <h3 class="font-bold text-base text-white group-hover:text-amber-300 transition-colors line-clamp-1">
                 ${item.title}
               </h3>
               ${item.comment ? `
@@ -524,7 +516,7 @@
       });
     }
 
-    // INITIALISATION GLOBALE
+    // INITIALISATION
     document.addEventListener('DOMContentLoaded', () => {
       loadStats();
       loadPalmares();
