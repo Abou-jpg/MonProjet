@@ -87,7 +87,7 @@
     /* Cartes Épisodes */
     .episode-card {
       position: relative;
-      min-height: 210px;
+      min-height: 200px;
       border-radius: 1.25rem;
       overflow: hidden;
       cursor: pointer;
@@ -912,424 +912,70 @@
     </div>
   </div>
 
-  <!-- NIVEAU 2 : ESPACE GAMING -->
-  <div id="view-gaming" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div id="gaming-hub-screen">
-      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span class="text-emerald-400 font-bold">Gaming</span>
-      </div>
-
-      <div class="flex items-center justify-between mb-8">
-        <div>
-          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-1">
-            Hub Compétitif
-          </div>
-          <h2 class="text-3xl md:text-4xl font-serif-title text-zinc-950 dark:text-white">Mes Jeux & Rangs ELO</h2>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- 1. POSTER ROCKET LEAGUE -->
-        <div onclick="openRLDetails()" class="game-poster-card group border-emerald-500/40 hover:border-emerald-500">
-          <div class="game-poster-bg" style="background-image: url('rl.jpg'), url('rl.jpg.png');"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
-          
-          <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
-            <div class="flex justify-between items-start">
-              <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-[10px] font-bold uppercase tracking-widest text-emerald-400 backdrop-blur-md">
-                Epic Games
-              </span>
-              <span class="w-10 h-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </span>
-            </div>
-
-            <div>
-              <h3 class="text-2xl font-bold text-white mb-1 drop-shadow-md">Rocket League</h3>
-              <p class="text-xs text-emerald-300 font-medium mb-4 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                ID : abdel92jr
-              </p>
-              <div class="w-full py-3 px-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-emerald-500 group-hover:text-black transition">
-                <span>Choisir 1v1 • 2v2 • 3v3</span>
-                <i data-lucide="chevron-right" class="w-4 h-4"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. POSTER LEAGUE OF LEGENDS -->
-        <div onclick="openLoLDetails()" class="game-poster-card group border-amber-500/40 hover:border-amber-500">
-          <div class="game-poster-bg" style="background-image: url('Neeko.jpg'), url('neeko.jpg'), url('lol.jpg');"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
-          
-          <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
-            <div class="flex justify-between items-start">
-              <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-[10px] font-bold uppercase tracking-widest text-amber-400 backdrop-blur-md">
-                Riot EUW
-              </span>
-              <span class="w-10 h-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-amber-400 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </span>
-            </div>
-
-            <div>
-              <h3 class="text-2xl font-bold text-white mb-1 drop-shadow-md">League of Legends</h3>
-              <p class="text-xs text-amber-300 font-medium mb-4 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-                ID : HDKAbou
-              </p>
-              <div class="w-full py-3 px-4 rounded-xl bg-amber-500/20 border border-amber-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-amber-500 group-hover:text-black transition">
-                <span>Voir le profil & stats</span>
-                <i data-lucide="chevron-right" class="w-4 h-4"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. POSTER VALORANT -->
-        <div onclick="openValoDetails()" class="game-poster-card group border-rose-500/40 hover:border-rose-500">
-          <div class="game-poster-bg" style="background-image: url('valo.jpg'), url('valo.jpg.png'), url('valo.png');"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070d0a] via-[#070d0a]/60 to-transparent"></div>
-          
-          <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
-            <div class="flex justify-between items-start">
-              <span class="px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/40 text-[10px] font-bold uppercase tracking-widest text-rose-400 backdrop-blur-md">
-                Riot EUW
-              </span>
-              <span class="w-10 h-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-rose-400 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </span>
-            </div>
-
-            <div>
-              <h3 class="text-2xl font-bold text-white mb-1 drop-shadow-md">Valorant</h3>
-              <p class="text-xs text-rose-300 font-medium mb-4 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
-                ID : Abouu92jr#0213
-              </p>
-              <div class="w-full py-3 px-4 rounded-xl bg-rose-500/20 border border-rose-500/40 backdrop-blur-md text-white text-xs font-bold flex items-center justify-between group-hover:bg-rose-500 group-hover:text-black transition">
-                <span>Voir le rang & K/D</span>
-                <i data-lucide="chevron-right" class="w-4 h-4"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- NIVEAU 2 : ESPACE SPORT DATA -->
+  <div id="view-sport" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
+    <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+      <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
+      <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+      <span class="text-amber-400 font-bold">Sport Pro Data</span>
     </div>
-
-    <!-- ROCKET LEAGUE : LISTE DES MODES -->
-    <div id="gaming-rl-screen" class="hidden">
-      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="closeRLDetails()" class="hover:text-emerald-400 transition">Gaming</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span class="text-emerald-400 font-bold">Rocket League</span>
-      </div>
-
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-        <div class="flex items-center gap-4">
-          <button onclick="closeRLDetails()" class="px-4 py-2 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-emerald-500 hover:text-black dark:hover:bg-emerald-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            Tous les jeux
-          </button>
-          <div>
-            <h2 class="text-2xl md:text-3xl font-serif-title text-zinc-950 dark:text-white">Choisis ton mode Rocket League</h2>
-            <p class="text-xs text-zinc-500 dark:text-zinc-400">ID Epic : <span class="text-emerald-600 dark:text-emerald-400 font-semibold">abdel92jr</span></p>
-          </div>
-        </div>
-
-        <a href="https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white text-xs font-semibold flex items-center gap-2 transition w-fit">
-          <span>Tracker Network</span>
-          <i data-lucide="external-link" class="w-4 h-4"></i>
-        </a>
-      </div>
-
-      <div class="flex flex-col gap-5 max-w-4xl mx-auto">
-        <div onclick="openRLRankPage('1v1')" class="mode-vertical-card group">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
-            <div class="sm:w-3/5 h-36 overflow-hidden">
-              <img id="banner-img-1v1" src="1vs1.jpg" alt="1 VS 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            </div>
-            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
-              <div>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Solo</span>
-                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Duel 1 VS 1</h3>
-                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
-              </div>
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div onclick="openRLRankPage('2v2')" class="mode-vertical-card group">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
-            <div class="sm:w-3/5 h-36 overflow-hidden">
-              <img id="banner-img-2v2" src="2vs2.jpg" alt="2 VS 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            </div>
-            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
-              <div>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-400 block">Mode Principal</span>
-                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Double 2 VS 2</h3>
-                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
-              </div>
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div onclick="openRLRankPage('3v3')" class="mode-vertical-card group">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between">
-            <div class="sm:w-3/5 h-36 overflow-hidden">
-              <img id="banner-img-3v3" src="3vs3.jpg" alt="3 VS 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            </div>
-            <div class="p-6 sm:w-2/5 flex items-center justify-between gap-4">
-              <div>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-zinc-400 block">Mode Équipe</span>
-                <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition">Standard 3 VS 3</h3>
-                <span class="text-xs text-zinc-400">Voir le rang et le badge</span>
-              </div>
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="mb-8">
+      <h2 class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">Sport Pro Data</h2>
+      <p class="text-xs text-zinc-400 mt-1">Suivi des équipes et athlètes favoris (Real Madrid, OL, Spurs, Wemby, Alcaraz)</p>
     </div>
-
-    <!-- ROCKET LEAGUE : PAGE DU RANG SÉLECTIONNÉ -->
-    <div id="gaming-rl-rank-page" class="hidden max-w-4xl mx-auto">
-      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="closeRLDetails()" class="hover:text-emerald-400 transition">Gaming</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="backToRLModes()" class="hover:text-emerald-400 transition">Rocket League</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span id="rankpage-breadcrumb-mode" class="text-emerald-400 font-bold">1 VS 1</span>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="glass-card p-6 rounded-3xl border border-white/10">
+        <h3 class="text-lg font-bold text-white mb-2">Football</h3>
+        <p class="text-xs text-zinc-400">Real Madrid • Olympique Lyonnais • Équipe de France • Algérie</p>
       </div>
-
-      <div class="mb-6">
-        <button onclick="backToRLModes()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-emerald-500 hover:text-black dark:hover:bg-emerald-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-          <i data-lucide="arrow-left" class="w-4 h-4"></i>
-          Choisir un autre mode
-        </button>
+      <div class="glass-card p-6 rounded-3xl border border-white/10">
+        <h3 class="text-lg font-bold text-white mb-2">Basketball</h3>
+        <p class="text-xs text-zinc-400">San Antonio Spurs • Victor Wembanyama • Gabby Williams</p>
       </div>
-
-      <div class="glass-card rounded-3xl overflow-hidden border border-emerald-500/40 p-6 sm:p-10 bg-[#0b1611]/90 shadow-2xl">
-        <div class="w-full h-48 sm:h-64 rounded-2xl overflow-hidden mb-8 border border-white/10 shadow-lg">
-          <img id="rankpage-banner-img" src="1vs1.jpg" alt="Bannière Mode" class="w-full h-full object-cover">
-        </div>
-
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-white/10">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 block mb-1" id="rankpage-mode-subtitle">MODE SOLO</span>
-            <h2 class="text-3xl sm:text-4xl font-black text-white" id="rankpage-mode-title">Duel 1 VS 1</h2>
-          </div>
-          <span class="text-xs font-semibold px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 w-fit">
-            Synchronisation Active
-          </span>
-        </div>
-
-        <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <div class="flex items-center gap-6">
-            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
-              <img id="rankpage-badge-img" src="ou-3.jpg.png" alt="Badge de rang" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(16,185,129,0.4)]">
-            </div>
-            <div>
-              <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
-              <div class="text-3xl sm:text-4xl font-black text-white tracking-tight" id="rankpage-rank-text">Chargement...</div>
-              <span class="text-xs text-emerald-400 font-medium block mt-1">Epic ID : abdel92jr</span>
-            </div>
-          </div>
-
-          <div class="sm:text-right border-t sm:border-t-0 pt-4 sm:pt-0 border-white/5">
-            <a href="https://rocketleague.tracker.network/rocket-league/profile/epic/abdel92jr/overview" target="_blank" class="px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold inline-flex items-center gap-2 transition shadow-lg shadow-emerald-500/20">
-              <span>Voir sur Tracker Network</span>
-              <i data-lucide="external-link" class="w-4 h-4"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- LEAGUE OF LEGENDS : PAGE DÉDIÉE -->
-    <div id="gaming-lol-screen" class="hidden max-w-4xl mx-auto">
-      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="closeOtherGames()" class="hover:text-emerald-400 transition">Gaming</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span class="text-amber-400 font-bold">League of Legends</span>
-      </div>
-
-      <div class="mb-6">
-        <button onclick="closeOtherGames()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-amber-500 hover:text-black dark:hover:bg-amber-400 dark:hover:text-black transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-          <i data-lucide="arrow-left" class="w-4 h-4"></i>
-          Tous les jeux
-        </button>
-      </div>
-
-      <div class="glass-card rounded-3xl overflow-hidden border border-amber-500/40 p-6 sm:p-10 bg-[#141208]/90 shadow-2xl">
-        <div class="w-full h-56 sm:h-72 rounded-2xl overflow-hidden mb-8 border border-white/10 shadow-lg">
-          <img id="lol-banner-img" src="Neeko.jpg" alt="Neeko - League of Legends" class="w-full h-full object-cover">
-        </div>
-
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-white/10">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-widest text-amber-400 block mb-1">RIOT GAMES • SERVEUR EUW</span>
-            <h2 class="text-3xl sm:text-4xl font-black text-white">League of Legends</h2>
-          </div>
-          <span class="text-xs font-semibold px-4 py-1.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40 w-fit">
-            Profil Joueur Actif
-          </span>
-        </div>
-
-        <div class="pt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="p-6 rounded-2xl bg-black/40 border border-white/10">
-            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider block mb-2">Champion Préféré</span>
-            <div class="text-3xl font-black text-white mb-2">Neeko</div>
-            <p class="text-xs text-zinc-400">Spam Mid / Support • Contrôle & Teamfight</p>
-          </div>
-
-          <div class="p-6 rounded-2xl bg-black/40 border border-white/10">
-            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider block mb-2">Rang Compétitif</span>
-            <div class="text-3xl font-black text-white mb-2">Non Classé</div>
-            <p class="text-xs text-zinc-400">ID In-Game : <strong class="text-white">HDKAbou</strong></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- VALORANT : PAGE DÉDIÉE -->
-    <div id="gaming-valo-screen" class="hidden max-w-4xl mx-auto">
-      <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
-        <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <button onclick="closeOtherGames()" class="hover:text-emerald-400 transition">Gaming</button>
-        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-        <span class="text-rose-400 font-bold">Valorant</span>
-      </div>
-
-      <div class="mb-6">
-        <button onclick="closeOtherGames()" class="px-4 py-2.5 rounded-xl bg-zinc-200 dark:bg-white/10 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-500 dark:hover:text-white transition flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-          <i data-lucide="arrow-left" class="w-4 h-4"></i>
-          Tous les jeux
-        </button>
-      </div>
-
-      <div class="glass-card rounded-3xl overflow-hidden border border-rose-500/40 p-6 sm:p-10 bg-[#140b0e]/90 shadow-2xl">
-        <div class="w-full h-48 sm:h-64 rounded-2xl overflow-hidden mb-8 border border-white/10 shadow-lg">
-          <img id="valo-banner-img" src="valo.jpg" alt="Valorant" class="w-full h-full object-cover">
-        </div>
-
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-white/10">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-widest text-rose-400 block mb-1">RIOT GAMES • SERVEUR EUW</span>
-            <h2 class="text-3xl sm:text-4xl font-black text-white">Valorant</h2>
-          </div>
-          <span class="text-xs font-semibold px-4 py-1.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/40 w-fit">
-            Synchronisé Tracker.gg
-          </span>
-        </div>
-
-        <div class="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <div class="flex items-center gap-6">
-            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center p-3 shadow-inner">
-              <img id="valo-badge-img" src="" alt="Badge Valorant" class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(244,63,94,0.4)]">
-            </div>
-            <div>
-              <span class="text-xs text-zinc-400 block mb-1">Rang Compétitif Actuel</span>
-              <div class="text-3xl sm:text-4xl font-black text-rose-400 tracking-tight" id="valo-dedicated-rank">Bronze 3</div>
-              <span class="text-xs text-zinc-400 font-medium block mt-1" id="valo-dedicated-rr">Score : 38 RR • Peak Silver 3</span>
-            </div>
-          </div>
-
-          <div class="flex gap-4">
-            <div class="p-4 rounded-xl bg-black/40 border border-white/10 text-center min-w-[90px]">
-              <span class="text-[10px] text-zinc-400 block mb-0.5">K/D Ratio</span>
-              <span id="valo-dedicated-kd" class="font-bold text-white text-lg">0.74</span>
-            </div>
-            <div class="p-4 rounded-xl bg-black/40 border border-white/10 text-center min-w-[90px]">
-              <span class="text-[10px] text-zinc-400 block mb-0.5">Headshot %</span>
-              <span id="valo-dedicated-hs" class="font-bold text-white text-lg">15.6%</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-8 pt-6 border-t border-white/10 flex justify-end">
-          <a href="https://tracker.gg/valorant/profile/riot/Abouu92jr%230213/overview" target="_blank" class="px-5 py-3 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold inline-flex items-center gap-2 transition shadow-lg shadow-rose-500/20">
-            <span>Ouvrir la fiche Tracker.gg</span>
-            <i data-lucide="external-link" class="w-4 h-4"></i>
-          </a>
-        </div>
+      <div class="glass-card p-6 rounded-3xl border border-white/10">
+        <h3 class="text-lg font-bold text-white mb-2">Tennis</h3>
+        <p class="text-xs text-zinc-400">Carlos Alcaraz • Emma Raducanu</p>
       </div>
     </div>
   </div>
 
-  <!-- MODALE : CRÉATION D'ÉVÉNEMENT PLANNING -->
-  <div id="modal-add-event" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="glass-card bg-[#0e171b]/95 border border-blue-500/40 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl">
-      <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-        <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <i data-lucide="calendar-plus" class="w-5 h-5 text-blue-400"></i>
-          Ajouter une activité
-        </h3>
-        <button onclick="closeAddEventModal()" class="text-zinc-400 hover:text-white">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
+  <!-- NIVEAU 2 : ESPACE VOLLEY -->
+  <div id="view-volley" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
+    <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+      <button onclick="navigateTab('accueil')" class="hover:text-emerald-400 transition">Accueil</button>
+      <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+      <span class="text-emerald-400 font-bold">Volley Nanterre</span>
+    </div>
+    <div class="mb-8">
+      <h2 class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">Volley Nanterre</h2>
+      <p class="text-xs text-zinc-400 mt-1">Pôle Directeur Sportif, Tournois et Gala</p>
+    </div>
+    <div class="glass-card p-8 rounded-3xl border border-emerald-500/30">
+      <h3 class="text-xl font-bold text-white mb-3">Administration & Direction Sportive</h3>
+      <p class="text-xs text-zinc-400 leading-relaxed">Gestion des plannings d'entraînements, organisation des tournois internes/externes et du gala de fin de saison.</p>
+    </div>
+  </div>
+
+  <!-- NIVEAU 2 : ESPACE PERSONNEL -->
+  <div id="view-perso" class="view-section hidden max-w-7xl mx-auto px-6 pt-12 pb-20">
+    <div class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 pb-2 border-b border-white/5">
+      <button onclick="navigateTab('accueil')" class="hover:text-amber-400 transition">Accueil</button>
+      <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
+      <span class="text-amber-400 font-bold">Personnel</span>
+    </div>
+    <div class="mb-8">
+      <h2 class="text-3xl md:text-5xl font-serif-title text-zinc-950 dark:text-white">Personnel & Pro</h2>
+      <p class="text-xs text-zinc-400 mt-1">L2 Éco-Gestion • Permis de conduire • Montage vidéo</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="glass-card p-6 rounded-3xl border border-white/10">
+        <h3 class="text-lg font-bold text-white mb-2">Universitaire</h3>
+        <p class="text-xs text-zinc-400">Licence 2 Éco-Gestion</p>
       </div>
-
-      <form id="form-add-event" onsubmit="saveNewEvent(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Titre</label>
-          <input type="text" id="event-title" required placeholder="Ex: Entraînement Volley, Montage MCU, Révisions Éco" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-400">
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Date</label>
-            <input type="date" id="event-date" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Début</label>
-            <input type="time" id="event-start-time" value="14:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Fin</label>
-            <input type="time" id="event-end-time" value="16:00" required class="w-full bg-black/60 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Couleur & Catégorie</label>
-          <select id="event-category" class="w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-blue-400">
-            <option value="blue">🔵 Bleu Google (Général / Cours)</option>
-            <option value="orange">🟠 Orange (Volley-ball Nanterre)</option>
-            <option value="purple">🟣 Violet (Montage MCU TikTok)</option>
-            <option value="emerald">🟢 Vert (Gaming & Ranked)</option>
-            <option value="rose">🔴 Rouge / Rose (Personnel)</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1">Lieu / Note (optionnel)</label>
-          <input type="text" id="event-desc" placeholder="Ex: Gymnase Voltaire / PC Bureau" class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-blue-400">
-        </div>
-
-        <div class="pt-4 flex justify-end gap-3">
-          <button type="button" onclick="closeAddEventModal()" class="px-4 py-2 rounded-xl bg-white/10 text-white text-xs font-bold hover:bg-white/20 transition">Annuler</button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition">Enregistrer</button>
-        </div>
-      </form>
+      <div class="glass-card p-6 rounded-3xl border border-white/10">
+        <h3 class="text-lg font-bold text-white mb-2">Objectifs 2026</h3>
+        <p class="text-xs text-zinc-400">Code de la route & Permis B • Montage TikTok MCU</p>
+      </div>
     </div>
   </div>
 
@@ -1485,7 +1131,6 @@
         desc: `${epCount} Épisodes`
       });
 
-      // Mettre à jour dans le catalogue global et sauvegarder
       const catalog = getStoredCatalog();
       updateItemInCatalog(catalog, currentShowItem);
       saveCatalogToStorage(catalog);
@@ -1507,6 +1152,226 @@
           if (idx !== -1) cat.items[idx] = targetItem;
         }
       });
+    }
+
+    // ROUTEUR SPA
+    function navigateTab(tabName) {
+      document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+
+      document.querySelectorAll('.nav-tab').forEach(btn => {
+        btn.className = 'nav-tab text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-white transition pb-0.5';
+      });
+
+      const targetView = document.getElementById(`view-${tabName}`);
+      if (targetView) targetView.classList.remove('hidden');
+
+      const activeBtn = document.getElementById(`nav-btn-${tabName}`);
+      if (activeBtn) {
+        activeBtn.className = 'nav-tab text-emerald-700 dark:text-emerald-400 font-semibold border-b-2 border-emerald-600 dark:border-emerald-400 pb-0.5';
+      }
+
+      if (tabName === 'planning') {
+        renderGCal();
+      }
+
+      if (tabName === 'palmares') {
+        backToPalmaresHub();
+      }
+
+      if (tabName === 'gaming') {
+        closeRLDetails();
+        closeOtherGames();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    // ROUTEUR GAMING
+    let rlStatsCache = {
+      '1v1': 'Platinum I (Division III)',
+      '2v2': 'Platinum II (Division III)',
+      '3v3': 'Platinum II (Division II)'
+    };
+
+    const themeToggleBtn = document.getElementById('themeToggle');
+    themeToggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      lucide.createIcons();
+    });
+
+    function openRLDetails() {
+      document.getElementById('gaming-hub-screen').classList.add('hidden');
+      document.getElementById('gaming-rl-screen').classList.remove('hidden');
+      document.getElementById('gaming-rl-rank-page').classList.add('hidden');
+      document.getElementById('gaming-lol-screen').classList.add('hidden');
+      document.getElementById('gaming-valo-screen').classList.add('hidden');
+      
+      setupImageWithFallbacks('banner-img-1v1', ['1vs1.jpg', '1vs1.jpg.png', '1vs1.png']);
+      setupImageWithFallbacks('banner-img-2v2', ['2vs2.jpg', '2vs2.jpg.png', '2vs2.png']);
+      setupImageWithFallbacks('banner-img-3v3', ['3vs3.jpg', '3vs3.jpg.png', '3vs3.png']);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function closeRLDetails() {
+      document.getElementById('gaming-rl-screen').classList.add('hidden');
+      document.getElementById('gaming-rl-rank-page').classList.add('hidden');
+      document.getElementById('gaming-hub-screen').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function backToRLModes() {
+      document.getElementById('gaming-rl-rank-page').classList.add('hidden');
+      document.getElementById('gaming-rl-screen').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function openRLRankPage(mode) {
+      document.getElementById('gaming-rl-screen').classList.add('hidden');
+      document.getElementById('gaming-rl-rank-page').classList.remove('hidden');
+
+      const meta = {
+        '1v1': { title: 'Duel 1 VS 1', subtitle: 'MODE SOLO', banner: ['1vs1.jpg', '1vs1.jpg.png', '1vs1.png'] },
+        '2v2': { title: 'Double 2 VS 2', subtitle: 'MODE PRINCIPAL', banner: ['2vs2.jpg', '2vs2.jpg.png', '2vs2.png'] },
+        '3v3': { title: 'Standard 3 VS 3', subtitle: 'MODE ÉQUIPE', banner: ['3vs3.jpg', '3vs3.jpg.png', '3vs3.png'] }
+      };
+
+      const info = meta[mode];
+      document.getElementById('rankpage-breadcrumb-mode').innerText = info.title;
+      document.getElementById('rankpage-mode-title').innerText = info.title;
+      document.getElementById('rankpage-mode-subtitle').innerText = info.subtitle;
+
+      setupImageWithFallbacks('rankpage-banner-img', info.banner);
+
+      const rankText = rlStatsCache[mode] || 'Non Classé';
+      document.getElementById('rankpage-rank-text').innerText = rankText;
+
+      const badgeList = getRLRankBadgeFallbacks(rankText);
+      setupImageWithFallbacks('rankpage-badge-img', badgeList);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function openLoLDetails() {
+      document.getElementById('gaming-hub-screen').classList.add('hidden');
+      document.getElementById('gaming-lol-screen').classList.remove('hidden');
+      setupImageWithFallbacks('lol-banner-img', ['Neeko.jpg', 'neeko.jpg', 'Neeko.jpg.png', 'neeko.jpg.png']);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function openValoDetails() {
+      document.getElementById('gaming-hub-screen').classList.add('hidden');
+      document.getElementById('gaming-valo-screen').classList.remove('hidden');
+      setupImageWithFallbacks('valo-banner-img', ['valo.jpg', 'valo.jpg.png', 'valo.png']);
+      
+      const currentValoRank = document.getElementById('valo-dedicated-rank').innerText;
+      const valoBadges = getValoRankBadgeFallbacks(currentValoRank);
+      setupImageWithFallbacks('valo-badge-img', valoBadges);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function closeOtherGames() {
+      document.getElementById('gaming-lol-screen').classList.add('hidden');
+      document.getElementById('gaming-valo-screen').classList.add('hidden');
+      document.getElementById('gaming-hub-screen').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function setupImageWithFallbacks(elementId, candidates) {
+      const el = document.getElementById(elementId);
+      if (!el || !candidates || candidates.length === 0) return;
+
+      let idx = 0;
+      el.onerror = function() {
+        idx++;
+        if (idx < candidates.length) {
+          this.src = candidates[idx];
+        } else {
+          this.onerror = null;
+        }
+      };
+      el.src = '';
+      el.src = candidates[0];
+    }
+
+    function getRLRankBadgeFallbacks(rankStr) {
+      if (!rankStr) return ['ou-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-9.png'];
+      const r = rankStr.toLowerCase();
+
+      if (r.includes('supersonic') || r.includes('ssl')) return ['ssl.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-22.png'];
+      if (r.includes('grand champion iii') || r.includes('gc3')) return ['gc-3.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-21.png'];
+      if (r.includes('grand champion ii') || r.includes('gc2')) return ['gc-2.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-20.png'];
+      if (r.includes('grand champion') || r.includes('gc1')) return ['gc-1.webp.webp', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-19.png'];
+      
+      if (r.includes('champion iii') || r.includes('c3') || r.includes('champion 3')) return ['champion-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-18.png'];
+      if (r.includes('champion ii') || r.includes('c2') || r.includes('champion 2')) return ['champion-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-17.png'];
+      if (r.includes('champion i') || r.includes('c1') || r.includes('champion 1')) return ['champion-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-16.png'];
+
+      if (r.includes('diamond iii') || r.includes('diamant iii') || r.includes('diamond 3')) return ['diamant-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-15.png'];
+      if (r.includes('diamond ii') || r.includes('diamant ii') || r.includes('diamond 2')) return ['diamant-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-14.png'];
+      if (r.includes('diamond i') || r.includes('diamant i') || r.includes('diamond 1')) return ['diamant-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-13.png'];
+
+      if (r.includes('platinum iii') || r.includes('platine iii') || r.includes('platinum 3')) return ['platine-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-12.png'];
+      if (r.includes('platinum ii') || r.includes('platine ii') || r.includes('platinum 2')) return ['platine-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-11.png'];
+      if (r.includes('platinum i') || r.includes('platine i') || r.includes('platinum 1')) return ['platine-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-10.png'];
+
+      if (r.includes('gold iii') || r.includes('or iii') || r.includes('gold 3')) return ['ou-3.jpg.png', 'or-3.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-9.png'];
+      if (r.includes('gold ii') || r.includes('or ii') || r.includes('gold 2')) return ['ou-2.jpg.png', 'or-2.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-8.png'];
+      if (r.includes('gold i') || r.includes('or i') || r.includes('gold 1')) return ['ou-1.jpg.png', 'or-1.jpg.png', 'https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-7.png'];
+
+      return ['https://trackercdn.com/cdn/tracker.gg/rocket-league/ranks/s4-11.png'];
+    }
+
+    function getValoRankBadgeFallbacks(rankStr) {
+      const r = (rankStr || '').toLowerCase();
+      const api = 'https://media.valorant-api.com/competitivetiers/03621f52-342b-77e7-4f49-ed82dc47a6d4';
+
+      function makeList(fileName, apiTier) {
+        return [
+          `Rank valo/${fileName}`,
+          `./Rank valo/${fileName}`,
+          `Rank%20valo/${fileName}`,
+          `./Rank%20valo/${fileName}`,
+          `rank valo/${fileName}`,
+          fileName,
+          `${api}/${apiTier}/largeicon.png`
+        ];
+      }
+
+      if (r.includes('radiant')) return makeList('valo-radiant.svg', 27);
+      if (r.includes('immortal 3') || r.includes('immortel 3')) return makeList('valo-immortel-3.svg', 26);
+      if (r.includes('immortal 2') || r.includes('immortel 2')) return makeList('valo-immortel-2.svg', 25);
+      if (r.includes('immortal') || r.includes('immortel')) return makeList('valo-immortel-1.svg', 24);
+      if (r.includes('ascendant 3')) return makeList('valo-ascendant-3.svg', 23);
+      if (r.includes('ascendant 2')) return makeList('valo-ascendant-2.svg', 22);
+      if (r.includes('ascendant')) return makeList('valo-ascendant-1.svg', 21);
+      if (r.includes('diamond 3') || r.includes('diamant 3')) return makeList('valo-diamond-3.svg', 20);
+      if (r.includes('diamond 2') || r.includes('diamant 2')) return makeList('valo-diamond-2.svg', 19);
+      if (r.includes('diamond') || r.includes('diamant')) return makeList('valo-diamond-1.svg', 18);
+      if (r.includes('platinum 3') || r.includes('platine 3')) return makeList('valo-platinum-3.svg', 17);
+      if (r.includes('platinum 2') || r.includes('platine 2')) return makeList('valo-platinum-2.svg', 16);
+      if (r.includes('platinum') || r.includes('platine')) return makeList('valo-platinum-1.svg', 15);
+      if (r.includes('gold 3') || r.includes('or 3')) return makeList('valo-gold-3.svg', 14);
+      if (r.includes('gold 2') || r.includes('or 2')) return makeList('valo-gold-2.svg', 13);
+      if (r.includes('gold') || r.includes('or')) return makeList('valo-gold-1.svg', 12);
+      if (r.includes('silver 3') || r.includes('argent 3')) return makeList('valo-silver-3.svg', 11);
+      if (r.includes('silver 2') || r.includes('argent 2')) return makeList('valo-silver-2.svg', 10);
+      if (r.includes('silver') || r.includes('argent')) return makeList('valo-silver-1.svg', 9);
+      if (r.includes('bronze 3')) return makeList('valo-bronze-3.svg', 8);
+      if (r.includes('bronze 2')) return makeList('valo-bronze-2.svg', 7);
+      if (r.includes('bronze')) return makeList('valo-bronze-1.svg', 6);
+      if (r.includes('iron 3') || r.includes('fer 3')) return makeList('valo-iron-3.svg', 5);
+      if (r.includes('iron 2') || r.includes('fer 2')) return makeList('valo-iron-2.svg', 4);
+      if (r.includes('iron') || r.includes('fer')) return makeList('valo-iron-1.svg', 3);
+
+      return makeList('valo-bronze-3.svg', 8);
     }
 
     // INITIALISATION GLOBALE
